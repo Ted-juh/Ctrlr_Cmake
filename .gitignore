@@ -1,0 +1,11 @@
+Source/Core/CtrlrRevision.h
+Source/Misc/boost/**
+!Source/Misc/boost/boost.zip
+
+Builds/*/*/*
+build/
+
+
+
+
+
