@@ -171,6 +171,9 @@ namespace Ids
 	DECLARE_ID (panelOSCPort);
     DECLARE_ID (panelOSCProtocol);
 
+	/* Panel Batch options */
+	DECLARE_ID (panelBatchVisualStudioPath);
+
 	DECLARE_ID (panelScheme);
 	DECLARE_ID (panelShowDialogs);
 	DECLARE_ID (panelMidiRealtimeIgnore);
@@ -210,6 +213,8 @@ namespace Ids
 	DECLARE_ID (panelMessageTime);
 	DECLARE_ID (panelCustomData);
 	DECLARE_ID (panelLastSaveDir);
+
+
 
 	DECLARE_ID (componentRectangle);
 	DECLARE_ID (componentSentBack);

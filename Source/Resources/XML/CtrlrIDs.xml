@@ -57,13 +57,13 @@
   <id name="uiPanelTooltipPlacement" 		text="Tooltip placement" 				type="VarNumeric" defaults="Above=1,Below=2,Left=4,Right=8"/>
   <id name="uiPanelTooltipFont" 			text="Tooltip font"						type="Font" />
   <id name="uiPanelTooltipColour" 			text="Tooltip font colour"				type="Colour" />
-  <id name="uiPanelMenuBarVisible"      text="Is menu bar visible for this panel" type="Bool" />
-  <id name="uiPanelMenuBarHideOnExport" text="Hide the menu bar when exporting an instance" type="Bool" />
+  <id name="uiPanelMenuBarVisible"          text="Is menu bar visible for this panel" type="Bool" />
+  <id name="uiPanelMenuBarHideOnExport"     text="Hide the menu bar when exporting an instance" type="Bool" />
   <id name="uiPanelProgramsMenuHideOnExport" text="Hide the Programs menu when exporting an instance" type="Bool" />
   <id name="uiPanelMidiControllerMenuHideOnExport" text="Hide the Midi Controller menu when exporting an instance" type="Bool" />
   <id name="uiPanelMidiThruMenuHideOnExport" text="Hide the Midi Thru menu when exporting an instance" type="Bool" />
   <id name="uiPanelMidiChannelMenuHideOnExport" text="Hide the Midi Channel menu when exporting an instance" type="Bool" />
-  <id name="uiPanelZoom" text="Zoom ratio" type="Numeric" min="0.01" max="10.00" int="0.01"/>
+  <id name="uiPanelZoom"                    text="Zoom ratio" type="Numeric" min="0.01" max="10.00" int="0.01"/>
 
   <!-- Panel properties -->
 
@@ -110,6 +110,10 @@
   <id name="panelOSCEnabled"                            text="Enable OSC for this panel"                        type="Bool" />
   <id name="panelOSCPort"                               text="OSC port to listen on"                            type="Numeric" min="1" max="65535" />
   <id name="panelOSCProtocol"                           text="OSC network protocol"                             type="VarNumeric" defaults="Default=0,UDP=1,UNIX/LOCAL=2,TCP=4" />
+
+<!-- Panel Batch Properties -->
+  <id name="panelBatchVisualStudioPath" text="Path to Visual Studio"                            type="FileProperty" />
+	
 
   <!-- General -->
   <id name="panelFilePath"                  text="Panel file path" type="ReadOnly"/>
@@ -319,7 +323,7 @@
   <id name="uiFileListItemDeleteKeyPressed" text="Called when a file has Delete key pressed"  type="LuaMethod" />
   <id name="uiFileListItemReturnKeyPressed" text="Called when a file has Return key pressed" type="LuaMethod" />
   -->
-  <id name="uiFileListCurrentRoot"          text="Root directory browsing"        type="Text" />
+  <id name="uiFileListCurrentRoot"          text="Root directory browsing"        type="Text"/>
 
   <!-- Label -->
   <id name="uiLabelBgColour"                  text="Background colour" type="Colour"/>
@@ -677,80 +681,80 @@
   <id name="resourceImageOrientation" 	text="Image frame orientation" 	type="VarNumeric" defaults="Horizontal=0,Vertical=1"/>
 
   <!-- Instance settings (when panel is exported as an instance) -->
-  <id name="ctrlrInstanceIsResiazble"         text="Exported instance will be resizable" type="Bool" defaults="Resiazble/Not Resizable" />
+  <id name="ctrlrInstanceIsResiazble"         text="Exported instance will be resizable"    type="Bool" defaults="Resiazble/Not Resizable" />
 
   <!-- Global Ctrlr settings -->
-  <id name="ctrlrMaxExportedVstParameters"    text="Max exported VST params" type="Numeric" min="0" max="999999" int="1" />
+  <id name="ctrlrMaxExportedVstParameters"    text="Max exported VST params"                type="Numeric" min="0" max="999999" int="1" />
   <id name="ctrlrLogToFile"                   text="Log everything to file (for debugging)" type="Bool" />
-  <id name="ctrlrLuaDebug"                    text="Enable some LUA debugging" type="Bool" />
+  <id name="ctrlrLuaDebug"                    text="Enable some LUA debugging"              type="Bool" />
   <id name="ctrlrShutdownDelay"               text="How to long to wait when deleting plugin" type="Numeric" min="0" max="10000" int="1" />
   <id name="ctrlrUseEditorWrapper"            text="Use the Editor Wrapper for VST plugins" type="Bool"/>
-  <id name="ctrlrVersionSeparator"            text="Version field separator" type="Text"/>
-  <id name="ctrlrVersionCompressed"           text="Save versioned panels compressed" type="Bool"/>
-  <id name="ctrlrVstFile"                     text="VST File" type="FileProperty" />
-  <id name="ctrlrAuFile"                      text="AU File"  type="FileProperty" />
-  <id name="ctrlrAppFile"                     text="APP File" type="FileProperty" />
-  <id name="ctrlrEditorBounds"                text="Editor bounds" type="Text"/>
+  <id name="ctrlrVersionSeparator"            text="Version field separator"            type="Text"/>
+  <id name="ctrlrVersionCompressed"           text="Save versioned panels compressed"   type="Bool"/>
+  <id name="ctrlrVstFile"                     text="VST File"                           type="FileProperty" />
+  <id name="ctrlrAuFile"                      text="AU File"                            type="FileProperty" />
+  <id name="ctrlrAppFile"                     text="APP File"                           type="FileProperty" />
+  <id name="ctrlrEditorBounds"                text="Editor bounds"                      type="Text"/>
   <id name="ctrlrMidiDeviceNumPrograms"       text="Number of programs the device can store per bank" type="Numeric" min="0" max="8192" int="1"/>
-  <id name="ctrlrMidiDeviceNumBanks"          text="Number of banks the device has" type="Numeric" min="0" max="8192" int="1"/>
-  <id name="ctrlrKeyboardMapping"             text="Keyboard mappings" type="ReadOnly" />
-  <id name="vstIndex"                         text="VST Index" type="Text"/>
-  <id name="name"                             text="Name" type="Text"/>
-  <id name="uiType"                           text="Component Type" type="ReadOnly" />
-  <id name="inherit"                          text="Inherit from parent" type="Bool" />
-  <id name="program"                          text="Program"  min="0" max="127"   type="Numeric" />
-  <id name="bank"                             text="Bank"     min="0" max="65535" type="Numeric" />
+  <id name="ctrlrMidiDeviceNumBanks"          text="Number of banks the device has"     type="Numeric" min="0" max="8192" int="1"/>
+  <id name="ctrlrKeyboardMapping"             text="Keyboard mappings"                  type="ReadOnly" />
+  <id name="vstIndex"                         text="VST Index"                          type="Text"/>
+  <id name="name"                             text="Name"                               type="Text"/>
+  <id name="uiType"                           text="Component Type"                     type="ReadOnly" />
+  <id name="inherit"                          text="Inherit from parent"                type="Bool" />
+  <id name="program"                          text="Program"  min="0" max="127"         type="Numeric" />
+  <id name="bank"                             text="Bank"     min="0" max="65535"       type="Numeric" />
   <id name="lsb"                              text="Least significant part of a number" type="Numeric" min="0" max="65535" />
   <id name="msb"                              text="Most  significant part of a number" type="Numeric" min="0" max="65535" />
-  <id name="value"                            text="Current value"  type="Numeric"  min="-65535" max="65535" />
-  <id name="time"                             text="Timestamp" type="Timestamp" />
-  <id name="number"                           text="Number" type="Numeric" min="-65535" max="65535" />
-  <id name="uuid"                             text="Unique identifier" type="ReadOnly" />
-  <id name="ctrlrScrollbarThickness"          text="Thickness for all scrollbars" type="Numeric" min="8" max="128"/>
-  <id name="ctrlrColourScheme"                text="Colour scheme" type="VarText" defaults="@colourSchemes"/>
-  <id name="ctrlrLookAndFeel"                 text="Look and feel" type="VarText" defaults="@lookandfeel"/>
+  <id name="value"                            text="Current value"                      type="Numeric"  min="-65535" max="65535" />
+  <id name="time"                             text="Timestamp"                          type="Timestamp" />
+  <id name="number"                           text="Number"                             type="Numeric" min="-65535" max="65535" />
+  <id name="uuid"                             text="Unique identifier"                  type="ReadOnly" />
+  <id name="ctrlrScrollbarThickness"          text="Thickness for all scrollbars"       type="Numeric" min="8" max="128"/>
+  <id name="ctrlrColourScheme"                text="Colour scheme"                      type="VarText" defaults="@colourSchemes"/>
+  <id name="ctrlrLookAndFeel"                 text="Look and feel"                      type="VarText" defaults="@lookandfeel"/>
 
   <!-- Logging settings  -->
   <id name="ctrlrMidiMonInputBufferSize"    text="MIDI Mon input buffer size"       type="Numeric" min="512" max="65535"/>
   <id name="ctrlrMidiMonOutputBufferSize"   text="MIDI Mon output buffer size"      type="Numeric" min="512" max="65535"/>
   <id name="ctrlrLogMidiInput"              text="Toggle MIDI Input logging"        type="Bool" />
   <id name="ctrlrLogMidiOutput"             text="Toggle MIDI output logging size"  type="Bool" />
-  <id name="ctrlrLogOptions"                text="MIDI Log options" type="Numeric" />
-  <id name="ctrlrLogToFile"                 text="Log debug messages to a file" type="Bool"/>
+  <id name="ctrlrLogOptions"                text="MIDI Log options"                 type="Numeric" />
+  <id name="ctrlrLogToFile"                 text="Log debug messages to a file"     type="Bool"/>
 
-  <id name="ctrlrMidiDeviceManagerSavedGlobaly" text="How the state of the device manager is remembered" type="Bool"/>
-  <id name="ctrlrLuaDisabled"               text="LUA is disabled" type="Bool"/>
-  <id name="ctrlrLuaBootstrapFile"          text="LUA script loaded on Ctrlr start" type="Text"/>
-  <id name="ctrlrLastBrowsedResourceDir"    text="Last directory browsed for resources" type="Text"/>
+  <id name="ctrlrMidiDeviceManagerSavedGlobaly" text="How the state of the device manager is remembered"    type="Bool"/>
+  <id name="ctrlrLuaDisabled"                   text="LUA is disabled"                                      type="Bool"/>
+  <id name="ctrlrLuaBootstrapFile"              text="LUA script loaded on Ctrlr start"                     type="Text"/>
+  <id name="ctrlrLastBrowsedResourceDir"        text="Last directory browsed for resources"                 type="Text"/>
 
-  <id name="ctrlrOverwriteResources"        text="Overwrite imported resources" type="Bool"/>
-  <id name="ctrlrAutoSave"                  text="Autosave enabled" type="Bool"/>
-  <id name="ctrlrAutoSaveInterval"          text="Autosave interval in seconds" type="Numeric" min="1" max="999999" int="1"/>
-  <id name="ctrlrOpenWindowState"           text="Open panel dialog state" type="Text"/>
-  <id name="ctrlrPropertiesAreURLs"         text="When editing a panel the property names can be clickable URLs to relevant WIKI pages" type="Bool" />
-  <id name="ctrlrRecenetOpenedPanelFiles"   text="Recent opened Panel file" type="Text" />
-  <id name="ctrlrLastBrowsedFileDirectory"  text="Last browsed file directory" type="Text" />
+  <id name="ctrlrOverwriteResources"            text="Overwrite imported resources"                                                         type="Bool"/>
+  <id name="ctrlrAutoSave"                      text="Autosave enabled"                                                                     type="Bool"/>
+  <id name="ctrlrAutoSaveInterval"              text="Autosave interval in seconds"                                                         type="Numeric" min="1" max="999999" int="1"/>
+  <id name="ctrlrOpenWindowState"               text="Open panel dialog state"                                                              type="Text"/>
+  <id name="ctrlrPropertiesAreURLs"             text="When editing a panel the property names can be clickable URLs to relevant WIKI pages" type="Bool" />
+  <id name="ctrlrRecenetOpenedPanelFiles"       text="Recent opened Panel file"                                                             type="Text" />
+  <id name="ctrlrLastBrowsedFileDirectory"      text="Last browsed file directory"                                                          type="Text" />
 
-  <id name="ctrlrMenuItemBackgroundColour"  	  text="Menu item background colour" type="Colour" />
-  <id name="ctrlrMenuItemTextColour" 			      text="Menu item text colour" type="Colour" />
-  <id name="ctrlrMenuItemHighlightedTextColour" text="Menu item highlighted text colour" type="Colour" />
-  <id name="ctrlrMenuItemHighlightColour" 		  text="Menu item highlight colour" type="Colour" />
-  <id name="ctrlrMenuItemFont" 					        text="Menu item font" type="Font" />
-  <id name="ctrlrMenuItemSeparatorColour"		    text="Menu separator colour" type="Colour" />
-  <id name="ctrlrMenuItemHeaderColour"			    text="Menu header colour" type="Colour" />
+  <id name="ctrlrMenuItemBackgroundColour"  	text="Menu item background colour"              type="Colour" />
+  <id name="ctrlrMenuItemTextColour" 			text="Menu item text colour"                    type="Colour" />
+  <id name="ctrlrMenuItemHighlightedTextColour" text="Menu item highlighted text colour"        type="Colour" />
+  <id name="ctrlrMenuItemHighlightColour" 		text="Menu item highlight colour"               type="Colour" />
+  <id name="ctrlrMenuItemFont" 					text="Menu item font"                           type="Font" />
+  <id name="ctrlrMenuItemSeparatorColour"		text="Menu separator colour"                    type="Colour" />
+  <id name="ctrlrMenuItemHeaderColour"			text="Menu header colour"                       type="Colour" />
 
-  <id name="ctrlrMenuBarBackgroundColour1" 		  text="Menu bar background gradient colour top" type="Colour" />
-  <id name="ctrlrMenuBarBackgroundColour2" 		  text="Menu bar background gradient colour bottom" type="Colour" />
-  <id name="ctrlrMenuBarTextColour" 			      text="Menu bar text colour" type="Colour" />
-  <id name="ctrlrMenuBarHighlightedTextColour" 	text="Menu bar highlighted text colour" type="Colour" />
-  <id name="ctrlrMenuBarHighlightColour" 		    text="Menu bar highlight colour" type="Colour" />
-  <id name="ctrlrMenuBarFont" 					        text="Menu bar font" type="Font" />
-  <id name="ctrlrMenuBarHeight" 					        text="Menu bar height" type="Numeric" min="4" max="128"/>
-  <id name="ctrlrNativeAlerts"					        text="Use OS native dialog windows" type="Bool" />
-  <id name="ctrlrNativeFileDialogs"             text="Use OS native file open/save dialogs (disable for Linux)" type="Bool" />
-  <id name="ctrlrPrivateKey"                    text="RSA private key used to sign exported panels" type="FileProperty" />
-  <id name="ctrlrFontSizeBaseValue"             text="Base value for all font sizes in the Ctrlr UI (won't affect panel UI)" type="Numeric" min="6.0" max="128.0" int="0.1"/>
-  <id name="ctrlrTabBarDepth"             text="Depth of all tab bars" type="Numeric" min="6.0" max="128.0" int="0.1"/>
+  <id name="ctrlrMenuBarBackgroundColour1" 		text="Menu bar background gradient colour top"                                  type="Colour" />
+  <id name="ctrlrMenuBarBackgroundColour2" 		text="Menu bar background gradient colour bottom"                               type="Colour" />
+  <id name="ctrlrMenuBarTextColour" 			text="Menu bar text colour"                                                     type="Colour" />
+  <id name="ctrlrMenuBarHighlightedTextColour" 	text="Menu bar highlighted text colour"                                         type="Colour" />
+  <id name="ctrlrMenuBarHighlightColour" 		text="Menu bar highlight colour"                                                type="Colour" />
+  <id name="ctrlrMenuBarFont" 					text="Menu bar font"                                                            type="Font" />
+  <id name="ctrlrMenuBarHeight" 				text="Menu bar height"                                                          type="Numeric" min="4" max="128"/>
+  <id name="ctrlrNativeAlerts"					text="Use OS native dialog windows"                                             type="Bool" />
+  <id name="ctrlrNativeFileDialogs"             text="Use OS native file open/save dialogs (disable for Linux)"                 type="Bool" />
+  <id name="ctrlrPrivateKey"                    text="RSA private key used to sign exported panels"                             type="FileProperty" />
+  <id name="ctrlrFontSizeBaseValue"             text="Base value for all font sizes in the Ctrlr UI (won't affect panel UI)"    type="Numeric" min="6.0" max="128.0" int="0.1"/>
+  <id name="ctrlrTabBarDepth"                   text="Depth of all tab bars"                                                    type="Numeric" min="6.0" max="128.0" int="0.1"/>
 
   <!-- LUA callbacks -->
   <id name="luaManagerMethods"                text="luaManagerMethods"                                    type="Text" />
@@ -788,56 +792,56 @@
   <id name="luaPanelMidiSnapshotPre"          text="Called before a MIDI snapshot is sent"                                    type="LuaMethod" />
   <id name="luaPanelMidiSnapshotPost"         text="Called after a MIDI snapshot has been sent"                               type="LuaMethod" />
 
-  <id name="luaTransProcess"		              text="Transaction process" 					type="LuaMethod" />
-  <id name="luaTransDataUnpack"		            text="Transaction data unpacking" 			type="LuaMethod" />
-  <id name="luaTransDataPack"		              text="Transaction data packing" 			type="LuaMethod" />
-  <id name="luaTransRequest"		              text="Transaction request" 					type="LuaMethod" />
-  <id name="luaTransNameData"		              text="Transaction get name" 				type="LuaMethod" />
-  <id name="luaTransRequestData"	            text="Transaction get request data" 		type="LuaMethod" />
-  <id name="luaTransResponseData"	            text="Transaction get response data" 		type="LuaMethod" />
-  <id name="luaTransConfData"		              text="Transaction get confirmation data" 	type="LuaMethod" />
-  <id name="luaTransTimeout"		              text="Transaction timeout handler" 			type="LuaMethod" />
-  <id name="luaTransInfo"			                text="Transaction information query"		type="LuaMethod" />
-  <id name="luaCtrlrSaveState"                text="Called when Ctrlr state is saved (DAW saves a project)" type="LuaMethod" />
-  <id name="luaCtrlrRestoreState"             text="Called when Ctrlr is loaded (DAW opens a project)" type="LuaMethod" />
-  <id name="uiLuaConsoleInputRemoveAfterRun"  text="Clear console input after execute" type="Bool" />
+  <id name="luaTransProcess"		                text="Transaction process" 					                     type="LuaMethod" />
+  <id name="luaTransDataUnpack"		                text="Transaction data unpacking" 			                     type="LuaMethod" />
+  <id name="luaTransDataPack"		                text="Transaction data packing" 			                     type="LuaMethod" />
+  <id name="luaTransRequest"		                text="Transaction request" 					                     type="LuaMethod" />
+  <id name="luaTransNameData"		                text="Transaction get name" 				                     type="LuaMethod" />
+  <id name="luaTransRequestData"	                text="Transaction get request data" 		                     type="LuaMethod" />
+  <id name="luaTransResponseData"	                text="Transaction get response data" 		                     type="LuaMethod" />
+  <id name="luaTransConfData"		                text="Transaction get confirmation data" 	                     type="LuaMethod" />
+  <id name="luaTransTimeout"		                text="Transaction timeout handler" 			                     type="LuaMethod" />
+  <id name="luaTransInfo"			                text="Transaction information query"		                     type="LuaMethod" />
+  <id name="luaCtrlrSaveState"                      text="Called when Ctrlr state is saved (DAW saves a project)"    type="LuaMethod" />
+  <id name="luaCtrlrRestoreState"                   text="Called when Ctrlr is loaded (DAW opens a project)"         type="LuaMethod" />
+  <id name="uiLuaConsoleInputRemoveAfterRun"        text="Clear console input after execute"                         type="Bool" />
 
-  <id name="luaAudioProcessBlock"             text="AUDIO: main process block for the audio/midi thread" type="LuaMethod" />
+  <id name="luaAudioProcessBlock"                   text="AUDIO: main process block for the audio/midi thread" type="LuaMethod" />
 
-  <id name="midiLibraryTreeState"     				    text="Tree state"     												type="ReadOnly" />
-  <id name="midiLibraryCanGetItem"    				    text="Can get item"   												type="Bool" />
-  <id name="midiLibraryCanSendItem"   				    text="Can send item"  												type="Bool" />
+  <id name="midiLibraryTreeState"     			    text="Tree state"     												type="ReadOnly" />
+  <id name="midiLibraryCanGetItem"    			    text="Can get item"   												type="Bool" />
+  <id name="midiLibraryCanSendItem"   			    text="Can send item"  												type="Bool" />
   <id name="midiLibraryAllProgramsSupport"  	    text="Device supports sending all program data in one request"  	type="Bool" />
-  <id name="midiLibrarySendSnapAfterPChg"			    text="Send MIDI snapshot after changing programs" 					type="Bool" />
-  <id name="midiLibraryParameterIndexProperty"	  text="What property holds the parameter index in the dump data" 	type="Text" />
-  <id name="midiLibraryMidiProgramChangeControl"  text="Send MIDI program change event after changing the program" 	type="Bool" />
-  <id name="midiLibraryDefaultBankName"				    text="Default bank name (This uses the C strftime)"					type="Text" />
-  <id name="midiLibraryDefaultProgramName"			  text="Default bank name (This uses the C strftime)"					type="Text" />
-  <id name="midiLibraryDefaultSnapshotName"       text="Default snapshot name (This uses the C strftime)"				type="Text" />
+  <id name="midiLibrarySendSnapAfterPChg"			text="Send MIDI snapshot after changing programs" 					type="Bool" />
+  <id name="midiLibraryParameterIndexProperty"	    text="What property holds the parameter index in the dump data" 	type="Text" />
+  <id name="midiLibraryMidiProgramChangeControl"    text="Send MIDI program change event after changing the program" 	type="Bool" />
+  <id name="midiLibraryDefaultBankName"			    text="Default bank name (This uses the C strftime)"					type="Text" />
+  <id name="midiLibraryDefaultProgramName"			text="Default bank name (This uses the C strftime)"					type="Text" />
+  <id name="midiLibraryDefaultSnapshotName"         text="Default snapshot name (This uses the C strftime)"				type="Text" />
   <id name="midiLibraryCustomRequests"  	        text="Custom request to add to the menu bar"                      	type="MultiLine" />
 
 	<!-- Transaction -->
-  <id name="trans"       			      text="Transaction"					                          type="ReadOnly" />
-  <id name="transCap"				        text="What library items can this transaction handle"	type="MultiLine" />
-  <id name="transModIdxProp"        text="Modulator property for indexing data"           type="Text" />
-  <id name="transReqFormulaPrefix" 	text="Request formula prefix"		                      type="SysEx" />
-  <id name="transReqFormulaSuffix" 	text="Request formula suffix"		                      type="SysEx" />
-  <id name="transReqDataLen"		    text="Request data length"			                      type="Numeric" min="0" max="65565" int="1" />
+  <id name="trans"       			text="Transaction"					                    type="ReadOnly" />
+  <id name="transCap"				text="What library items can this transaction handle"	type="MultiLine" />
+  <id name="transModIdxProp"        text="Modulator property for indexing data"             type="Text" />
+  <id name="transReqFormulaPrefix" 	text="Request formula prefix"		                    type="SysEx" />
+  <id name="transReqFormulaSuffix" 	text="Request formula suffix"		                    type="SysEx" />
+  <id name="transReqDataLen"		text="Request data length"			                    type="Numeric" min="0" max="65565" int="1" />
   <id name="transRespFormulaPrefix"	text="Response formula prefix"		                    type="SysEx" />
   <id name="transRespFormulaSuffix" text="Response formula suffix"		                    type="SysEx" />
-  <id name="transRespDataLen"       text="Response data length"			                      type="Numeric" min="0" max="65565" int="1" />
-  <id name="transRespDataCheck"     text="Response data check"			                      type="Bool" />
-  <id name="transRespSizeCheck"     text="Response size check"                            type="Bool" />
-  <id name="transConfFormulaPrefix" text="Confirmation formula prefix"	                  type="SysEx" />
-  <id name="transConfFormulaSuffix" text="Confirmation formula suffix"	                  type="SysEx" />
-  <id name="transConfDataLen" 		  text="Confirmation data length"		                    type="Numeric" min="0" max="65565" int="1" />
-  <id name="transReqExists"       	text="Request exists"				                          type="Bool" />
-  <id name="transRespExists"        text="Response exists"				                        type="Bool" />
-  <id name="transConfExists"	      text="Confirmation exists"			                      type="Bool" />
-  <id name="transRespNameLen"		    text="Response name length"			type="Numeric" min="0" max="65565" int="1" />
-  <id name="transRespNameOffset"	  text="Response name offset"			type="Numeric" min="0" max="65565" int="1" />
-  <id name="transReqNameLen"		    text="Request name length"			type="Numeric" min="0" max="65565" int="1" />
-  <id name="transReqNameOffset"		  text="Request name offset"			type="Numeric" min="0" max="65565" int="1" />
+  <id name="transRespDataLen"       text="Response data length"			                    type="Numeric" min="0" max="65565" int="1" />
+  <id name="transRespDataCheck"     text="Response data check"			                    type="Bool" />
+  <id name="transRespSizeCheck"     text="Response size check"                              type="Bool" />
+  <id name="transConfFormulaPrefix" text="Confirmation formula prefix"	                    type="SysEx" />
+  <id name="transConfFormulaSuffix" text="Confirmation formula suffix"	                    type="SysEx" />
+  <id name="transConfDataLen" 		text="Confirmation data length"		                    type="Numeric" min="0" max="65565" int="1" />
+  <id name="transReqExists"       	text="Request exists"				                    type="Bool" />
+  <id name="transRespExists"        text="Response exists"				                    type="Bool" />
+  <id name="transConfExists"	    text="Confirmation exists"			                    type="Bool" />
+  <id name="transRespNameLen"		text="Response name length"			                    type="Numeric" min="0" max="65565" int="1" />
+  <id name="transRespNameOffset"	text="Response name offset"			                    type="Numeric" min="0" max="65565" int="1" />
+  <id name="transReqNameLen"		text="Request name length"			                    type="Numeric" min="0" max="65565" int="1" />
+  <id name="transReqNameOffset"		text="Request name offset"			                    type="Numeric" min="0" max="65565" int="1" />
 
   <!-- Constants used in properties -->
   <constants>

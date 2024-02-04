@@ -5,11 +5,11 @@
 #include "CtrlrInlineUtilitiesGUI.h"
 
 CtrlrPropertyComponent::CtrlrPropertyComponent (const Identifier &_propertyName,
-								const ValueTree &_propertyElement,
-								const ValueTree &_identifierDefinition,
-								CtrlrPanel *_panel,
-								StringArray *_possibleChoices,
-								Array<var>  *_possibleValues)
+												const ValueTree &_propertyElement,
+												const ValueTree &_identifierDefinition,
+												CtrlrPanel *_panel,
+												StringArray *_possibleChoices,
+												Array<var>  *_possibleValues)
 	:	PropertyComponent (_propertyName.toString()),
 		identifierDefinition(_identifierDefinition),
 		propertyName(_propertyName),
@@ -162,10 +162,8 @@ Component *CtrlrPropertyComponent::getPropertyComponent()
 
 		case CtrlrIDManager::Timestamp:
 			return (new CtrlrTimestampProperty (valueToControl));
-
 		case CtrlrIDManager::ModulatorList:
 			return (new CtrlrModulatorListProperty (valueToControl, panel));
-
 		default:
 			break;
 	}
@@ -462,9 +460,7 @@ void CtrlrColourEditorComponent::changeListenerCallback (ChangeBroadcaster* sour
 	}
 }
 
-/**
- *
- */
+
 CtrlrColourPropertyComponent::CtrlrColourPropertyComponent (const Value &_valueToControl) : valueToControl(_valueToControl)
 {
 	addAndMakeVisible (&cs);
@@ -641,7 +637,7 @@ void CtrlrFileProperty::buttonClicked (Button* buttonThatWasClicked)
 		FileChooser myChooser ("Select a file",
 								File::getSpecialLocation (File::userHomeDirectory),
 								"*.*",
-								false);
+								true);
 
         if (myChooser.browseForFileToOpen())
         {
@@ -2024,3 +2020,7 @@ void CtrlrUnknownPropertyComponent::refresh()
 {
 	l.setText (propertyElement.getPropertyAsValue(propertyName, 0).toString(), dontSendNotification);
 }
+
+
+
+

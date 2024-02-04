@@ -123,6 +123,8 @@ CtrlrPanel::CtrlrPanel(CtrlrManager &_owner, const String &panelName, const int 
 	setProperty (Ids::panelOSCPort, -1);
 	setProperty (Ids::panelOSCProtocol, 0);
 
+	setProperty (Ids::panelBatchVisualStudioPath, "");
+
     setProperty (Ids::luaPanelMidiChannelChanged, COMBO_ITEM_NONE);
 	setProperty (Ids::luaPanelMidiReceived, COMBO_ITEM_NONE);
 	setProperty (Ids::luaPanelMidiMultiReceived, COMBO_ITEM_NONE);

@@ -96,6 +96,7 @@ void CtrlrPanelComponentProperties::setTree (const ValueTree &_treeToEdit, const
 	if (treeToEdit.hasType (Ids::panel))
 	{
 		Array <PropertyComponent*> panelProperties;
+		Array <PropertyComponent*> panelBatchProperties;
 		Array <PropertyComponent*> panelEditorProperties;
 		Array <PropertyComponent*> panelMidiProperties;
 		Array <PropertyComponent*> panelOSCProperties;
@@ -181,6 +182,18 @@ void CtrlrPanelComponentProperties::setTree (const ValueTree &_treeToEdit, const
 					)
 				);
 			}
+			else if (treeToEdit.getPropertyName(i).toString().startsWith("panelBatch"))
+			{
+				panelBatchProperties.add
+				(
+					getIDManager().createComponentForProperty
+					(
+						treeToEdit.getPropertyName(i),
+						treeToEdit,
+						&owner.getOwner()
+					)
+				);
+			}
 			else
 			{
 				panelProperties.add
@@ -234,16 +247,19 @@ void CtrlrPanelComponentProperties::setTree (const ValueTree &_treeToEdit, const
 		if (panelProperties.size() != 0)
 			propertyPanel->addSection ("Panel", filterProperties(panelProperties));
 
+		if (panelBatchProperties.size() != 0)
+			propertyPanel->addSection("Batch", filterProperties(panelBatchProperties));
+
 		if (panelMidiProperties.size() != 0)
 			propertyPanel->addSection ("MIDI", filterProperties(panelMidiProperties));
 
 		if (panelOSCProperties.size() != 0)
 			propertyPanel->addSection ("OSC", filterProperties(panelOSCProperties));
 
-		if (panelMidiProperties.size() != 0)
+		if (panelEditorProperties.size() != 0)
 			propertyPanel->addSection ("Editor", filterProperties(panelEditorProperties));
 
-		(propertyPanel);
+		(propertyPanel); 
 	}
 
 	/** Modulator properties **/
