@@ -184,6 +184,8 @@ const String CtrlrIDManager::typeToString (const PropertyType t)
 			return ("UnknownProperty");
 		case FileProperty:
 			return ("FileProperty");
+		case FolderProperty:
+			return ("FolderProperty");
 		case ReadOnly:
 			return ("ReadOnly");
 		case Timestamp:
@@ -259,6 +261,10 @@ CtrlrIDManager::PropertyType CtrlrIDManager::stringToType (const String t)
 	else if (t == "FileProperty")
 	{
 		return (FileProperty);
+	}
+	else if (t == "FolderProperty")
+	{
+		return (FolderProperty);
 	}
 	else if (t == "ReadOnly")
 	{
