@@ -172,7 +172,11 @@ namespace Ids
     DECLARE_ID (panelOSCProtocol);
 
 	/* Panel Batch options */
-	DECLARE_ID (panelBatchVisualStudioPath);
+	DECLARE_ID (panelBatchProjectDir);
+	DECLARE_ID (panelBatchVsDevCmdPath);
+	DECLARE_ID (panelBatchMSBuildPath);
+	DECLARE_ID (panelBatchDAWPath);
+	DECLARE_ID (panelBatchBuildScript);
 
 	DECLARE_ID (panelScheme);
 	DECLARE_ID (panelShowDialogs);

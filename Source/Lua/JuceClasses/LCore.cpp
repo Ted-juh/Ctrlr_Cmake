@@ -66,13 +66,14 @@ void LFile::wrapForLua (lua_State *L)
 	module(L)
     [
 		class_<LFile>("LFile")
-		,
-		class_<File, bases<LFile> >("File")
-			.def(constructor<const String &>())
-			.def(constructor<const File &>())
+			,
+			class_<File, bases<LFile> >("File")
+			.def(constructor<const String&>())
+			.def(constructor<const File&>())
 			.def("exists", &File::exists)
 			.def("existsAsFile", &File::existsAsFile)
 			.def("isDirectory", &File::isDirectory)
+			// .def("isRoot", &File::isRoot)
 			.def("getSize", &LFile::getSize)
 			.def("getFullPathName", &File::getFullPathName)
 			.def("getFileName", &File::getFileName)
@@ -90,8 +91,10 @@ void LFile::wrapForLua (lua_State *L)
 			.def("getNonexistentChildFile", &File::getNonexistentChildFile)
 			.def("getNonexistentSibling", &File::getNonexistentSibling)
 			.def("hasWriteAccess", &File::hasWriteAccess)
+			// .def("hasReadAccess", &File::hasReadAccess)
 			.def("setReadOnly", &File::setReadOnly)
 			.def("isHidden", &File::isHidden)
+			// .def("getFileIdentifier", &File::getFileIdentifier)
 			.def("getLinkedTarget", &File::getLinkedTarget)
 			.def("isHidden", &File::isHidden)
 			.def("getLastModificationTime", &File::getLastModificationTime)
@@ -110,6 +113,7 @@ void LFile::wrapForLua (lua_State *L)
 			.def("copyFileTo", &File::copyFileTo)
 			.def("getNumberOfChildFiles", &File::getNumberOfChildFiles)
 			.def("containsSubDirectories", &File::containsSubDirectories)
+			// .def("loadFileAsData", &File::loadFileAsData)
 			.def("loadFileAsString", &File::loadFileAsString)
 			.def("appendData", &LFile::appendData)
 			.def("replaceWithData", &File::replaceWithData)
@@ -128,6 +132,7 @@ void LFile::wrapForLua (lua_State *L)
 			.def("revealToUser", &File::revealToUser)
 			.def("loadFileAsData", &File::loadFileAsData)
 			.def("findChildFiles", &LFile::findChildFiles)
+			// .def("revealToUser", &File::revealToUser)
 			.def("setAsCurrentWorkingDirectory", &File::setAsCurrentWorkingDirectory)
 			.def("isValid", &LFile::isValid)
 			.enum_("TypesOfFileToFind")
@@ -142,16 +147,21 @@ void LFile::wrapForLua (lua_State *L)
 				value("userHomeDirectory", 0),
 				value("userDocumentsDirectory", 1),
 				value("userDesktopDirectory", 2),
-				value("userApplicationDataDirectory", 3),
-				value("commonApplicationDataDirectory", 4),
-				value("tempDirectory", 5),
-				value("currentExecutableFile", 6),
-				value("currentApplicationFile", 7),
-				value("invokedExecutableFile", 8),
-				value("globalApplicationsDirectory", 9),
-				value("userMusicDirectory", 10),
-				value("userMoviesDirectory", 11),
-				value("userPicturesDirectory", 12)
+				value("userMusicDirectory", 3),
+				value("userMoviesDirectory", 4),
+				value("userPicturesDirectory", 5),
+				value("userApplicationDataDirectory", 6),
+				value("commonApplicationDataDirectory", 7),
+				value("commonDocumentsDirectory", 8),
+				value("tempDirectory", 9),
+				value("currentExecutableFile", 10),
+				value("currentApplicationFile", 11),
+				value("invokedExecutableFile", 12),
+				value("hostApplicationPath", 13),
+				value("windowsSystemDirectory", 14),
+				value("globalApplicationsDirectory", 15),
+				value("globalApplicationDirectoryX86", 16),
+				value("windowsLocalAppData", 17)
 			]
 			.scope
 			[
@@ -883,7 +893,7 @@ void LValueTree::wrapForLua (lua_State *L)
 				.def("indexOf", &ValueTree::indexOf)
 				.def("getParent", &ValueTree::getParent)
 				.def("getSibling", &ValueTree::getSibling)
-				//.def("createXml", &ValueTree::createXml)
+				//.def("createXml", &ValueTree::createXml) Note: was already commented out, probably not usable.
 				.def("toXmlString", &ValueTree::toXmlString)
 				.def("writeToStream", &ValueTree::writeToStream)
 				.def("addListener", &ValueTree::addListener)

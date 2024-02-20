@@ -112,7 +112,11 @@
   <id name="panelOSCProtocol"                           text="OSC network protocol"                             type="VarNumeric" defaults="Default=0,UDP=1,UNIX/LOCAL=2,TCP=4" />
 
 <!-- Panel Batch Properties -->
-  <id name="panelBatchVisualStudioPath" text="Path to Visual Studio"                            type="FileProperty" />
+  <id name="panelBatchProjectDir"           text="Path to Project Directory"                        type="FolderProperty" />
+  <id name="panelBatchVsDevCmdPath"         text="Path to Visual Studio VsDevCmd.bat"               type="FileProperty" />
+  <id name="panelBatchMSBuildPath"          text="Path to MSBuild.exe"                              type="FileProperty" />
+  <id name="panelBatchDAWPath"              text="Path to DAW"                                      type="FileProperty" />
+  <id name="panelBatchBuildScript"          text="Execute Build Script"                             type="ActionButton" />
 	
 
   <!-- General -->

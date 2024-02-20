@@ -123,7 +123,11 @@ CtrlrPanel::CtrlrPanel(CtrlrManager &_owner, const String &panelName, const int 
 	setProperty (Ids::panelOSCPort, -1);
 	setProperty (Ids::panelOSCProtocol, 0);
 
-	setProperty (Ids::panelBatchVisualStudioPath, "");
+	setProperty(Ids::panelBatchProjectDir, "");
+	setProperty(Ids::panelBatchVsDevCmdPath, "");
+	setProperty(Ids::panelBatchMSBuildPath, "");
+	setProperty(Ids::panelBatchDAWPath, "");
+	setProperty(Ids::panelBatchBuildScript, 0);
 
     setProperty (Ids::luaPanelMidiChannelChanged, COMBO_ITEM_NONE);
 	setProperty (Ids::luaPanelMidiReceived, COMBO_ITEM_NONE);
@@ -1850,4 +1854,9 @@ void CtrlrPanel::multiMidiReceived(CtrlrMidiMessage &multiMidiMessage)
 {
 	multiMidiQueue.add (multiMidiMessage);
 	triggerAsyncUpdate();
+}
+
+const String CtrlrPanel::getPanelBatchProjectDir()
+{
+	return getProperty(Ids::panelBatchProjectDir).toString();
 }

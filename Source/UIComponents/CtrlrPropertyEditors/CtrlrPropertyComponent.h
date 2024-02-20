@@ -3,6 +3,7 @@
 
 #include "CtrlrIDManager.h"
 #include "CtrlrPanel/CtrlrPanel.h"
+
 class CtrlrFloatingWindow;
 
 class CtrlrPropertyChild: public ChangeBroadcaster
@@ -76,8 +77,10 @@ class CtrlrButtonPropertyComponent : public Component, public Button::Listener, 
 		void refresh();
 		void resized();
 		void buttonClicked (Button *button);
+		void openDialogWindow();
 
 	private:
+		CtrlrPanel *owner;
 		Value valueToControl;
 		String propertyName;
 		TextButton button;
@@ -282,6 +285,23 @@ class CtrlrFileProperty  : public Component, public Label::Listener, public Butt
 		Value valueToControl;
 		Label *path;
 		TextButton *browse;
+};
+
+class CtrlrFolderProperty : public Component, public Label::Listener, public Button::Listener, public CtrlrPropertyChild
+{
+	public:
+		CtrlrFolderProperty(const Value &_valeToControl);
+		~CtrlrFolderProperty();
+		void refresh();
+		void resized();
+		void buttonClicked(Button* buttonThatWasClicked);
+		void labelTextChanged(Label* labelThatWasChanged);
+
+	private:
+		JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(CtrlrFolderProperty);
+		Value valueToControl;
+		Label *path;
+		TextButton* browse;
 };
 
 class CtrlrFontPropertyComponent  : public Component,

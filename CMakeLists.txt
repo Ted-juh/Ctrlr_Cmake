@@ -663,6 +663,13 @@ jucer_project_files("Ctrlr/Source/UIComponents/CtrlrApplicationWindow"
   .         .         .         "Source/UIComponents/CtrlrApplicationWindow/CtrlrSettings.h"
 )
 
+jucer_project_files("Ctrlr/Source/UIComponents/CtrlrBuildScript"
+# Compile   Xcode     Binary    File
+#           Resource  Resource
+  x         .         .         "Source/UIComponents/CtrlrBuildScript/CtrlrBuildScriptDialogWindow.cpp"
+  .         .         .         "Source/UIComponents/CtrlrBuildScript/CtrlrBuildScriptDialogWindow.h"
+)
+
 jucer_project_files("Ctrlr/Source/UIComponents/CtrlrComponents/Buttons"
 # Compile   Xcode     Binary    File
 #           Resource  Resource

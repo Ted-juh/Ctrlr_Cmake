@@ -1,39 +1,11 @@
-/*
-  ==============================================================================
-
-  This is an automatically generated GUI class created by the Introjucer!
-
-  Be careful when adding custom code to these files, as only the code within
-  the "//[xyz]" and "//[/xyz]" sections will be retained when the file is loaded
-  and re-saved.
-
-  Created with Introjucer version: 3.2.0
-
-  ------------------------------------------------------------------------------
-
-  The Introjucer is part of the JUCE library - "Jules' Utility Class Extensions"
-  Copyright (c) 2015 - ROLI Ltd.
-
-  ==============================================================================
-*/
-
-//[Headers] You can add your own extra header files here...
 #include "stdafx.h"
-//[/Headers]
-
 #include "CtrlrMIDISettingsRouting.h"
-
-
-//[MiscUserDefs] You can add your own user definitions and misc code here...
 #include "CtrlrPanel/CtrlrPanel.h"
-//[/MiscUserDefs]
 
-//==============================================================================
+
 CtrlrMIDISettingsRouting::CtrlrMIDISettingsRouting (CtrlrPanel &_owner)
     : owner(_owner)
 {
-    //[Constructor_pre] You can add your own custom stuff here..
-    //[/Constructor_pre]
 
     addAndMakeVisible (groupComponent = new GroupComponent ("new group",
                                                             TRANS("THRU")));
@@ -93,14 +65,8 @@ CtrlrMIDISettingsRouting::CtrlrMIDISettingsRouting (CtrlrPanel &_owner)
     inDev2HostCh->setButtonText ("");
     inDev2HostCh->addListener (this);
 
-
-    //[UserPreSize]
-    //[/UserPreSize]
-
     setSize (400, 500);
 
-
-    //[Constructor] You can add your own custom stuff here..
     inDev2OutDev->setToggleState(owner.getProperty(Ids::panelMidiThruD2D), dontSendNotification);
     ctrlDev2OutDev->setToggleState(owner.getProperty(Ids::panelMidiThruC2D), dontSendNotification);
     host2OutDev->setToggleState(owner.getProperty(Ids::panelMidiThruH2D), dontSendNotification);
@@ -112,14 +78,12 @@ CtrlrMIDISettingsRouting::CtrlrMIDISettingsRouting (CtrlrPanel &_owner)
     host2OutDevCh->setToggleState(owner.getProperty(Ids::panelMidiThruH2DChannelize), dontSendNotification);
     host2HostCh->setToggleState(owner.getProperty(Ids::panelMidiThruH2HChannelize), dontSendNotification);
     inDev2HostCh->setToggleState(owner.getProperty(Ids::panelMidiThruD2HChannelize), dontSendNotification);
-    //[/Constructor]
+
 }
 
 CtrlrMIDISettingsRouting::~CtrlrMIDISettingsRouting()
 {
-    //[Destructor_pre]. You can add your own custom destruction code here..
-    //[/Destructor_pre]
-
+ 
     groupComponent = nullptr;
     inDev2OutDev = nullptr;
     ctrlDev2OutDev = nullptr;
@@ -133,25 +97,16 @@ CtrlrMIDISettingsRouting::~CtrlrMIDISettingsRouting()
     inDev2Host = nullptr;
     inDev2HostCh = nullptr;
 
-
-    //[Destructor]. You can add your own custom destruction code here..
-    //[/Destructor]
 }
 
 //==============================================================================
 void CtrlrMIDISettingsRouting::paint (Graphics& g)
 {
-    //[UserPrePaint] Add your own custom painting code here..
-    //[/UserPrePaint]
-
-    //[UserPaint] Add your own custom painting code here..
-    //[/UserPaint]
+ 
 }
 
 void CtrlrMIDISettingsRouting::resized()
 {
-    //[UserPreResize] Add your own custom resize code here..
-    //[/UserPreResize]
 
     groupComponent->setBounds (proportionOfWidth (0.0500f), proportionOfHeight (0.0200f), proportionOfWidth (0.9000f), proportionOfHeight (0.9560f));
     inDev2OutDev->setBounds (proportionOfWidth (0.1000f), proportionOfHeight (0.2200f), proportionOfWidth (0.6000f), proportionOfHeight (0.1000f));
@@ -165,87 +120,53 @@ void CtrlrMIDISettingsRouting::resized()
     label->setBounds (proportionOfWidth (0.7400f), proportionOfHeight (0.0800f), proportionOfWidth (0.1600f), proportionOfHeight (0.1200f));
     inDev2Host->setBounds (proportionOfWidth (0.1000f), proportionOfHeight (0.8000f), proportionOfWidth (0.6000f), proportionOfHeight (0.1000f));
     inDev2HostCh->setBounds (proportionOfWidth (0.8000f), proportionOfHeight (0.8000f), 24, proportionOfHeight (0.1000f));
-    //[UserResized] Add your own custom resize handling here..
-    //[/UserResized]
+
 }
 
 void CtrlrMIDISettingsRouting::buttonClicked (Button* buttonThatWasClicked)
 {
-    //[UserbuttonClicked_Pre]
-    //[/UserbuttonClicked_Pre]
-
     if (buttonThatWasClicked == inDev2OutDev)
     {
-        //[UserButtonCode_inDev2OutDev] -- add your button handler code here..
         owner.setProperty(Ids::panelMidiThruD2D, inDev2OutDev->getToggleState());
-        //[/UserButtonCode_inDev2OutDev]
     }
     else if (buttonThatWasClicked == ctrlDev2OutDev)
     {
-        //[UserButtonCode_ctrlDev2OutDev] -- add your button handler code here..
         owner.setProperty(Ids::panelMidiThruC2D, ctrlDev2OutDev->getToggleState());
-        //[/UserButtonCode_ctrlDev2OutDev]
     }
     else if (buttonThatWasClicked == host2OutDev)
     {
-        //[UserButtonCode_host2OutDev] -- add your button handler code here..
         owner.setProperty(Ids::panelMidiThruH2D, host2OutDev->getToggleState());
-        //[/UserButtonCode_host2OutDev]
     }
     else if (buttonThatWasClicked == host2Host)
     {
-        //[UserButtonCode_host2Host] -- add your button handler code here..
         owner.setProperty(Ids::panelMidiThruH2H, host2Host->getToggleState());
-        //[/UserButtonCode_host2Host]
     }
     else if (buttonThatWasClicked == inDev2OutDevCh)
     {
-        //[UserButtonCode_inDev2OutDevCh] -- add your button handler code here..
         owner.setProperty(Ids::panelMidiThruD2DChannelize, inDev2OutDevCh->getToggleState());
-        //[/UserButtonCode_inDev2OutDevCh]
     }
     else if (buttonThatWasClicked == ctrlDev2OutDevCh)
     {
-        //[UserButtonCode_ctrlDev2OutDevCh] -- add your button handler code here..
         owner.setProperty(Ids::panelMidiThruC2DChannelize, ctrlDev2OutDevCh->getToggleState());
-        //[/UserButtonCode_ctrlDev2OutDevCh]
     }
     else if (buttonThatWasClicked == host2OutDevCh)
     {
-        //[UserButtonCode_host2OutDevCh] -- add your button handler code here..
         owner.setProperty(Ids::panelMidiThruH2DChannelize, host2OutDevCh->getToggleState());
-        //[/UserButtonCode_host2OutDevCh]
     }
     else if (buttonThatWasClicked == host2HostCh)
     {
-        //[UserButtonCode_host2HostCh] -- add your button handler code here..
         owner.setProperty(Ids::panelMidiThruH2HChannelize, host2HostCh->getToggleState());
-        //[/UserButtonCode_host2HostCh]
     }
     else if (buttonThatWasClicked == inDev2Host)
     {
-        //[UserButtonCode_inDev2Host] -- add your button handler code here..
         owner.setProperty(Ids::panelMidiThruD2H, inDev2Host->getToggleState());
-        //[/UserButtonCode_inDev2Host]
     }
     else if (buttonThatWasClicked == inDev2HostCh)
     {
-        //[UserButtonCode_inDev2HostCh] -- add your button handler code here..
         owner.setProperty(Ids::panelMidiThruD2HChannelize, inDev2HostCh->getToggleState());
-        //[/UserButtonCode_inDev2HostCh]
     }
-
-    //[UserbuttonClicked_Post]
-    //[/UserbuttonClicked_Post]
 }
 
-
-
-//[MiscUserCode] You can add your own definitions of your custom methods or any other code here...
-//[/MiscUserCode]
-
-
-//==============================================================================
 #if 0
 /*  -- Introjucer information section --
 
@@ -310,7 +231,3 @@ BEGIN_JUCER_METADATA
 END_JUCER_METADATA
 */
 #endif
-
-
-//[EndFile] You can add extra defines here...
-//[/EndFile]

@@ -34,6 +34,7 @@ class CtrlrIDManager
 			UnknownProperty,
 			ReadOnly,
 			FileProperty,
+			FolderProperty,
 			Timestamp,
 			ModulatorList
 		};

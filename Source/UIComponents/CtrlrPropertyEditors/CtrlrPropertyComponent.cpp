@@ -160,8 +160,12 @@ Component *CtrlrPropertyComponent::getPropertyComponent()
 		case CtrlrIDManager::FileProperty:
 			return (new CtrlrFileProperty (valueToControl));
 
+		case CtrlrIDManager::FolderProperty:
+			return (new CtrlrFolderProperty (valueToControl));
+
 		case CtrlrIDManager::Timestamp:
 			return (new CtrlrTimestampProperty (valueToControl));
+
 		case CtrlrIDManager::ModulatorList:
 			return (new CtrlrModulatorListProperty (valueToControl, panel));
 		default:
@@ -291,9 +295,40 @@ void CtrlrButtonPropertyComponent::refresh()
 {
 }
 
-void CtrlrButtonPropertyComponent::buttonClicked (Button *_button)
+void CtrlrButtonPropertyComponent::buttonClicked(Button* _button)
 {
+	if (propertyName == "panelBatchBuildScript" || "Execute Build Script")
+	{
+		openDialogWindow ();
+
+	}
+	else
+	{
 	valueToControl = true;
+	}
+}
+
+void CtrlrButtonPropertyComponent::openDialogWindow()
+{
+	if (owner == nullptr)
+	{
+		DBG("CtrlrButtonPropertyComponent::openDialogWindow - owner is null");
+		AlertWindow::showMessageBox (AlertWindow::WarningIcon, "Warning", "Owner is null.");
+		return;
+	}
+
+	CtrlrBuildScriptDialogWindow* contentComponent = new CtrlrBuildScriptDialogWindow(owner);
+	DialogWindow::LaunchOptions buildScriptDialog;
+	buildScriptDialog.content.set (contentComponent, true);
+	buildScriptDialog.dialogTitle = "Build Script Editor";
+	buildScriptDialog.dialogBackgroundColour = Colours::whitesmoke;
+	buildScriptDialog.escapeKeyTriggersCloseButton = true;
+	buildScriptDialog.useNativeTitleBar = true;
+	buildScriptDialog.resizable = true;
+	buildScriptDialog.componentToCentreAround = this;
+
+	DialogWindow* dialog = buildScriptDialog.launchAsync();
+	contentComponent->setDialogWindow(dialog);
 }
 
 CtrlrChoicePropertyComponent::CtrlrChoicePropertyComponent (const Value &_valueToControl,
@@ -636,7 +671,8 @@ void CtrlrFileProperty::buttonClicked (Button* buttonThatWasClicked)
     {
 		FileChooser myChooser ("Select a file",
 								File::getSpecialLocation (File::userHomeDirectory),
-								"*.*",
+								"*",
+								true, 
 								true);
 
         if (myChooser.browseForFileToOpen())
@@ -644,6 +680,10 @@ void CtrlrFileProperty::buttonClicked (Button* buttonThatWasClicked)
 			valueToControl = myChooser.getResult().getFullPathName();
 			path->setText (valueToControl.toString(), dontSendNotification);
         }
+		else 
+		{
+						
+		}
     }
 }
 
@@ -653,6 +693,68 @@ void CtrlrFileProperty::refresh()
 }
 
 void CtrlrFileProperty::labelTextChanged (Label* labelThatHasChanged)
+{
+	valueToControl = labelThatHasChanged->getText();
+}
+
+
+
+CtrlrFolderProperty::CtrlrFolderProperty(const Value& _valeToControl) : valueToControl(_valeToControl)
+{
+	addAndMakeVisible(path = new Label(""));
+	path->setText(valueToControl.toString(), dontSendNotification);
+	path->addListener(this);
+	path->setColour(Label::backgroundColourId, findColour(ComboBox::backgroundColourId));
+	path->setColour(Label::outlineColourId, findColour(ComboBox::outlineColourId));
+
+	addAndMakeVisible(browse = new TextButton("Browse", "Browse"));
+	browse->addListener(this);
+	browse->setConnectedEdges(TextButton::ConnectedOnRight);
+	setSize(256, 48);
+}
+
+CtrlrFolderProperty::~CtrlrFolderProperty()
+{
+	deleteAndZero(path);
+	deleteAndZero(browse);
+}
+
+void CtrlrFolderProperty::resized()
+{
+	browse->setBounds(0, 0, 48, getHeight());
+	path->setBounds(48, 0, getWidth() - 48, getHeight());
+}
+
+void CtrlrFolderProperty::buttonClicked(Button* buttonThatWasClicked)
+{
+	if (buttonThatWasClicked == browse)
+	{
+		FileChooser myChooser("Select a folder",
+			File::getSpecialLocation(File::userHomeDirectory),
+			"*",
+			true,
+			true);
+
+		if (myChooser.browseForDirectory())
+		{
+			valueToControl = myChooser.getResult().getFullPathName();
+			path->setText(valueToControl.toString(), dontSendNotification);
+		}
+		else
+		{
+
+		}
+	}
+}
+
+
+
+void CtrlrFolderProperty::refresh()
+{
+	path->setText(valueToControl.toString(), dontSendNotification);
+}
+
+void CtrlrFolderProperty::labelTextChanged(Label* labelThatHasChanged)
 {
 	valueToControl = labelThatHasChanged->getText();
 }
