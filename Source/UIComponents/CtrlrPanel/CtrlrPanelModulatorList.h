@@ -1,4 +1,6 @@
-#pragma once
+#ifndef __CTRLR_PANEL_MODULATOR_LIST__
+#define __CTRLR_PANEL_MODULATOR_LIST__
+
 #include "CtrlrPanelModulatorListTree.h"
 
 class CtrlrModulatorListSorter
@@ -79,3 +81,6 @@ class CtrlrPanelModulatorList  : public CtrlrChildWindowContent,
 		CtrlrPanelModulatorListTree modulatorListTree;
 	    TableListBox* modulatorList;
 };
+
+
+#endif

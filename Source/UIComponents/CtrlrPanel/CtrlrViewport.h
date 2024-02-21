@@ -1,4 +1,6 @@
-#pragma once
+#ifndef CTRLR_VIEWPORT_H
+#define CTRLR_VIEWPORT_H
+
 #include "JuceHeader.h"
 
 class CtrlrViewport  : public Component,
@@ -53,3 +55,6 @@ class CtrlrViewport  : public Component,
 
         JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (CtrlrViewport);
 };
+
+
+#endif   // __JUCE_VIEWPORT_JUCEHEADER__

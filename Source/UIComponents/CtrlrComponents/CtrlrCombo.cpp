@@ -9,6 +9,7 @@
 #include "CtrlrUtilitiesGUI.h"
 #include "JuceClasses/LLookAndFeel.h"
 
+//==============================================================================
 CtrlrCombo::CtrlrCombo (CtrlrModulator &owner)
     : CtrlrComponent(owner), lf(*this),
       ctrlrCombo (0)
@@ -21,6 +22,8 @@ CtrlrCombo::CtrlrCombo (CtrlrModulator &owner)
     ctrlrCombo->setTextWhenNoChoicesAvailable (L"(no choices)");
     ctrlrCombo->addListener (this);
 
+
+    //[UserPreSize]
 	ctrlrCombo->setLookAndFeel (&lf);
 	componentTree.addListener (this);
 
@@ -46,41 +49,72 @@ CtrlrCombo::CtrlrCombo (CtrlrModulator &owner)
 	setProperty (Ids::uiComboDynamicContent, 0);
 	setProperty (Ids::uiComboSelectedId, -1);
 	setProperty (Ids::uiComboSelectedIndex, -1);
+    //[/UserPreSize]
 
     setSize (88, 32);
+
+
+    //[Constructor] You can add your own custom stuff here..
+    //[/Constructor]
 }
 
 CtrlrCombo::~CtrlrCombo()
 {
+    //[Destructor_pre]. You can add your own custom destruction code here..
+    //[/Destructor_pre]
+
     deleteAndZero (ctrlrCombo);
+
+
+    //[Destructor]. You can add your own custom destruction code here..
+    //[/Destructor]
 }
 
+//==============================================================================
 void CtrlrCombo::resized()
 {
+    //ctrlrCombo->setBounds (2, 2, getWidth() - 4, getHeight() - 4);
+    //[UserResized] Add your own custom resize handling here..
 	if (restoreStateInProgress)
 		return;
 
 	ctrlrCombo->setBounds (getUsableRect());
+    //[/UserResized]
 }
 
 void CtrlrCombo::comboBoxChanged (ComboBox* comboBoxThatHasChanged)
 {
+    //[UsercomboBoxChanged_Pre]
+    //[/UsercomboBoxChanged_Pre]
+
     if (comboBoxThatHasChanged == ctrlrCombo)
     {
+        //[UserComboBoxCode_ctrlrCombo] -- add your combo box handling code here..
         _DBG("CtrlrCombo::comboBoxChanged");
 		setComponentValue (ctrlrCombo->getSelectedItemIndex(), true);
+        //[/UserComboBoxCode_ctrlrCombo]
     }
+
+    //[UsercomboBoxChanged_Post]
+    //[/UsercomboBoxChanged_Post]
 }
 
 void CtrlrCombo::mouseDown (const MouseEvent& e)
 {
+    //[UserCode_mouseDown] -- Add your code here...
+    //[/UserCode_mouseDown]
 }
 
 bool CtrlrCombo::keyPressed (const KeyPress& key)
 {
+    //[UserCode_keyPressed] -- Add your code here...
     return false;  // Return true if your handler uses this key event, or false to allow it to be passed-on.
+    //[/UserCode_keyPressed]
 }
 
+
+
+//[MiscUserCode] You can add your own definitions of your custom methods or any other code here...
 double CtrlrCombo::getComponentMaxValue()
 {
 	return (valueMap->getNonMappedMax());
@@ -539,3 +573,34 @@ void CtrlrCombo::customLookAndFeelChanged(LookAndFeelBase *customLookAndFeel)
     else
         ctrlrCombo->setLookAndFeel (customLookAndFeel);
 }
+
+
+//[/MiscUserCode]
+
+
+//==============================================================================
+#if 0
+/*  -- Jucer information section --
+
+    This is where the Jucer puts all of its metadata, so don't change anything in here!
+
+BEGIN_JUCER_METADATA
+
+<JUCER_COMPONENT documentType="Component" className="CtrlrCombo" componentName=""
+                 parentClasses="public CtrlrComponent, public KeyListener" constructorParams="CtrlrModulator &amp;owner"
+                 variableInitialisers="CtrlrComponent(owner), lf(*this)" snapPixels="8"
+                 snapActive="1" snapShown="1" overlayOpacity="0.330000013" fixedSize="1"
+                 initialWidth="88" initialHeight="32">
+  <METHODS>
+    <METHOD name="mouseDown (const MouseEvent&amp; e)"/>
+    <METHOD name="keyPressed (const KeyPress&amp; key)"/>
+  </METHODS>
+  <BACKGROUND backgroundColour="ffffff"/>
+  <COMBOBOX name="ctrlrCombo" id="8c7a382fb899f6c2" memberName="ctrlrCombo"
+            virtualName="" explicitFocusOrder="0" pos="2 2 4M 4M" editable="0"
+            layout="36" items="" textWhenNonSelected="(no selection)" textWhenNoItems="(no choices)"/>
+</JUCER_COMPONENT>
+
+END_JUCER_METADATA
+*/
+#endif

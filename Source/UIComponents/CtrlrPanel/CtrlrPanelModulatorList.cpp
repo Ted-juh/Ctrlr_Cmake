@@ -7,6 +7,7 @@
 #include "CtrlrPanelModulatorList.h"
 #include "CtrlrInlineUtilitiesGUI.h"
 
+/* ********************************************************************************** */
 CtrlrPanelModulatorList::CtrlrPanelModulatorList (CtrlrPanel &_owner)
     : owner(_owner),
       modulatorList (0),

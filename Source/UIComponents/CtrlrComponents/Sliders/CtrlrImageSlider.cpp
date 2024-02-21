@@ -48,42 +48,72 @@ CtrlrImageSlider::CtrlrImageSlider (CtrlrModulator &owner)
 	setProperty (Ids::uiSliderSpringValue, 0);
 	setProperty (Ids::uiSliderMouseWheelInterval, 1);
 	setProperty (Ids::uiSliderPopupBubble, false);
+    //[/UserPreSize]
 
     setSize (64, 64);
+
+    //[Constructor] You can add your own custom stuff here..
+    //[/Constructor]
 }
 
 CtrlrImageSlider::~CtrlrImageSlider()
 {
+    //[Destructor_pre]. You can add your own custom destruction code here..
+    //[/Destructor_pre]
+
     deleteAndZero (ctrlrSlider);
+
+    //[Destructor]. You can add your own custom destruction code here..
+    //[/Destructor]
 }
 
+//==============================================================================
 void CtrlrImageSlider::paint (Graphics& g)
 {
+    //[UserPrePaint] Add your own custom painting code here..
+    //[/UserPrePaint]
+
+    //[UserPaint] Add your own custom painting code here..
+    //[/UserPaint]
 }
 
 void CtrlrImageSlider::resized()
 {
+    //ctrlrSlider->setBounds (0, 0, getWidth() - 0, getHeight() - 0);
+    //[UserResized] Add your own custom resize handling here..
 	if (restoreStateInProgress)
 		return;
 	ctrlrSlider->setBounds (getUsableRect());
+    //[/UserResized]
 }
 
 void CtrlrImageSlider::sliderValueChanged (Slider* sliderThatWasMoved)
 {
+    //[UsersliderValueChanged_Pre]
+    //[/UsersliderValueChanged_Pre]
+
     if (sliderThatWasMoved == ctrlrSlider)
     {
+        //[UserSliderCode_ctrlrSlider] -- add your slider handling code here..
 		setComponentValue ((int)ctrlrSlider->getValue(), true);
+        //[/UserSliderCode_ctrlrSlider]
     }
+
+    //[UsersliderValueChanged_Post]
+    //[/UsersliderValueChanged_Post]
 }
 
 void CtrlrImageSlider::mouseUp (const MouseEvent& e)
 {
+    //[UserCode_mouseUp] -- Add your code here...
 	if ((bool)getProperty(Ids::uiSliderSpringMode) == true)
 	{
 		ctrlrSlider->setValue ((double)getProperty(Ids::uiSliderSpringValue), sendNotificationSync);
 	}
+    //[/UserCode_mouseUp]
 }
 
+//[MiscUserCode] You can add your own definitions of your custom methods or any other code here...
 double CtrlrImageSlider::getComponentMaxValue()
 {
 	return ((int)ctrlrSlider->getMaximum());
@@ -244,3 +274,33 @@ void CtrlrImageSlider::reloadResources(Array <CtrlrPanelResource*> resourcesThat
 		}
 	}
 }
+//[/MiscUserCode]
+
+
+//==============================================================================
+#if 0
+/*  -- Jucer information section --
+
+    This is where the Jucer puts all of its metadata, so don't change anything in here!
+
+BEGIN_JUCER_METADATA
+
+<JUCER_COMPONENT documentType="Component" className="CtrlrImageSlider" componentName=""
+                 parentClasses="public CtrlrComponent, public SettableTooltipClient"
+                 constructorParams="CtrlrModulator &amp;owner" variableInitialisers="CtrlrComponent(owner), lf(*this)"
+                 snapPixels="8" snapActive="1" snapShown="1" overlayOpacity="0.330000013"
+                 fixedSize="1" initialWidth="64" initialHeight="64">
+  <METHODS>
+    <METHOD name="mouseUp (const MouseEvent&amp; e)"/>
+    <METHOD name="mouseDoubleClick (const MouseEvent&amp; e)"/>
+  </METHODS>
+  <BACKGROUND backgroundColour="0"/>
+  <SLIDER name="ctrlrSlider" id="9d33c05c00f3fd09" memberName="ctrlrSlider"
+          virtualName="" explicitFocusOrder="0" pos="0 0 0M 0M" min="0"
+          max="10" int="0" style="LinearHorizontal" textBoxPos="TextBoxBelow"
+          textBoxEditable="1" textBoxWidth="80" textBoxHeight="20" skewFactor="1"/>
+</JUCER_COMPONENT>
+
+END_JUCER_METADATA
+*/
+#endif

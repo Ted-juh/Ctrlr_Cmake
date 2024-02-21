@@ -1,4 +1,6 @@
-#pragma once
+#ifndef __CTRLR_SLIDER__
+#define __CTRLR_SLIDER__
+
 #include "../CtrlrComponent.h"
 #include "CtrlrSliderInternal.h"
 
@@ -33,3 +35,6 @@ class CtrlrSlider  : public CtrlrComponent,
 		CtrlrSliderLookAndFeel_V2 lf;
 		CtrlrSliderInternal ctrlrSlider;
 };
+
+
+#endif

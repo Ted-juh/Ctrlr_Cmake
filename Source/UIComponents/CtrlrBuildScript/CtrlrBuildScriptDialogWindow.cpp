@@ -4,7 +4,7 @@
 #include "CtrlrPanel/CtrlrPanel.h"
 #include "JuceHeader.h"
 
-CtrlrBuildScriptDialogWindow::CtrlrBuildScriptDialogWindow()
+CtrlrBuildScriptDialogWindow::CtrlrBuildScriptDialogWindow(CtrlrPanel *panel) : panel(panel)
 {
     addAndMakeVisible(debugButton);
     debugButton.setButtonText("Debug");
@@ -142,7 +142,6 @@ void CtrlrBuildScriptDialogWindow::generateAndExecuteBuildScript()
     buildScriptFile.appendText("# Directory where the /build folder is located\n");
 
     //get Ids::panelBatchProjectDir from getPanelBatchProjectDir from CtrlrPanel
-    //String buildDir = panel->getPanelBatchProjectDir();
-    //buildScriptFile.appendText("$buildDir = \"" + buildDir + "\"\n");
+    buildScriptFile.appendText("$buildDir = \"" + panel->getPanelBatchProjectDir() + "\"\n");
 
 } 

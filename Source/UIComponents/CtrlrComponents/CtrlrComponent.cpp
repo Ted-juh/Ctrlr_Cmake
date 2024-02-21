@@ -46,6 +46,8 @@ void CtrlrComponentResizableBorder::drawResizableFrame (Graphics& g, int w, int 
 				h - bSize.getTop() - bSize.getBottom() + 2);
 }
 
+/** */
+
 CtrlrComponent::CtrlrComponent(CtrlrModulator &_owner)
 	:	componentTree(Ids::component),
 		owner(_owner),

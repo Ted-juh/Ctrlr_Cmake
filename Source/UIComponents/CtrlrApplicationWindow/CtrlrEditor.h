@@ -1,4 +1,6 @@
-#pragma once
+#ifndef __CTRLR_EDITOR__
+#define __CTRLR_EDITOR__
+
 #include "CtrlrMacros.h"
 #include "CtrlrWindowManagers/CtrlrChildWindowContainer.h"
 #include "CtrlrSettings.h"
@@ -174,3 +176,6 @@ class CtrlrEditor  : public AudioProcessorEditor,
 		bool hideMidiChannelMenu = false;
 
 };
+
+
+#endif

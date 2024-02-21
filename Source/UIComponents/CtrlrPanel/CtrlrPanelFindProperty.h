@@ -1,4 +1,15 @@
+/*
+  ==============================================================================
+
+    CtrlrPanelFindProperty.h
+    Created: 4 Jan 2021 4:49:27pm
+    Author:  atom
+
+  ==============================================================================
+*/
+
 #pragma once
+
 #include "CtrlrMacros.h"
 #include "CtrlrInlineUtilitiesGUI.h"
 

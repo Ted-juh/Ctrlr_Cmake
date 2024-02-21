@@ -1,4 +1,6 @@
-#pragma once
+#ifndef __CTRLR_PROPERTY_COMPONENT__
+#define __CTRLR_PROPERTY_COMPONENT__
+
 #include "CtrlrIDManager.h"
 #include "CtrlrPanel/CtrlrPanel.h"
 
@@ -34,6 +36,7 @@ class CtrlrPropertyComponent  : public PropertyComponent
 		const String getElementType();
 
 	private:
+	    JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (CtrlrPropertyComponent);
 		String visibleText;
 		ValueTree propertyElement;
 		Identifier propertyName;
@@ -45,8 +48,6 @@ class CtrlrPropertyComponent  : public PropertyComponent
 		Array<var>  *possibleValues;
 		URL url;
 		String urlString;
-
-		JUCE_LEAK_DETECTOR (CtrlrPropertyComponent);
 };
 
 class CtrlrBooleanPropertyComponent : public Component, public Button::Listener, public CtrlrPropertyChild
@@ -60,12 +61,12 @@ class CtrlrBooleanPropertyComponent : public Component, public Button::Listener,
 	    void buttonClicked (Button*);
 
 	private:
+		JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (CtrlrBooleanPropertyComponent);
+
 		Value valueToControl;
 		ToggleButton button;
 		String onText,offText;
 		String stateText;
-
-		JUCE_LEAK_DETECTOR (CtrlrBooleanPropertyComponent)
 };
 
 class CtrlrButtonPropertyComponent : public Component, public Button::Listener, public CtrlrPropertyChild
@@ -101,14 +102,13 @@ class CtrlrChoicePropertyComponent  : public Component,
 		void changed();
 
 	private:
+		JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(CtrlrChoicePropertyComponent)
 		Value valueToControl;
 		Array <var> values;
 		StringArray choices;
 		ScopedPointer <ComboBox> combo;
 		CtrlrPropertyComponent *owner;
 		bool numeric;
-
-		JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(CtrlrChoicePropertyComponent)
 };
 
 class CtrlrColourLabel : public Label
@@ -142,12 +142,12 @@ class CtrlrColourEditorComponent : 	public Component,
 		void mouseDown (const MouseEvent &e);
 		void changeListenerCallback (ChangeBroadcaster* source);
 
+		JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (CtrlrColourEditorComponent)
+
 	private:
 		CtrlrColourLabel colourTextInput;
 		Colour colour;
 		bool canResetToDefault;
-
-		JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(CtrlrColourEditorComponent)
 
 		class CtrlrColourSelectorComp   : public Component, public Button::Listener
 		{
@@ -198,14 +198,13 @@ class CtrlrColourEditorComponent : 	public Component,
 					owner->refresh();
 					selector->setCurrentColour (owner->getColour());
 				}
-				
+
+				JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (CtrlrColourSelectorComp)
 		private:
 
 			CtrlrColourEditorComponent* owner;
 			ColourSelector* selector;
 			TextButton* defaultButton;
-
-			JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(CtrlrColourSelectorComp)
 		};
 };
 
@@ -218,11 +217,11 @@ class CtrlrColourPropertyComponent : public Component, public ChangeListener, pu
 		void changeListenerCallback (ChangeBroadcaster* source);
 		void resized();
 
+		JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (CtrlrColourPropertyComponent)
+
 	private:
 		Value valueToControl;
 		CtrlrColourEditorComponent cs;
-
-		JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(CtrlrColourPropertyComponent)
 };
 
 class CtrlrReadOnlyProperty : public Component, public CtrlrPropertyChild
@@ -238,12 +237,12 @@ class CtrlrReadOnlyProperty : public Component, public CtrlrPropertyChild
 		void refresh();
 		void resized();
 
+		JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (CtrlrReadOnlyProperty)
+
 	private:
 		Label value;
 		ValueTree propertyElement;
 		Identifier propertyName;
-
-		JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(CtrlrReadOnlyProperty)
 };
 
 class CtrlrExpressionProperty  : public Component,
@@ -262,13 +261,13 @@ class CtrlrExpressionProperty  : public Component,
 		void resized();
 		void buttonClicked (Button* buttonThatWasClicked);
 
+		JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (CtrlrExpressionProperty);
+
 	private:
 		CtrlrFloatingWindow *externalEditorWindow;
 		Value valeToControl;
 		TextEditor* text;
 		DrawableButton* apply;
-
-		JUCE_LEAK_DETECTOR (CtrlrExpressionProperty)
 };
 
 class CtrlrFileProperty  : public Component, public Label::Listener, public Button::Listener, public CtrlrPropertyChild
@@ -282,11 +281,10 @@ class CtrlrFileProperty  : public Component, public Label::Listener, public Butt
 		void labelTextChanged (Label* labelThatHasChanged);
 
 	private:
+		JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (CtrlrFileProperty);
 		Value valueToControl;
 		Label *path;
 		TextButton *browse;
-
-		JUCE_LEAK_DETECTOR (CtrlrFileProperty)
 };
 
 class CtrlrFolderProperty : public Component, public Label::Listener, public Button::Listener, public CtrlrPropertyChild
@@ -300,11 +298,10 @@ class CtrlrFolderProperty : public Component, public Label::Listener, public But
 		void labelTextChanged(Label* labelThatWasChanged);
 
 	private:
+		JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(CtrlrFolderProperty);
 		Value valueToControl;
 		Label *path;
 		TextButton* browse;
-
-		JUCE_LEAK_DETECTOR (CtrlrFolderProperty)
 };
 
 class CtrlrFontPropertyComponent  : public Component,
@@ -325,6 +322,8 @@ class CtrlrFontPropertyComponent  : public Component,
 		void sliderValueChanged (Slider* sliderThatWasMoved);
 		Label* createSliderTextBox (Slider& slider);
 
+		JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (CtrlrFontPropertyComponent);
+
 		class SliderLabelComp : public Label
 		{
 			public:
@@ -341,8 +340,6 @@ class CtrlrFontPropertyComponent  : public Component,
 		DrawableButton* fontItalic;
 		DrawableButton* fontUnderline;
 		Slider* fontSize,*horizontalScale,*kerning;
-
-		JUCE_LEAK_DETECTOR (CtrlrFontPropertyComponent)
 };
 
 class CtrlrLuaMethodProperty  : public Component,
@@ -493,10 +490,9 @@ class CtrlrSliderPropertyComponent   : public Component, private Slider::Listene
 		void resized();
 
 	private:
+		JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (CtrlrSliderPropertyComponent);
 		Slider slider;
 		Value valueToControl;
-
-		JUCE_LEAK_DETECTOR (CtrlrSliderPropertyComponent)
 };
 
 class SysExRow : public Component
@@ -545,25 +541,39 @@ class CtrlrSysExEditor  : public Component,
 class CtrlrSysExFormulaEditor  : public Component
 {
 public:
-
+    //==============================================================================
     CtrlrSysExFormulaEditor ();
     ~CtrlrSysExFormulaEditor();
 
-	void paint (Graphics& g);
+    //==============================================================================
+    //[UserMethods]     -- You can add your own custom methods in this section.
+    //[/UserMethods]
+
+    void paint (Graphics& g);
     void resized();
 
+
+
+    //==============================================================================
+    juce_UseDebuggingNewOperator
+
 private:
+    //[UserVariables]   -- You can add your own custom variables in this section.
 	CodeDocument forwardFormulaDocument, reverseFormulaDocument;
+    //[/UserVariables]
+
+    //==============================================================================
     CodeEditorComponent* forwardFormula;
     CodeEditorComponent* reverseFormula;
     Label* forwardLabel;
     Label* reverseLabel;
     Label* label;
 
-	CtrlrSysExFormulaEditor (const CtrlrSysExFormulaEditor&);
-    const CtrlrSysExFormulaEditor& operator= (const CtrlrSysExFormulaEditor&);
 
-	JUCE_LEAK_DETECTOR (CtrlrSysExFormulaEditor)
+    //==============================================================================
+    // (prevent copy constructor and operator= being generated..)
+    CtrlrSysExFormulaEditor (const CtrlrSysExFormulaEditor&);
+    const CtrlrSysExFormulaEditor& operator= (const CtrlrSysExFormulaEditor&);
 };
 
 class CtrlrSysExPropertyComponent  : public Component,
@@ -609,11 +619,11 @@ class CtrlrTextPropertyComponent : public Component, public CtrlrPropertyChild
 		void resized();
 
 	private:
+		JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (CtrlrTextPropertyComponent);
+
 		ScopedPointer<Label> textEditor;
 		void createEditor (int maxNumChars, bool isMultiLine);
 		Value valueToControl;
-
-		JUCE_LEAK_DETECTOR (CtrlrTextPropertyComponent)
 };
 
 class CtrlrTimestampProperty : public Component, public CtrlrPropertyChild
@@ -625,10 +635,9 @@ class CtrlrTimestampProperty : public Component, public CtrlrPropertyChild
 		void resized();
 
 	private:
+		JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (CtrlrTimestampProperty);
 		ScopedPointer<Label> textEditor;
 		Value valueToControl;
-
-		JUCE_LEAK_DETECTOR (CtrlrTimestampProperty)
 };
 
 class CtrlrUnknownPropertyComponent : public Component, public CtrlrPropertyChild
@@ -645,9 +654,10 @@ class CtrlrUnknownPropertyComponent : public Component, public CtrlrPropertyChil
 		void refresh();
 
 	private:
+		JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (CtrlrUnknownPropertyComponent);
 		Label l;
 		Identifier propertyName;
 		ValueTree propertyElement;
-
-		JUCE_LEAK_DETECTOR (CtrlrUnknownPropertyComponent)
 };
+
+#endif

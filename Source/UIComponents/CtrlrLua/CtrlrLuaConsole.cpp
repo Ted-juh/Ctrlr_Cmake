@@ -1,9 +1,35 @@
 #include "stdafx.h"
+/*
+  ==============================================================================
+
+  This is an automatically generated file created by the Jucer!
+
+  Creation date:  3 Apr 2012 10:45:28pm
+
+  Be careful when adding custom code to these files, as only the code within
+  the "//[xyz]" and "//[/xyz]" sections will be retained when the file is loaded
+  and re-saved.
+
+  Jucer version: 1.12
+
+  ------------------------------------------------------------------------------
+
+  The Jucer is part of the JUCE library - "Jules' Utility Class Extensions"
+  Copyright 2004-6 by Raw Material Software ltd.
+
+  ==============================================================================
+*/
+
+//[Headers] You can add your own extra header files here...
 #include "CtrlrLuaManager.h"
 #include "CtrlrManager/CtrlrManager.h"
 #include "CtrlrPanel/CtrlrPanel.h"
+//[/Headers]
+
 #include "CtrlrLuaConsole.h"
 
+
+//[MiscUserDefs] You can add your own user definitions and misc code here...
 const StringArray joinFileArray (const Array<File> ar)
 {
 	StringArray s;
@@ -14,7 +40,9 @@ const StringArray joinFileArray (const Array<File> ar)
 	}
 	return (s);
 }
+//[/MiscUserDefs]
 
+//==============================================================================
 CtrlrLuaConsole::CtrlrLuaConsole (CtrlrPanel &_owner)
     : owner(_owner),
       luaConsoleOutput (0),
@@ -31,6 +59,8 @@ CtrlrLuaConsole::CtrlrLuaConsole (CtrlrPanel &_owner)
 
     addAndMakeVisible (resizer = new StretchableLayoutResizerBar (&layoutManager, 1, false));
 
+
+    //[UserPreSize]
 	layoutManager.setItemLayout (0, -0.001, -1.0, -0.69);
  	layoutManager.setItemLayout (1, -0.001, -0.01, -0.01);
  	layoutManager.setItemLayout (2, -0.001, -1.0, -0.30);
@@ -47,21 +77,41 @@ CtrlrLuaConsole::CtrlrLuaConsole (CtrlrPanel &_owner)
 	lastMoveDirection = NONE;
 	currentInputString = "";
 
-	setSize (600, 400);
-	
+	//luaConsoleOutput->setWantsKeyboardFocus(false);
+	//luaConsoleInput->grabKeyboardFocus();
+    //[/UserPreSize]
+
+    setSize (600, 400);
+
+
+    //[Constructor] You can add your own custom stuff here..
 	snips.addTokens (owner.getProperty(Ids::uiLuaConsoleSnips).toString(), "$", "\'\"");
+    //[/Constructor]
 }
 
 CtrlrLuaConsole::~CtrlrLuaConsole()
 {
+    //[Destructor_pre]. You can add your own custom destruction code here..
 	owner.getCtrlrManagerOwner().getCtrlrLog().removeListener (this);
+    //[/Destructor_pre]
+
     deleteAndZero (luaConsoleOutput);
     deleteAndZero (luaConsoleInput);
     deleteAndZero (resizer);
+
+
+    //[Destructor]. You can add your own custom destruction code here..
+    //[/Destructor]
 }
 
+//==============================================================================
 void CtrlrLuaConsole::paint (Graphics& g)
 {
+    //[UserPrePaint] Add your own custom painting code here..
+    //[/UserPrePaint]
+
+    //[UserPaint] Add your own custom painting code here..
+    //[/UserPaint]
 }
 
 void CtrlrLuaConsole::resized()
@@ -69,15 +119,22 @@ void CtrlrLuaConsole::resized()
     luaConsoleOutput->setBounds (0, 0, getWidth() - 0, proportionOfHeight (0.6900f));
     luaConsoleInput->setBounds (0, proportionOfHeight (0.7000f), getWidth() - 0, proportionOfHeight (0.3000f));
     resizer->setBounds (0, proportionOfHeight (0.6900f), getWidth() - 0, proportionOfHeight (0.0100f));
+    //[UserResized] Add your own custom resize handling here..
 	Component* comps[] = { luaConsoleOutput, resizer, luaConsoleInput  };
  	layoutManager.layOutComponents (comps, 3, 0, 0, getWidth(), getHeight(), true, true);
+    //[/UserResized]
 }
 
 bool CtrlrLuaConsole::keyPressed (const KeyPress& key)
 {
+    //[UserCode_keyPressed] -- Add your code here...
     return false;  // Return true if your handler uses this key event, or false to allow it to be passed-on.
+    //[/UserCode_keyPressed]
 }
 
+
+
+//[MiscUserCode] You can add your own definitions of your custom methods or any other code here...
 bool CtrlrLuaConsole::keyPressed (const KeyPress& key, Component* originatingComponent)
 {
 	if (key.getKeyCode() == 13 && originatingComponent == luaConsoleInput && !key.getModifiers().isCtrlDown())
@@ -258,3 +315,37 @@ void CtrlrLuaConsole::focusGained(FocusChangeType cause)
 {
 	luaConsoleInput->grabKeyboardFocus();
 }
+//[/MiscUserCode]
+
+
+//==============================================================================
+#if 0
+/*  -- Jucer information section --
+
+    This is where the Jucer puts all of its metadata, so don't change anything in here!
+
+BEGIN_JUCER_METADATA
+
+<JUCER_COMPONENT documentType="Component" className="CtrlrLuaConsole" componentName=""
+                 parentClasses="public CtrlrChildWindowContent, public CtrlrLog::Listener, public KeyListener"
+                 constructorParams="CtrlrPanel &amp;_owner" variableInitialisers="owner(_owner)"
+                 snapPixels="8" snapActive="1" snapShown="1" overlayOpacity="0.330000013"
+                 fixedSize="1" initialWidth="600" initialHeight="400">
+  <METHODS>
+    <METHOD name="keyPressed (const KeyPress&amp; key)"/>
+  </METHODS>
+  <BACKGROUND backgroundColour="0"/>
+  <GENERICCOMPONENT name="luaConsoleOutput" id="cf0696d15c4f91e3" memberName="luaConsoleOutput"
+                    virtualName="" explicitFocusOrder="0" pos="0 0 0M 69%" class="CodeEditorComponent"
+                    params="outputDocument, 0"/>
+  <GENERICCOMPONENT name="luaConsoleInput" id="9630267470906dc" memberName="luaConsoleInput"
+                    virtualName="" explicitFocusOrder="0" pos="0 70% 0M 30%" class="CodeEditorComponent"
+                    params="inputDocument, 0"/>
+  <GENERICCOMPONENT name="" id="f4fe604fd1cb0e52" memberName="resizer" virtualName=""
+                    explicitFocusOrder="0" pos="0 69% 0M 1%" class="StretchableLayoutResizerBar"
+                    params="&amp;layoutManager, 1, false"/>
+</JUCER_COMPONENT>
+
+END_JUCER_METADATA
+*/
+#endif

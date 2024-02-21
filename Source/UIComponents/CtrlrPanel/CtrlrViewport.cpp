@@ -1,6 +1,8 @@
 #include "stdafx.h"
 #include "CtrlrViewport.h"
 
+
+//==============================================================================
 CtrlrViewport::CtrlrViewport (const String& componentName)
   : Component (componentName),
     scrollBarThickness (0),
@@ -12,6 +14,7 @@ CtrlrViewport::CtrlrViewport (const String& componentName)
     verticalScrollBar (true),
     horizontalScrollBar (false)
 {
+    // content holder is used to clip the contents so they don't overlap the scrollbars
     addAndMakeVisible (&contentHolder);
     contentHolder.setInterceptsMouseClicks (false, true);
 
@@ -40,6 +43,8 @@ void CtrlrViewport::deleteContentComp()
 {
     if (deleteContent)
     {
+        // This sets the content comp to a null pointer before deleting the old one, in case
+        // anything tries to use the old one while it's in mid-deletion..
         ScopedPointer<Component> oldCompDeleter (contentComp);
         contentComp = nullptr;
     }
@@ -144,6 +149,7 @@ void CtrlrViewport::resized()
     updateVisibleArea();
 }
 
+//==============================================================================
 void CtrlrViewport::updateVisibleArea()
 {
     const int scrollbarWidth = getScrollBarThickness();
@@ -214,6 +220,7 @@ void CtrlrViewport::updateVisibleArea()
         visibleOrigin.setY (0);
     }
 
+    // Force the visibility *after* setting the ranges to avoid flicker caused by edge conditions in the numbers.
     horizontalScrollBar.setVisible (hBarVisible);
     verticalScrollBar.setVisible (vBarVisible);
 
@@ -228,6 +235,9 @@ void CtrlrViewport::updateVisibleArea()
         lastVisibleArea = visibleArea;
         visibleAreaChanged (visibleArea);
     }
+
+    // horizontalScrollBar.handleUpdateNowIfNeeded();
+    // verticalScrollBar.handleUpdateNowIfNeeded();
 }
 
 //==============================================================================
@@ -270,6 +280,8 @@ int CtrlrViewport::getScrollBarThickness() const
 
 void CtrlrViewport::setScrollBarButtonVisibility (const bool /* buttonsVisible */)
 {
+    // verticalScrollBar.setButtonVisibility (buttonsVisible);
+    // horizontalScrollBar.setButtonVisibility (buttonsVisible);
 }
 
 void CtrlrViewport::scrollBarMoved (ScrollBar* scrollBarThatHasMoved, double newRangeStart)

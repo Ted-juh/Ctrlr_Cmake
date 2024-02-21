@@ -1,4 +1,6 @@
-#pragma once
+#ifndef __CTRLR_OWNED_MIDI_MESSAGE__
+#define __CTRLR_OWNED_MIDI_MESSAGE__
+
 #include "CtrlrMidiMessage.h"
 
 class CtrlrModulator;
@@ -32,3 +34,5 @@ class CtrlrOwnedMidiMessage : public CtrlrMidiMessage
 	private:
 		CtrlrMidiMessageOwner &owner;
 };
+
+#endif

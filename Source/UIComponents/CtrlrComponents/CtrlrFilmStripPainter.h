@@ -1,4 +1,6 @@
-#pragma once
+#ifndef __CTRLR_FILM_STRIP_PAINTER__
+#define __CTRLR_FILM_STRIP_PAINTER__
+
 #include "CtrlrMacros.h"
 
 class CtrlrFilmStripPainter;
@@ -60,3 +62,4 @@ class CtrlrImageToggleButton : public CtrlrFilmStripPainter, public LookAndFeel
 	private:
 		CtrlrComponent &owner;
 };
+#endif

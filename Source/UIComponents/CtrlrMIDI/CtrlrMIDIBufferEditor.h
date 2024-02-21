@@ -16,9 +16,11 @@
 
   ==============================================================================
 */
-#pragma once
-//[Headers]     -- You can add your own extra header files here --
 
+#ifndef __JUCE_HEADER_817734578EE0E242__
+#define __JUCE_HEADER_817734578EE0E242__
+
+//[Headers]     -- You can add your own extra header files here --
 #include "CtrlrWindowManagers/CtrlrChildWindowContent.h"
 #include "CtrlrWindowManagers/CtrlrPanelWindowManager.h"
 //[/Headers]

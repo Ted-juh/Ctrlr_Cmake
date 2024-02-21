@@ -1,4 +1,6 @@
-#pragma once
+#ifndef __CTRLR_METHOD_EDITOR__
+#define __CTRLR_METHOD_EDITOR__
+
 #include "Methods/CtrlrLuaMethod.h"
 #include "CtrlrTextEditor.h"
 #include "CtrlrWindowManagers/CtrlrChildWindowContent.h"
@@ -56,7 +58,7 @@ private:
 	ValueTree methodTree;
 	CtrlrLuaMethodEditor &owner;
 };
-
+//==============================================================================
 class GenericCodeEditorComponent  : public CodeEditorComponent
 {
 private:
@@ -97,3 +99,5 @@ private:
     CtrlrLuaDebugger &getDebugger();
 	JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (GenericCodeEditorComponent)
 };
+//==============================================================================
+#endif

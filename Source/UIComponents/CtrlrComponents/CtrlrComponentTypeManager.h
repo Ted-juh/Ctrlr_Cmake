@@ -1,4 +1,6 @@
-#pragma once
+#ifndef __CTRLR_COMPONENT_TYPE_MANAGER__
+#define __CTRLR_COMPONENT_TYPE_MANAGER__
+
 #include "CtrlrMacros.h"
 
 class CtrlrComponent;
@@ -32,3 +34,5 @@ class CtrlrComponentTypeManager
 		static bool isGroupingComponent(CtrlrComponent *componentToCheck);
 		static CtrlrComponent *getParentIfGroupped(CtrlrComponent *childComponent);
 };
+
+#endif

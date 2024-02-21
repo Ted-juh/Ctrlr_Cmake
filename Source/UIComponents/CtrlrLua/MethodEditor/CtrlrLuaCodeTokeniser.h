@@ -1,4 +1,6 @@
-#pragma once
+#ifndef __CTRLR_LUA_CODE_TOKENISER__
+#define __CTRLR_LUA_CODE_TOKENISER__
+
 #include "CtrlrMacros.h"
 
 class CtrlrLuaCodeTokeniser : public LuaTokeniser
@@ -26,3 +28,5 @@ class CtrlrLuaCodeTokeniser : public LuaTokeniser
 
 		JUCE_LEAK_DETECTOR (CtrlrLuaCodeTokeniser);
 };
+
+#endif

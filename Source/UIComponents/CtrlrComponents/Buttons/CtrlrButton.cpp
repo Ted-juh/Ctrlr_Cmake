@@ -5,6 +5,7 @@
 #include "CtrlrModulator/CtrlrModulator.h"
 #include "CtrlrPanel/CtrlrPanel.h"
 
+//==============================================================================
 CtrlrButton::CtrlrButton (CtrlrModulator &owner)
     : CtrlrComponent(owner),
       ctrlrButton (0)
@@ -12,6 +13,8 @@ CtrlrButton::CtrlrButton (CtrlrModulator &owner)
 	valueMap = new CtrlrValueMap();
     addAndMakeVisible (ctrlrButton = new TextButton ("ctrlrButton"));
     ctrlrButton->addListener (this);
+
+    //[UserPreSize]
     ctrlrButton->addMouseListener(this, true);
 	ctrlrButton->setBufferedToImage (true);
 	setProperty (Ids::uiButtonTrueValue, 1);
@@ -30,17 +33,33 @@ CtrlrButton::CtrlrButton (CtrlrModulator &owner)
 	setProperty (Ids::uiButtonRepeatRate, 100);
 	setProperty (Ids::uiButtonTriggerOnMouseDown, false);
 	setProperty (Ids::componentInternalFunction, COMBO_ITEM_NONE);
+    //[/UserPreSize]
 
     setSize (88, 32);
+
+    //[Constructor] You can add your own custom stuff here..
+    //[/Constructor]
 }
 
 CtrlrButton::~CtrlrButton()
 {
+    //[Destructor_pre]. You can add your own custom destruction code here..
+    //[/Destructor_pre]
+
     deleteAndZero (ctrlrButton);
+
+    //[Destructor]. You can add your own custom destruction code here..
+    //[/Destructor]
 }
 
+//==============================================================================
 void CtrlrButton::paint (Graphics& g)
 {
+    //[UserPrePaint] Add your own custom painting code here..
+    //[/UserPrePaint]
+
+    //[UserPaint] Add your own custom painting code here..
+    //[/UserPaint]
 }
 
 void CtrlrButton::resized()
@@ -59,19 +78,24 @@ void CtrlrButton::buttonClicked (Button* buttonThatWasClicked)
 
 	if (!owner.getOwnerPanel().checkRadioGroup(this, buttonThatWasClicked->getToggleState()))
 		return;
+    //[/UserbuttonClicked_Pre]
 
     if (buttonThatWasClicked == ctrlrButton)
     {
+        //[UserButtonCode_ctrlrButton] -- add your button handler code here..
 		valueMap->increment();
 		ctrlrButton->setButtonText (valueMap->getCurrentText());
 		setComponentValue (valueMap->getCurrentNonMappedValue(), true);
+        //[/UserButtonCode_ctrlrButton]
     }
 
+    //[UserbuttonClicked_Post]
+    //[/UserbuttonClicked_Post]
 }
 
 void CtrlrButton::mouseDown (const MouseEvent& e)
 {
-
+    //[UserCode_mouseDown] -- Add your code here...
     if ((bool)getProperty(Ids::uiButtonTriggerOnMouseDown) == true)
     {
         if (e.eventComponent == ctrlrButton)
@@ -88,8 +112,12 @@ void CtrlrButton::mouseDown (const MouseEvent& e)
         }
     }
 	CtrlrComponent::mouseDown(e);
+    //[/UserCode_mouseDown]
 }
 
+
+
+//[MiscUserCode] You can add your own definitions of your custom methods or any other code here...
 void CtrlrButton::timerCallback()
 {
 	if (ctrlrButton->isMouseButtonDown())
@@ -239,3 +267,31 @@ void CtrlrButton::setToggleState(const bool toggleState, const bool sendChangeMe
 {
 	ctrlrButton->setToggleState (toggleState, sendChangeMessage ? sendNotification : dontSendNotification);
 }
+//[/MiscUserCode]
+
+
+//==============================================================================
+#if 0
+/*  -- Jucer information section --
+
+    This is where the Jucer puts all of its metadata, so don't change anything in here!
+
+BEGIN_JUCER_METADATA
+
+<JUCER_COMPONENT documentType="Component" className="CtrlrButton" componentName=""
+                 parentClasses="public CtrlrComponent" constructorParams="CtrlrModulator &amp;owner"
+                 variableInitialisers="CtrlrComponent(owner)" snapPixels="8" snapActive="1"
+                 snapShown="1" overlayOpacity="0.330000013" fixedSize="1" initialWidth="88"
+                 initialHeight="32">
+  <METHODS>
+    <METHOD name="mouseDown (const MouseEvent&amp; e)"/>
+  </METHODS>
+  <BACKGROUND backgroundColour="ffffff"/>
+  <TEXTBUTTON name="ctrlrButton" id="d906fca95b2d6ff7" memberName="ctrlrButton"
+              virtualName="" explicitFocusOrder="0" pos="0 0 0M 0M" buttonText="Button"
+              connectedEdges="0" needsCallback="1" radioGroupId="0"/>
+</JUCER_COMPONENT>
+
+END_JUCER_METADATA
+*/
+#endif

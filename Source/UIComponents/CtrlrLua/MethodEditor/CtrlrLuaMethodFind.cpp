@@ -1,10 +1,37 @@
+/*
+  ==============================================================================
+
+  This is an automatically generated GUI class created by the Introjucer!
+
+  Be careful when adding custom code to these files, as only the code within
+  the "//[xyz]" and "//[/xyz]" sections will be retained when the file is loaded
+  and re-saved.
+
+  Created with Introjucer version: 3.1.0
+
+  ------------------------------------------------------------------------------
+
+  The Introjucer is part of the JUCE library - "Jules' Utility Class Extensions"
+  Copyright 2004-13 by Raw Material Software Ltd.
+
+  ==============================================================================
+*/
+
+//[Headers] You can add your own extra header files here...
 #include "stdafx.h"
 #include "CtrlrLuaMethodEditor.h"
 #include "CtrlrLuaMethodCodeEditor.h"
 #include "Methods/CtrlrLuaMethodManager.h"
 #include "CtrlrInlineUtilitiesGUI.h"
+//[/Headers]
+
 #include "CtrlrLuaMethodFind.h"
 
+
+//[MiscUserDefs] You can add your own user definitions and misc code here...
+//[/MiscUserDefs]
+
+//==============================================================================
 CtrlrLuaMethodFind::CtrlrLuaMethodFind (CtrlrLuaMethodEditor &_owner)
     : owner(_owner)
 {
@@ -81,18 +108,28 @@ CtrlrLuaMethodFind::CtrlrLuaMethodFind (CtrlrLuaMethodEditor &_owner)
     whereToFindCombo->addItem (TRANS("All"), 3);
     whereToFindCombo->addListener (this);
 
+
+    //[UserPreSize]
 	replaceInput->addListener (this);
 	findInput->addListener (this);
 
 	lastFoundPosition = -1;
 	findInput->setFont (Font(16));
 	replaceInput->setFont (Font(16));
+    //[/UserPreSize]
 
     setSize (424, 64);
+
+
+    //[Constructor] You can add your own custom stuff here..
+    //[/Constructor]
 }
 
 CtrlrLuaMethodFind::~CtrlrLuaMethodFind()
 {
+    //[Destructor_pre]. You can add your own custom destruction code here..
+    //[/Destructor_pre]
+
     findInput = nullptr;
     replaceInput = nullptr;
     findNext = nullptr;
@@ -102,6 +139,10 @@ CtrlrLuaMethodFind::~CtrlrLuaMethodFind()
     matchCase = nullptr;
     label2 = nullptr;
     whereToFindCombo = nullptr;
+
+
+    //[Destructor]. You can add your own custom destruction code here..
+    //[/Destructor]
 }
 
 
@@ -116,12 +157,18 @@ void CtrlrLuaMethodFind::resized()
     matchCase->setBounds (4 + 68, 40, 96, 24);
     label2->setBounds (proportionOfWidth (0.4505f) + 121, 40, 64, 24);
     whereToFindCombo->setBounds (176, 40, 128, 24);
+    //[UserResized] Add your own custom resize handling here..
+    //[/UserResized]
 }
 
 void CtrlrLuaMethodFind::buttonClicked (Button* buttonThatWasClicked)
 {
+    //[UserbuttonClicked_Pre]
+    //[/UserbuttonClicked_Pre]
+
     if (buttonThatWasClicked == findNext)
     {
+        //[UserButtonCode_findNext] -- add your button handler code here..
 		if (whereToFindCombo->getSelectedId() == 1 || whereToFindCombo->getSelectedId() == 0)
 		{
 			findNextMatch();
@@ -134,44 +181,69 @@ void CtrlrLuaMethodFind::buttonClicked (Button* buttonThatWasClicked)
 		{
 			findInAll();
 		}
+        //[/UserButtonCode_findNext]
     }
     else if (buttonThatWasClicked == replaceNextButton)
     {
+        //[UserButtonCode_replaceNextButton] -- add your button handler code here..
 		replaceNextMatch();
+        //[/UserButtonCode_replaceNextButton]
     }
     else if (buttonThatWasClicked == replaceAllButton)
     {
+        //[UserButtonCode_replaceAllButton] -- add your button handler code here..
 		replaceAllMatches();
+        //[/UserButtonCode_replaceAllButton]
     }
     else if (buttonThatWasClicked == matchCase)
     {
+        //[UserButtonCode_matchCase] -- add your button handler code here..
+        //[/UserButtonCode_matchCase]
     }
+
+    //[UserbuttonClicked_Post]
+    //[/UserbuttonClicked_Post]
 }
 
 void CtrlrLuaMethodFind::comboBoxChanged (ComboBox* comboBoxThatHasChanged)
 {
+    //[UsercomboBoxChanged_Pre]
+    //[/UsercomboBoxChanged_Pre]
+
     if (comboBoxThatHasChanged == whereToFindCombo)
     {
+        //[UserComboBoxCode_whereToFindCombo] -- add your combo box handling code here..
+        //[/UserComboBoxCode_whereToFindCombo]
     }
+
+    //[UsercomboBoxChanged_Post]
+    //[/UsercomboBoxChanged_Post]
 }
 
 void CtrlrLuaMethodFind::visibilityChanged()
 {
+    //[UserCode_visibilityChanged] -- Add your code here...
 	if (isVisible())
 	{
 		findInput->grabKeyboardFocus();
 		findInput->selectAll();
 	}
+    //[/UserCode_visibilityChanged]
 }
 
 bool CtrlrLuaMethodFind::keyPressed (const KeyPress& key)
 {
+    //[UserCode_keyPressed] -- Add your code here...
 	if (key.getKeyCode() == 65650) // F3
 	{
 	}
     return false;  // Return true if your handler uses this key event, or false to allow it to be passed-on.
+    //[/UserCode_keyPressed]
 }
 
+
+
+//[MiscUserCode] You can add your own definitions of your custom methods or any other code here...
 void CtrlrLuaMethodFind::textEditorReturnKeyPressed (TextEditor &editor)
 {
 	if (&editor == findInput)
@@ -382,3 +454,72 @@ void CtrlrLuaMethodFind::reportFoundMatch (CodeDocument &document, const String 
 
 	owner.getMethodEditArea()->insertOutput (as);
 }
+//[/MiscUserCode]
+
+
+//==============================================================================
+#if 0
+/*  -- Introjucer information section --
+
+    This is where the Introjucer stores the metadata that describe this GUI layout, so
+    make changes in here at your peril!
+
+BEGIN_JUCER_METADATA
+
+<JUCER_COMPONENT documentType="Component" className="CtrlrLuaMethodFind" componentName="Search and Replace"
+                 parentClasses="public Component, public TextEditor::Listener"
+                 constructorParams="CtrlrLuaMethodEditor &amp;_owner" variableInitialisers="owner(_owner)"
+                 snapPixels="8" snapActive="1" snapShown="1" overlayOpacity="0.330"
+                 fixedSize="1" initialWidth="424" initialHeight="64">
+  <METHODS>
+    <METHOD name="keyPressed (const KeyPress&amp; key)"/>
+    <METHOD name="visibilityChanged()"/>
+  </METHODS>
+  <BACKGROUND backgroundColour="0"/>
+  <TEXTEDITOR name="" id="6f936e948893af75" memberName="findInput" virtualName=""
+              explicitFocusOrder="0" pos="4 4 33.019% 32" bkgcol="ffffffff"
+              outlinecol="0" shadowcol="0" initialText="" multiline="1" retKeyStartsLine="0"
+              readonly="0" scrollbars="1" caret="1" popupmenu="1"/>
+  <TEXTEDITOR name="" id="744e2163900608e0" memberName="replaceInput" virtualName=""
+              explicitFocusOrder="0" pos="45.047% 4 33.019% 32" bkgcol="ffffffff"
+              outlinecol="0" shadowcol="0" initialText="" multiline="1" retKeyStartsLine="0"
+              readonly="0" scrollbars="1" caret="1" popupmenu="1"/>
+  <TEXTBUTTON name="" id="fa9e37fe9ed18cb8" memberName="findNext" virtualName=""
+              explicitFocusOrder="0" pos="0R 4 9.906% 32" posRelativeX="6f936e948893af75"
+              bgColOff="ffbababa" buttonText="Find" connectedEdges="3" needsCallback="1"
+              radioGroupId="0"/>
+  <TEXTBUTTON name="" id="c0ea170c8f7a9eba" memberName="replaceNextButton"
+              virtualName="" explicitFocusOrder="0" pos="0R 4 9.906% 32" posRelativeX="744e2163900608e0"
+              bgColOff="ffcbf2aa" buttonText="Next" connectedEdges="3" needsCallback="1"
+              radioGroupId="0"/>
+  <TEXTBUTTON name="" id="3d16946d31b26786" memberName="replaceAllButton" virtualName=""
+              explicitFocusOrder="0" pos="0R 4 9.906% 32" posRelativeX="c0ea170c8f7a9eba"
+              bgColOff="ffa9cfff" buttonText="All" connectedEdges="3" needsCallback="1"
+              radioGroupId="0"/>
+  <LABEL name="new label" id="3e2e6635ee9aae4e" memberName="label" virtualName=""
+         explicitFocusOrder="0" pos="0 40 64 24" posRelativeX="6f936e948893af75"
+         edTextCol="ff000000" edBkgCol="0" labelText="Find" editableSingleClick="0"
+         editableDoubleClick="0" focusDiscardsChanges="0" fontname="Default font"
+         fontsize="16" bold="1" italic="1" justification="33"/>
+  <TOGGLEBUTTON name="" id="ec465ae4cc0e8e7a" memberName="matchCase" virtualName=""
+                explicitFocusOrder="0" pos="68 40 96 24" posRelativeX="6f936e948893af75"
+                buttonText="Match Case" connectedEdges="0" needsCallback="1"
+                radioGroupId="0" state="0"/>
+  <LABEL name="new label" id="846ac0d0c5ae311c" memberName="label2" virtualName=""
+         explicitFocusOrder="0" pos="121 40 64 24" posRelativeX="744e2163900608e0"
+         edTextCol="ff000000" edBkgCol="0" labelText="Replace" editableSingleClick="0"
+         editableDoubleClick="0" focusDiscardsChanges="0" fontname="Default font"
+         fontsize="16" bold="1" italic="1" justification="33"/>
+  <COMBOBOX name="" id="d5a9d17b100be8b2" memberName="whereToFindCombo" virtualName=""
+            explicitFocusOrder="0" pos="176 40 128 24" editable="0" layout="33"
+            items="Current&#10;All Open&#10;All" textWhenNonSelected="Current"
+            textWhenNoItems=""/>
+</JUCER_COMPONENT>
+
+END_JUCER_METADATA
+*/
+#endif
+
+
+//[EndFile] You can add extra defines here...
+//[/EndFile]

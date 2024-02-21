@@ -1,6 +1,7 @@
-#pragma once
-#include "CtrlrComponents/CtrlrComponent.h"
+#ifndef __JUCER_HEADER_CTRLRBUTTON_CTRLRBUTTON_4EC1070F__
+#define __JUCER_HEADER_CTRLRBUTTON_CTRLRBUTTON_4EC1070F__
 
+#include "CtrlrComponents/CtrlrComponent.h"
 class CtrlrValueMap;
 
 class CtrlrButton  : public CtrlrComponent,
@@ -8,11 +9,13 @@ class CtrlrButton  : public CtrlrComponent,
 					 public Timer
 {
 public:
- 
+    //==============================================================================
     CtrlrButton (CtrlrModulator &owner);
     ~CtrlrButton();
 
- 	void setComponentValue (const double newValue, const bool sendChangeMessage=false);
+    //==============================================================================
+    //[UserMethods]     -- You can add your own custom methods in this section.
+	void setComponentValue (const double newValue, const bool sendChangeMessage=false);
 	double getComponentValue();
 	int getComponentMidiValue();
 	double getComponentMaxValue();
@@ -41,11 +44,23 @@ public:
     void buttonClicked (Button* buttonThatWasClicked);
     void mouseDown (const MouseEvent& e);
 
+
+    //==============================================================================
+    juce_UseDebuggingNewOperator
+
 private:
+    //[UserVariables]   -- You can add your own custom variables in this section.
 	ScopedPointer <CtrlrValueMap> valueMap;
+    //[/UserVariables]
+
+    //==============================================================================
     TextButton* ctrlrButton;
+
+    //==============================================================================
+    // (prevent copy constructor and operator= being generated..)
     CtrlrButton (const CtrlrButton&);
     const CtrlrButton& operator= (const CtrlrButton&);
-
-	JUCE_LEAK_DETECTOR(CtrlrButton)
 };
+
+
+#endif   // __JUCER_HEADER_CTRLRBUTTON_CTRLRBUTTON_4EC1070F__

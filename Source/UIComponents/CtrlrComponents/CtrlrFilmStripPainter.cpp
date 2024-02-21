@@ -43,6 +43,10 @@ Label *CtrlrImageSliderLF::createSliderTextBox (Slider &slider)
 	return (l);
 }
 
+/**
+
+ */
+
 CtrlrImageToggleButton::CtrlrImageToggleButton(CtrlrComponent &_owner) : owner(_owner)
 {
 }
@@ -56,6 +60,10 @@ void CtrlrImageToggleButton::setImage (const Image image, const int fWidth, cons
 {
 	CtrlrFilmStripPainter::setImage (image, fWidth, fHeight);
 }
+
+/**
+
+ */
 
 CtrlrFilmStripPainter::CtrlrFilmStripPainter(const Image imageToSet, const int frameWidth, const int frameHeight)
 	: paintMode(RectanglePlacement::stretchToFit), isVertical(true)

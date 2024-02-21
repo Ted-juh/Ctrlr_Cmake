@@ -7,6 +7,8 @@
 #include "CtrlrPanel/CtrlrPanelCanvas.h"
 #include "CtrlrInlineUtilitiesGUI.h"
 
+
+/* ********************************************************************************** */
 CtrlrModulatorTreeLabel::CtrlrModulatorTreeLabel(CtrlrModulatorTreeViewItem &_owner, const ValueTree &_itemToAttach)
 	:	owner(_owner),
 		itemToAttach(_itemToAttach)

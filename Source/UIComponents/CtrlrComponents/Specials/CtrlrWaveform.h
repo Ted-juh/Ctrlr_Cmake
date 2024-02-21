@@ -1,6 +1,7 @@
-#pragma once
-#include "../CtrlrComponent.h"
+#ifndef __CTRLR_WAVEFORM__
+#define __CTRLR_WAVEFORM__
 
+#include "../CtrlrComponent.h"
 class CtrlrLuaAudioSampleBuffer;
 
 class CtrlrWaveform  : public CtrlrComponent, public FileDragAndDropTarget
@@ -68,3 +69,6 @@ class CtrlrWaveform  : public CtrlrComponent, public FileDragAndDropTarget
 		StringPairArray metadataForAudioFiles;
 		int qualityForAudioFiles;
 };
+
+
+#endif

@@ -1,4 +1,6 @@
-#pragma once
+#ifndef __CTRLR_COMPONENT__
+#define __CTRLR_COMPONENT__
+
 #include "CtrlrMacros.h"
 #include "CtrlrLuaObject.h"
 
@@ -129,3 +131,4 @@ class CtrlrComponent :	public Component,
 		ScopedPointer <DropShadowEffect> shadowEffect;
 		WeakReference <CtrlrLuaMethod> mouseMoveCbk, mouseDownCbk, mouseDragCbk, mouseDoubleClickCbk;
 };
+#endif

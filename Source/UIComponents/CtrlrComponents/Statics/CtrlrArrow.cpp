@@ -5,8 +5,11 @@
 CtrlrArrow::CtrlrArrow (CtrlrModulator &owner)
     : CtrlrComponent(owner)
 {
+
+    //[UserPreSize]
 	owner.setProperty (Ids::modulatorIsStatic, true);
 	owner.setProperty (Ids::modulatorVstExported, false);
+
 	setProperty (Ids::uiArrowColour, "0xff000000");
 	setProperty (Ids::uiArrowLineThickness, 2);
 	setProperty (Ids::uiArrowHeadWidth, 8);
@@ -14,17 +17,33 @@ CtrlrArrow::CtrlrArrow (CtrlrModulator &owner)
 	setProperty (Ids::uiArrowOrientation, 0);
 	setProperty (Ids::uiArrowRotation, 0);
 	setProperty (Ids::uiArrowStokeThickness, 1);
+
 	componentTree.addListener (this);
+    //[/UserPreSize]
+
     setSize (32, 96);
+
+
+    //[Constructor] You can add your own custom stuff here..
+    //[/Constructor]
 }
 
 CtrlrArrow::~CtrlrArrow()
 {
+    //[Destructor_pre]. You can add your own custom destruction code here..
 	componentTree.removeListener (this);
+    //[/Destructor_pre]
+
+
+
+    //[Destructor]. You can add your own custom destruction code here..
+    //[/Destructor]
 }
 
+//==============================================================================
 void CtrlrArrow::paint (Graphics& g)
 {
+    //[UserPrePaint] Add your own custom painting code here..
 	const int orientation	= getProperty(Ids::uiArrowOrientation);
 	const int thick			= getProperty(Ids::uiArrowStokeThickness);
 
@@ -54,13 +73,22 @@ void CtrlrArrow::paint (Graphics& g)
 	}
 
 	g.strokePath (arrowPath, PathStrokeType(getProperty(Ids::uiArrowStokeThickness)), AffineTransform::rotation ((float)getProperty(Ids::uiArrowRotation)*(float_Pi/180), getWidth()/2.0f, getHeight()/2.0f));
+    //[/UserPrePaint]
+
+    //[UserPaint] Add your own custom painting code here..
+    //[/UserPaint]
 }
 
 void CtrlrArrow::resized()
 {
+    //[UserResized] Add your own custom resize handling here..
 	CtrlrComponent::resized();
+    //[/UserResized]
 }
 
+
+
+//[MiscUserCode] You can add your own definitions of your custom methods or any other code here...
 void CtrlrArrow::setComponentValue (const double newValue, const bool sendChangeMessage)
 {
 }
@@ -91,3 +119,25 @@ void CtrlrArrow::restoreState (const ValueTree &savedState)
 {
 	CtrlrComponent::restoreState(savedState);
 }
+//[/MiscUserCode]
+
+
+//==============================================================================
+#if 0
+/*  -- Jucer information section --
+
+    This is where the Jucer puts all of its metadata, so don't change anything in here!
+
+BEGIN_JUCER_METADATA
+
+<JUCER_COMPONENT documentType="Component" className="CtrlrArrow" componentName=""
+                 parentClasses="public CtrlrComponent" constructorParams="CtrlrModulator &amp;owner"
+                 variableInitialisers="CtrlrComponent(owner)" snapPixels="8" snapActive="1"
+                 snapShown="1" overlayOpacity="0.330000013" fixedSize="1" initialWidth="32"
+                 initialHeight="96">
+  <BACKGROUND backgroundColour="0"/>
+</JUCER_COMPONENT>
+
+END_JUCER_METADATA
+*/
+#endif

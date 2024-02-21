@@ -1,4 +1,6 @@
-#pragma once
+#ifndef __CTRLR_LUA_METHOD_EDITOR__
+#define __CTRLR_LUA_METHOD_EDITOR__
+
 #include "CtrlrPanel/CtrlrPanelModulatorListTree.h"
 #include "CtrlrWindowManagers/CtrlrPanelWindowManager.h"
 #include "CtrlrLuaMethodFind.h"
@@ -131,3 +133,6 @@ class CtrlrLuaMethodEditor  : public CtrlrChildWindowContent,
 		CtrlrPanel &owner;
 		CtrlrLuaMethodEditArea *methodEditArea;
 };
+
+
+#endif

@@ -1,4 +1,6 @@
-#pragma once
+#ifndef __CTRLR_DOCUMENT_PANEL__
+#define __CTRLR_DOCUMENT_PANEL__
+
 #include "CtrlrMacros.h"
 
 class CtrlrEditor;
@@ -19,3 +21,6 @@ class CtrlrDocumentPanel  : public MultiDocumentPanel
 		CtrlrEditor *ctrlrEditor;
 		CtrlrManager &owner;
 };
+
+
+#endif
