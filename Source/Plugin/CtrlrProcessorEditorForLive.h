@@ -1,6 +1,4 @@
-#ifndef __CTRLR_PROCESSOR_EDITOR_FOR_LIVE__
-#define __CTRLR_PROCESSOR_EDITOR_FOR_LIVE__
-
+#pragma once
 #include "CtrlrApplicationWindow/CtrlrEditor.h"
 
 class CtrlrManager;
@@ -33,5 +31,3 @@ class CtrlrProcessorEditorForLive : public AudioProcessorEditor, public Timer
 		CtrlrEditorWrapper wrapper;
 		Point<int> lastScreenPosition;
 };
-
-#endif

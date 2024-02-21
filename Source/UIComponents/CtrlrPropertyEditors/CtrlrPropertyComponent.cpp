@@ -244,9 +244,7 @@ CtrlrBooleanPropertyComponent::CtrlrBooleanPropertyComponent (const Value& _valu
 	button.setToggleState (valueToControl.getValue(), dontSendNotification);
 }
 
-CtrlrBooleanPropertyComponent::~CtrlrBooleanPropertyComponent()
-{
-}
+CtrlrBooleanPropertyComponent::~CtrlrBooleanPropertyComponent(){}
 
 void CtrlrBooleanPropertyComponent::paint (Graphics& g)
 {
@@ -300,7 +298,6 @@ void CtrlrButtonPropertyComponent::buttonClicked(Button* _button)
 	if (propertyName == "panelBatchBuildScript" || "Execute Build Script")
 	{
 		openDialogWindow ();
-
 	}
 	else
 	{
@@ -310,14 +307,16 @@ void CtrlrButtonPropertyComponent::buttonClicked(Button* _button)
 
 void CtrlrButtonPropertyComponent::openDialogWindow()
 {
+	/*
 	if (owner == nullptr)
 	{
 		DBG("CtrlrButtonPropertyComponent::openDialogWindow - owner is null");
 		AlertWindow::showMessageBox (AlertWindow::WarningIcon, "Warning", "Owner is null.");
 		return;
 	}
+	*/
 
-	CtrlrBuildScriptDialogWindow* contentComponent = new CtrlrBuildScriptDialogWindow(owner);
+	CtrlrBuildScriptDialogWindow* contentComponent = new CtrlrBuildScriptDialogWindow();
 	DialogWindow::LaunchOptions buildScriptDialog;
 	buildScriptDialog.content.set (contentComponent, true);
 	buildScriptDialog.dialogTitle = "Build Script Editor";

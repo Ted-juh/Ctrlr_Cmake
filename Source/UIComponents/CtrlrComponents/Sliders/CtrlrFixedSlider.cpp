@@ -10,9 +10,6 @@ CtrlrFixedSlider::CtrlrFixedSlider (CtrlrModulator &owner)
 	lf = new CtrlrSliderLookAndFeel_V2 (*this, componentTree);
     addAndMakeVisible (ctrlrSlider = new CtrlrSliderInternal (*this));
     ctrlrSlider->setName ("ctrlrSlider");
-
-
-    //[UserPreSize]
 	ctrlrSlider->addListener (this);
 	ctrlrSlider->setLookAndFeel(lf);
 	componentTree.addListener (this);
@@ -47,56 +44,34 @@ CtrlrFixedSlider::CtrlrFixedSlider (CtrlrModulator &owner)
 	setProperty (Ids::uiSliderSpringValue, 0);
 	setProperty (Ids::uiSliderMouseWheelInterval, 1);
 	setProperty (Ids::uiSliderPopupBubble, false);
-    //[/UserPreSize]
 
     setSize (64, 64);
-
-    //[Constructor] You can add your own custom stuff here..
-    //[/Constructor]
 }
 
 CtrlrFixedSlider::~CtrlrFixedSlider()
 {
-    //[Destructor_pre]. You can add your own custom destruction code here..
-    //[/Destructor_pre]
-
     deleteAndZero (ctrlrSlider);
-
-    //[Destructor]. You can add your own custom destruction code here..
-    //[/Destructor]
 }
 
-//==============================================================================
 void CtrlrFixedSlider::paint (Graphics& g)
 {
-    //[UserPrePaint] Add your own custom painting code here..
-    //[/UserPrePaint]
-
-    //[UserPaint] Add your own custom painting code here..
-    //[/UserPaint]
 }
 
 void CtrlrFixedSlider::resized()
 {
-    //ctrlrSlider->setBounds (0, 0, getWidth() - 0, getHeight() - 0);
-    //[UserResized] Add your own custom resize handling here..
 	if (restoreStateInProgress)
 		return;
 	ctrlrSlider->setBounds (getUsableRect());
-    //[/UserResized]
 }
 
 void CtrlrFixedSlider::mouseUp (const MouseEvent& e)
 {
-    //[UserCode_mouseUp] -- Add your code here...
 	if ((bool)getProperty(Ids::uiSliderSpringMode) == true)
 	{
 		ctrlrSlider->setValue ((double)getProperty(Ids::uiSliderSpringValue), sendNotificationSync);
 	}
-    //[/UserCode_mouseUp]
 }
 
-//[MiscUserCode] You can add your own definitions of your custom methods or any other code here...
 double CtrlrFixedSlider::getComponentMaxValue()
 {
 	return (valueMap->getNonMappedMax());
@@ -252,32 +227,3 @@ void CtrlrFixedSlider::sliderValueChanged (Slider* sliderThatWasMoved)
 {
 	setComponentValue(ctrlrSlider->getValue(), true);
 }
-//[/MiscUserCode]
-
-
-//==============================================================================
-#if 0
-/*  -- Jucer information section --
-
-    This is where the Jucer puts all of its metadata, so don't change anything in here!
-
-BEGIN_JUCER_METADATA
-
-<JUCER_COMPONENT documentType="Component" className="CtrlrFixedSlider" componentName=""
-                 parentClasses="public CtrlrComponent, public SettableTooltipClient, public Slider::Listener"
-                 constructorParams="CtrlrModulator &amp;owner" variableInitialisers="CtrlrComponent(owner), lf(componentTree)"
-                 snapPixels="8" snapActive="1" snapShown="1" overlayOpacity="0.330000013"
-                 fixedSize="1" initialWidth="64" initialHeight="64">
-  <METHODS>
-    <METHOD name="mouseUp (const MouseEvent&amp; e)"/>
-    <METHOD name="mouseDoubleClick (const MouseEvent&amp; e)"/>
-  </METHODS>
-  <BACKGROUND backgroundColour="0"/>
-  <GENERICCOMPONENT name="ctrlrSlider" id="725ab5397cee0647" memberName="ctrlrSlider"
-                    virtualName="" explicitFocusOrder="0" pos="0 0 0M 0M" class="CtrlrOwnSlider"
-                    params="*this, &quot;ctrlrSlider&quot;"/>
-</JUCER_COMPONENT>
-
-END_JUCER_METADATA
-*/
-#endif

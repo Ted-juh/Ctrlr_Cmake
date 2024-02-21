@@ -1,6 +1,4 @@
-#ifndef __CTRLR_VALUE_MAP__
-#define __CTRLR_VALUE_MAP__
-
+#pragma once
 #include "CtrlrMacros.h"
 
 struct CtrlrValue
@@ -8,7 +6,7 @@ struct CtrlrValue
 	CtrlrValue(const int _numericValue, const String &_textRepresentation)
 		: numericValue(_numericValue), textRepresentation(_textRepresentation)
 	{}
-	CtrlrValue()
+	~CtrlrValue()
 	{}
 
 	static const String toString(const CtrlrValue &value)
@@ -164,5 +162,3 @@ class CtrlrValueMap
 		Array<int> numericValues;
 		HashMap<int,String> additionalData;
 };
-
-#endif

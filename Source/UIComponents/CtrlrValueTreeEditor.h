@@ -1,5 +1,4 @@
 #pragma once
-
 #include "CtrlrIDs.h"
 #include "CtrlrMacros.h"
 #include "CtrlrUtilities.h"

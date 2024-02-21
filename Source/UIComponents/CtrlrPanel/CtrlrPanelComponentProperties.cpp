@@ -11,7 +11,6 @@ CtrlrPanelComponentProperties::CtrlrPanelComponentProperties (CtrlrPanelEditor &
     addAndMakeVisible (propertyPanel = new PropertyPanel());
     propertyPanel->getViewport().setScrollBarThickness(owner.getOwner().getOwner().getProperty(Ids::ctrlrScrollbarThickness));
 
-    //[UserPreSize]
 	selectedItems=-1;
 	owner.getOwner().getCtrlrManagerOwner().addListener (this);
 	selectionTree.addListener (this);
@@ -20,49 +19,28 @@ CtrlrPanelComponentProperties::CtrlrPanelComponentProperties (CtrlrPanelEditor &
 	{
         owner.getSelection()->addChangeListener (this);
 	}
-    //[/UserPreSize]
 
     setSize (216, 400);
-
-
-    //[Constructor] You can add your own custom stuff here..
-    //[/Constructor]
 }
 
 CtrlrPanelComponentProperties::~CtrlrPanelComponentProperties()
 {
-    //[Destructor_pre]. You can add your own custom destruction code here..
     if (owner.getSelection())
         owner.getSelection()->removeChangeListener (this);
-    //[/Destructor_pre]
 
     propertyPanel = nullptr;
-
-
-    //[Destructor]. You can add your own custom destruction code here..
-    //[/Destructor]
 }
 
 //==============================================================================
 void CtrlrPanelComponentProperties::paint (Graphics& g)
 {
-    //[UserPrePaint] Add your own custom painting code here..
-    //[/UserPrePaint]
-
-    //[UserPaint] Add your own custom painting code here..
-    //[/UserPaint]
 }
 
 void CtrlrPanelComponentProperties::resized()
 {
     propertyPanel->setBounds (0, 0, getWidth() - 0, getHeight() - 0);
-    //[UserResized] Add your own custom resize handling here..
-    //[/UserResized]
 }
 
-
-
-//[MiscUserCode] You can add your own definitions of your custom methods or any other code here...
 PropertyComponent *CtrlrPanelComponentProperties::getPropertyEditor (const Value &valueToEdit, const Identifier &valueIdentifier)
 {
 	return (new TextPropertyComponent (valueToEdit, valueIdentifier.toString(), 1024, false));

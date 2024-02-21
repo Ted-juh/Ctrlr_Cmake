@@ -1,15 +1,9 @@
-#ifndef __CTRLR_PANEL_CANVAS_LAYER__
-#define __CTRLR_PANEL_CANVAS_LAYER__
-
+#pragma once
 #include "CtrlrLuaObject.h"
 
 class CtrlrPanelCanvas;
 class LookAndFeelBase;
 
-//==============================================================================
-/** @brief Class that represents a canvas layer
-
-*/
 class CtrlrPanelCanvasLayer : public Component, public CtrlrLuaObject, public ValueTree::Listener
 {
 	public:
@@ -40,5 +34,3 @@ class CtrlrPanelCanvasLayer : public Component, public CtrlrLuaObject, public Va
 		CtrlrPanelCanvas &owner;
 		bool mousePass;
 };
-
-#endif

@@ -41,7 +41,8 @@ class CtrlrPanelResourceEditor  : public Component,
 	    TextButton* add;
 		TextButton* move;
 		TextButton* remove, *reload;
-	    JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (CtrlrPanelResourceEditor);
+
+		JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (CtrlrPanelResourceEditor);
 };
 
 

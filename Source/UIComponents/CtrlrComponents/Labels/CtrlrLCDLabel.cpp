@@ -3,7 +3,6 @@
 #include "CtrlrUtilitiesGUI.h"
 #include "CtrlrLuaManager.h"
 
-//==============================================================================
 CtrlrLCDLabel::CtrlrLCDLabel (CtrlrModulator &owner)
     : CtrlrComponent(owner),
       ctrlrLabel (0)
@@ -17,9 +16,6 @@ CtrlrLCDLabel::CtrlrLCDLabel (CtrlrModulator &owner)
     ctrlrLabel->setColour (Label::textColourId, Colours::black);
     ctrlrLabel->setColour (TextEditor::textColourId, Colours::black);
     ctrlrLabel->setColour (TextEditor::backgroundColourId, Colour (0x0));
-
-
-    //[UserPreSize]
     ctrlrLabel->addListener (this);
 	owner.setProperty (Ids::modulatorIsStatic, true);
 	owner.setProperty (Ids::modulatorVstExported, false);
@@ -45,34 +41,17 @@ CtrlrLCDLabel::CtrlrLCDLabel (CtrlrModulator &owner)
 	setProperty (Ids::uiLabelInputMaxLength, 1024);
 	setProperty (Ids::uiLabelChangedCbk, COMBO_NONE_ITEM);
 	componentTree.addListener (this);
-    //[/UserPreSize]
-
+ 
     setSize (96, 32);
-
-    //[Constructor] You can add your own custom stuff here..
-    //[/Constructor]
 }
 
 CtrlrLCDLabel::~CtrlrLCDLabel()
 {
-    //[Destructor_pre]. You can add your own custom destruction code here..
-    //[/Destructor_pre]
-
     deleteAndZero (ctrlrLabel);
-
-    //[Destructor]. You can add your own custom destruction code here..
-    //[/Destructor]
 }
 
-//==============================================================================
 void CtrlrLCDLabel::paint (Graphics& g)
 {
-	//[UserPrePaint] Add your own custom painting code here..
-	//[/UserPrePaint]
-
-
-
-	//[UserPaint] Add your own custom painting code here..
 	int i = getProperty(Ids::uiLabelOutline);
 	g.setColour (VAR2COLOUR (getProperty(Ids::uiLabelBgColour)));
 	g.fillRoundedRectangle (i, i, getWidth() - 2*i, getHeight() - 2*i, 7);
@@ -84,13 +63,10 @@ void CtrlrLCDLabel::paint (Graphics& g)
 //	g.drawRect (0, 0, getWidth(), getHeight(), i);
 //	g.setColour (STR2COLOUR (getProperty(Ids::uiLabelBgColour)).darker(0.2f));
 //	g.drawRoundedRectangle (2.0f, 2.0f, (float) (getWidth() - 4), (float) (getHeight() - 4), 7.0000f, 2.0000f);
-	//[/UserPaint]
 }
 
 void CtrlrLCDLabel::resized()
 {
-    //ctrlrLabel->setBounds (0, 0, getWidth() - 0, getHeight() - 0);
-    //[UserResized] Add your own custom resize handling here..
 	if (restoreStateInProgress)
 		return;
 	if ((bool)ctrlrLabel->getProperties() ["fh"] == true)
@@ -100,12 +76,8 @@ void CtrlrLCDLabel::resized()
 		ctrlrLabel->setFont (f);
 	}
 	ctrlrLabel->setBounds (getUsableRect());
-    //[/UserResized]
 }
 
-
-
-//[MiscUserCode] You can add your own definitions of your custom methods or any other code here...
 double CtrlrLCDLabel::getComponentMaxValue()
 {
 	return (1);
@@ -250,33 +222,3 @@ const String CtrlrLCDLabel::getText()
 {
 	return (ctrlrLabel->getText());
 }
-//[/MiscUserCode]
-
-
-//==============================================================================
-#if 0
-/*  -- Jucer information section --
-
-    This is where the Jucer puts all of its metadata, so don't change anything in here!
-
-BEGIN_JUCER_METADATA
-
-<JUCER_COMPONENT documentType="Component" className="CtrlrLCDLabel" componentName=""
-                 parentClasses="public CtrlrComponent, public CtrlrPanel::PanelListener"
-                 constructorParams="CtrlrModulator &amp;owner" variableInitialisers="CtrlrComponent(owner)"
-                 snapPixels="8" snapActive="1" snapShown="1" overlayOpacity="0.330000013"
-                 fixedSize="1" initialWidth="96" initialHeight="32">
-  <BACKGROUND backgroundColour="ffffff">
-    <ROUNDRECT pos="2 2 4M 4M" cornerSize="7" fill="solid: ff00c109" hasStroke="1"
-               stroke="2, mitered, butt" strokeColour="solid: ff008c0f"/>
-  </BACKGROUND>
-  <LABEL name="ctrlrLabel" id="409d64ae540e634d" memberName="ctrlrLabel"
-         virtualName="" explicitFocusOrder="0" pos="0 0 0M 0M" bkgCol="0"
-         textCol="ff000000" edTextCol="ff000000" edBkgCol="0" labelText="LCD TEST"
-         editableSingleClick="0" editableDoubleClick="0" focusDiscardsChanges="0"
-         fontname="Default font" fontsize="16" bold="0" italic="0" justification="36"/>
-</JUCER_COMPONENT>
-
-END_JUCER_METADATA
-*/
-#endif

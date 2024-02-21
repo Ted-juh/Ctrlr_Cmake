@@ -1,6 +1,4 @@
-#ifndef __JUCER_HEADER_CTRLRGROUP_CTRLRGROUP_F9C865FE__
-#define __JUCER_HEADER_CTRLRGROUP_CTRLRGROUP_F9C865FE__
-
+#pragma once
 #include "CtrlrComponents/CtrlrComponent.h"
 
 class CtrlrGroup;
@@ -17,27 +15,14 @@ class CtrlrGroupContentComponent : public GroupComponent
 	private:
 		CtrlrGroup &owner;
 };
-//[/Headers]
 
-
-
-//==============================================================================
-/**
-                                                                    //[Comments]
-    An auto-generated component, created by the Jucer.
-
-    Describe your class and how it works here!
-                                                                    //[/Comments]
-*/
 class CtrlrGroup  : public CtrlrComponent, public DragAndDropTarget, public CtrlrGrouppingComponent
 {
 public:
-    //==============================================================================
+
     CtrlrGroup (CtrlrModulator &owner);
     ~CtrlrGroup();
 
-    //==============================================================================
-    //[UserMethods]     -- You can add your own custom methods in this section.
 	enum GradientType
 	{
 		None,
@@ -75,17 +60,10 @@ public:
 	void setResource();
 	void customLookAndFeelChanged(LookAndFeelBase *customLookAndFeel = nullptr);
 	static void wrapForLua (lua_State *L);
-    //[/UserMethods]
-
     void paint (Graphics& g);
     void resized();
 
-
-    //==============================================================================
-    juce_UseDebuggingNewOperator
-
 private:
-    //[UserVariables]   -- You can add your own custom variables in this section.
 	Array <int> values;
 	GradientType outlineGradient, backgroundGradient;
 	Colour outlineColour1, outlineColour2, backgroundColour1, backgroundColour2;
@@ -94,16 +72,9 @@ private:
 	int textMargin;
 	Image groupBackgroundImage;
 	CtrlrGroupContentComponent content;
-    //[/UserVariables]
-
-    //==============================================================================
     Label* label;
-
-    //==============================================================================
-    // (prevent copy constructor and operator= being generated..)
     CtrlrGroup (const CtrlrGroup&);
     const CtrlrGroup& operator= (const CtrlrGroup&);
+
+	JUCE_LEAK_DETECTOR(CtrlrGroup)
 };
-
-
-#endif   // __JUCER_HEADER_CTRLRGROUP_CTRLRGROUP_F9C865FE__

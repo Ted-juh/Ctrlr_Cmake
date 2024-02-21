@@ -1,6 +1,4 @@
-#ifndef __CTRLR_CUSTOM_COMPONENT__
-#define __CTRLR_CUSTOM_COMPONENT__
-
+#pragma once
 #include "CtrlrComponent.h"
 
 class CtrlrCustomComponent :    public CtrlrComponent,
@@ -71,5 +69,3 @@ class CtrlrCustomComponent :    public CtrlrComponent,
 										dadStartCbk,dadIsInterestedCbk,dadEnterCbk,dadExitCbk,dadMoveCbk,dadDroppedCbk;
 		bool isADragAndDropContainer;
 };
-
-#endif

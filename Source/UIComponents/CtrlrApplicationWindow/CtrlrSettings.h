@@ -1,8 +1,5 @@
-#ifndef __CTRLR_SETTINGS__
-#define __CTRLR_SETTINGS__
-
+#pragma once
 #include "CtrlrManager/CtrlrManager.h"
-
 
 class CtrlrSettings  : public Component
 {
@@ -17,6 +14,3 @@ class CtrlrSettings  : public Component
 		CtrlrManager &owner;
 		PropertyPanel* propertyPanel;
 };
-
-
-#endif

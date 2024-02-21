@@ -1,6 +1,4 @@
-#ifndef __CTRLR_PROCESSOR__
-#define __CTRLR_PROCESSOR__
-
+#pragma once
 #include "CtrlrProperties.h"
 #include "CtrlrPanel/CtrlrPanelProcessor.h"
 #include "juce_PluginHostType.h"
@@ -114,5 +112,3 @@ class CtrlrProcessor  : public AudioProcessor, public ChangeBroadcaster
 				outputToHost,
 				inputFromHost;
 };
-
-#endif

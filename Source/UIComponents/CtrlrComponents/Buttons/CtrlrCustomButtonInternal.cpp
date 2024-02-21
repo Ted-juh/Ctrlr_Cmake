@@ -1,26 +1,4 @@
 #include "stdafx.h"
-/*
-  ==============================================================================
-
-  This is an automatically generated file created by the Jucer!
-
-  Creation date:  16 Apr 2011 6:28:52pm
-
-  Be careful when adding custom code to these files, as only the code within
-  the "//[xyz]" and "//[/xyz]" sections will be retained when the file is loaded
-  and re-saved.
-
-  Jucer version: 1.12
-
-  ------------------------------------------------------------------------------
-
-  The Jucer is part of the JUCE library - "Jules' Utility Class Extensions"
-  Copyright 2004-6 by Raw Material Software ltd.
-
-  ==============================================================================
-*/
-
-//[Headers] You can add your own extra header files here...
 #include "CtrlrImageButton.h"
 #include "../CtrlrComponentTypeManager.h"
 #include "CtrlrIDs.h"
@@ -28,47 +6,25 @@
 #include "CtrlrUtilitiesGUI.h"
 #include "CtrlrFontManager.h"
 #include "CtrlrPanel/CtrlrPanel.h"
-//[/Headers]
-
 #include "CtrlrCustomButtonInternal.h"
 
-
-//[MiscUserDefs] You can add your own user definitions and misc code here...
-//[/MiscUserDefs]
-
-//==============================================================================
 CtrlrCustomButtonInternal::CtrlrCustomButtonInternal (CtrlrImageButton &_owner)
     : Button (""),
       owner(_owner),
 	  paintMode(RectanglePlacement::stretchToFit)
 {
-    //[UserPreSize]
-    //[/UserPreSize]
-
     setSize (128, 32);
-
-    //[Constructor] You can add your own custom stuff here..
-    //[/Constructor]
 }
 
 CtrlrCustomButtonInternal::~CtrlrCustomButtonInternal()
 {
-    //[Destructor_pre]. You can add your own custom destruction code here..
-    //[/Destructor_pre]
-
-
-
-    //[Destructor]. You can add your own custom destruction code here..
-    //[/Destructor]
 }
 
 //==============================================================================
 void CtrlrCustomButtonInternal::resized()
 {
-    //[UserResized] Add your own custom resize handling here..
-    //[/UserResized]
 }
-//[MiscUserCode] You can add your own definitions of your custom methods or any other code here...
+
 void CtrlrCustomButtonInternal::paintButton (Graphics& g, bool isMouseOverButton, bool isButtonDown)
 {
 	drawFrame (g, getFrameDestinationRect(), isMouseOverButton, isButtonDown);
@@ -248,39 +204,3 @@ void CtrlrCustomButtonInternal::drawFrame(Graphics &g, const Rectangle<int> &des
 						relativePostionFromProperty (owner.getProperty(::Ids::resourceImagePaintMode)),
 						false);
 }
-//[/MiscUserCode]
-
-
-//==============================================================================
-#if 0
-/*  -- Jucer information section --
-
-    This is where the Jucer puts all of its metadata, so don't change anything in here!
-
-BEGIN_JUCER_METADATA
-
-<JUCER_COMPONENT documentType="Button" className="CtrlrCustomButtonInternal" componentName=""
-                 parentClasses="public Button" constructorParams="CtrlrImageButton &amp;_owner"
-                 variableInitialisers="owner(_owner)" snapPixels="8" snapActive="1"
-                 snapShown="1" overlayOpacity="0.330000013" fixedSize="1" initialWidth="128"
-                 initialHeight="32">
-  <BACKGROUND backgroundColour="0" buttonState="normal" enabled="1">
-    <IMAGE pos="0 0 32 64" resource="button_filmstrip_png" opacity="1" mode="1"/>
-  </BACKGROUND>
-  <BACKGROUND backgroundColour="0" buttonState="over" enabled="0"/>
-  <BACKGROUND backgroundColour="0" buttonState="down" enabled="1">
-    <IMAGE pos="0 -32 32 64" resource="button_filmstrip_png" opacity="1"
-           mode="1"/>
-  </BACKGROUND>
-  <BACKGROUND backgroundColour="0" buttonState="normal on" enabled="0"/>
-  <BACKGROUND backgroundColour="0" buttonState="over on" enabled="0"/>
-  <BACKGROUND backgroundColour="0" buttonState="down on" enabled="0"/>
-  <BACKGROUND backgroundColour="0" buttonState="common background" enabled="1">
-    <TEXT pos="32 0 32M 0M" fill="solid: ff000000" hasStroke="0" text="Button"
-          fontname="Default font" fontsize="15" bold="0" italic="0" justification="36"/>
-  </BACKGROUND>
-</JUCER_COMPONENT>
-
-END_JUCER_METADATA
-*/
-#endif

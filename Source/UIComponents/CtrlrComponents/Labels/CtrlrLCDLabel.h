@@ -1,6 +1,4 @@
-#ifndef __JUCER_HEADER_CTRLRLCDLABEL_CTRLRLCDLABEL_980087AF__
-#define __JUCER_HEADER_CTRLRLCDLABEL_CTRLRLCDLABEL_980087AF__
-
+#pragma once
 #include "CtrlrComponents/CtrlrComponent.h"
 #include "CtrlrPanel/CtrlrPanel.h"
 
@@ -9,12 +7,10 @@ class CtrlrLCDLabel  : public CtrlrComponent,
 					   public Label::Listener
 {
 public:
-    //==============================================================================
+
     CtrlrLCDLabel (CtrlrModulator &owner);
     ~CtrlrLCDLabel();
 
-    //==============================================================================
-    //[UserMethods]     -- You can add your own custom methods in this section.
 	void setComponentValue (const double newValue, const bool sendChangeMessage=false);
 	double getComponentValue();
 	int getComponentMidiValue();
@@ -34,28 +30,14 @@ public:
 	CtrlrLCDLabel &appendText(const String &text);
 	const String getText();
 	void customLookAndFeelChanged(LookAndFeelBase *customLookAndFeel = nullptr) {}
-    //[/UserMethods]
-
     void paint (Graphics& g);
     void resized();
 
-
-    //==============================================================================
-    juce_UseDebuggingNewOperator
-
 private:
-    //[UserVariables]   -- You can add your own custom variables in this section.
 	WeakReference <CtrlrLuaMethod> labelChangedCbk;
-    //[/UserVariables]
-
-    //==============================================================================
     Label* ctrlrLabel;
-
-    //==============================================================================
-    // (prevent copy constructor and operator= being generated..)
     CtrlrLCDLabel (const CtrlrLCDLabel&);
     const CtrlrLCDLabel& operator= (const CtrlrLCDLabel&);
+
+	JUCE_LEAK_DETECTOR(CtrlrLCDLabel)
 };
-
-
-#endif   // __JUCER_HEADER_CTRLRLCDLABEL_CTRLRLCDLABEL_980087AF__

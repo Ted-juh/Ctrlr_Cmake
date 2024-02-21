@@ -1,6 +1,4 @@
-#ifndef __JUCER_HEADER_CTRLRTABSCOMPONENT_CTRLRTABSCOMPONENT_C6ADFA92__
-#define __JUCER_HEADER_CTRLRTABSCOMPONENT_CTRLRTABSCOMPONENT_C6ADFA92__
-
+#pragma once
 #include "CtrlrComponents/CtrlrComponent.h"
 #include "CtrlrPanel/CtrlrPanel.h"
 
@@ -59,30 +57,17 @@ class CtrlrTabsInternal : public TabbedComponent
 	private:
 		CtrlrTabsComponent &owner;
 };
-//[/Headers]
 
-
-
-//==============================================================================
-/**
-                                                                    //[Comments]
-    An auto-generated component, created by the Jucer.
-
-    Describe your class and how it works here!
-                                                                    //[/Comments]
-*/
 class CtrlrTabsComponent  : public CtrlrComponent,
                             public CtrlrPanel::Listener,
 							public DragAndDropTarget,
 							public CtrlrGrouppingComponent
 {
 public:
-    //==============================================================================
+
     CtrlrTabsComponent (CtrlrModulator &owner);
     ~CtrlrTabsComponent();
 
-    //==============================================================================
-    //[UserMethods]     -- You can add your own custom methods in this section.
 	void setComponentValue (const double newValue, const bool sendChangeMessage=false);
 	double getComponentValue();
 	int getComponentMidiValue();
@@ -110,31 +95,15 @@ public:
 	bool isOwned(CtrlrComponent *componentToCheck);
 	Array <CtrlrComponent*> getOwnedChildren();
 	void customLookAndFeelChanged(LookAndFeelBase *customLookAndFeel = nullptr);
-    //[/UserMethods]
-
     void paint (Graphics& g);
     void resized();
 
-
-
-    //==============================================================================
-    juce_UseDebuggingNewOperator
-
 private:
-    //[UserVariables]   -- You can add your own custom variables in this section.
 	CtrlrTabsLF lf;
 	WeakReference <CtrlrLuaMethod> tabChangedCbk;
-    //[/UserVariables]
-
-    //==============================================================================
     CtrlrTabsInternal* ctrlrTabs;
-
-
-    //==============================================================================
-    // (prevent copy constructor and operator= being generated..)
     CtrlrTabsComponent (const CtrlrTabsComponent&);
     const CtrlrTabsComponent& operator= (const CtrlrTabsComponent&);
+
+	JUCE_LEAK_DETECTOR(CtrlrTabsComponent)
 };
-
-
-#endif   // __JUCER_HEADER_CTRLRTABSCOMPONENT_CTRLRTABSCOMPONENT_C6ADFA92__

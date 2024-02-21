@@ -13,9 +13,6 @@ CtrlrToggleButton::CtrlrToggleButton (CtrlrModulator &owner)
     addAndMakeVisible (ctrlrButton = new ToggleButton ("ctrlrButton"));
     ctrlrButton->setButtonText ("Button");
     ctrlrButton->addListener (this);
-
-
-    //[UserPreSize]
 	ctrlrButton->setBufferedToImage (true);
 	setProperty (Ids::uiButtonTextColourOn, "0xff000000");
 	setProperty (Ids::uiToggleButtonFocusOutline, "0x00000000");
@@ -25,46 +22,26 @@ CtrlrToggleButton::CtrlrToggleButton (CtrlrModulator &owner)
 	setProperty (Ids::uiButtonColourOff, "0xff0000ff");
 	owner.setProperty (Ids::modulatorMax, 1);
 	owner.setProperty (Ids::modulatorMin, 0);
-    //[/UserPreSize]
 
     setSize (88, 32);
-
-    //[Constructor] You can add your own custom stuff here..
-	//owner.getProcessor().setValueFromGUI (0, true);
-    //[/Constructor]
 }
 
 CtrlrToggleButton::~CtrlrToggleButton()
 {
-    //[Destructor_pre]. You can add your own custom destruction code here..
-    //[/Destructor_pre]
-
     deleteAndZero (ctrlrButton);
-
-    //[Destructor]. You can add your own custom destruction code here..
-    //[/Destructor]
 }
 
-//==============================================================================
 void CtrlrToggleButton::paint (Graphics& g)
 {
-    //[UserPrePaint] Add your own custom painting code here..
-    //[/UserPrePaint]
-
-    //[UserPaint] Add your own custom painting code here..
-    //[/UserPaint]
 }
 
 void CtrlrToggleButton::resized()
 {
     ctrlrButton->setBounds (0, 0, getWidth() - 0, getHeight() - 0);
-    //[UserResized] Add your own custom resize handling here..
-    //[/UserResized]
 }
 
 void CtrlrToggleButton::buttonClicked (Button* buttonThatWasClicked)
 {
-    //[UserbuttonClicked_Pre]
     if (isInternal())
 	{
 		owner.getOwnerPanel().performInternalComponentFunction(this);
@@ -73,29 +50,18 @@ void CtrlrToggleButton::buttonClicked (Button* buttonThatWasClicked)
 
 	if (!owner.getOwnerPanel().checkRadioGroup(this, buttonThatWasClicked->getToggleState()))
 		return;
-    //[/UserbuttonClicked_Pre]
 
     if (buttonThatWasClicked == ctrlrButton)
     {
-        //[UserButtonCode_ctrlrButton] -- add your button handler code here..
 		setComponentValue (ctrlrButton->getToggleState(), true);
-        //[/UserButtonCode_ctrlrButton]
     }
-
-    //[UserbuttonClicked_Post]
-    //[/UserbuttonClicked_Post]
 }
 
 void CtrlrToggleButton::mouseDown (const MouseEvent& e)
 {
-    //[UserCode_mouseDown] -- Add your code here...
     CtrlrComponent::mouseDown(e);
-    //[/UserCode_mouseDown]
 }
 
-
-
-//[MiscUserCode] You can add your own definitions of your custom methods or any other code here...
 void CtrlrToggleButton::setComponentValue (const double newValue, const bool sendChangeMessage)
 {
 	if (!owner.getOwnerPanel().checkRadioGroup(this, ctrlrButton->getToggleState()))
@@ -207,31 +173,3 @@ void CtrlrToggleButton::setToggleState(const bool toggleState, const bool sendCh
 {
 	ctrlrButton->setToggleState (toggleState, sendChangeMessage ? sendNotification : dontSendNotification);
 }
-//[/MiscUserCode]
-
-
-//==============================================================================
-#if 0
-/*  -- Jucer information section --
-
-    This is where the Jucer puts all of its metadata, so don't change anything in here!
-
-BEGIN_JUCER_METADATA
-
-<JUCER_COMPONENT documentType="Component" className="CtrlrToggleButton" componentName=""
-                 parentClasses="public CtrlrComponent" constructorParams="CtrlrModulator &amp;owner"
-                 variableInitialisers="CtrlrComponent(owner)" snapPixels="8" snapActive="1"
-                 snapShown="1" overlayOpacity="0.330000013" fixedSize="1" initialWidth="88"
-                 initialHeight="32">
-  <METHODS>
-    <METHOD name="mouseDown (const MouseEvent&amp; e)"/>
-  </METHODS>
-  <BACKGROUND backgroundColour="ffffff"/>
-  <TOGGLEBUTTON name="ctrlrButton" id="ece5e33c201d706e" memberName="ctrlrButton"
-                virtualName="" explicitFocusOrder="0" pos="0 0 0M 0M" buttonText="Button"
-                connectedEdges="0" needsCallback="1" radioGroupId="0" state="0"/>
-</JUCER_COMPONENT>
-
-END_JUCER_METADATA
-*/
-#endif

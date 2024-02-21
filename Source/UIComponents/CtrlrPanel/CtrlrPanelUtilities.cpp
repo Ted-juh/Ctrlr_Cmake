@@ -10,50 +10,28 @@ CtrlrPanelUtilities::CtrlrPanelUtilities (CtrlrPanelEditor &_owner)
     addAndMakeVisible (xmlPreview = new CodeEditorComponent (codeDocument, &xmlTokeniser));
     xmlPreview->setName (L"xmlPreview");
     xmlPreview->setScrollbarThickness(owner.getOwner().getOwner().getProperty(Ids::ctrlrScrollbarThickness));
-
-    //[UserPreSize]
 	xmlPreview->setColour (CodeEditorComponent::backgroundColourId, Colours::white);
 	xmlPreview->setColour (CodeEditorComponent::highlightColourId, Colours::lightgrey);
 	xmlPreview->setColour(CodeEditorComponent::lineNumberBackgroundId, Colours::lightgrey);
 
     if (owner.getSelection())
         owner.getSelection()->addChangeListener(this);
-    //[/UserPreSize]
 
     setSize (216, 340);
-
-
-    //[Constructor] You can add your own custom stuff here..
-    //[/Constructor]
 }
 
 CtrlrPanelUtilities::~CtrlrPanelUtilities()
 {
-    //[Destructor_pre]. You can add your own custom destruction code here..
-    //[/Destructor_pre]
-
     deleteAndZero (xmlPreview);
-
-
-    //[Destructor]. You can add your own custom destruction code here..
-    //[/Destructor]
 }
 
-//==============================================================================
 void CtrlrPanelUtilities::paint (Graphics& g)
 {
-    //[UserPrePaint] Add your own custom painting code here..
-    //[/UserPrePaint]
-
-    //[UserPaint] Add your own custom painting code here..
-    //[/UserPaint]
 }
 
 void CtrlrPanelUtilities::resized()
 {
     xmlPreview->setBounds (0, 0, getWidth() - 0, getHeight() - 0);
-    //[UserResized] Add your own custom resize handling here..
-    //[/UserResized]
 }
 
 

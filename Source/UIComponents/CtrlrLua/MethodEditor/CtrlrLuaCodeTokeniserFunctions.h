@@ -1,5 +1,4 @@
-#ifndef __CTRLR_LUA_CODE_TOKENISER_FUNCTIONS__
-#define __CTRLR_LUA_CODE_TOKENISER_FUNCTIONS__
+#pragma once
 
 struct CtrlrLuaCodeTokeniserFunctions
 {
@@ -15,14 +14,6 @@ struct CtrlrLuaCodeTokeniserFunctions
                 || c == '_' || c == '@';
     }
 
-	/*
-	 if or in do
-	 and end for nil not
-	 then true else
-     false local until while break
-     repeat return elseif
-	 function
-	 */
     static bool isReservedKeyword (String::CharPointerType token, const int tokenLength) noexcept
     {
         static const char* const keywords2Char[] =
@@ -506,5 +497,3 @@ struct CtrlrLuaCodeTokeniserFunctions
         int numChars;
     };
 };
-
-#endif

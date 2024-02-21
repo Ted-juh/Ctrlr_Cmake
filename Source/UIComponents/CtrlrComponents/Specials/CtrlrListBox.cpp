@@ -16,7 +16,6 @@ CtrlrListBox::CtrlrListBox (CtrlrModulator &owner)
 	addAndMakeVisible (listBox = new ListBox ("List Box", this));
 	listBox->setModel( this );
 
-	//[UserPreSize]
 	setProperty (Ids::uiListBoxContent, "");
 	setProperty (Ids::uiListBoxRowHeight, 16);
 	setProperty (Ids::uiListBoxBackgroundColour, "0xffffffff");
@@ -39,48 +38,25 @@ CtrlrListBox::CtrlrListBox (CtrlrModulator &owner)
 	setProperty (Ids::uiListBoxItemDoubleClicked, COMBO_NONE_ITEM);
 	setProperty (Ids::uiListBoxItemDeleteKeyPressed, COMBO_NONE_ITEM);
 	setProperty (Ids::uiListBoxItemReturnKeyPressed, COMBO_NONE_ITEM);
-    //[/UserPreSize]
 
     setSize (128, 256);
-
-
-    //[Constructor] You can add your own custom stuff here..
-    //[/Constructor]
 }
 
 CtrlrListBox::~CtrlrListBox()
 {
-    //[Destructor_pre]. You can add your own custom destruction code here..
-    //[/Destructor_pre]
-
     deleteAndZero (listBox);
-
-
-    //[Destructor]. You can add your own custom destruction code here..
-    //[/Destructor]
 }
 
-//==============================================================================
 void CtrlrListBox::paint (Graphics& g)
 {
-    //[UserPrePaint] Add your own custom painting code here..
-    //[/UserPrePaint]
-
-    //[UserPaint] Add your own custom painting code here..
-    //[/UserPaint]
 }
 
 void CtrlrListBox::resized()
 {
     listBox->setBounds (0, 0, getWidth() - 0, getHeight() - 0);
-    //[UserResized] Add your own custom resize handling here..
 	listBox->setBounds (getUsableRect());
-    //[/UserResized]
 }
 
-
-
-//[MiscUserCode] You can add your own definitions of your custom methods or any other code here...
 int CtrlrListBox::getNumRows()
 {
 	return (valueMap->getNumValues());
@@ -346,27 +322,3 @@ void CtrlrListBox::setMultipleSelectionEnabled (bool shouldBeEnabled)
 {
 	listBox->setMultipleSelectionEnabled(shouldBeEnabled);
 }
-//[/MiscUserCode]
-
-
-//==============================================================================
-#if 0
-/*  -- Jucer information section --
-
-    This is where the Jucer puts all of its metadata, so don't change anything in here!
-
-BEGIN_JUCER_METADATA
-
-<JUCER_COMPONENT documentType="Component" className="CtrlrListBox" componentName=""
-                 parentClasses="public CtrlrComponent, public ListBoxModel" constructorParams="CtrlrModulator &amp;owner"
-                 variableInitialisers="CtrlrComponent(owner)" snapPixels="8" snapActive="1"
-                 snapShown="1" overlayOpacity="0.330000013" fixedSize="1" initialWidth="128"
-                 initialHeight="256">
-  <BACKGROUND backgroundColour="ffffff"/>
-  <GENERICCOMPONENT name="" id="fdd8fa416d09ba08" memberName="listBox" virtualName=""
-                    explicitFocusOrder="0" pos="0 0 0M 0M" class="ListBox" params="&quot;List Box&quot;, this"/>
-</JUCER_COMPONENT>
-
-END_JUCER_METADATA
-*/
-#endif

@@ -1,24 +1,11 @@
-/*
-  ==============================================================================
-
-    CtrlrPanelFindProperty.cpp
-    Created: 4 Jan 2021 4:49:27pm
-    Author:  atom
-
-  ==============================================================================
-*/
-
 #include <JuceHeader.h>
 #include "CtrlrPanelFindProperty.h"
 #include "CtrlrPanelEditor.h"
 #include "CtrlrPanelComponentProperties.h"
 
-//==============================================================================
 CtrlrPanelFindProperty::CtrlrPanelFindProperty(CtrlrPanelEditor &_owner, CtrlrPanelComponentProperties *_props)
 : owner(_owner), props(_props)
 {
-    // In your constructor, you should add any child components, and
-    // initialise any special settings that your component needs.
 	filterInput.reset(new TextEditor("Filter Input"));
 	filterInput->setFont(filterInput->getFont().withHeight(24.0));
 	filterInput->addListener(this);

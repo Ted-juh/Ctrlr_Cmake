@@ -11,10 +11,10 @@
 #include "CtrlrMIDI/CtrlrMIDISettingsDialog.h"
 #include "CtrlrUtilities.h"
 
-CtrlrPanelWindowManager::CtrlrPanelWindowManager(CtrlrPanel &_owner)
+CtrlrPanelWindowManager::CtrlrPanelWindowManager(CtrlrPanel& _owner)
 	: owner(_owner), managerTree(Ids::uiWindowManager), CtrlrWindowManager(_owner.getOwner())
 {
-	owner.getObjectTree().addChild (managerTree, -1, nullptr);
+	owner.getObjectTree().addChild(managerTree, -1, nullptr);
 }
 
 CtrlrPanelWindowManager::~CtrlrPanelWindowManager()
@@ -22,56 +22,56 @@ CtrlrPanelWindowManager::~CtrlrPanelWindowManager()
 	windows.clear(true);
 }
 
-CtrlrPanel &CtrlrPanelWindowManager::getOwner()
+CtrlrPanel& CtrlrPanelWindowManager::getOwner()
 {
 	return (owner);
 }
 
-void CtrlrPanelWindowManager::restoreState (const ValueTree &savedState)
+void CtrlrPanelWindowManager::restoreState(const ValueTree& savedState)
 {
-	restoreProperties (savedState, managerTree, nullptr);
-	for (int i=0; i<savedState.getNumChildren(); i++)
+	restoreProperties(savedState, managerTree, nullptr);
+	for (int i = 0; i < savedState.getNumChildren(); i++)
 	{
-		managerTree.addChild (savedState.getChild(i).createCopy(), -1, nullptr);
+		managerTree.addChild(savedState.getChild(i).createCopy(), -1, nullptr);
 	}
 }
 
-void CtrlrPanelWindowManager::windowClosedButtonPressed(CtrlrChildWindow *windowThatChanged)
+void CtrlrPanelWindowManager::windowClosedButtonPressed(CtrlrChildWindow* windowThatChanged)
 {
 	_DBG("CtrlrPanelWindowManager::windowClosedButtonPressed");
 	windowChanged(windowThatChanged);
-	windows.removeObject (windowThatChanged);
+	windows.removeObject(windowThatChanged);
 }
 
-void CtrlrPanelWindowManager::show (const CtrlrPanelWindowManager::WindowType window)
+void CtrlrPanelWindowManager::show(const CtrlrPanelWindowManager::WindowType window)
 {
-	CtrlrChildWindow *w = getWindow(window);
+	CtrlrChildWindow* w = getWindow(window);
 	if (w)
 	{
-		w->setVisible (true);
+		w->setVisible(true);
 	}
 }
 
 void CtrlrPanelWindowManager::toggle(const CtrlrPanelWindowManager::WindowType window, const bool makeVisible)
 {
-	CtrlrChildWindow *w = getWindow(window);
+	CtrlrChildWindow* w = getWindow(window);
 	if (w)
 	{
-		if (w->isVisible () && !makeVisible)
+		if (w->isVisible() && !makeVisible)
 		{
-			windows.removeObject (w);
+			windows.removeObject(w);
 		}
 		else
 		{
-			w->setVisible (true);
+			w->setVisible(true);
 			w->toFront(true);
 		}
 	}
 }
 
-CtrlrChildWindowContent *CtrlrPanelWindowManager::getContent(const CtrlrPanelWindowManager::WindowType window)
+CtrlrChildWindowContent* CtrlrPanelWindowManager::getContent(const CtrlrPanelWindowManager::WindowType window)
 {
-	CtrlrChildWindow *w = getWindow(window);
+	CtrlrChildWindow* w = getWindow(window);
 	if (w)
 	{
 		return (w->getContent());
@@ -81,7 +81,7 @@ CtrlrChildWindowContent *CtrlrPanelWindowManager::getContent(const CtrlrPanelWin
 
 bool CtrlrPanelWindowManager::isCreated(const CtrlrPanelWindowManager::WindowType window)
 {
-	for (int i=0; i<windows.size(); i++)
+	for (int i = 0; i < windows.size(); i++)
 	{
 		if (windows[i]->getType() == window)
 			return (true);
@@ -89,15 +89,15 @@ bool CtrlrPanelWindowManager::isCreated(const CtrlrPanelWindowManager::WindowTyp
 	return (false);
 }
 
-CtrlrChildWindow *CtrlrPanelWindowManager::getWindow(const CtrlrPanelWindowManager::WindowType window, const bool createIfNeeded)
+CtrlrChildWindow* CtrlrPanelWindowManager::getWindow(const CtrlrPanelWindowManager::WindowType window, const bool createIfNeeded)
 {
 	if (!isCreated(window))
 	{
 		if (createIfNeeded)
-			create (window);
+			create(window);
 	}
 
-	for (int i=0; i<windows.size(); i++)
+	for (int i = 0; i < windows.size(); i++)
 	{
 		if (windows[i]->getType() == window)
 			return (windows[i]);
@@ -110,24 +110,24 @@ const String CtrlrPanelWindowManager::getWindowName(const CtrlrPanelWindowManage
 {
 	switch (window)
 	{
-		case LuaConsole:
-			return ("LuaConsole");
-		case LuaMethodEditor:
-			return ("LuaMethodEditor");
-		case ModulatorList:
-			return ("ModulatorList");
-		case LayerEditor:
-			return ("LayerEditor");
-		case MIDILibrary:
-			return ("MIDILibrary");
-		case MIDISettings:
-			return ("MIDISettings");
-		default:
-			return ("LuaConsole");
+	case LuaConsole:
+		return ("LuaConsole");
+	case LuaMethodEditor:
+		return ("LuaMethodEditor");
+	case ModulatorList:
+		return ("ModulatorList");
+	case LayerEditor:
+		return ("LayerEditor");
+	case MIDILibrary:
+		return ("MIDILibrary");
+	case MIDISettings:
+		return ("MIDISettings");
+	default:
+		return ("LuaConsole");
 	}
 }
 
-CtrlrPanelWindowManager::WindowType CtrlrPanelWindowManager::getWindowType(const String &windowName)
+CtrlrPanelWindowManager::WindowType CtrlrPanelWindowManager::getWindowType(const String& windowName)
 {
 	if (windowName == "LuaConsole")
 		return (LuaConsole);
@@ -144,46 +144,46 @@ CtrlrPanelWindowManager::WindowType CtrlrPanelWindowManager::getWindowType(const
 	return (LuaConsole);
 }
 
-CtrlrChildWindow *CtrlrPanelWindowManager::createWindow(const CtrlrPanelWindowManager::WindowType window)
+CtrlrChildWindow* CtrlrPanelWindowManager::createWindow(const CtrlrPanelWindowManager::WindowType window)
 {
 	if (isCreated(window))
 	{
 		return (nullptr);
 	}
 
-	CtrlrChildWindow *w = new CtrlrChildWindow (*this);
+	CtrlrChildWindow* w = new CtrlrChildWindow(*this);
 
 	switch (window)
 	{
-		case CtrlrPanelWindowManager::LuaConsole:
-			w->setContent (new CtrlrLuaConsole (owner));
-			break;
+	case CtrlrPanelWindowManager::LuaConsole:
+		w->setContent(new CtrlrLuaConsole(owner));
+		break;
 
-		case CtrlrPanelWindowManager::LuaMethodEditor:
-			w->setContent (new CtrlrLuaMethodEditor (owner));
-			break;
+	case CtrlrPanelWindowManager::LuaMethodEditor:
+		w->setContent(new CtrlrLuaMethodEditor(owner));
+		break;
 
-		case CtrlrPanelWindowManager::ModulatorList:
-			w->setContent (new CtrlrPanelModulatorList(owner));
-			break;
+	case CtrlrPanelWindowManager::ModulatorList:
+		w->setContent(new CtrlrPanelModulatorList(owner));
+		break;
 
-		case CtrlrPanelWindowManager::LayerEditor:
-			w->setContent (new CtrlrPanelLayerList(owner));
-			break;
+	case CtrlrPanelWindowManager::LayerEditor:
+		w->setContent(new CtrlrPanelLayerList(owner));
+		break;
 
-		case CtrlrPanelWindowManager::MIDISettings:
-			w->setContent (new CtrlrMIDISettingsDialog(owner));
+	case CtrlrPanelWindowManager::MIDISettings:
+		w->setContent(new CtrlrMIDISettingsDialog(owner));
 	}
 
-	w->setName(owner.getProperty (Ids::name).toString() + "/" + w->getContent()->getContentName());
-	windows.add (w);
+	w->setName(owner.getProperty(Ids::name).toString() + "/" + w->getContent()->getContentName());
+	windows.add(w);
 
 	return (w);
 }
 
-void CtrlrPanelWindowManager::create(const CtrlrPanelWindowManager::WindowType window, const String &lastWindowState)
+void CtrlrPanelWindowManager::create(const CtrlrPanelWindowManager::WindowType window, const String& lastWindowState)
 {
-	CtrlrChildWindow *w			= createWindow(window);
+	CtrlrChildWindow* w = createWindow(window);
 	String windowState;
 
 	if (w == nullptr)
@@ -193,9 +193,9 @@ void CtrlrPanelWindowManager::create(const CtrlrPanelWindowManager::WindowType w
 
 	if (lastWindowState.isEmpty())
 	{
-		if (managerTree.getChildWithProperty (Ids::uiChildWindowName, getWindowName(window)).isValid())
+		if (managerTree.getChildWithProperty(Ids::uiChildWindowName, getWindowName(window)).isValid())
 		{
-			windowState = managerTree.getChildWithProperty (Ids::uiChildWindowName, getWindowName(window)).getProperty (Ids::uiChildWindowState);
+			windowState = managerTree.getChildWithProperty(Ids::uiChildWindowName, getWindowName(window)).getProperty(Ids::uiChildWindowState);
 		}
 	}
 	else
@@ -212,43 +212,43 @@ void CtrlrPanelWindowManager::create(const CtrlrPanelWindowManager::WindowType w
 		w->centreWithSize(w->getWidth(), w->getHeight());
 	}
 
-	if (managerTree.getChildWithProperty (Ids::uiChildWindowName, getWindowName(window)).isValid())
+	if (managerTree.getChildWithProperty(Ids::uiChildWindowName, getWindowName(window)).isValid())
 	{
 		if (w->getContent())
 		{
 			/* restore the stored state in our global tree */
-			w->getContent()->restoreState (managerTree.getChildWithProperty (Ids::uiChildWindowName, getWindowName(window)).getChildWithName(Ids::uiChildWindowContentState));
+			w->getContent()->restoreState(managerTree.getChildWithProperty(Ids::uiChildWindowName, getWindowName(window)).getChildWithName(Ids::uiChildWindowContentState));
 
 			/* remove the CONTENT state */
-			managerTree.getChildWithProperty (Ids::uiChildWindowName, getWindowName(window)).removeAllChildren (nullptr);
+			managerTree.getChildWithProperty(Ids::uiChildWindowName, getWindowName(window)).removeAllChildren(nullptr);
 
 			/* reattach the CONTENT state but with the valid data reference */
-			managerTree.getChildWithProperty (Ids::uiChildWindowName, getWindowName(window)).addChild (w->getContent()->saveState(), -1, nullptr);
+			managerTree.getChildWithProperty(Ids::uiChildWindowName, getWindowName(window)).addChild(w->getContent()->saveState(), -1, nullptr);
 		}
 	}
 }
 
-void CtrlrPanelWindowManager::windowChanged(CtrlrChildWindow *windowThatChanged)
+void CtrlrPanelWindowManager::windowChanged(CtrlrChildWindow* windowThatChanged)
 {
-	CtrlrChildWindowContent		*c	= windowThatChanged->getContent();
+	CtrlrChildWindowContent* c = windowThatChanged->getContent();
 
 	if (c == 0)
 		return;
 
-	CtrlrPanelWindowManager::WindowType window = (CtrlrPanelWindowManager::WindowType) c->getType();
+	CtrlrPanelWindowManager::WindowType window = (CtrlrPanelWindowManager::WindowType)c->getType();
 
-	if (managerTree.getChildWithProperty (Ids::uiChildWindowName, getWindowName(window)).isValid())
+	if (managerTree.getChildWithProperty(Ids::uiChildWindowName, getWindowName(window)).isValid())
 	{
-		managerTree.getChildWithProperty (Ids::uiChildWindowName, getWindowName(window)).setProperty (Ids::uiChildWindowState, getWindow(window)->getWindowStateAsString(), 0);
+		managerTree.getChildWithProperty(Ids::uiChildWindowName, getWindowName(window)).setProperty(Ids::uiChildWindowState, getWindow(window)->getWindowStateAsString(), 0);
 	}
 	else
 	{
 		ValueTree windowTree(Ids::uiChildWindow);
 
-		windowTree.setProperty (Ids::uiChildWindowName, getWindowName(window), 0);
-		windowTree.setProperty (Ids::uiChildWindowState, getWindow(window)->getWindowStateAsString(), 0);
-		windowTree.addChild (c->saveState(), -1, nullptr);
+		windowTree.setProperty(Ids::uiChildWindowName, getWindowName(window), 0);
+		windowTree.setProperty(Ids::uiChildWindowState, getWindow(window)->getWindowStateAsString(), 0);
+		windowTree.addChild(c->saveState(), -1, nullptr);
 
-		managerTree.addChild(windowTree,-1,0);
+		managerTree.addChild(windowTree, -1, 0);
 	}
 }

@@ -1,7 +1,6 @@
-#ifndef __JUCER_HEADER_CTRLRCOMBO_CTRLRCOMBO_380F4A09__
-#define __JUCER_HEADER_CTRLRCOMBO_CTRLRCOMBO_380F4A09__
-
+#pragma once
 #include "CtrlrComponents/CtrlrComponent.h"
+
 class CtrlrValueMap;
 
 class CtrlrCombo  : public CtrlrComponent,
@@ -9,12 +8,10 @@ class CtrlrCombo  : public CtrlrComponent,
 					public ComboBox::Listener
 {
 public:
-    //==============================================================================
+
     CtrlrCombo (CtrlrModulator &owner);
     ~CtrlrCombo();
 
-    //==============================================================================
-    //[UserMethods]     -- You can add your own custom methods in this section.
 	void setComponentValue (const double newValue, const bool sendChangeMessage=false);
 	double getComponentValue();
 	int getComponentMidiValue();
@@ -61,35 +58,19 @@ public:
 	ComboBox *getOwnedComboBox() { return (ctrlrCombo); }
 	void customLookAndFeelChanged(LookAndFeelBase *customLookAndFeel = nullptr);
 	CtrlrValueMap &getValueMap() { return (*valueMap); }
-
 	static void wrapForLua(lua_State *L);
-    //[/UserMethods]
     void resized();
     void comboBoxChanged (ComboBox* comboBoxThatHasChanged);
     void mouseDown (const MouseEvent& e);
     bool keyPressed (const KeyPress& key);
 
-
-
-    //==============================================================================
-    juce_UseDebuggingNewOperator
-
 private:
-    //[UserVariables]   -- You can add your own custom variables in this section.
 	Array <var> values;
 	CtrlrComboLF lf;
 	ScopedPointer<CtrlrValueMap> valueMap;
-    //[/UserVariables]
-
-    //==============================================================================
     ComboBox* ctrlrCombo;
-
-
-    //==============================================================================
-    // (prevent copy constructor and operator= being generated..)
     CtrlrCombo (const CtrlrCombo&);
     const CtrlrCombo& operator= (const CtrlrCombo&);
+
+	JUCE_LEAK_DETECTOR(CtrlrCombo)
 };
-
-
-#endif   // __JUCER_HEADER_CTRLRCOMBO_CTRLRCOMBO_380F4A09__

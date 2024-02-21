@@ -1,6 +1,4 @@
-#ifndef __CTRLR_WINDOWS__
-#define __CTRLR_WINDOWS__
-
+#pragma once
 #include "CtrlrNative.h"
 #include <Windows.h>
 class CtrlrPanel;
@@ -24,4 +22,3 @@ class CtrlrWindows : public CtrlrNative
     private:
         CtrlrManager &owner;
 };
-#endif

@@ -34,9 +34,7 @@ bool CtrlrLabelInternal::keyPressed (const KeyPress &key)
 {
 	return (false);
 }
-//[/MiscUserDefs]
 
-//==============================================================================
 CtrlrLabel::CtrlrLabel (CtrlrModulator &owner)
     : CtrlrComponent(owner),
       ctrlrLabel (0)
@@ -76,33 +74,18 @@ CtrlrLabel::CtrlrLabel (CtrlrModulator &owner)
 
 	ctrlrLabel->addListener (this);
 	componentTree.addListener (this);
-    //[/UserPreSize]
 
     setSize (88, 24);
-
-    //[Constructor] You can add your own custom stuff here..
-    //[/Constructor]
 }
 
 CtrlrLabel::~CtrlrLabel()
 {
-    //[Destructor_pre]. You can add your own custom destruction code here..
 	owner.getOwnerPanel().removePanelListener(this);
-    //[/Destructor_pre]
-
     deleteAndZero (ctrlrLabel);
-
-    //[Destructor]. You can add your own custom destruction code here..
-    //[/Destructor]
 }
 
-//==============================================================================
 void CtrlrLabel::paint (Graphics& g)
 {
-    //[UserPrePaint] Add your own custom painting code here..
-    //[/UserPrePaint]
-
-    //[UserPaint] Add your own custom painting code here..
 	const int i = getProperty(Ids::uiLabelOutline);
 	const int i2 = 2*i;
 	g.setColour (VAR2COLOUR(getProperty(Ids::uiLabelBgColour)));
@@ -111,13 +94,10 @@ void CtrlrLabel::paint (Graphics& g)
 	    g.fillRect( i, i, (getWidth() - 2*i), (getHeight() - 2*i));
 	g.setColour (VAR2COLOUR(getProperty(Ids::uiLabelOutlineColour)));
 	g.drawRect (0, 0, getWidth(), getHeight(),  i);
-    //[/UserPaint]
 }
 
 void CtrlrLabel::resized()
 {
-    //ctrlrLabel->setBounds (0, 0, getWidth() - 0, getHeight() - 0);
-    //[UserResized] Add your own custom resize handling here..
 	if (restoreStateInProgress)
 		return;
 	if ((bool)ctrlrLabel->getProperties() ["fh"] == true)
@@ -127,12 +107,8 @@ void CtrlrLabel::resized()
 		ctrlrLabel->setFont (f);
 	}
 	ctrlrLabel->setBounds (getUsableRect());
-    //[/UserResized]
 }
 
-
-
-//[MiscUserCode] You can add your own definitions of your custom methods or any other code here...
 double CtrlrLabel::getComponentMaxValue()
 {
 	return (1);
@@ -302,30 +278,3 @@ bool CtrlrLabel::keyPressed (const KeyPress &key)
 {
 	return (false);
 }
-//[/MiscUserCode]
-
-
-//==============================================================================
-#if 0
-/*  -- Jucer information section --
-
-    This is where the Jucer puts all of its metadata, so don't change anything in here!
-
-BEGIN_JUCER_METADATA
-
-<JUCER_COMPONENT documentType="Component" className="CtrlrLabel" componentName=""
-                 parentClasses="public CtrlrComponent, public CtrlrPanel::PanelListener, public Label::Listener"
-                 constructorParams="CtrlrModulator &amp;owner" variableInitialisers="CtrlrComponent(owner)"
-                 snapPixels="8" snapActive="1" snapShown="1" overlayOpacity="0.330000013"
-                 fixedSize="1" initialWidth="88" initialHeight="24">
-  <BACKGROUND backgroundColour="0"/>
-  <LABEL name="ctrlrLabel" id="409d64ae540e634d" memberName="ctrlrLabel"
-         virtualName="" explicitFocusOrder="0" pos="0 0 0M 0M" edTextCol="ff000000"
-         edBkgCol="0" labelText="label text" editableSingleClick="0" editableDoubleClick="0"
-         focusDiscardsChanges="0" fontname="Default font" fontsize="15"
-         bold="0" italic="0" justification="33"/>
-</JUCER_COMPONENT>
-
-END_JUCER_METADATA
-*/
-#endif

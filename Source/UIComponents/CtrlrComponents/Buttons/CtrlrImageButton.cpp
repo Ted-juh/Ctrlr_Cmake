@@ -11,7 +11,6 @@ CtrlrImageButton::CtrlrImageButton (CtrlrModulator &owner)
 	valueMap = new CtrlrValueMap();
     addAndMakeVisible (ctrlrButton = new CtrlrCustomButtonInternal (*this));
 
-    //[UserPreSize]
 	setBufferedToImage (true);
 	ctrlrButton->addListener (this);
 	setProperty (Ids::uiImageButtonMode, 0);
@@ -31,46 +30,25 @@ CtrlrImageButton::CtrlrImageButton (CtrlrModulator &owner)
 	setProperty (Ids::uiImageButtonContent, "False\nTrue");
 	setProperty (Ids::uiButtonRepeat, false);
 	setProperty (Ids::uiButtonRepeatRate, 100);
-    //[/UserPreSize]
 
     setSize (96, 32);
-
-    //[Constructor] You can add your own custom stuff here..
-    //[/Constructor]
 }
 
 CtrlrImageButton::~CtrlrImageButton()
 {
-    //[Destructor_pre]. You can add your own custom destruction code here..
-    //[/Destructor_pre]
-
     deleteAndZero (ctrlrButton);
-
-    //[Destructor]. You can add your own custom destruction code here..
-    //[/Destructor]
 }
 
-//==============================================================================
 void CtrlrImageButton::paint (Graphics& g)
 {
-    //[UserPrePaint] Add your own custom painting code here..
-    //[/UserPrePaint]
-
-    //[UserPaint] Add your own custom painting code here..
-    //[/UserPaint]
 }
 
 void CtrlrImageButton::resized()
 {
     ctrlrButton->setBounds (0, 0, getWidth() - 0, getHeight() - 0);
-    //[UserResized] Add your own custom resize handling here..
 	ctrlrButton->setBounds (getUsableRect());
-    //[/UserResized]
 }
 
-
-
-//[MiscUserCode] You can add your own definitions of your custom methods or any other code here...
 void CtrlrImageButton::timerCallback()
 {
 	if (ctrlrButton->isMouseButtonDown())
@@ -326,28 +304,3 @@ void CtrlrImageButton::reloadResources(Array <CtrlrPanelResource*> resourcesThat
 		}
 	}
 }
-//[/MiscUserCode]
-
-
-//==============================================================================
-#if 0
-/*  -- Jucer information section --
-
-    This is where the Jucer puts all of its metadata, so don't change anything in here!
-
-BEGIN_JUCER_METADATA
-
-<JUCER_COMPONENT documentType="Component" className="CtrlrImageButton" componentName=""
-                 parentClasses="public CtrlrComponent, public SettableTooltipClient, public Button::Listener"
-                 constructorParams="CtrlrModulator &amp;owner" variableInitialisers="CtrlrComponent(owner)"
-                 snapPixels="8" snapActive="1" snapShown="1" overlayOpacity="0.330000013"
-                 fixedSize="1" initialWidth="96" initialHeight="32">
-  <BACKGROUND backgroundColour="ffffff"/>
-  <JUCERCOMP name="ctrlrButton" id="21a8820941fca739" memberName="ctrlrButton"
-             virtualName="" explicitFocusOrder="0" pos="0 0 0M 0M" sourceFile="C:/devel/ctrlr/Source/UIComponents/CtrlrComponents/CtrlrCustomButtonInternal.cpp"
-             constructorParams="*this"/>
-</JUCER_COMPONENT>
-
-END_JUCER_METADATA
-*/
-#endif

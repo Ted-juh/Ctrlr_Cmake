@@ -4,7 +4,7 @@
 
 
 CtrlrMIDISettingsRouting::CtrlrMIDISettingsRouting (CtrlrPanel &_owner)
-    : owner(_owner)
+                                                                : owner(_owner)
 {
 
     addAndMakeVisible (groupComponent = new GroupComponent ("new group",
@@ -99,11 +99,7 @@ CtrlrMIDISettingsRouting::~CtrlrMIDISettingsRouting()
 
 }
 
-//==============================================================================
-void CtrlrMIDISettingsRouting::paint (Graphics& g)
-{
- 
-}
+void CtrlrMIDISettingsRouting::paint (Graphics& g){}
 
 void CtrlrMIDISettingsRouting::resized()
 {
