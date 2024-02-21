@@ -6,7 +6,7 @@ struct CtrlrValue
 	CtrlrValue(const int _numericValue, const String &_textRepresentation)
 		: numericValue(_numericValue), textRepresentation(_textRepresentation)
 	{}
-	CtrlrValue()
+	~CtrlrValue()
 	{}
 
 	static const String toString(const CtrlrValue &value)
