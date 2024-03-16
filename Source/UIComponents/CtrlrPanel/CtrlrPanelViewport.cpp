@@ -4,9 +4,6 @@
 #include "CtrlrPanelEditor.h"
 #include "CtrlrManager/CtrlrManager.h"
 
-/**
- */
-
 CtrlrPanelViewport::CtrlrPanelViewport (CtrlrPanelEditor &_owner)
 	: owner(_owner), isSpaceDown(false)
 {

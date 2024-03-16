@@ -8,9 +8,6 @@
 CtrlrAbout::CtrlrAbout (CtrlrManager &_owner)
     : owner(_owner)
 {
-    //[Constructor_pre] You can add your own custom stuff here..
-    //[/Constructor_pre]
-
     String authorEmail;
     if(owner.getActivePanel()) authorEmail = owner.getActivePanel()->getProperty(Ids::panelAuthorEmail);
         else authorEmail = "";
@@ -147,8 +144,6 @@ CtrlrAbout::CtrlrAbout (CtrlrManager &_owner)
     instanceDescription->setColour (TextEditor::shadowColourId, Colour (0x00000000));
     instanceDescription->setText ("");
 
-
-    //[UserPreSize]
 	ctrlrLogo->setMouseCursor(MouseCursor::PointingHandCursor);
 	addVersionInfo ("Version", STR(ctrlrRevision));
 	addVersionInfo ("Build date", STR(ctrlrRevisionDate));
@@ -168,8 +163,6 @@ CtrlrAbout::CtrlrAbout (CtrlrManager &_owner)
 
 	if (owner.isSingleInstance())
 	{
-    //[/UserPreSize]
-
 		int height = 380;
 		if (!authorEmail.isEmpty())
 		{
@@ -183,8 +176,6 @@ CtrlrAbout::CtrlrAbout (CtrlrManager &_owner)
 
 		setSize (600, height);
 
-
-    //[Constructor] You can add your own custom stuff here..
 		if (owner.getActivePanel())
 		{
 			instanceName->setText (owner.getActivePanel()->getProperty(Ids::name).toString(), dontSendNotification);
@@ -200,14 +191,10 @@ CtrlrAbout::CtrlrAbout (CtrlrManager &_owner)
 		setSize (600, 96);
 	}
 	updateVersionLabel();
-    //[/Constructor]
 }
 
 CtrlrAbout::~CtrlrAbout()
 {
-    //[Destructor_pre]. You can add your own custom destruction code here..
-    //[/Destructor_pre]
-
     ctrlrName = nullptr;
     ctrlrLogo = nullptr;
     versionInfoLabel = nullptr;
@@ -222,30 +209,16 @@ CtrlrAbout::~CtrlrAbout()
     instanceAuthor = nullptr;
     instanceName = nullptr;
     instanceDescription = nullptr;
-
-
-    //[Destructor]. You can add your own custom destruction code here..
-    //[/Destructor]
 }
 
-//==============================================================================
 void CtrlrAbout::paint (Graphics& g)
 {
-    //[UserPrePaint] Add your own custom painting code here..
-    //[/UserPrePaint]
-
     g.setColour (Colour (0xff4c4c4c));
     g.fillRect (proportionOfWidth (0.0200f), 163, proportionOfWidth (0.9600f), 2);
-
-    //[UserPaint] Add your own custom painting code here..
-    //[/UserPaint]
 }
 
 void CtrlrAbout::resized()
 {
-    //[UserPreResize] Add your own custom resize code here..
-    //[/UserPreResize]
-
     ctrlrName->setBounds (proportionOfWidth (0.0200f) + proportionOfWidth (0.0800f) - -8, 8, proportionOfWidth (0.2000f), 48);
     ctrlrLogo->setBounds (proportionOfWidth (0.0200f), 8, proportionOfWidth (0.0800f), 48);
     versionInfoLabel->setBounds ((proportionOfWidth (0.0200f) + proportionOfWidth (0.0800f) - -8) + proportionOfWidth (0.2000f) - -8, 8, proportionOfWidth (0.6600f), 76);
@@ -275,28 +248,15 @@ void CtrlrAbout::resized()
     instanceUrl->setBounds (proportionOfWidth (0.5000f), height, proportionOfWidth (0.4800f), 24);
 	height += 32;
 	instanceDescription->setBounds (proportionOfWidth (0.0200f), height, proportionOfWidth (0.9600f), 80);
-    //[UserResized] Add your own custom resize handling here..
-    //[/UserResized]
 }
 
 void CtrlrAbout::buttonClicked (Button* buttonThatWasClicked)
 {
-    //[UserbuttonClicked_Pre]
-    //[/UserbuttonClicked_Pre]
-
     if (buttonThatWasClicked == ctrlrLogo)
     {
-        //[UserButtonCode_ctrlrLogo] -- add your button handler code here..
-        //[/UserButtonCode_ctrlrLogo]
     }
-
-    //[UserbuttonClicked_Post]
-    //[/UserbuttonClicked_Post]
 }
 
-
-
-//[MiscUserCode] You can add your own definitions of your custom methods or any other code here...
 void CtrlrAbout::addVersionInfo (const String &name, const String &version)
 {
 	versionInformationArray.set (name, version);
@@ -311,91 +271,3 @@ void CtrlrAbout::updateVersionLabel()
 	}
 	versionInfoLabel->setText (versionInformationArray.getDescription());
 }
-//[/MiscUserCode]
-
-
-//==============================================================================
-#if 0
-/*  -- Introjucer information section --
-
-    This is where the Introjucer stores the metadata that describe this GUI layout, so
-    make changes in here at your peril!
-
-BEGIN_JUCER_METADATA
-
-<JUCER_COMPONENT documentType="Component" className="CtrlrAbout" componentName=""
-                 parentClasses="public Component" constructorParams="CtrlrManager &amp;_owner"
-                 variableInitialisers="owner(_owner)" snapPixels="8" snapActive="1"
-                 snapShown="1" overlayOpacity="0.330" fixedSize="1" initialWidth="600"
-                 initialHeight="380">
-  <BACKGROUND backgroundColour="ffffff">
-    <RECT pos="2% 163 96% 2" fill="solid: ff4c4c4c" hasStroke="0"/>
-  </BACKGROUND>
-  <LABEL name="" id="cb1b7e33d5cdf245" memberName="ctrlrName" virtualName=""
-         explicitFocusOrder="0" pos="-8R 8 20% 48" posRelativeX="a6024ea6965f7c56"
-         textCol="d6000000" edTextCol="ff000000" edBkgCol="0" labelText="Ctrlr"
-         editableSingleClick="0" editableDoubleClick="0" focusDiscardsChanges="0"
-         fontname="Default font" fontsize="48" bold="1" italic="0" justification="33"/>
-  <IMAGEBUTTON name="" id="a6024ea6965f7c56" memberName="ctrlrLogo" virtualName=""
-               explicitFocusOrder="0" pos="2% 8 8% 48" buttonText="" connectedEdges="0"
-               needsCallback="1" radioGroupId="0" keepProportions="1" resourceNormal=""
-               opacityNormal="0.75" colourNormal="0" resourceOver="" opacityOver="0.85000002384185791016"
-               colourOver="0" resourceDown="" opacityDown="0.99000000953674316406"
-               colourDown="0"/>
-  <TEXTEDITOR name="" id="f62f729d279478eb" memberName="versionInfoLabel" virtualName=""
-              explicitFocusOrder="0" pos="-8R 8 66% 76" posRelativeX="cb1b7e33d5cdf245"
-              bkgcol="0" outlinecol="9c000000" shadowcol="0" initialText=""
-              multiline="1" retKeyStartsLine="1" readonly="1" scrollbars="1"
-              caret="0" popupmenu="1"/>
-  <LABEL name="new label" id="eb972e3a417aa275" memberName="label" virtualName=""
-         explicitFocusOrder="0" pos="1.333% 120 46% 24" edTextCol="ff000000"
-         edBkgCol="0" labelText="Instance name" editableSingleClick="0"
-         editableDoubleClick="0" focusDiscardsChanges="0" fontname="Default font"
-         fontsize="24" bold="1" italic="0" justification="10"/>
-  <LABEL name="new label" id="bf16026dd2efbaf9" memberName="label2" virtualName=""
-         explicitFocusOrder="0" pos="1.333% 176 46% 24" edTextCol="ff000000"
-         edBkgCol="0" labelText="Author" editableSingleClick="0" editableDoubleClick="0"
-         focusDiscardsChanges="0" fontname="Default font" fontsize="24"
-         bold="0" italic="0" justification="10"/>
-  <LABEL name="new label" id="1686cf6bdfd3d170" memberName="label3" virtualName=""
-         explicitFocusOrder="0" pos="1.333% 216 46% 24" edTextCol="ff000000"
-         edBkgCol="0" labelText="Version" editableSingleClick="0" editableDoubleClick="0"
-         focusDiscardsChanges="0" fontname="Default font" fontsize="24"
-         bold="0" italic="0" justification="10"/>
-  <LABEL name="new label" id="6a832c3d3c867e98" memberName="label4" virtualName=""
-         explicitFocusOrder="0" pos="1.333% 256 46% 24" edTextCol="ff000000"
-         edBkgCol="0" labelText="URL" editableSingleClick="0" editableDoubleClick="0"
-         focusDiscardsChanges="0" fontname="Default font" fontsize="24"
-         bold="0" italic="0" justification="10"/>
-  <HYPERLINKBUTTON name="" id="251aa6b8d6ae85ab" memberName="instanceUrl" virtualName=""
-                   explicitFocusOrder="0" pos="50% 256 48% 24" tooltip="http://www.rawmaterialsoftware.com/juce"
-                   buttonText="" connectedEdges="0" needsCallback="0" radioGroupId="0"
-                   url="http://www.rawmaterialsoftware.com/juce"/>
-  <LABEL name="" id="f562f13a91eadcdd" memberName="instanceVersion" virtualName=""
-         explicitFocusOrder="0" pos="50% 216 48% 24" edTextCol="ff000000"
-         edBkgCol="0" labelText="" editableSingleClick="0" editableDoubleClick="0"
-         focusDiscardsChanges="0" fontname="Default font" fontsize="22"
-         bold="1" italic="0" justification="9"/>
-  <LABEL name="" id="34d3121f62edb861" memberName="instanceAuthor" virtualName=""
-         explicitFocusOrder="0" pos="50% 176 48% 24" edTextCol="ff000000"
-         edBkgCol="0" labelText="" editableSingleClick="0" editableDoubleClick="0"
-         focusDiscardsChanges="0" fontname="Default font" fontsize="22"
-         bold="1" italic="0" justification="9"/>
-  <LABEL name="" id="42b994d457a1c948" memberName="instanceName" virtualName=""
-         explicitFocusOrder="0" pos="50% 120 48% 24" edTextCol="ff000000"
-         edBkgCol="0" labelText="" editableSingleClick="0" editableDoubleClick="0"
-         focusDiscardsChanges="0" fontname="Default font" fontsize="24"
-         bold="1" italic="0" justification="9"/>
-  <TEXTEDITOR name="" id="b4e0855b38c272a2" memberName="instanceDescription"
-              virtualName="" explicitFocusOrder="0" pos="2% 288 96% 80" bkgcol="ffffff"
-              outlinecol="59000000" shadowcol="0" initialText="" multiline="1"
-              retKeyStartsLine="1" readonly="1" scrollbars="1" caret="0" popupmenu="0"/>
-</JUCER_COMPONENT>
-
-END_JUCER_METADATA
-*/
-#endif
-
-
-//[EndFile] You can add extra defines here...
-//[/EndFile]

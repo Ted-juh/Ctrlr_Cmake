@@ -1,6 +1,4 @@
-#ifndef CTRLRPANELVIEWPORT_H
-#define CTRLRPANELVIEWPORT_H
-
+#pragma once
 #include "CtrlrPanelCanvas.h"
 #include "CtrlrViewport.h"
 
@@ -139,6 +137,3 @@ public:
 		bool isSpaceDown;
 		double currentZoom;
 };
-
-
-#endif

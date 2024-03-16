@@ -1,6 +1,4 @@
-#ifndef __CTRLR_TEXT_EDITOR__
-#define __CTRLR_TEXT_EDITOR__
-
+#pragma once
 #include "CtrlrMacros.h"
 
 class CtrlrTextEditor : public TextEditor
@@ -19,5 +17,3 @@ class CtrlrTextEditor : public TextEditor
 		static CtrlrTextEditor *readOnlyMultiline(const String &xmlSource, const Colour backgroundColour=Colours::transparentBlack, const Colour outlineColour=Colours::transparentBlack, const Colour shadowColour=Colours::transparentBlack);
 		JUCE_LEAK_DETECTOR(CtrlrTextEditor)
 };
-
-#endif

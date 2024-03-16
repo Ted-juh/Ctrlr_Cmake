@@ -1,6 +1,6 @@
 #pragma once
-
 #include "CtrlrPanelFindProperty.h"
+
 class CtrlrPanelEditor;
 class CtrlrLookAndFeel;
 

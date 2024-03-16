@@ -1,5 +1,4 @@
 #pragma once
-
 #include "CtrlrMacros.h"
 
 class CtrlrChildWindowContent;

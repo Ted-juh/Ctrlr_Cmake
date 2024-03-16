@@ -1,6 +1,4 @@
-#ifndef __CTRLR_PANEL_MODULATOR_LIST_TREE__
-#define __CTRLR_PANEL_MODULATOR_LIST_TREE__
-
+#pragma once
 #include "CtrlrModulator/CtrlrModulator.h"
 #include "CtrlrWindowManagers/CtrlrChildWindowContent.h"
 
@@ -144,5 +142,3 @@ class CtrlrPanelModulatorListTree : public Component, public CtrlrTreeViewItemLi
 		StretchableLayoutManager layoutManager;
 		CtrlrPanel &owner;
 };
-
-#endif

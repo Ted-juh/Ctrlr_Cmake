@@ -7,8 +7,6 @@
 #include "CtrlrPanel/CtrlrPanelCanvas.h"
 #include "CtrlrInlineUtilitiesGUI.h"
 
-
-/* ********************************************************************************** */
 CtrlrModulatorTreeLabel::CtrlrModulatorTreeLabel(CtrlrModulatorTreeViewItem &_owner, const ValueTree &_itemToAttach)
 	:	owner(_owner),
 		itemToAttach(_itemToAttach)
@@ -259,7 +257,6 @@ bool CtrlrModulatorTreeViewItem::isInterestedInDragSource (const DragAndDropTarg
 	return (true);
 }
 
-/* ********************************************************************************** */
 CtrlrModulatorTreeXmlEditor::CtrlrModulatorTreeXmlEditor()
 	:	xmlEditor(nullptr),
 		saveButton("Save", "Click to save XML and apply properties")

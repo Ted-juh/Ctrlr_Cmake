@@ -1,6 +1,4 @@
-#ifndef __JUCER_HEADER_CTRLRLOGVIEWER_CTRLRLOGVIEWER_DDEA711A__
-#define __JUCER_HEADER_CTRLRLOGVIEWER_CTRLRLOGVIEWER_DDEA711A__
-
+#pragma once
 #include "CtrlrMacros.h"
 #include "CtrlrLog.h"
 #include "CtrlrWindowManagers/CtrlrChildWindowContent.h"
@@ -52,6 +50,3 @@ private:
     
 	const CtrlrLogViewer& operator= (const CtrlrLogViewer&);
 };
-
-
-#endif   // __JUCER_HEADER_CTRLRLOGVIEWER_CTRLRLOGVIEWER_DDEA711A__

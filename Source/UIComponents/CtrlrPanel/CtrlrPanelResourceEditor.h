@@ -1,7 +1,6 @@
-#ifndef CTRLR_PANEL_RESOURCE_EDITOR_H
-#define CTRLR_PANEL_RESOURCE_EDITOR_H
-
+#pragma once
 #include "CtrlrMacros.h"
+
 class CtrlrPanelEditor;
 class CtrlrPanelResourceManager;
 
@@ -43,6 +42,3 @@ class CtrlrPanelResourceEditor  : public Component,
 		TextButton* remove, *reload;
 	    JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (CtrlrPanelResourceEditor);
 };
-
-
-#endif

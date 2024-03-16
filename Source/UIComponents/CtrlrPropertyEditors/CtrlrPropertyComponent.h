@@ -1,6 +1,4 @@
-#ifndef __CTRLR_PROPERTY_COMPONENT__
-#define __CTRLR_PROPERTY_COMPONENT__
-
+#pragma once
 #include "CtrlrIDManager.h"
 #include "CtrlrPanel/CtrlrPanel.h"
 
@@ -660,5 +658,3 @@ class CtrlrUnknownPropertyComponent : public Component, public CtrlrPropertyChil
 		Identifier propertyName;
 		ValueTree propertyElement;
 };
-
-#endif

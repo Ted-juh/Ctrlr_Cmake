@@ -1,6 +1,4 @@
-#ifndef __JUCER_HEADER_CTRLRPANELCANVAS_CTRLRPANELCANVAS_13CAE15F__
-#define __JUCER_HEADER_CTRLRPANELCANVAS_CTRLRPANELCANVAS_13CAE15F__
-
+#pragma once
 #include "CtrlrMacros.h"
 #include "CtrlrWindowManagers/CtrlrChildWindowContent.h"
 #include "luabind/object_fwd.hpp"
@@ -48,10 +46,6 @@ class CtrlrPopupMenuLook : public LookAndFeel_V2
 
 class CtrlrPanelEditor;
 
-//==============================================================================
-/** @brief Class that represents a panel's canvas (layers are held by the canvas)
-
-*/
 class CtrlrPanelCanvas  : public CtrlrChildWindowContent,
                           public KeyListener,
                           public LassoSource<CtrlrComponent*>,
@@ -229,6 +223,3 @@ private:
     CtrlrPanelCanvas (const CtrlrPanelCanvas&);
     const CtrlrPanelCanvas& operator= (const CtrlrPanelCanvas&);
 };
-
-
-#endif

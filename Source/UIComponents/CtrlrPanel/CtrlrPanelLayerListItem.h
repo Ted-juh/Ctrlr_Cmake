@@ -1,7 +1,6 @@
-#ifndef __JUCER_HEADER_CTRLRPANELLAYERLISTITEM_CTRLRPANELLAYERLISTITEM_618D5794__
-#define __JUCER_HEADER_CTRLRPANELLAYERLISTITEM_CTRLRPANELLAYERLISTITEM_618D5794__
-
+#pragma once
 #include "CtrlrMacros.h"
+
 class CtrlrPanelCanvas;
 class CtrlrPanelLayerList;
 class CtrlrPanelCanvasLayer;
@@ -45,6 +44,3 @@ private:
     CtrlrPanelLayerListItem (const CtrlrPanelLayerListItem&);
     const CtrlrPanelLayerListItem& operator= (const CtrlrPanelLayerListItem&);
 };
-
-
-#endif

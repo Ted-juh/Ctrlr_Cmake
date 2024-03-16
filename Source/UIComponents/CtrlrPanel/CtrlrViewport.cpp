@@ -1,8 +1,6 @@
 #include "stdafx.h"
 #include "CtrlrViewport.h"
 
-
-//==============================================================================
 CtrlrViewport::CtrlrViewport (const String& componentName)
   : Component (componentName),
     scrollBarThickness (0),
@@ -14,7 +12,6 @@ CtrlrViewport::CtrlrViewport (const String& componentName)
     verticalScrollBar (true),
     horizontalScrollBar (false)
 {
-    // content holder is used to clip the contents so they don't overlap the scrollbars
     addAndMakeVisible (&contentHolder);
     contentHolder.setInterceptsMouseClicks (false, true);
 
@@ -33,18 +30,14 @@ CtrlrViewport::~CtrlrViewport()
     deleteContentComp();
 }
 
-//==============================================================================
 void CtrlrViewport::visibleAreaChanged (const Rectangle<int>&)
 {
 }
 
-//==============================================================================
 void CtrlrViewport::deleteContentComp()
 {
     if (deleteContent)
     {
-        // This sets the content comp to a null pointer before deleting the old one, in case
-        // anything tries to use the old one while it's in mid-deletion..
         ScopedPointer<Component> oldCompDeleter (contentComp);
         contentComp = nullptr;
     }
@@ -149,7 +142,6 @@ void CtrlrViewport::resized()
     updateVisibleArea();
 }
 
-//==============================================================================
 void CtrlrViewport::updateVisibleArea()
 {
     const int scrollbarWidth = getScrollBarThickness();
@@ -240,7 +232,6 @@ void CtrlrViewport::updateVisibleArea()
     // verticalScrollBar.handleUpdateNowIfNeeded();
 }
 
-//==============================================================================
 void CtrlrViewport::setSingleStepSizes (const int stepX, const int stepY)
 {
     if (singleStepX != stepX || singleStepY != stepY)

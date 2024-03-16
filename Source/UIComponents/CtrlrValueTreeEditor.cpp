@@ -2,7 +2,6 @@
 #include "CtrlrValueTreeEditor.h"
 #include "CtrlrInlineUtilitiesGUI.h"
 
-//=========================================================================================================
 bool CtrlrValueTreeEditorTree::keyPressed (const KeyPress &key)
 {
 	if (getNumSelectedItems() == 1)
@@ -21,7 +20,6 @@ bool CtrlrValueTreeEditorTree::keyPressed (const KeyPress &key)
 	return (TreeView::keyPressed(key));
 }
 
-//=========================================================================================================
 CtrlrValueTreeEditorItem::CtrlrValueTreeEditorItem(CtrlrValueTreeEditorLookProvider &_provider, ValueTree _treeToEdit, const Identifier &_nameIdentifier)
 	: treeToEdit(_treeToEdit), provider(_provider), nameIdentifier(_nameIdentifier)
 {
