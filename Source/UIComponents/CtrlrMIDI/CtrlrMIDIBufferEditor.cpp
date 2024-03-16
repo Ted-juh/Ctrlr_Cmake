@@ -126,7 +126,7 @@ void CtrlrMIDIBufferEditor::menuItemSelected(int menuItemID, int topLevelMenuInd
 		}
 		else if (menuItemID==1)
 		{
-			owner.getWindowManager().toggle(CtrlrPanelWindowManager::BufferEditor, false);
+			//owner.getWindowManager().toggle(CtrlrPanelWindowManager::BufferEditor, false);
 		}
 	}
 	else if (topLevelMenuIndex == 1)

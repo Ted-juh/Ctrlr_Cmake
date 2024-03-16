@@ -1,3 +1,8 @@
+
+.git
+.vs
+.vscode
+
 Source/Core/CtrlrRevision.h
 Source/Misc/boost/**
 !Source/Misc/boost/boost.zip

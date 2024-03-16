@@ -110,7 +110,7 @@ void CtrlrStandaloneWindow::changeListenerCallback(ChangeBroadcaster* source)
 
 void CtrlrStandaloneWindow::saveStateNow()
 {
-    _DBG("CtrlrStandaloneWindow::saveStateNow");
+    //_DBG("CtrlrStandaloneWindow::saveStateNow");
 
     if (ctrlrProcessor != nullptr && appProperties != nullptr)
     {

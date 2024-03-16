@@ -17,27 +17,14 @@ class CtrlrGroupContentComponent : public GroupComponent
 	private:
 		CtrlrGroup &owner;
 };
-//[/Headers]
 
-
-
-//==============================================================================
-/**
-                                                                    //[Comments]
-    An auto-generated component, created by the Jucer.
-
-    Describe your class and how it works here!
-                                                                    //[/Comments]
-*/
 class CtrlrGroup  : public CtrlrComponent, public DragAndDropTarget, public CtrlrGrouppingComponent
 {
 public:
-    //==============================================================================
+
     CtrlrGroup (CtrlrModulator &owner);
     ~CtrlrGroup();
 
-    //==============================================================================
-    //[UserMethods]     -- You can add your own custom methods in this section.
 	enum GradientType
 	{
 		None,
@@ -80,12 +67,10 @@ public:
     void paint (Graphics& g);
     void resized();
 
-
-    //==============================================================================
     juce_UseDebuggingNewOperator
 
 private:
-    //[UserVariables]   -- You can add your own custom variables in this section.
+
 	Array <int> values;
 	GradientType outlineGradient, backgroundGradient;
 	Colour outlineColour1, outlineColour2, backgroundColour1, backgroundColour2;
@@ -94,16 +79,10 @@ private:
 	int textMargin;
 	Image groupBackgroundImage;
 	CtrlrGroupContentComponent content;
-    //[/UserVariables]
-
-    //==============================================================================
     Label* label;
 
-    //==============================================================================
-    // (prevent copy constructor and operator= being generated..)
     CtrlrGroup (const CtrlrGroup&);
     const CtrlrGroup& operator= (const CtrlrGroup&);
 };
 
-
-#endif   // __JUCER_HEADER_CTRLRGROUP_CTRLRGROUP_F9C865FE__
+#endif

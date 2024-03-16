@@ -9,6 +9,7 @@
 #include "CtrlrLua/CtrlrLuaConsole.h"
 #include "CtrlrLua/MethodEditor/CtrlrLuaMethodEditor.h"
 #include "CtrlrMIDI/CtrlrMIDISettingsDialog.h"
+#include "CtrlrBuildScript/CtrlrBuildScriptDialogWindow.h"
 #include "CtrlrUtilities.h"
 
 CtrlrPanelWindowManager::CtrlrPanelWindowManager(CtrlrPanel &_owner)
@@ -38,7 +39,7 @@ void CtrlrPanelWindowManager::restoreState (const ValueTree &savedState)
 
 void CtrlrPanelWindowManager::windowClosedButtonPressed(CtrlrChildWindow *windowThatChanged)
 {
-	_DBG("CtrlrPanelWindowManager::windowClosedButtonPressed");
+	//_DBG("CtrlrPanelWindowManager::windowClosedButtonPressed");
 	windowChanged(windowThatChanged);
 	windows.removeObject (windowThatChanged);
 }
@@ -122,6 +123,8 @@ const String CtrlrPanelWindowManager::getWindowName(const CtrlrPanelWindowManage
 			return ("MIDILibrary");
 		case MIDISettings:
 			return ("MIDISettings");
+		case BuildScriptEditor:
+			return ("BuildScriptEditor");
 		default:
 			return ("LuaConsole");
 	}
@@ -141,6 +144,8 @@ CtrlrPanelWindowManager::WindowType CtrlrPanelWindowManager::getWindowType(const
 		return (MIDILibrary);
 	if (windowName == "MIDISettings")
 		return (MIDISettings);
+	if (windowName == "BuildScriptEditor")
+		return (BuildScriptEditor);
 	return (LuaConsole);
 }
 
@@ -158,7 +163,7 @@ CtrlrChildWindow *CtrlrPanelWindowManager::createWindow(const CtrlrPanelWindowMa
 		case CtrlrPanelWindowManager::LuaConsole:
 			w->setContent (new CtrlrLuaConsole (owner));
 			break;
-
+			
 		case CtrlrPanelWindowManager::LuaMethodEditor:
 			w->setContent (new CtrlrLuaMethodEditor (owner));
 			break;

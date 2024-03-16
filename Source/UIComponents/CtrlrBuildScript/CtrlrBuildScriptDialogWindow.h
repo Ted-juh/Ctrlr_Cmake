@@ -1,44 +1,56 @@
-#pragma once
-#include "JuceHeader.h"
+#ifndef __CTRLR_BUILD_SCRIPT_DIALOG_WINDOW_H__
+#define __CTRLR_BUILD_SCRIPT_DIALOG_WINDOW_H__
 
-class CtrlrPanel;
+#include "CtrlrWindowManagers/CtrlrChildWindowContent.h"
+#include "CtrlrWindowManagers/CtrlrManagerWindowManager.h"
+#include "IDESection.h"
+#include "OptionsSection.h"
+#include "OutputSection.h"
 
-class CtrlrBuildScriptDialogWindow : public Component, public Button::Listener
+class CtrlrManager;
+class CtrlrBuildScriptDialogWindow : public CtrlrChildWindowContent,
+                                     public Label::Listener,
+									 public Button::Listener
 {
-    public:
-        CtrlrBuildScriptDialogWindow(CtrlrPanel *_panel);
+ public:
 
-        ~CtrlrBuildScriptDialogWindow();
+    CtrlrBuildScriptDialogWindow(CtrlrManager &_owner);
+    ~CtrlrBuildScriptDialogWindow();
 
-        void paint (Graphics& g);
+    String getContentName()             { return ("Build Script Editor"); }
+    uint8 getType()                     { return (CtrlrManagerWindowManager::BuildScript);}
+    void paint (Graphics& g);
+    void paintOverChildren (Graphics& g);
 
-        void resized();
+    void resized();
 
-            void buttonClicked(Button* button);
+    void setButtonStateAndColour(TextButton* button, bool state);
+    void buttonClicked(Button* buttonThatWasClicked);
+    void buttonStateChanged(Button* button);
 
-            void setDialogWindow(DialogWindow* _window) 
-            {   
-                window = _window; 
-            };
+    void setOkButtonVisible (const bool isVisible);
 
-        void generateAndExecuteBuildScript();
-void NewFunction();
-void buildFunction(juce::File &buildScriptFile);
 
+    void labelTextChanged (Label* labelThatHasChanged);
+
+    void checkCMake();
+    void openBuildFolder();
+    void generateBuildFiles();
+    void buildFiles();
+    int getIDEIndex() { return ideSection->getIDEIndex(); }
+    
 private:
-DialogWindow *window;
-ToggleButton debugButton;
-ToggleButton releaseButton;
-ToggleButton VST2Button;
-ToggleButton VST3Button;
-ToggleButton cleanBuildButton;
-ToggleButton buildFolderButton;
-ToggleButton vstFolderButton;
-ToggleButton dawButton;
-TextButton cancelButton;
-TextButton okButton;
+    CtrlrManager &owner;
 
-CtrlrPanel *panel;
+    ScopedPointer<IDESection>                       ideSection;
+    ScopedPointer<OptionsSection>                   optionsSection;
+    ScopedPointer<OutputSection>	                outputSection;
 
-JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(CtrlrBuildScriptDialogWindow)
+    ScopedPointer<TextButton>                       cancelButton;
+    ScopedPointer<TextButton>                       okButton;
+    
+
+
+    JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(CtrlrBuildScriptDialogWindow)
 };
+#endif

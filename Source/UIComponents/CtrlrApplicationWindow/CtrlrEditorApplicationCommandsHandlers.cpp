@@ -33,6 +33,10 @@ bool CtrlrEditor::perform (const InvocationInfo &info)
 			owner.getWindowManager().toggle(CtrlrManagerWindowManager::MIDICalculator, true);
 			break;
 
+		case showBuildScriptEditor:
+			owner.getWindowManager().toggle(CtrlrManagerWindowManager::BuildScript, true);
+			break;
+
 		case doSaveState:
 			owner.saveStateToDisk();
 			break;

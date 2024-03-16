@@ -346,27 +346,3 @@ void CtrlrListBox::setMultipleSelectionEnabled (bool shouldBeEnabled)
 {
 	listBox->setMultipleSelectionEnabled(shouldBeEnabled);
 }
-//[/MiscUserCode]
-
-
-//==============================================================================
-#if 0
-/*  -- Jucer information section --
-
-    This is where the Jucer puts all of its metadata, so don't change anything in here!
-
-BEGIN_JUCER_METADATA
-
-<JUCER_COMPONENT documentType="Component" className="CtrlrListBox" componentName=""
-                 parentClasses="public CtrlrComponent, public ListBoxModel" constructorParams="CtrlrModulator &amp;owner"
-                 variableInitialisers="CtrlrComponent(owner)" snapPixels="8" snapActive="1"
-                 snapShown="1" overlayOpacity="0.330000013" fixedSize="1" initialWidth="128"
-                 initialHeight="256">
-  <BACKGROUND backgroundColour="ffffff"/>
-  <GENERICCOMPONENT name="" id="fdd8fa416d09ba08" memberName="listBox" virtualName=""
-                    explicitFocusOrder="0" pos="0 0 0M 0M" class="ListBox" params="&quot;List Box&quot;, this"/>
-</JUCER_COMPONENT>
-
-END_JUCER_METADATA
-*/
-#endif

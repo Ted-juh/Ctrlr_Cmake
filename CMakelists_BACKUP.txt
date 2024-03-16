@@ -263,6 +263,7 @@ target_sources(Ctrlr
 	Source/Lua/Methods/CtrlrLuaMethodManager.h
 	Source/Lua/Methods/CtrlrLuaMethodManagerCalls.cpp
 
+
 	# Source files	\MIDI
 	Source/MIDI/CtrlrMIDIDevice.cpp
 	Source/MIDI/CtrlrMIDIDevice.h
@@ -383,12 +384,6 @@ target_sources(Ctrlr
 	# Source files	\UIComponents\CtrlrBuildScript
 	Source/UIComponents/CtrlrBuildScript/CtrlrBuildScriptDialogWindow.cpp
 	Source/UIComponents/CtrlrBuildScript/CtrlrBuildScriptDialogWindow.h
-	Source/UIComponents/CtrlrBuildScript/IDEsection.cpp
-	Source/UIComponents/CtrlrBuildScript/IDEsection.h
-	Source/UIComponents/CtrlrBuildScript/OptionsSection.cpp
-	Source/UIComponents/CtrlrBuildScript/OptionsSection.h
-	Source/UIComponents/CtrlrBuildScript/OutputSection.cpp
-	Source/UIComponents/CtrlrBuildScript/OutputSection.h
 
 	# Source files	\UIComponents\CtrlrComponents
 	Source/UIComponents/CtrlrComponents/CtrlrCombo.cpp

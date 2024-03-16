@@ -12,13 +12,13 @@ const uint32 magicXmlNumber = 0x00001040;
 
 AudioProcessor* JUCE_CALLTYPE createPluginFilter()
 {
-	_DBG("createPluginFilter");
+	//_DBG("createPluginFilter");
     return new CtrlrProcessor();
 }
 
 CtrlrProcessor::CtrlrProcessor() : overridesTree(Ids::ctrlrOverrides), ctrlrManager(nullptr)
 {
-	_DBG("CtrlrProcessor::ctor");
+	//_DBG("CtrlrProcessor::ctor");
 
 	midiCollector.reset (SAMPLERATE);
 
@@ -241,18 +241,18 @@ int CtrlrProcessor::getCurrentProgram()
 
 void CtrlrProcessor::setCurrentProgram (int index)
 {
-	_DBG("CtrlrProcessor::setCurrentProgram id:"+_STR(index));
+	//_DBG("CtrlrProcessor::setCurrentProgram id:"+_STR(index));
 }
 
 const String CtrlrProcessor::getProgramName (int index)
 {
-	_DBG("CtrlrProcessor::getProgramName id:"+_STR(index));
+	//_DBG("CtrlrProcessor::getProgramName id:"+_STR(index));
     return ("Default CTRLR program");
 }
 
 void CtrlrProcessor::changeProgramName (int index, const String& newName)
 {
-	_DBG("CtrlrProcessor::changeProgramName id:"+_STR(index)+" newName:"+newName);
+	//_DBG("CtrlrProcessor::changeProgramName id:"+_STR(index)+" newName:"+newName);
 }
 
 void CtrlrProcessor::prepareToPlay (double sampleRate, int samplesPerBlock)
@@ -403,7 +403,7 @@ AudioProcessorEditor* CtrlrProcessor::createEditor()
 
 void CtrlrProcessor::getStateInformation (MemoryBlock& destData)
 {
-	_DBG("CtrlrProcessor::getStateInformation");
+	//_DBG("CtrlrProcessor::getStateInformation");
 	ScopedPointer <XmlElement> xmlState(ctrlrManager->saveState());
 	if (xmlState)
 	{
@@ -413,7 +413,7 @@ void CtrlrProcessor::getStateInformation (MemoryBlock& destData)
 
 void CtrlrProcessor::setStateInformation (const void* data, int sizeInBytes)
 {
-	_DBG("CtrlrProcessor::setStateInformation");
+	//_DBG("CtrlrProcessor::setStateInformation");
 	ScopedPointer<XmlElement> xmlState (getXmlFromBinary (data, sizeInBytes));
 	if (xmlState)
 	{

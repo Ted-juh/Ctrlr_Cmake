@@ -26,6 +26,7 @@ class CtrlrEditor  : public AudioProcessorEditor,
 			MenuMidi,
 			MenuPrograms,
 			MenuTools,
+			MenuBatch,
 			MenuHelp
 		};
 
@@ -37,6 +38,7 @@ class CtrlrEditor  : public AudioProcessorEditor,
 			MenuRestrictedMidi,
 			MenuRestrictedPrograms,
 			MenuRestrictedTools,
+			MenuRestrictedBatch,
 			MenuRestrictedHelp
 		};
 
@@ -50,10 +52,10 @@ class CtrlrEditor  : public AudioProcessorEditor,
 			showLogViewer				= 0x2006,
 			showMidiCalculator          = 0x2007,
 			showAboutDialog             = 0x2008,
+			showBuildScriptEditor       = 0x2009,
 			showKeyboardMappingDialog	= 0x200a,
 
 			/* Panel commands */
-
 			doZoomIn					= 0x3001,
 			doZoomOut					= 0x3002,
 			doCopy						= 0x3003,

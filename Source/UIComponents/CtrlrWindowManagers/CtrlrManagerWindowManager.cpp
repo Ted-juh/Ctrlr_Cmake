@@ -7,6 +7,7 @@
 #include "CtrlrMIDI/CtrlrMIDIMon.h"
 #include "CtrlrLogViewer.h"
 #include "CtrlrMIDI/CtrlrMIDICalculator.h"
+#include "CtrlrBuildScript/CtrlrBuildScriptDialogWindow.h"
 
 CtrlrManagerWindowManager::CtrlrManagerWindowManager(CtrlrManager &_owner)
     : owner(_owner), managerTree(Ids::uiWindowManager), CtrlrWindowManager(_owner)
@@ -122,6 +123,8 @@ const String CtrlrManagerWindowManager::getWindowName(const CtrlrManagerWindowMa
 			return ("LogViewer");
 		case MIDICalculator:
 			return ("MIDICalculator");
+		case BuildScript:
+			return ("BuildScript");
 		default:
 			return ("Unknown");
 	}
@@ -137,6 +140,8 @@ CtrlrManagerWindowManager::WindowType CtrlrManagerWindowManager::getWindowType(c
 		return (LogViewer);
 	if (windowName == "MIDICalculator")
 		return (MIDICalculator);
+	if (windowName == "BuildScript")
+		return (BuildScript);
 	return (MidiMonWindow);
 }
 
@@ -191,6 +196,10 @@ CtrlrChildWindow *CtrlrManagerWindowManager::createWindow(const CtrlrManagerWind
 
 		case CtrlrManagerWindowManager::MIDICalculator:
 			w->setContent (new CtrlrMIDICalculator (owner));
+			break;
+
+		case CtrlrManagerWindowManager::BuildScript:
+			w->setContent(new CtrlrBuildScriptDialogWindow (owner));
 			break;
 
         case CtrlrManagerWindowManager::Repository:

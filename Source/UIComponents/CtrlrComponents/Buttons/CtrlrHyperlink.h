@@ -8,12 +8,10 @@ class CtrlrHyperlink  : public CtrlrComponent,
 						public Button::Listener
 {
 public:
-    //==============================================================================
+
     CtrlrHyperlink (CtrlrModulator &owner);
     ~CtrlrHyperlink();
 
-    //==============================================================================
-    //[UserMethods]     -- You can add your own custom methods in this section.
 	void setComponentValue (const double newValue, const bool sendChangeMessage=false);
 	double getComponentValue();
 	int getComponentMidiValue();
@@ -30,29 +28,18 @@ public:
 	void buttonContentChanged();
 	bool hyperlinkOpensUrl();
 	void setHyperlinkUrl(const String &newURL);
-	//[/UserMethods]
-
     void paint (Graphics& g);
     void resized();
     void buttonClicked (Button* buttonThatWasClicked);
 
-
-    //==============================================================================
     juce_UseDebuggingNewOperator
 
 private:
-    //[UserVariables]   -- You can add your own custom variables in this section.
     CtrlrValueMap valueMap;
-    //[/UserVariables]
-
-    //==============================================================================
     HyperlinkButton* hyperlinkButton;
-
-    //==============================================================================
-    // (prevent copy constructor and operator= being generated..)
     CtrlrHyperlink (const CtrlrHyperlink&);
     const CtrlrHyperlink& operator= (const CtrlrHyperlink&);
 };
 
 
-#endif   // __JUCER_HEADER_CTRLRHYPERLINK_CTRLRHYPERLINK_843BD87D__
+#endif

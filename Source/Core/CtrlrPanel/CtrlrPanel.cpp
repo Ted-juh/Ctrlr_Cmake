@@ -222,7 +222,7 @@ void CtrlrPanel::setProgramState(const bool _programState)
 
 Result CtrlrPanel::restoreState (const ValueTree &savedState)
 {
-	_DBG("CtrlrPanel::restoreState");
+	//_DBG("CtrlrPanel::restoreState");
 
 	setRestoreState (true);
 
@@ -332,7 +332,7 @@ void CtrlrPanel::sendSnapshotOnLoad()
 
 void CtrlrPanel::bootstrapPanel(const bool setInitialProgram)
 {
-    _DBG("CtrlrPanel::bootstrapPanel");
+    //_DBG("CtrlrPanel::bootstrapPanel");
 	if (getRestoreState())
 		return;
 
@@ -867,7 +867,7 @@ void CtrlrPanel::setCustomData (const ValueTree &customData)
 
 void CtrlrPanel::setProgram(ValueTree programTree, const bool sendSnapshotNow)
 {
-	_DBG("CtrlrPanel::setProgram");
+	//_DBG("CtrlrPanel::setProgram");
 
 	ValueTree program;
 
@@ -1702,16 +1702,16 @@ void CtrlrPanel::modulatorNameChanged(CtrlrModulator *modulatorThatChanged, cons
 
 void CtrlrPanel::dumpDebugData()
 {
-	_DBG("CtrlrPanel::dumpDebugData");
+	//_DBG("CtrlrPanel::dumpDebugData");
 
-	_DBG("---------- modulators by name hash table ----------");
+	//_DBG("---------- modulators by name hash table ----------");
 	HashMap<String,CtrlrModulator*>::Iterator it (modulatorsByName);
 
 	while (it.next())
 	{
-		_DBG ("["+it.getKey()+"]: " + it.getValue()->getName());
+		//_DBG ("["+it.getKey()+"]: " + it.getValue()->getName());
 	}
-	_DBG("---------- modulators by name hash table ----------");
+	//_DBG("---------- modulators by name hash table ----------");
 }
 
 const Identifier CtrlrPanel::getMidiOptionIdentifier(const CtrlrPanelMidiOption option)
@@ -1854,9 +1854,4 @@ void CtrlrPanel::multiMidiReceived(CtrlrMidiMessage &multiMidiMessage)
 {
 	multiMidiQueue.add (multiMidiMessage);
 	triggerAsyncUpdate();
-}
-
-const String CtrlrPanel::getPanelBatchProjectDir()
-{
-	return getProperty(Ids::panelBatchProjectDir).toString();
 }

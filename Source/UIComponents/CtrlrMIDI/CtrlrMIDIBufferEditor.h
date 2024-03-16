@@ -46,7 +46,7 @@ public:
     //==============================================================================
     //[UserMethods]     -- You can add your own custom methods in this section.
     String getContentName()					{ return ("Buffer Editor"); }
-	uint8 getType()							{ return (CtrlrPanelWindowManager::BufferEditor); }
+	//uint8 getType()							{ return (CtrlrPanelWindowManager::BufferEditor); }
 	StringArray getMenuBarNames();
 	PopupMenu getMenuForIndex(int topLevelMenuIndex, const String &menuName);
 	void menuItemSelected(int menuItemID, int topLevelMenuIndex);

@@ -1,26 +1,4 @@
 #include "stdafx.h"
-/*
-  ==============================================================================
-
-  This is an automatically generated file created by the Jucer!
-
-  Creation date:  7 Oct 2011 4:24:16pm
-
-  Be careful when adding custom code to these files, as only the code within
-  the "//[xyz]" and "//[/xyz]" sections will be retained when the file is loaded
-  and re-saved.
-
-  Jucer version: 1.12
-
-  ------------------------------------------------------------------------------
-
-  The Jucer is part of the JUCE library - "Jules' Utility Class Extensions"
-  Copyright 2004-6 by Raw Material Software ltd.
-
-  ==============================================================================
-*/
-
-//[Headers] You can add your own extra header files here...
 #include "CtrlrManager/CtrlrManager.h"
 #include "../CtrlrComponentTypeManager.h"
 #include "CtrlrModulator/CtrlrModulator.h"
@@ -28,22 +6,14 @@
 #include "CtrlrPanel/CtrlrPanel.h"
 #include "CtrlrLog.h"
 #include "CtrlrPanel/CtrlrPanelResource.h"
-//[/Headers]
-
 #include "CtrlrXYSurface.h"
 
-
-//[MiscUserDefs] You can add your own user definitions and misc code here...
-//[/MiscUserDefs]
-
-//==============================================================================
 CtrlrXYSurface::CtrlrXYSurface (CtrlrModulator &owner)
     : CtrlrComponent(owner),
       surfaceModulator (0)
 {
     addAndMakeVisible (surfaceModulator = new CtrlrXYModulator (*this));
 
-    //[UserPreSize]
 	initialized=false;
 	surfaceModulator->setAlwaysOnTop(true);
 	surfaceModulator->addMouseListener(this,true);
@@ -92,35 +62,19 @@ CtrlrXYSurface::CtrlrXYSurface (CtrlrModulator &owner)
 	setProperty (Ids::uiXYSuraceShowRightClickMenu, true);
 	setProperty (Ids::uiXYSurfaceDestinationXGroupFilter, "");
 	setProperty (Ids::uiXYSurfaceDestinationYGroupFilter, "");
-    //[/UserPreSize]
 
     setSize (256, 256);
 
-
-    //[Constructor] You can add your own custom stuff here..
 	surfaceModulator->setBounds (128,128,16,16);
-    //[/Constructor]
 }
 
 CtrlrXYSurface::~CtrlrXYSurface()
 {
-    //[Destructor_pre]. You can add your own custom destruction code here..
-    //[/Destructor_pre]
-
     deleteAndZero (surfaceModulator);
-
-
-    //[Destructor]. You can add your own custom destruction code here..
-    //[/Destructor]
 }
 
-//==============================================================================
 void CtrlrXYSurface::paint (Graphics& g)
 {
-    //[UserPrePaint] Add your own custom painting code here..
-    //[/UserPrePaint]
-
-    //[UserPaint] Add your own custom painting code here..
 	gradientFromProperty (g, usableRectangle.getSmallestIntegerContainer(), getObjectTree(), Ids::uiXYSurfaceBgGradientType, Ids::uiXYSurfaceBackgroundColour1, Ids::uiXYSurfaceBackgroundColour2);
 	g.fillRoundedRectangle ((float)usableRectangle.getTopLeft().getX(), (float)usableRectangle.getTopLeft().getY(), (float)usableRectangle.getWidth(), (float)usableRectangle.getHeight(), getProperty(Ids::uiXYSurfaceCornerSize));
 
@@ -191,22 +145,17 @@ void CtrlrXYSurface::paint (Graphics& g)
 					justificationFromProperty(getProperty (Ids::uiXYSurfaceInfoLabelLocation)),
 					true);
 	}
-
-    //[/UserPaint]
 }
 
 void CtrlrXYSurface::resized()
 {
-    //[UserResized] Add your own custom resize handling here..
 	surfaceModulator->setSize (getProperty(Ids::uiXYSurfaceModulatorWidth), getProperty(Ids::uiXYSurfaceModulatorHeight));
 	CtrlrComponent::resized();
 	usableRectangle = getUsableRect();
-    //[/UserResized]
 }
 
 void CtrlrXYSurface::mouseDown (const MouseEvent& e)
 {
-    //[UserCode_mouseDown] -- Add your code here...
 	if (e.mods.isPopupMenu())
 	{
 		showPopupMenu();
@@ -217,12 +166,10 @@ void CtrlrXYSurface::mouseDown (const MouseEvent& e)
 		surfaceModulator->mouseDown (e);
 		repaint();
 	}
-    //[/UserCode_mouseDown]
 }
 
 void CtrlrXYSurface::mouseDrag (const MouseEvent& e)
 {
-    //[UserCode_mouseDrag] -- Add your code here...
 	if (e.mods.isPopupMenu())
 	{
 	}
@@ -230,12 +177,8 @@ void CtrlrXYSurface::mouseDrag (const MouseEvent& e)
 	{
 		surfaceModulator->mouseDrag (e);
 	}
-    //[/UserCode_mouseDrag]
 }
 
-
-
-//[MiscUserCode] You can add your own definitions of your custom methods or any other code here...
 void CtrlrXYSurface::setComponentValue (const double newValue, const bool sendChangeMessage)
 {
 }
@@ -437,32 +380,3 @@ void CtrlrXYSurface::reloadResources(Array <CtrlrPanelResource*> resourcesThatCh
 		}
 	}
 }
-//[/MiscUserCode]
-
-
-//==============================================================================
-#if 0
-/*  -- Jucer information section --
-
-    This is where the Jucer puts all of its metadata, so don't change anything in here!
-
-BEGIN_JUCER_METADATA
-
-<JUCER_COMPONENT documentType="Component" className="CtrlrXYSurface" componentName=""
-                 parentClasses="public CtrlrComponent" constructorParams="CtrlrModulator &amp;owner"
-                 variableInitialisers="CtrlrComponent(owner)" snapPixels="8" snapActive="1"
-                 snapShown="1" overlayOpacity="0.330000013" fixedSize="1" initialWidth="256"
-                 initialHeight="256">
-  <METHODS>
-    <METHOD name="mouseDown (const MouseEvent&amp; e)"/>
-    <METHOD name="mouseDrag (const MouseEvent&amp; e)"/>
-  </METHODS>
-  <BACKGROUND backgroundColour="ffffff"/>
-  <JUCERCOMP name="" id="492f31ef5b9a710a" memberName="surfaceModulator" virtualName=""
-             explicitFocusOrder="0" pos="0C 0C 16 16" sourceFile="CtrlrXYModulator.cpp"
-             constructorParams="*this"/>
-</JUCER_COMPONENT>
-
-END_JUCER_METADATA
-*/
-#endif

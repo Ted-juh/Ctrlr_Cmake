@@ -194,7 +194,7 @@ void CtrlrManager::addPanel (CtrlrPanelEditor *panelToAdd)
 
 void CtrlrManager::restoreState (const ValueTree &savedTree)
 {
-	_DBG("CtrlrManager::restoreState enter");
+	//_DBG("CtrlrManager::restoreState enter");
 	if (savedTree.isValid())
 	{
 		// Something has changed in Juce 4.0
@@ -230,7 +230,7 @@ void CtrlrManager::restoreState (const ValueTree &savedTree)
 		if (getInstanceMode() != InstanceMulti && savedTree.hasType (Ids::panelState))
 		{
 			restoreInstanceState (savedTree);
-			_DBG("CtrlrManager::restoreState instance is not multi, exit restoreInstanceState");
+			//_DBG("CtrlrManager::restoreState instance is not multi, exit restoreInstanceState");
 			return;
 		}
 
@@ -250,7 +250,7 @@ void CtrlrManager::restoreState (const ValueTree &savedTree)
 		ctrlrManagerRestoring = false;
 	}
 
-	_DBG("CtrlrManager::restoreState exit");
+	//_DBG("CtrlrManager::restoreState exit");
 }
 
 void CtrlrManager::restoreState (const XmlElement &savedState)

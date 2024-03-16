@@ -79,19 +79,19 @@ StringArray CtrlrEditor::getMenuBarNames()
 
 	if (!isRestricted())
 	{
-		const char* const names[] = { "File", "Edit", "View", "Panel", "MIDI", "Programs", "Tools", "Help", nullptr };
+		const char* const names[] = { "File", "Edit", "View", "Panel", "MIDI", "Programs", "Tools", "Batch", "Help", nullptr};
 		n = StringArray (names);
 	}
 	else
 	{
 		if (hideProgramsMenu)
 		{
-			const char* const names[] = { "File", "Edit", "View",  "MIDI", "Tools", "Help", nullptr };
+			const char* const names[] = { "File", "Edit", "View",  "MIDI", "Tools", "Batch","Help", nullptr };
 			n = StringArray(names);
 		}
 		else
 		{
-			const char* const names[] = { "File", "Edit", "View",  "MIDI", "Programs", "Tools", "Help", nullptr };
+			const char* const names[] = { "File", "Edit", "View",  "MIDI", "Programs", "Tools", "Batch","Help", nullptr };
 			n = StringArray(names);
 		}
 	}
@@ -137,6 +137,10 @@ PopupMenu CtrlrEditor::getMenuForIndex(int topLevelMenuIndex, const String &menu
 		menu.addSeparator();
 		menu.addCommandItem (commandManager, doQuit);
 	}
+	else if (topLevelMenuIndex== MenuBatch) // Batch
+	{
+		menu.addCommandItem (commandManager, showBuildScriptEditor);
+	}
 	else if (topLevelMenuIndex == MenuEdit) // Edit
 	{
 		menu.addCommandItem (commandManager, doCopy);
@@ -170,7 +174,6 @@ PopupMenu CtrlrEditor::getMenuForIndex(int topLevelMenuIndex, const String &menu
 		if (!isRestricted()) menu.addCommandItem (commandManager, showLayers);
 		if (!isRestricted()) menu.addCommandItem (commandManager, showLuaEditor);
 		if (!isRestricted()) menu.addCommandItem (commandManager, showLuaConsole);
-		// menu.addCommandItem (commandManager, showBufferEditor);
 	}
 	else if ((!isRestricted() && (topLevelMenuIndex == MenuMidi)) || (isRestricted() && (topLevelMenuIndex == MenuRestrictedMidi))) // MIDI
 	{
@@ -225,9 +228,6 @@ PopupMenu CtrlrEditor::getMenuForIndex(int topLevelMenuIndex, const String &menu
 		menu.addCommandItem (commandManager, doSendSnapshot);
 		menu.addCommandItem (commandManager, optMidiSnapshotOnLoad);
 		menu.addCommandItem (commandManager, optMidiSnapshotOnProgramChange);
-		//std::unique_ptr<PopupMenu::CustomComponent> slider;
-		//slider.reset (new CtrlrMenuSlider(this, "Snapshot delay", getPanelProperty(Ids::panelMidiSnapshotDelay), 0, 2000, 1));
-		//menu.addCustomItem (1, slider);
 	}
 	else if ((!isRestricted() && (topLevelMenuIndex == MenuTools)) || (isRestricted() && (topLevelMenuIndex == (hideProgramsMenu ? (MenuRestrictedTools - 1) : MenuRestrictedTools)))) // Tools
 	{
@@ -241,15 +241,21 @@ PopupMenu CtrlrEditor::getMenuForIndex(int topLevelMenuIndex, const String &menu
 			menu.addCommandItem(commandManager, doKeyGenerator);
 		}
 	}
+	else if ((!isRestricted() && (topLevelMenuIndex == MenuBatch)) || (isRestricted() && (topLevelMenuIndex == (hideProgramsMenu ? (MenuRestrictedBatch - 1) : MenuRestrictedBatch)))) // Batch
+		{
+			menu.addCommandItem (commandManager, showBuildScriptEditor);
+		}
 	else if ((!isRestricted() && (topLevelMenuIndex == MenuHelp)) || (isRestricted() && (topLevelMenuIndex == (hideProgramsMenu ? (MenuRestrictedHelp - 1) : MenuRestrictedHelp)))) // Help
 	{
 		menu.addCommandItem (commandManager, showAboutDialog);
 		menu.addSeparator();
+
 #ifdef JUCE_DEBUG
 		menu.addCommandItem (commandManager, doCrash);
 		menu.addCommandItem (commandManager, doDumpVstTables);
 #endif
-	}
+
+		}
 
 	return menu;
 }

@@ -14,7 +14,8 @@ class CtrlrPanelWindowManager : public CtrlrWindowManager
 			ModulatorList,
 			LayerEditor,
 			MIDILibrary,
-			MIDISettings
+			MIDISettings,
+			BuildScriptEditor
 		};
 
 		CtrlrPanelWindowManager(CtrlrPanel &_owner);

@@ -21,12 +21,9 @@ class CtrlrLabel  : public CtrlrComponent,
                     public Label::Listener
 {
 public:
-    //==============================================================================
     CtrlrLabel (CtrlrModulator &owner);
     ~CtrlrLabel();
 
-    //==============================================================================
-    //[UserMethods]     -- You can add your own custom methods in this section.
 	void setComponentValue (const double newValue, const bool sendChangeMessage=false);
 	double getComponentValue();
 	int getComponentMidiValue();
@@ -58,19 +55,12 @@ public:
     juce_UseDebuggingNewOperator
 
 private:
-    //[UserVariables]   -- You can add your own custom variables in this section.
 	Array <int> values;
 	WeakReference <CtrlrLuaMethod> labelChangedCbk;
-    //[/UserVariables]
-
-    //==============================================================================
     CtrlrLabelInternal* ctrlrLabel;
-
-    //==============================================================================
-    // (prevent copy constructor and operator= being generated..)
     CtrlrLabel (const CtrlrLabel&);
     const CtrlrLabel& operator= (const CtrlrLabel&);
 };
 
 
-#endif   // __JUCER_HEADER_CTRLRLABEL_CTRLRLABEL_1082F2C2__
+#endif

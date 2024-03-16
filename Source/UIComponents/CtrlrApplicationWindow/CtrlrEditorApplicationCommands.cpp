@@ -15,6 +15,7 @@ void CtrlrEditor::getAllCommands (Array< CommandID > &commands)
                                 showMidiCalculator,
                                 showAboutDialog,
 								showKeyboardMappingDialog,
+								showBuildScriptEditor,
 								doViewPropertyDisplayIDs,
 								doZoomIn,
 								doZoomOut,
@@ -47,7 +48,7 @@ void CtrlrEditor::getAllCommands (Array< CommandID > &commands)
 								doExportFileInstance,
 								doExportFileInstanceRestricted,
 								doExportGenerateUID,
-                                 doSearchForProperty,
+                                doSearchForProperty,
 								doShowMidiSettingsDialog,
 								optMidiInputFromHost,
 								optMidiInputFromHostCompare,
@@ -124,6 +125,11 @@ void CtrlrEditor::getCommandInfo (CommandID commandID, ApplicationCommandInfo &r
 		case showKeyboardMappingDialog:
 			result.setInfo ("Keyboard mapping", "Change default keyboard mappings", globalCategory, 0);
 			result.addDefaultKeypress ('k', ModifierKeys::commandModifier);
+			break;
+
+		case showBuildScriptEditor:
+			result.setInfo ("Build Script Editor", "Show/hide the build script editor", globalCategory, 0);
+			result.addDefaultKeypress ('d', ModifierKeys::commandModifier);
 			break;
 
 		case doViewPropertyDisplayIDs:

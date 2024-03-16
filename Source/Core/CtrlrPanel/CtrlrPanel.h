@@ -16,7 +16,6 @@
 #include "CtrlrPanelResourceManager.h"
 #include "CtrlrPanelUndoManager.h"
 #include "CtrlrPanelSchemeMigration.h"
-#include "UIComponents/CtrlrBuildScript/CtrlrBuildScriptDialogWindow.h"
 
 typedef WeakReference <CtrlrModulator>					ModulatorReference;
 typedef WeakReference <CtrlrComponent>					ComponentReference;
@@ -337,10 +336,6 @@ class CtrlrPanel:	public ValueTree::Listener,
 					hostInputChannel,
 					hostOutputChannel,
 					controllerInputChannel;
-
-		const String getPanelBatchProjectDir();	
-
-
 
 		JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(CtrlrPanel)
 

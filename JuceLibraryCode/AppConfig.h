@@ -1,11 +1,7 @@
 /*
 
-    IMPORTANT! This file is auto-generated each time you save your
+    IMPORTANT! This file is auto-generated each time you run cmake on your
     project - if you alter its contents, your changes may be overwritten!
-
-    There's a section below where you can add your own custom code safely, and the
-    Projucer will preserve the contents of that block, but the best way to change
-    any of these definitions is by using the Projucer's project settings.
 
     Any commented-out settings will assume their default values.
 
@@ -16,7 +12,7 @@
 //==============================================================================
 // [BEGIN_USER_CODE_SECTION]
 
-// (You can add your own code in this section, and the Projucer will not overwrite it)
+// (You can get your own code in this section by calling jucer_appconfig_header)
 
 // [END_USER_CODE_SECTION]
 
@@ -45,8 +41,6 @@
 
 #define JUCE_USE_DARK_SPLASH_SCREEN 0
 
-#define JUCE_PROJUCER_VERSION 0x60008
-
 //==============================================================================
 #define JUCE_MODULE_AVAILABLE_juce_audio_basics             1
 #define JUCE_MODULE_AVAILABLE_juce_audio_devices            1
@@ -67,231 +61,231 @@
 // juce_audio_devices flags:
 
 #ifndef    JUCE_USE_WINRT_MIDI
- //#define JUCE_USE_WINRT_MIDI 0
+ //#define JUCE_USE_WINRT_MIDI
 #endif
 
 #ifndef    JUCE_ASIO
- //#define JUCE_ASIO 0
+ //#define JUCE_ASIO
 #endif
 
 #ifndef    JUCE_WASAPI
- //#define JUCE_WASAPI 1
+ //#define JUCE_WASAPI
 #endif
 
 #ifndef    JUCE_DIRECTSOUND
- //#define JUCE_DIRECTSOUND 1
+ //#define JUCE_DIRECTSOUND
 #endif
 
 #ifndef    JUCE_ALSA
- //#define JUCE_ALSA 1
+ //#define JUCE_ALSA
 #endif
 
 #ifndef    JUCE_JACK
- //#define JUCE_JACK 0
+ //#define JUCE_JACK
 #endif
 
 #ifndef    JUCE_BELA
- //#define JUCE_BELA 0
+ //#define JUCE_BELA
 #endif
 
 #ifndef    JUCE_USE_ANDROID_OBOE
- //#define JUCE_USE_ANDROID_OBOE 1
+ //#define JUCE_USE_ANDROID_OBOE
 #endif
 
 #ifndef    JUCE_USE_OBOE_STABILIZED_CALLBACK
- //#define JUCE_USE_OBOE_STABILIZED_CALLBACK 0
+ //#define JUCE_USE_OBOE_STABILIZED_CALLBACK
 #endif
 
 #ifndef    JUCE_USE_ANDROID_OPENSLES
- //#define JUCE_USE_ANDROID_OPENSLES 0
+ //#define JUCE_USE_ANDROID_OPENSLES
 #endif
 
 #ifndef    JUCE_DISABLE_AUDIO_MIXING_WITH_OTHER_APPS
- //#define JUCE_DISABLE_AUDIO_MIXING_WITH_OTHER_APPS 0
+ //#define JUCE_DISABLE_AUDIO_MIXING_WITH_OTHER_APPS
 #endif
 
 //==============================================================================
 // juce_audio_formats flags:
 
 #ifndef    JUCE_USE_FLAC
- //#define JUCE_USE_FLAC 1
+ //#define JUCE_USE_FLAC
 #endif
 
 #ifndef    JUCE_USE_OGGVORBIS
- //#define JUCE_USE_OGGVORBIS 1
+ //#define JUCE_USE_OGGVORBIS
 #endif
 
 #ifndef    JUCE_USE_MP3AUDIOFORMAT
- //#define JUCE_USE_MP3AUDIOFORMAT 0
+ //#define JUCE_USE_MP3AUDIOFORMAT
 #endif
 
 #ifndef    JUCE_USE_LAME_AUDIO_FORMAT
- //#define JUCE_USE_LAME_AUDIO_FORMAT 0
+ //#define JUCE_USE_LAME_AUDIO_FORMAT
 #endif
 
 #ifndef    JUCE_USE_WINDOWS_MEDIA_FORMAT
- //#define JUCE_USE_WINDOWS_MEDIA_FORMAT 1
+ //#define JUCE_USE_WINDOWS_MEDIA_FORMAT
 #endif
 
 //==============================================================================
 // juce_audio_plugin_client flags:
 
 #ifndef    JUCE_VST3_CAN_REPLACE_VST2
- //#define JUCE_VST3_CAN_REPLACE_VST2 1
+ //#define JUCE_VST3_CAN_REPLACE_VST2
 #endif
 
 #ifndef    JUCE_FORCE_USE_LEGACY_PARAM_IDS
- //#define JUCE_FORCE_USE_LEGACY_PARAM_IDS 0
+ //#define JUCE_FORCE_USE_LEGACY_PARAM_IDS
 #endif
 
 #ifndef    JUCE_FORCE_LEGACY_PARAMETER_AUTOMATION_TYPE
- //#define JUCE_FORCE_LEGACY_PARAMETER_AUTOMATION_TYPE 0
+ //#define JUCE_FORCE_LEGACY_PARAMETER_AUTOMATION_TYPE
 #endif
 
 #ifndef    JUCE_USE_STUDIO_ONE_COMPATIBLE_PARAMETERS
- //#define JUCE_USE_STUDIO_ONE_COMPATIBLE_PARAMETERS 1
+ //#define JUCE_USE_STUDIO_ONE_COMPATIBLE_PARAMETERS
 #endif
 
 #ifndef    JUCE_AU_WRAPPERS_SAVE_PROGRAM_STATES
- //#define JUCE_AU_WRAPPERS_SAVE_PROGRAM_STATES 0
+ //#define JUCE_AU_WRAPPERS_SAVE_PROGRAM_STATES
 #endif
 
 #ifndef    JUCE_STANDALONE_FILTER_WINDOW_USE_KIOSK_MODE
- //#define JUCE_STANDALONE_FILTER_WINDOW_USE_KIOSK_MODE 0
+ //#define JUCE_STANDALONE_FILTER_WINDOW_USE_KIOSK_MODE
 #endif
 
 //==============================================================================
 // juce_audio_processors flags:
 
 #ifndef    JUCE_PLUGINHOST_VST
- //#define JUCE_PLUGINHOST_VST 0
+ //#define JUCE_PLUGINHOST_VST
 #endif
 
 #ifndef    JUCE_PLUGINHOST_VST3
- //#define JUCE_PLUGINHOST_VST3 0
+ //#define JUCE_PLUGINHOST_VST3
 #endif
 
 #ifndef    JUCE_PLUGINHOST_AU
- //#define JUCE_PLUGINHOST_AU 0
+ //#define JUCE_PLUGINHOST_AU
 #endif
 
 #ifndef    JUCE_PLUGINHOST_LADSPA
- //#define JUCE_PLUGINHOST_LADSPA 0
+ //#define JUCE_PLUGINHOST_LADSPA
 #endif
 
 #ifndef    JUCE_CUSTOM_VST3_SDK
- //#define JUCE_CUSTOM_VST3_SDK 0
+ //#define JUCE_CUSTOM_VST3_SDK
 #endif
 
 //==============================================================================
 // juce_audio_utils flags:
 
 #ifndef    JUCE_USE_CDREADER
- //#define JUCE_USE_CDREADER 0
+ //#define JUCE_USE_CDREADER
 #endif
 
 #ifndef    JUCE_USE_CDBURNER
- //#define JUCE_USE_CDBURNER 0
+ //#define JUCE_USE_CDBURNER
 #endif
 
 //==============================================================================
 // juce_core flags:
 
 #ifndef    JUCE_FORCE_DEBUG
- //#define JUCE_FORCE_DEBUG 0
+ //#define JUCE_FORCE_DEBUG
 #endif
 
 #ifndef    JUCE_LOG_ASSERTIONS
- //#define JUCE_LOG_ASSERTIONS 0
+ //#define JUCE_LOG_ASSERTIONS
 #endif
 
 #ifndef    JUCE_CHECK_MEMORY_LEAKS
- //#define JUCE_CHECK_MEMORY_LEAKS 1
+ //#define JUCE_CHECK_MEMORY_LEAKS
 #endif
 
 #ifndef    JUCE_DONT_AUTOLINK_TO_WIN32_LIBRARIES
- //#define JUCE_DONT_AUTOLINK_TO_WIN32_LIBRARIES 0
+ //#define JUCE_DONT_AUTOLINK_TO_WIN32_LIBRARIES
 #endif
 
 #ifndef    JUCE_INCLUDE_ZLIB_CODE
- //#define JUCE_INCLUDE_ZLIB_CODE 1
+ //#define JUCE_INCLUDE_ZLIB_CODE
 #endif
 
 #ifndef    JUCE_USE_CURL
- //#define JUCE_USE_CURL 1
+ //#define JUCE_USE_CURL
 #endif
 
 #ifndef    JUCE_LOAD_CURL_SYMBOLS_LAZILY
- //#define JUCE_LOAD_CURL_SYMBOLS_LAZILY 0
+ //#define JUCE_LOAD_CURL_SYMBOLS_LAZILY
 #endif
 
 #ifndef    JUCE_CATCH_UNHANDLED_EXCEPTIONS
- //#define JUCE_CATCH_UNHANDLED_EXCEPTIONS 0
+ //#define JUCE_CATCH_UNHANDLED_EXCEPTIONS
 #endif
 
 #ifndef    JUCE_ALLOW_STATIC_NULL_VARIABLES
- //#define JUCE_ALLOW_STATIC_NULL_VARIABLES 0
+ //#define JUCE_ALLOW_STATIC_NULL_VARIABLES
 #endif
 
 #ifndef    JUCE_STRICT_REFCOUNTEDPOINTER
- //#define JUCE_STRICT_REFCOUNTEDPOINTER 0
+ //#define JUCE_STRICT_REFCOUNTEDPOINTER
 #endif
 
 #ifndef    JUCE_ENABLE_ALLOCATION_HOOKS
- //#define JUCE_ENABLE_ALLOCATION_HOOKS 0
+ //#define JUCE_ENABLE_ALLOCATION_HOOKS
 #endif
 
 //==============================================================================
 // juce_events flags:
 
 #ifndef    JUCE_EXECUTE_APP_SUSPEND_ON_BACKGROUND_TASK
- //#define JUCE_EXECUTE_APP_SUSPEND_ON_BACKGROUND_TASK 0
+ //#define JUCE_EXECUTE_APP_SUSPEND_ON_BACKGROUND_TASK
 #endif
 
 //==============================================================================
 // juce_graphics flags:
 
 #ifndef    JUCE_USE_COREIMAGE_LOADER
- //#define JUCE_USE_COREIMAGE_LOADER 1
+ //#define JUCE_USE_COREIMAGE_LOADER
 #endif
 
 #ifndef    JUCE_USE_DIRECTWRITE
- //#define JUCE_USE_DIRECTWRITE 1
+ //#define JUCE_USE_DIRECTWRITE
 #endif
 
 #ifndef    JUCE_DISABLE_COREGRAPHICS_FONT_SMOOTHING
- //#define JUCE_DISABLE_COREGRAPHICS_FONT_SMOOTHING 0
+ //#define JUCE_DISABLE_COREGRAPHICS_FONT_SMOOTHING
 #endif
 
 //==============================================================================
 // juce_gui_basics flags:
 
 #ifndef    JUCE_ENABLE_REPAINT_DEBUGGING
- //#define JUCE_ENABLE_REPAINT_DEBUGGING 0
+ //#define JUCE_ENABLE_REPAINT_DEBUGGING
 #endif
 
 #ifndef    JUCE_USE_XRANDR
- //#define JUCE_USE_XRANDR 1
+ //#define JUCE_USE_XRANDR
 #endif
 
 #ifndef    JUCE_USE_XINERAMA
- //#define JUCE_USE_XINERAMA 1
+ //#define JUCE_USE_XINERAMA
 #endif
 
 #ifndef    JUCE_USE_XSHM
- //#define JUCE_USE_XSHM 1
+ //#define JUCE_USE_XSHM
 #endif
 
 #ifndef    JUCE_USE_XRENDER
- //#define JUCE_USE_XRENDER 0
+ //#define JUCE_USE_XRENDER
 #endif
 
 #ifndef    JUCE_USE_XCURSOR
- //#define JUCE_USE_XCURSOR 1
+ //#define JUCE_USE_XCURSOR
 #endif
 
 #ifndef    JUCE_WIN_PER_MONITOR_DPI_AWARE
- //#define JUCE_WIN_PER_MONITOR_DPI_AWARE 1
+ //#define JUCE_WIN_PER_MONITOR_DPI_AWARE
 #endif
 
 //==============================================================================
@@ -302,7 +296,7 @@
 #endif
 
 #ifndef    JUCE_USE_WIN_WEBVIEW2
- //#define JUCE_USE_WIN_WEBVIEW2 0
+ //#define JUCE_USE_WIN_WEBVIEW2
 #endif
 
 #ifndef    JUCE_ENABLE_LIVE_CONSTANT_EDITOR

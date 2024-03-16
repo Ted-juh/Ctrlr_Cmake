@@ -12,12 +12,10 @@ class CtrlrFixedSlider  : public CtrlrComponent,
                           public Slider::Listener
 {
 public:
-    //==============================================================================
+
     CtrlrFixedSlider (CtrlrModulator &owner);
     ~CtrlrFixedSlider();
 
-    //==============================================================================
-    //[UserMethods]     -- You can add your own custom methods in this section.
 	void sliderValueChanged (Slider* sliderThatWasMoved);
 	void setComponentValue (const double newValue, const bool sendChangeMessage=false);
 	double getComponentValue();
@@ -35,29 +33,17 @@ public:
 	Slider *getOwnedSlider() { return (ctrlrSlider); }
 	CtrlrValueMap &getValueMap() { return (*valueMap); }
 	void customLookAndFeelChanged(LookAndFeelBase *customLookAndFeel = nullptr) {}
-
 	static void wrapForLua(lua_State *L);
-    //[/UserMethods]
-
     void paint (Graphics& g);
     void resized();
     void mouseUp (const MouseEvent& e);
 
-
-    //==============================================================================
     juce_UseDebuggingNewOperator
 
 private:
-    //[UserVariables]   -- You can add your own custom variables in this section.
 	ScopedPointer<CtrlrSliderLookAndFeel_V2> lf;
 	ScopedPointer<CtrlrValueMap> valueMap;
-    //[/UserVariables]
-
-    //==============================================================================
     CtrlrSliderInternal* ctrlrSlider;
-
-    //==============================================================================
-    // (prevent copy constructor and operator= being generated..)
     CtrlrFixedSlider (const CtrlrFixedSlider&);
     const CtrlrFixedSlider& operator= (const CtrlrFixedSlider&);
 };

@@ -1,6 +1,6 @@
 /*
 
-    IMPORTANT! This file is auto-generated each time you save your
+    IMPORTANT! This file is auto-generated each time you run cmake on your
     project - if you alter its contents, your changes may be overwritten!
 
     This is the header file that your files should include in order to get all the
@@ -29,15 +29,6 @@
 
 #include "BinaryData.h"
 
-#if defined (JUCE_PROJUCER_VERSION) && JUCE_PROJUCER_VERSION < JUCE_VERSION
- /** If you've hit this error then the version of the Projucer that was used to generate this project is
-     older than the version of the JUCE modules being included. To fix this error, re-save your project
-     using the latest version of the Projucer or, if you aren't using the Projucer to manage your project,
-     remove the JUCE_PROJUCER_VERSION define.
- */
- #error "This project was last saved using an outdated version of the Projucer! Re-save this project with the latest version to fix this error."
-#endif
-
 #if ! DONT_SET_USING_JUCE_NAMESPACE
  // If your code uses a lot of JUCE classes, then this will obviously save you
  // a lot of typing, but can be disabled by setting DONT_SET_USING_JUCE_NAMESPACE.
@@ -49,7 +40,7 @@ namespace ProjectInfo
 {
     const char* const  projectName    = "Ctrlr";
     const char* const  companyName    = "Instigator";
-    const char* const  versionString  = "5.5";
-    const int          versionNumber  = 0x50500;
+    const char* const  versionString  = "5.6.23";
+    const int          versionNumber  = 0x50617;
 }
 #endif

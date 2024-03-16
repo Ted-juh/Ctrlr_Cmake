@@ -1,92 +1,37 @@
 #include "stdafx.h"
-/*
-  ==============================================================================
-
-  This is an automatically generated file created by the Jucer!
-
-  Creation date:  14 Nov 2011 8:14:25pm
-
-  Be careful when adding custom code to these files, as only the code within
-  the "//[xyz]" and "//[/xyz]" sections will be retained when the file is loaded
-  and re-saved.
-
-  Jucer version: 1.12
-
-  ------------------------------------------------------------------------------
-
-  The Jucer is part of the JUCE library - "Jules' Utility Class Extensions"
-  Copyright 2004-6 by Raw Material Software ltd.
-
-  ==============================================================================
-*/
-
-//[Headers] You can add your own extra header files here...
 #include "CtrlrManager/CtrlrManager.h"
 #include "CtrlrPanel/CtrlrPanel.h"
 #include "CtrlrPanel/CtrlrPanelEditor.h"
 #include "CtrlrPanel/CtrlrPanelCanvas.h"
 #include "CtrlrPanelLayerListItem.h"
 #include "CtrlrInlineUtilitiesGUI.h"
-//[/Headers]
-
 #include "CtrlrPanelLayerList.h"
 
-
-//[MiscUserDefs] You can add your own user definitions and misc code here...
-//[/MiscUserDefs]
-
-//==============================================================================
 CtrlrPanelLayerList::CtrlrPanelLayerList (CtrlrPanel &_owner)
     : owner(_owner),
       layerList (0)
 {
     addAndMakeVisible (layerList = new ListBox ("Layer List", this));
-
-
-    //[UserPreSize]
 	layerList->setRowHeight (40);
 	layerList->setMultipleSelectionEnabled (false);
-    //[/UserPreSize]
 
     setSize (600, 400);
-
-
-    //[Constructor] You can add your own custom stuff here..
-    //[/Constructor]
 }
 
 CtrlrPanelLayerList::~CtrlrPanelLayerList()
 {
-    //[Destructor_pre]. You can add your own custom destruction code here..
-    //[/Destructor_pre]
-
     deleteAndZero (layerList);
-
-
-    //[Destructor]. You can add your own custom destruction code here..
-    //[/Destructor]
 }
 
-//==============================================================================
 void CtrlrPanelLayerList::paint (Graphics& g)
 {
-    //[UserPrePaint] Add your own custom painting code here..
-    //[/UserPrePaint]
-
-    //[UserPaint] Add your own custom painting code here..
-    //[/UserPaint]
 }
 
 void CtrlrPanelLayerList::resized()
 {
     layerList->setBounds (0, 0, getWidth() - 0, getHeight() - 0);
-    //[UserResized] Add your own custom resize handling here..
-    //[/UserResized]
 }
 
-
-
-//[MiscUserCode] You can add your own definitions of your custom methods or any other code here...
 int CtrlrPanelLayerList::getNumRows()
 {
 	return (owner.getEditor()->getCanvas()->getNumLayers());

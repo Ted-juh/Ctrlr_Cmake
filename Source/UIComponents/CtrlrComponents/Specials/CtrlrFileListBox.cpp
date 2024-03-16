@@ -125,42 +125,23 @@ CtrlrFileListBox::CtrlrFileListBox (CtrlrModulator &owner)
 	setProperty (Ids::uiFileListCurrentRoot, folder.getFullPathName());
 
 	treeComponent->setLookAndFeel (&fileListBoxLookAndFeel);
-    //[/UserPreSize]
 
     setSize (128, 256);
-
-
-    //[Constructor] You can add your own custom stuff here..
-    //[/Constructor]
 }
 
 CtrlrFileListBox::~CtrlrFileListBox()
 {
-    //[Destructor_pre]. You can add your own custom destruction code here..
 	treeComponent->removeListener (this);
 	delete treeComponent.release();
 	delete directoryContentsList.release();
-    //[/Destructor_pre]
-
-
-
-    //[Destructor]. You can add your own custom destruction code here..
-    //[/Destructor]
 }
 
-//==============================================================================
 void CtrlrFileListBox::paint (Graphics& g)
 {
-    //[UserPrePaint] Add your own custom painting code here..
-    //[/UserPrePaint]
-
-    //[UserPaint] Add your own custom painting code here..
-    //[/UserPaint]
 }
 
 void CtrlrFileListBox::resized()
 {
-    //[UserResized] Add your own custom resize handling here..
 	treeComponent->setBounds (getUsableRect());
 	int i = getProperty(Ids::uiFileListBoxOutline);
 	int w = getWidth(), h = getHeight();
@@ -172,8 +153,6 @@ void CtrlrFileListBox::resized()
     //[/UserResized]
 }
 
-
-//[MiscUserCode] You can add your own definitions of your custom methods or any other code here...
 void CtrlrFileListBox::setComponentValue (const double newValue, const bool sendChangeMessage)
 {
 	treeComponent->setSelectedFile (treeComponent->getSelectedFile(newValue));
@@ -403,25 +382,3 @@ void CtrlrFileListBox::refresh()
 {
 	treeComponent->refresh();
 }
-//[/MiscUserCode]
-
-
-//==============================================================================
-#if 0
-/*  -- Jucer information section --
-
-    This is where the Jucer puts all of its metadata, so don't change anything in here!
-
-BEGIN_JUCER_METADATA
-
-<JUCER_COMPONENT documentType="Component" className="CtrlrFileListBox" componentName=""
-                 parentClasses="public CtrlrComponent" constructorParams="CtrlrModulator &amp;owner"
-                 variableInitialisers="CtrlrComponent(owner), timeSliceThread(&quot;CTRLR FILE LIST BOX THREAD&quot;), fileListBoxLookAndFeel(*this)"
-                 snapPixels="8" snapActive="1" snapShown="1" overlayOpacity="0.330000013"
-                 fixedSize="1" initialWidth="128" initialHeight="256">
-  <BACKGROUND backgroundColour="ffffff"/>
-</JUCER_COMPONENT>
-
-END_JUCER_METADATA
-*/
-#endif

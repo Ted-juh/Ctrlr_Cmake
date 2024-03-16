@@ -36,7 +36,6 @@ class CtrlrPropertyComponent  : public PropertyComponent
 		const String getElementType();
 
 	private:
-	    JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (CtrlrPropertyComponent);
 		String visibleText;
 		ValueTree propertyElement;
 		Identifier propertyName;
@@ -48,6 +47,8 @@ class CtrlrPropertyComponent  : public PropertyComponent
 		Array<var>  *possibleValues;
 		URL url;
 		String urlString;
+
+		JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(CtrlrPropertyComponent);
 };
 
 class CtrlrBooleanPropertyComponent : public Component, public Button::Listener, public CtrlrPropertyChild
@@ -77,7 +78,6 @@ class CtrlrButtonPropertyComponent : public Component, public Button::Listener, 
 		void refresh();
 		void resized();
 		void buttonClicked (Button *button);
-		void openDialogWindow();
 
 	private:
 		CtrlrPanel *owner;
@@ -298,10 +298,11 @@ class CtrlrFolderProperty : public Component, public Label::Listener, public But
 		void labelTextChanged(Label* labelThatWasChanged);
 
 	private:
-		JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(CtrlrFolderProperty);
 		Value valueToControl;
 		Label *path;
 		TextButton* browse;
+
+		JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(CtrlrFolderProperty);
 };
 
 class CtrlrFontPropertyComponent  : public Component,

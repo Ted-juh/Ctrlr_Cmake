@@ -35,7 +35,8 @@ class CtrlrManagerWindowManager : public CtrlrWindowManager
 			Repository,
 			MidiMonWindow,
 			LogViewer,
-			MIDICalculator
+			MIDICalculator,
+			BuildScript
 		};
 
 		CtrlrManagerWindowManager(CtrlrManager &_owner);

@@ -131,7 +131,7 @@ void CtrlrPanel::convertLuaMethodsToPropeties(const File &panelLuaDir, ValueTree
 
 Result CtrlrPanel::savePanel()
 {
-	_DBG("CtrlrPanel::savePanel");
+	//_DBG("CtrlrPanel::savePanel");
 
 	bool panelWasDirty = isPanelDirty();
 	setPanelDirty(false);

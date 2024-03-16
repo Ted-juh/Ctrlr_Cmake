@@ -5,7 +5,7 @@
 
 void CtrlrManager::setEmbeddedDefaults()
 {
-	_DBG("CtrlrManager::setEmbeddedDefaults");
+	//_DBG("CtrlrManager::setEmbeddedDefaults");
 
 	/* first init the ApplicationProperties stuff */
 	if (ctrlrPlayerInstanceTree.hasProperty(Ids::restricted))

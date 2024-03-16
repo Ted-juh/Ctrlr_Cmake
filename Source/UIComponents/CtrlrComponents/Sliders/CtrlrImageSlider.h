@@ -11,12 +11,9 @@ class CtrlrImageSlider  : public CtrlrComponent,
 						  public Slider::Listener
 {
 public:
-    //==============================================================================
     CtrlrImageSlider (CtrlrModulator &owner);
     ~CtrlrImageSlider();
 
-    //==============================================================================
-    //[UserMethods]     -- You can add your own custom methods in this section.
 	void setComponentValue (const double newValue, const bool sendChangeMessage=false);
 	double getComponentValue();
 	int getComponentMidiValue();
@@ -34,28 +31,17 @@ public:
 	void setResource();
 	static void wrapForLua(lua_State *L);
 	void customLookAndFeelChanged(LookAndFeelBase *customLookAndFeel = nullptr) {}
-    //[/UserMethods]
-
     void paint (Graphics& g);
     void resized();
     void sliderValueChanged (Slider* sliderThatWasMoved);
     void mouseUp (const MouseEvent& e);
 
-
-    //==============================================================================
     juce_UseDebuggingNewOperator
 
 private:
-    //[UserVariables]   -- You can add your own custom variables in this section.
 	ScopedPointer<CtrlrImageSliderLF> lf;
 	Image filmStripImage;
-    //[/UserVariables]
-
-    //==============================================================================
     CtrlrSliderInternal* ctrlrSlider;
-
-    //==============================================================================
-    // (prevent copy constructor and operator= being generated..)
     CtrlrImageSlider (const CtrlrImageSlider&);
     const CtrlrImageSlider& operator= (const CtrlrImageSlider&);
 };

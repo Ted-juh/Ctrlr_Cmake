@@ -297,38 +297,7 @@ void CtrlrButtonPropertyComponent::refresh()
 
 void CtrlrButtonPropertyComponent::buttonClicked(Button* _button)
 {
-	if (propertyName == "panelBatchBuildScript" || "Execute Build Script")
-	{
-		openDialogWindow ();
-
-	}
-	else
-	{
 	valueToControl = true;
-	}
-}
-
-void CtrlrButtonPropertyComponent::openDialogWindow()
-{
-	if (owner == nullptr)
-	{
-		DBG("CtrlrButtonPropertyComponent::openDialogWindow - owner is null");
-		AlertWindow::showMessageBox (AlertWindow::WarningIcon, "Warning", "Owner is null.");
-		return;
-	}
-
-	CtrlrBuildScriptDialogWindow* contentComponent = new CtrlrBuildScriptDialogWindow(owner);
-	DialogWindow::LaunchOptions buildScriptDialog;
-	buildScriptDialog.content.set (contentComponent, true);
-	buildScriptDialog.dialogTitle = "Build Script Editor";
-	buildScriptDialog.dialogBackgroundColour = Colours::whitesmoke;
-	buildScriptDialog.escapeKeyTriggersCloseButton = true;
-	buildScriptDialog.useNativeTitleBar = true;
-	buildScriptDialog.resizable = true;
-	buildScriptDialog.componentToCentreAround = this;
-
-	DialogWindow* dialog = buildScriptDialog.launchAsync();
-	contentComponent->setDialogWindow(dialog);
 }
 
 CtrlrChoicePropertyComponent::CtrlrChoicePropertyComponent (const Value &_valueToControl,

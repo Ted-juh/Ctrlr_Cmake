@@ -6,12 +6,12 @@
 
 CtrlrManagerVst::CtrlrManagerVst(CtrlrManager &_owner) : owner(_owner)
 {
-	_DBG("CtrlrManagerVst::ctor");
+	//_DBG("CtrlrManagerVst::ctor");
 }
 
 CtrlrManagerVst::~CtrlrManagerVst()
 {
-	_DBG("CtrlrManagerVst::dtor");
+	//_DBG("CtrlrManagerVst::dtor");
 }
 
 int CtrlrManagerVst::size ()
@@ -96,15 +96,15 @@ int CtrlrManagerVst::getLargestIndex()
 
 void CtrlrManagerVst::dumpDebugData()
 {
-	_DBG("CtrlrManagerVst::dumpDebugData");
+	//_DBG("CtrlrManagerVst::dumpDebugData");
 
-	_DBG("---------- modulators by vst indexes ----------");
+	//_DBG("---------- modulators by vst indexes ----------");
 
 	for (CtrlrVstMapIterator it=map.begin(); it!=map.end(); ++it)
 	{
 		_DBG("["+STR(it->first)+"]: "+it->second->getName());
 	}
 
-	_DBG("\t largest index "+STR(getLargestIndex()));
-	_DBG("---------- modulators by vst indexes ----------");
+	//_DBG("\t largest index "+STR(getLargestIndex()));
+	//_DBG("---------- modulators by vst indexes ----------");
 }

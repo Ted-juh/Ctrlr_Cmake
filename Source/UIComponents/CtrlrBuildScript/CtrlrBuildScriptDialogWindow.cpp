@@ -1,147 +1,309 @@
 #include "stdafx.h"
-#include "CtrlrBuildScriptDialogWindow.h"
 #include "CtrlrManager/CtrlrManager.h"
-#include "CtrlrPanel/CtrlrPanel.h"
-#include "JuceHeader.h"
+#include "CtrlrBuildScriptDialogWindow.h"
 
-CtrlrBuildScriptDialogWindow::CtrlrBuildScriptDialogWindow(CtrlrPanel *panel) : panel(panel)
+
+CtrlrBuildScriptDialogWindow::CtrlrBuildScriptDialogWindow(CtrlrManager &_owner) 
+    : owner(_owner)
 {
-    addAndMakeVisible(debugButton);
-    debugButton.setButtonText("Debug");
-    debugButton.addListener(this);
-    addAndMakeVisible(releaseButton);
-    releaseButton.setButtonText("Release");
-    releaseButton.addListener(this);
-    addAndMakeVisible(VST2Button);
-    VST2Button.setButtonText("VST2");
-    VST2Button.addListener(this);
-    addAndMakeVisible(VST3Button);
-    VST3Button.setButtonText("VST3");
-    VST3Button.addListener(this);
+    ideSection = new IDESection();
+    addAndMakeVisible (ideSection);
 
-    addAndMakeVisible(cancelButton);
-    cancelButton.setButtonText("Cancel");
-    cancelButton.addListener(this);
-    addAndMakeVisible(okButton);
-    okButton.setVisible(false);
-    okButton.setButtonText("OK");
-    okButton.addListener(this);
+    optionsSection = new OptionsSection();
+    addAndMakeVisible (optionsSection);
 
-    addAndMakeVisible(cleanBuildButton);
-    cleanBuildButton.setVisible(false);
-    cleanBuildButton.setButtonText("Clean Build?");
-    cleanBuildButton.addListener(this);
-    addAndMakeVisible(buildFolderButton);
-    buildFolderButton.setVisible(false);
-    buildFolderButton.setButtonText("Open /build Folder?");
-    buildFolderButton.addListener(this);
+    outputSection = new OutputSection();
+    addAndMakeVisible (outputSection);
 
-    addAndMakeVisible(vstFolderButton);
-    vstFolderButton.setVisible(false);
-    vstFolderButton.setButtonText("Open VST Folder?");
-    vstFolderButton.addListener(this);
-    addAndMakeVisible(dawButton);
-    dawButton.setVisible(false);
-    dawButton.setButtonText("Open Daw?");
-    dawButton.addListener(this);
+    /*
+    addAndMakeVisible(cancelButton = new TextButton(""));
+    cancelButton->setButtonText("Cancel");
+    cancelButton->addListener(this);
+    */
 
-    setSize(440, 190);
-    setCentreRelative(0.5f, 0.5f);
-    setVisible(true);
-    toFront(true);
-    enterModalState();
-    setAlwaysOnTop(true);
+    addAndMakeVisible(okButton = new TextButton(""));
+    okButton->setButtonText("OK");
+    okButton->setVisible(false);
+    okButton->addListener(this);
+
+    const float factor = 1.5f;
+    int newWidth = jmax(240, (int)(getWidth() * factor));
+    int newHeight = jmax(700, (int)(getHeight() * factor));
+
+    if (newWidth != getWidth() || newHeight != getHeight())
+    {
+        setSize(newWidth, newHeight);
+    }
 }
 
-CtrlrBuildScriptDialogWindow::~CtrlrBuildScriptDialogWindow(){}
+CtrlrBuildScriptDialogWindow::~CtrlrBuildScriptDialogWindow()
+{
+    ideSection = nullptr;
+	optionsSection = nullptr;
+    outputSection = nullptr;
+    okButton = nullptr;
+
+    //cancelButton = nullptr;
+}
 
 void CtrlrBuildScriptDialogWindow::paint(Graphics& g)
 {
     g.fillAll(Colours::lightgrey);
+}
 
-    g.setColour(Colours::black);
-    g.setFont(Font(16.0f, Font::bold));
-    g.drawText("Choose the project configuration to build", 0, 5, getWidth(), 30, Justification::centred, true);
+void CtrlrBuildScriptDialogWindow::paintOverChildren(Graphics& g)
+{
+    const int startRect = getWidth() * 0.05;
+    const int rectWidth = getWidth() - (startRect * 2);
+    const int buttonHeight = getHeight() * 0.05;
+    const int rectLineHeight = buttonHeight / 2;
 
-    g.setColour(Colours::whitesmoke);
-    g.fillRect(5, 35, getWidth() - 10, 30);
+    const int amountBut = 4;
+    const int buttonSpace = rectWidth / amountBut;
 
-    g.setColour(Colours::black);
-    g.setFont(Font(14.0f, Font::bold));
-    g.drawText("Extra options", 0, 60, getWidth(), 30, Justification::centred, true);
-
-    g.setColour(Colours::whitesmoke);
-    g.fillRect(5, 85, getWidth() - 10, 60);
+    if (okButton->isVisible())
+    {
+    g.setColour(Colours::darkgrey);
+    g.drawRect(startRect + (buttonSpace * 2), rectLineHeight * 23, buttonSpace * 2, buttonHeight, 1.0);
+	}
 }
 
 void CtrlrBuildScriptDialogWindow::resized()
 {
-    const int startX = getWidth() * 0.01;
-    const int xDivided = getWidth() / 4;
 
-    debugButton.setBounds       (startX,                    35, 110, 30);
-    releaseButton.setBounds     (startX + xDivided,         35, 110, 30);
-    VST2Button.setBounds        (startX + (xDivided * 2),   35, 110, 30);
-    VST3Button.setBounds        (startX + (xDivided * 3),   35, 110, 30);
+    const int startRect         = getWidth() * 0.05;
+    const int rectWidth         = getWidth() - (startRect * 2);
+    const int buttonHeight      = getHeight() * 0.05;
+    const int rectLineHeight    = buttonHeight / 2;
 
-    cleanBuildButton.setBounds  (startX,                    85,    150, 30);
-    buildFolderButton.setBounds (startX,                    115,   150, 30);
-    vstFolderButton.setBounds   (startX + (xDivided *2),    85, 150, 30);
-    dawButton.setBounds         (startX + (xDivided * 2),   115, 150, 30);
+    const int amountBut         = 4;
+    const int buttonSpace       = rectWidth / amountBut;
 
-    cancelButton.setBounds(10, getHeight() - 40, 100, 30);
-    okButton.setBounds(getWidth() - 110, getHeight() - 40, 100, 30);
+    ideSection          ->setBounds(startRect,                          rectLineHeight * 1,     rectWidth,          buttonHeight * 5);
+    optionsSection      ->setBounds(startRect,                          rectLineHeight * 12,    rectWidth,          buttonHeight * 5);
+    okButton            ->setBounds(startRect + (buttonSpace * 2),      rectLineHeight * 23,    buttonSpace * 2,    buttonHeight);
+    outputSection       ->setBounds(startRect,                          rectLineHeight * 26,    rectWidth,          buttonHeight * 7);
+
+
+    //cancelButton->setBounds(10, getHeight() - 40, 100, 30);
 }
 
-void CtrlrBuildScriptDialogWindow::buttonClicked(Button* button)
+void CtrlrBuildScriptDialogWindow::setButtonStateAndColour(TextButton* button, bool state)
 {
-    if (button == &cancelButton)
+    button->setToggleState(state, dontSendNotification);
+    button->setColour(TextButton::buttonColourId,   state ? Colours::darkgrey : Colours::whitesmoke);       // on/off
+    button->setColour(TextButton::buttonOnColourId, state ? Colours::darkgrey : Colours::whitesmoke);       // on/off
+    button->setColour(TextButton::textColourOffId,  state ? Colours::black : Colours::black);               // on/off
+    button->setColour(TextButton::textColourOnId,   state ? Colours::white : Colours::white);			    // on/off          
+}
+
+void CtrlrBuildScriptDialogWindow::buttonClicked(Button* buttonThatWasClicked)
+{
+    if (buttonThatWasClicked == okButton) 
+        {   
+            // Check if an IDE is selected
+            if (ideSection->getIDEIndex() == -1)
+            {
+                outputSection->getOutputView().insertTextAtCaret("Please select an IDE.\n");
+                return;
+            }
+
+            if (ideSection->getBuildFolderPath().isEmpty())
+			{
+				outputSection->getOutputView().insertTextAtCaret("Please select a build folder.\n");
+				return;
+			}
+
+            if (optionsSection->isCCMakeButtonToggled()) { checkCMake(); }                  // Check CMake button
+
+            if (optionsSection->isBuildButtonToggled())                                     // Build button 
+            {
+                generateBuildFiles();													    // Generate build files
+
+                if (optionsSection->isBuildFolderButtonToggled())                           // Open build folder button
+                {
+                    openBuildFolder();
+                }
+            }
+
+            if (optionsSection->isReleaseButtonToggled())                                   // Release button
+            {
+                if (optionsSection->isCleanBuildButtonToggled())                            // Clean build button
+                {
+                    generateBuildFiles();                                                   // Generate build files
+                }
+
+                buildFiles();
+
+                if (optionsSection->isBuildFolderButtonToggled())                           // Open build folder button
+                {
+                    openBuildFolder();
+                }
+            }
+        }
+ }
+
+void CtrlrBuildScriptDialogWindow::setOkButtonVisible(const bool isVisible)
+{
+	okButton->setVisible(isVisible);
+}
+
+void CtrlrBuildScriptDialogWindow::labelTextChanged(Label* labelThatHasChanged){}
+
+void CtrlrBuildScriptDialogWindow::buttonStateChanged(Button* button){}
+
+void CtrlrBuildScriptDialogWindow::checkCMake()                                                                     // Check if CMake is installed and added to the PATH
+{
+    // Add CMake to the PATH
+    String cmakePath = "C:\\Program Files\\CMake\\bin";                                                             // Actual path to CMake bin directory
+    String currentPath = getenv("PATH");                                                                            // Get the current PATH
+        
+    if (currentPath.indexOf(cmakePath) == -1)                                                                       // If CMake is not in the PATH
     {
-		window->exitModalState(0);
+        outputSection->getOutputView().insertTextAtCaret("Check if PATH is set for CMake.\n\n");                    // Opening message
+        outputSection->getOutputView().insertTextAtCaret("Adding CMake as a variable to your System's PATH environment.\n");
+        _putenv_s("PATH", (currentPath + ";" + cmakePath).toRawUTF8());						                        // Add CMake to the PATH
+        outputSection->getOutputView().insertTextAtCaret("CMake check passed.\n");
+    }
+    else
+    {
+        outputSection->getOutputView().insertTextAtCaret("Check if PATH is set for CMake.\n\n");                    // Opening message
+        outputSection->getOutputView().insertTextAtCaret("CMake check passed\n");       							// CMake is in the PATH
     }
 
-    if (button == &okButton)
-    {
-		generateAndExecuteBuildScript();
-	}
-
-    vstFolderButton.setVisible (
-                                    VST2Button.getToggleState() || 
-                                    VST3Button.getToggleState()
-                                );
-
-    dawButton.setVisible (
-                          VST2Button.getToggleState() || 
-                          VST3Button.getToggleState()
-                         );
-
-    cleanBuildButton.setVisible(
-								debugButton.getToggleState() || 
-								releaseButton.getToggleState()
-								);
-
-    buildFolderButton.setVisible(
-                                 debugButton.getToggleState() || 
-                                 releaseButton.getToggleState()
-                                );
-
-    okButton.setVisible(
-                        debugButton.getToggleState() || 
-                        releaseButton.getToggleState() || 
-                        VST2Button.getToggleState() || 
-                        VST3Button.getToggleState()
-                        );  
+     ChildProcess cmakeCheck;
+     if (cmakeCheck.start("cmake --version"))																        // Double check, get the version of CMake
+     {
+        String output = cmakeCheck.readAllProcessOutput();                                                          // Read the output
+        outputSection->getOutputView().insertTextAtCaret("" + output + "\n");							            // Output the version
+     }
+     else
+     {
+         outputSection->getOutputView().insertTextAtCaret("CMake check failed. Please ensure CMake is correctly installed and added to the PATH.\n");
+        return;
+     }
 }
 
-void CtrlrBuildScriptDialogWindow::generateAndExecuteBuildScript()
+void CtrlrBuildScriptDialogWindow::generateBuildFiles()										    // Re-Generate the build folder + build/solution files   
 {
-    // Generate the build script
-    File buildScriptFile = File::getSpecialLocation(File::userDesktopDirectory).getFullPathName() + "/BuildScript.ps1";
+    std::map<int, String> generatorMap =
+    {
+        {0, "Visual Studio 17 2022" },
+        {1, "Visual Studio 16 2019" },
+		{2, "Visual Studio 15 2017" },
+ 		{3, "Xcode" },
+    };
 
-    //Write to the build script
-    buildScriptFile.appendText("# Directory where the /build folder is located\n");
+    String generator = generatorMap[ideSection->getIDEIndex()];
+    outputSection->getOutputView().insertTextAtCaret("The generator is " + generator + "\n");
 
-    //get Ids::panelBatchProjectDir from getPanelBatchProjectDir from CtrlrPanel
-    buildScriptFile.appendText("$buildDir = \"" + panel->getPanelBatchProjectDir() + "\"\n");
 
-} 
+    String projectFolderPath = ideSection->getBuildFolderPath();
+	String buildFolderPath = projectFolderPath + "\\build";
+
+    String command = "cmd /C ";                                                                 // command to run in the command prompt
+    String argument1 = "\"rmdir /S /Q \"" + buildFolderPath + "\" && ";                         // delete the build folder
+	String argument2 = "mkdir \"" + buildFolderPath + "\" && ";                                 // create a new build folder
+	String argument3 = "cd \"" + buildFolderPath + "\" && ";                                    // change directory to the build folder
+    //String argument4 = "cmake -S .. -B . -G \"" + generator + "\"";                             // generate the build files
+
+    String argument4;
+    if (generator == "Xcode")
+    {
+        String sourcePath = projectFolderPath + "\\..";
+        argument4 = "cmake -S \"" + sourcePath + "\" -B . -G \"" + generator + "\"";
+    }
+    	else
+	{
+		argument4 = "cmake -S .. -B . -G \"" + generator + "\"";
+	}
+
+	ChildProcess cp;
+	bool success = cp.start(command + argument1 + argument2 + argument3 + argument4);
+
+    if (success)
+    {
+        outputSection->getOutputView().insertTextAtCaret("The build folder is going to be deleted and the build files will be generated into a new build folder.\n");
+        String output = cp.readAllProcessOutput();
+        outputSection->getOutputView().insertTextAtCaret("" + output + "\n");
+    }
+    else
+    {
+			outputSection->getOutputView().insertTextAtCaret("Build process failed. Please check your setup and try again.\n");
+	}
+}
+
+void CtrlrBuildScriptDialogWindow::openBuildFolder()
+{
+    String projectFolderPath = ideSection->getBuildFolderPath();
+    String buildFolderPath = projectFolderPath + "\\build";
+
+    outputSection->getOutputView().insertTextAtCaret("The build folder is going to be opened.\n");
+    String command = "cmd /C ";
+    String openFolderCommand = "explorer " + buildFolderPath;
+    system(openFolderCommand.toStdString().c_str());
+}
+
+
+
+
+
+void CtrlrBuildScriptDialogWindow::buildFiles()
+{
+    String projectFolderPath = ideSection->getBuildFolderPath();
+    String buildFolderPath = projectFolderPath + "\\build";
+
+    String command = "cmd /C ";
+    String argument1 = "cd \"" + buildFolderPath + "\" && ";
+    String argument2 = "cmake --build . --config Release";
+
+    ChildProcess cp;
+    bool success = cp.start(command + argument1 + argument2);
+
+    if (success)
+	{
+		outputSection->getOutputView().insertTextAtCaret("The build process is going to start.\n");
+		String output = cp.readAllProcessOutput();
+		outputSection->getOutputView().insertTextAtCaret("" + output + "\n");
+	}
+	else
+	{
+		outputSection->getOutputView().insertTextAtCaret("Build process failed. Please check your setup and try again.\n");
+	} 
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  

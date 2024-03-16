@@ -222,46 +222,24 @@ CtrlrTabsComponent::CtrlrTabsComponent (CtrlrModulator &owner)
     //[/UserPreSize]
 
     setSize (256, 256);
-
-
-    //[Constructor] You can add your own custom stuff here..
-    //[/Constructor]
 }
 
 CtrlrTabsComponent::~CtrlrTabsComponent()
 {
-    //[Destructor_pre]. You can add your own custom destruction code here..
 	owner.getModulatorTree().removeListener (this);
-    //[/Destructor_pre]
-
     deleteAndZero (ctrlrTabs);
-
-
-    //[Destructor]. You can add your own custom destruction code here..
-    //[/Destructor]
 }
 
-//==============================================================================
 void CtrlrTabsComponent::paint (Graphics& g)
 {
-    //[UserPrePaint] Add your own custom painting code here..
-    //[/UserPrePaint]
-
-    //[UserPaint] Add your own custom painting code here..
-    //[/UserPaint]
 }
 
 void CtrlrTabsComponent::resized()
 {
-    //ctrlrTabs->setBounds (0, 0, getWidth() - 0, getHeight() - 0);
-    //[UserResized] Add your own custom resize handling here..
 	ctrlrTabs->setBounds (getUsableRect());
-    //[/UserResized]
 }
 
 
-
-//[MiscUserCode] You can add your own definitions of your custom methods or any other code here...
 void CtrlrTabsComponent::setComponentValue (const double newValue, const bool sendChangeMessage)
 {
 	if (newValue >= ctrlrTabs->getNumTabs())
@@ -641,28 +619,3 @@ Array <CtrlrComponent*> CtrlrTabsComponent::getOwnedChildren()
 
 	return (ar);
 }
-//[/MiscUserCode]
-
-
-//==============================================================================
-#if 0
-/*  -- Jucer information section --
-
-    This is where the Jucer puts all of its metadata, so don't change anything in here!
-
-BEGIN_JUCER_METADATA
-
-<JUCER_COMPONENT documentType="Component" className="CtrlrTabsComponent" componentName=""
-                 parentClasses="public CtrlrComponent, public CtrlrPanel::PanelListener"
-                 constructorParams="CtrlrModulator &amp;owner" variableInitialisers="CtrlrComponent(owner), lf(*this)"
-                 snapPixels="8" snapActive="1" snapShown="1" overlayOpacity="0.330000013"
-                 fixedSize="1" initialWidth="256" initialHeight="256">
-  <BACKGROUND backgroundColour="ffffff"/>
-  <GENERICCOMPONENT name="ctrlrTabs" id="e0c7af1494f7ba1c" memberName="ctrlrTabs"
-                    virtualName="" explicitFocusOrder="0" pos="0 0 0M 0M" class="CtrlrTabsInternal"
-                    params="*this"/>
-</JUCER_COMPONENT>
-
-END_JUCER_METADATA
-*/
-#endif

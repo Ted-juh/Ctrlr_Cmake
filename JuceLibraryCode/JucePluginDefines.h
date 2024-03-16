@@ -1,12 +1,11 @@
 /*
 
-    IMPORTANT! This file is auto-generated each time you save your
+    IMPORTANT! This file is auto-generated each time you run cmake on your
     project - if you alter its contents, your changes may be overwritten!
 
 */
 
 #pragma once
-
 //==============================================================================
 // Audio plugin settings..
 
@@ -53,10 +52,10 @@
  #define JucePlugin_ManufacturerEmail      ""
 #endif
 #ifndef  JucePlugin_ManufacturerCode
- #define JucePlugin_ManufacturerCode       0x696e5374
+ #define JucePlugin_ManufacturerCode       0x696e5374 // 'inSt'
 #endif
 #ifndef  JucePlugin_PluginCode
- #define JucePlugin_PluginCode             0x6354726c
+ #define JucePlugin_PluginCode             0x6354726c // 'cTrl'
 #endif
 #ifndef  JucePlugin_IsSynth
  #define JucePlugin_IsSynth                1
@@ -74,13 +73,13 @@
  #define JucePlugin_EditorRequiresKeyboardFocus  1
 #endif
 #ifndef  JucePlugin_Version
- #define JucePlugin_Version                5.5
+ #define JucePlugin_Version                5.6.23
 #endif
 #ifndef  JucePlugin_VersionCode
- #define JucePlugin_VersionCode            0x50500
+ #define JucePlugin_VersionCode            0x50617
 #endif
 #ifndef  JucePlugin_VersionString
- #define JucePlugin_VersionString          "5.5"
+ #define JucePlugin_VersionString          "5.6.23"
 #endif
 #ifndef  JucePlugin_VSTUniqueID
  #define JucePlugin_VSTUniqueID            JucePlugin_PluginCode
@@ -92,16 +91,16 @@
  #define JucePlugin_Vst3Category           "Instrument|Synth"
 #endif
 #ifndef  JucePlugin_AUMainType
- #define JucePlugin_AUMainType             CtrlrAU
+ #define JucePlugin_AUMainType             'aumi'
 #endif
 #ifndef  JucePlugin_AUSubType
  #define JucePlugin_AUSubType              JucePlugin_PluginCode
 #endif
 #ifndef  JucePlugin_AUExportPrefix
- #define JucePlugin_AUExportPrefix         CtrlrAU
+ #define JucePlugin_AUExportPrefix         
 #endif
 #ifndef  JucePlugin_AUExportPrefixQuoted
- #define JucePlugin_AUExportPrefixQuoted   "CtrlrAU"
+ #define JucePlugin_AUExportPrefixQuoted   ""
 #endif
 #ifndef  JucePlugin_AUManufacturerCode
  #define JucePlugin_AUManufacturerCode     JucePlugin_ManufacturerCode
@@ -110,7 +109,7 @@
  #define JucePlugin_CFBundleIdentifier     com.instigator.Ctrlr
 #endif
 #ifndef  JucePlugin_RTASCategory
- #define JucePlugin_RTASCategory           0
+ #define JucePlugin_RTASCategory           2048
 #endif
 #ifndef  JucePlugin_RTASManufacturerCode
  #define JucePlugin_RTASManufacturerCode   JucePlugin_ManufacturerCode
@@ -143,7 +142,7 @@
  #define JucePlugin_AAXDisableMultiMono    0
 #endif
 #ifndef  JucePlugin_IAAType
- #define JucePlugin_IAAType                0x61757269
+ #define JucePlugin_IAAType                0x61757269 // 'auri'
 #endif
 #ifndef  JucePlugin_IAASubType
  #define JucePlugin_IAASubType             JucePlugin_PluginCode

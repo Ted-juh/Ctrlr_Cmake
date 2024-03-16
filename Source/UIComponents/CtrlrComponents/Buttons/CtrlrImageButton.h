@@ -11,12 +11,9 @@ class CtrlrImageButton  : public CtrlrComponent,
 						  public Timer
 {
 public:
-    //==============================================================================
     CtrlrImageButton (CtrlrModulator &owner);
     ~CtrlrImageButton();
 
-    //==============================================================================
-    //[UserMethods]     -- You can add your own custom methods in this section.
 	enum ImageButtonMode
 	{
 		Normal,
@@ -55,29 +52,18 @@ public:
 	CtrlrValueMap &getValueMap() { return (*valueMap); }
 
 	static void wrapForLua(lua_State *L);
-    //[/UserMethods]
 
     void paint (Graphics& g);
     void resized();
 
-
-    //==============================================================================
     juce_UseDebuggingNewOperator
 
 private:
-    //[UserVariables]   -- You can add your own custom variables in this section.
 	Image filmStripImage;
 	ScopedPointer<CtrlrValueMap> valueMap;
-    //[/UserVariables]
-
-    //==============================================================================
     CtrlrCustomButtonInternal* ctrlrButton;
-
-    //==============================================================================
-    // (prevent copy constructor and operator= being generated..)
     CtrlrImageButton (const CtrlrImageButton&);
     const CtrlrImageButton& operator= (const CtrlrImageButton&);
 };
 
-
-#endif   // __JUCER_HEADER_CTRLRIMAGEBUTTON_CTRLRIMAGEBUTTON_56E3F9F9__
+#endif
