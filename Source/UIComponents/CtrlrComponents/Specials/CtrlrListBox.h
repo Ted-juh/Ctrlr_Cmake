@@ -1,19 +1,16 @@
-#ifndef __JUCER_HEADER_CTRLRLISTBOX_CTRLRLISTBOX_F60BFF20__
-#define __JUCER_HEADER_CTRLRLISTBOX_CTRLRLISTBOX_F60BFF20__
-
+#pragma once
 #include "../CtrlrComponent.h"
+
 class CtrlrValueMap;
 
 class CtrlrListBox  : public CtrlrComponent,
                       public ListBoxModel
 {
 public:
-    //==============================================================================
+
     CtrlrListBox (CtrlrModulator &owner);
     ~CtrlrListBox();
 
-    //==============================================================================
-    //[UserMethods]     -- You can add your own custom methods in this section.
 	int getNumRows();
 	void paintListBoxItem (int rowNumber, Graphics &g, int width, int height, bool rowIsSelected);
 	void setComponentValue (const double newValue, const bool sendChangeMessage=false);
@@ -50,31 +47,16 @@ public:
 	void setMultipleSelectionEnabled (bool shouldBeEnabled);
 	SparseSet <int> getSelectedRows () const;
 	void customLookAndFeelChanged(LookAndFeelBase *customLookAndFeel = nullptr) {}
-    //[/UserMethods]
 
     void paint (Graphics& g);
     void resized();
 
-
-
-    //==============================================================================
     juce_UseDebuggingNewOperator
 
 private:
-    //[UserVariables]   -- You can add your own custom variables in this section.
 	ScopedPointer<CtrlrValueMap> valueMap;
 	WeakReference <CtrlrLuaMethod> itemClickedCbk,itemDoubleClickedCbk,itemDeleteKeyPressedCbk,itemReturnKeyPressedCbk;
-    //[/UserVariables]
-
-    //==============================================================================
     ListBox* listBox;
-
-
-    //==============================================================================
-    // (prevent copy constructor and operator= being generated..)
     CtrlrListBox (const CtrlrListBox&);
     const CtrlrListBox& operator= (const CtrlrListBox&);
 };
-
-
-#endif   // __JUCER_HEADER_CTRLRLISTBOX_CTRLRLISTBOX_F60BFF20__

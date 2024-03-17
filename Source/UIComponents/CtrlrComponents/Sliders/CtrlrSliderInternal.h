@@ -1,6 +1,4 @@
-#ifndef __CTRLR_SLIDER_INTERNAL__
-#define __CTRLR_SLIDER_INTERNAL__
-
+#pragma once
 #include "../CtrlrComponentTypeManager.h"
 #include "CtrlrMacros.h"
 #include "CtrlrUtilities.h"
@@ -196,4 +194,3 @@ private:
     ValueTree &ownerTree;
     CtrlrComponent &owner;
 };
-#endif

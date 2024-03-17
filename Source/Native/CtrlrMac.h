@@ -1,6 +1,4 @@
-#ifndef __CTRLR_MAC__
-#define __CTRLR_MAC__
-
+#pragma once
 #include "CtrlrNative.h"
 
 typedef struct vmtotal vmtotal_t;
@@ -19,4 +17,3 @@ class CtrlrMac : public CtrlrNative
     private:
         CtrlrManager &owner;
 };
-#endif

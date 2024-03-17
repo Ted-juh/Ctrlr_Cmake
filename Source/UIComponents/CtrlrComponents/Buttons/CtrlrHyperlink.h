@@ -1,7 +1,4 @@
-#ifndef __JUCER_HEADER_CTRLRHYPERLINK_CTRLRHYPERLINK_843BD87D__
-#define __JUCER_HEADER_CTRLRHYPERLINK_CTRLRHYPERLINK_843BD87D__
-
-
+#pragma once
 #include "CtrlrComponents/CtrlrComponent.h"
 
 class CtrlrHyperlink  : public CtrlrComponent,
@@ -40,6 +37,3 @@ private:
     CtrlrHyperlink (const CtrlrHyperlink&);
     const CtrlrHyperlink& operator= (const CtrlrHyperlink&);
 };
-
-
-#endif

@@ -1,16 +1,4 @@
-/*
-  ==============================================================================
-
-    CtrlrLuaDebugger.h
-    Created: 14 Oct 2014 12:59:44pm
-    Author:  r.kubiak
-
-  ==============================================================================
-*/
-
-#ifndef CTRLRLUADEBUGGER_H_INCLUDED
-#define CTRLRLUADEBUGGER_H_INCLUDED
-
+#pragma once
 #include "CtrlrMacros.h"
 #include "CtrlrLua/MethodEditor/CtrlrLuaMethodEditor.h"
 
@@ -45,5 +33,3 @@ class CtrlrLuaDebugger
         Array <String> commandQueue;
         Array <PendingBreakpoint> pendingBreakpoints;
 };
-
-#endif  // CTRLRLUADEBUGGER_H_INCLUDED

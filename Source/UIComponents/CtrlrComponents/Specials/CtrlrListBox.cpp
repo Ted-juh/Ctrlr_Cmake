@@ -16,7 +16,6 @@ CtrlrListBox::CtrlrListBox (CtrlrModulator &owner)
 	addAndMakeVisible (listBox = new ListBox ("List Box", this));
 	listBox->setModel( this );
 
-	//[UserPreSize]
 	setProperty (Ids::uiListBoxContent, "");
 	setProperty (Ids::uiListBoxRowHeight, 16);
 	setProperty (Ids::uiListBoxBackgroundColour, "0xffffffff");
@@ -39,48 +38,26 @@ CtrlrListBox::CtrlrListBox (CtrlrModulator &owner)
 	setProperty (Ids::uiListBoxItemDoubleClicked, COMBO_NONE_ITEM);
 	setProperty (Ids::uiListBoxItemDeleteKeyPressed, COMBO_NONE_ITEM);
 	setProperty (Ids::uiListBoxItemReturnKeyPressed, COMBO_NONE_ITEM);
-    //[/UserPreSize]
 
     setSize (128, 256);
-
-
-    //[Constructor] You can add your own custom stuff here..
-    //[/Constructor]
 }
 
 CtrlrListBox::~CtrlrListBox()
 {
-    //[Destructor_pre]. You can add your own custom destruction code here..
-    //[/Destructor_pre]
-
     deleteAndZero (listBox);
-
-
-    //[Destructor]. You can add your own custom destruction code here..
-    //[/Destructor]
 }
 
-//==============================================================================
 void CtrlrListBox::paint (Graphics& g)
 {
-    //[UserPrePaint] Add your own custom painting code here..
-    //[/UserPrePaint]
-
-    //[UserPaint] Add your own custom painting code here..
-    //[/UserPaint]
 }
 
 void CtrlrListBox::resized()
 {
     listBox->setBounds (0, 0, getWidth() - 0, getHeight() - 0);
-    //[UserResized] Add your own custom resize handling here..
 	listBox->setBounds (getUsableRect());
-    //[/UserResized]
+
 }
 
-
-
-//[MiscUserCode] You can add your own definitions of your custom methods or any other code here...
 int CtrlrListBox::getNumRows()
 {
 	return (valueMap->getNumValues());

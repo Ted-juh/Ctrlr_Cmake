@@ -1,12 +1,3 @@
-/*
-  ==============================================================================
-
-    CtrlrLuaDebugger.cpp
-    Created: 14 Oct 2014 12:59:44pm
-    Author:  r.kubiak
-
-  ==============================================================================
-*/
 #include "stdafx.h"
 #include "stdafx_luabind.h"
 #include "CtrlrLuaDebugger.h"

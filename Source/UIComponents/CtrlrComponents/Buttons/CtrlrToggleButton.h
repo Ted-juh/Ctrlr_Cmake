@@ -1,7 +1,6 @@
-#ifndef __JUCER_HEADER_CTRLRTOGGLEBUTTON_CTRLRTOGGLEBUTTON_74F5E916__
-#define __JUCER_HEADER_CTRLRTOGGLEBUTTON_CTRLRTOGGLEBUTTON_74F5E916__
-
+#pragma once
 #include "CtrlrComponents/CtrlrComponent.h"
+
 class CtrlrValueMap;
 
 class CtrlrToggleButton  : public CtrlrComponent, public Button::Listener
@@ -44,6 +43,3 @@ private:
     CtrlrToggleButton (const CtrlrToggleButton&);
     const CtrlrToggleButton& operator= (const CtrlrToggleButton&);
 };
-
-
-#endif

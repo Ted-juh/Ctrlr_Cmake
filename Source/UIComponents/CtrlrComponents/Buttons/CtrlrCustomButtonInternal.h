@@ -1,7 +1,6 @@
-#ifndef __JUCER_HEADER_CTRLRCUSTOMBUTTONINTERNAL_CTRLRCUSTOMBUTTONINTERNAL_1CA0CFDB__
-#define __JUCER_HEADER_CTRLRCUSTOMBUTTONINTERNAL_CTRLRCUSTOMBUTTONINTERNAL_1CA0CFDB__
-
+#pragma once
 #include "CtrlrMacros.h"
+
 class CtrlrImageButton;
 
 class CtrlrCustomButtonInternal  : public Button
@@ -36,5 +35,3 @@ private:
     CtrlrCustomButtonInternal (const CtrlrCustomButtonInternal&);
     const CtrlrCustomButtonInternal& operator= (const CtrlrCustomButtonInternal&);
 };
-
-#endif

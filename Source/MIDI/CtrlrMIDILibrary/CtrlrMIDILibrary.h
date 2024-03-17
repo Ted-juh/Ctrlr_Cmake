@@ -1,6 +1,4 @@
-#ifndef CTRLR_MIDI_LIBRARY
-#define CTRLR_MIDI_LIBRARY
-
+#pragma once
 #include "CtrlrMIDIDevice.h"
 #include "CtrlrOwnedMidiMessage.h"
 
@@ -170,5 +168,3 @@ class CtrlrMIDILibrary : public ValueTree::Listener,
 		WeakReference <CtrlrLuaMethod> 	luaTransInfoCbk;
 		ValueTree currentBank, currentProgram, snapshotsTree, firmwareTree, editBufferTree, currentSnapshot, transactions;
 };
-
-#endif

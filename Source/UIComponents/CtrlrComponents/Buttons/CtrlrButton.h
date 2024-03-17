@@ -1,7 +1,6 @@
-#ifndef __JUCER_HEADER_CTRLRBUTTON_CTRLRBUTTON_4EC1070F__
-#define __JUCER_HEADER_CTRLRBUTTON_CTRLRBUTTON_4EC1070F__
-
+#pragma once
 #include "CtrlrComponents/CtrlrComponent.h"
+
 class CtrlrValueMap;
 
 class CtrlrButton  : public CtrlrComponent,
@@ -48,5 +47,3 @@ private:
     CtrlrButton (const CtrlrButton&);
     const CtrlrButton& operator= (const CtrlrButton&);
 };
-
-#endif   

@@ -1,7 +1,6 @@
-#ifndef __JUCER_HEADER_CTRLRFILELISTBOX_CTRLRFILELISTBOX_BC137D95__
-#define __JUCER_HEADER_CTRLRFILELISTBOX_CTRLRFILELISTBOX_BC137D95__
-
+#pragma once
 #include "CtrlrComponents/CtrlrComponent.h"
+
 class CtrlrFileListBox;
 
 class CtrlrFileListBoxLF : public LookAndFeel_V2
@@ -22,18 +21,7 @@ public:
 private:
 	CtrlrFileListBox &owner;
 };
-//[/Headers]
 
-
-
-//==============================================================================
-/**
-                                                                    //[Comments]
-    An auto-generated component, created by the Jucer.
-
-    Describe your class and how it works here!
-                                                                    //[/Comments]
-*/
 class CtrlrFileListBox  : public CtrlrComponent, public FileBrowserListener
 {
 public:
@@ -41,8 +29,6 @@ public:
     CtrlrFileListBox (CtrlrModulator &owner);
     ~CtrlrFileListBox();
 
-    //==============================================================================
-    //[UserMethods]     -- You can add your own custom methods in this section.
 	void setComponentValue (const double newValue, const bool sendChangeMessage=false);
 	double getComponentValue();
 	int getComponentMidiValue();
@@ -68,18 +54,12 @@ public:
 	void setSelectedFile(const File &file);
 	void refresh();
 	void customLookAndFeelChanged(LookAndFeelBase *customLookAndFeel = nullptr) {}
-    //[/UserMethods]
-
     void paint (Graphics& g);
     void resized();
 
-
-
-    //==============================================================================
-    juce_UseDebuggingNewOperator
+	juce_UseDebuggingNewOperator
 
 private:
-    //[UserVariables]   -- You can add your own custom variables in this section.
 	ScopedPointer <DirectoryContentsList> directoryContentsList;
 	TimeSliceThread timeSliceThread;
 //	ScopedPointer <FileTreeComponent> treeComponent;
@@ -87,16 +67,6 @@ private:
 //	ScopedPointer <FileListComponent> fileListComponent;
 	CtrlrFileListBoxLF fileListBoxLookAndFeel;
 	WeakReference <CtrlrLuaMethod> fileClickedCbk,fileDoubleClickedCbk; //,itemDeleteKeyPressedCbk,itemReturnKeyPressedCbk;
-    //[/UserVariables]
-
-    //==============================================================================
-
-
-    //==============================================================================
-    // (prevent copy constructor and operator= being generated..)
     CtrlrFileListBox (const CtrlrFileListBox&);
     const CtrlrFileListBox& operator= (const CtrlrFileListBox&);
 };
-
-
-#endif   // __JUCER_HEADER_CTRLRFILELISTBOX_CTRLRFILELISTBOX_BC137D95__

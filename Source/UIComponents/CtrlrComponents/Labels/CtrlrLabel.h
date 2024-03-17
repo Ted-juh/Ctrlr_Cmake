@@ -1,6 +1,4 @@
-#ifndef __JUCER_HEADER_CTRLRLABEL_CTRLRLABEL_1082F2C2__
-#define __JUCER_HEADER_CTRLRLABEL_CTRLRLABEL_1082F2C2__
-
+#pragma once
 #include "CtrlrComponents/CtrlrComponent.h"
 #include "CtrlrPanel/CtrlrPanel.h"
 
@@ -45,13 +43,9 @@ public:
 	CtrlrLabel &appendText(const String &text);
 	const String getText();
 	void customLookAndFeelChanged(LookAndFeelBase *customLookAndFeel = nullptr);
-    //[/UserMethods]
-
     void paint (Graphics& g);
     void resized();
 
-
-    //==============================================================================
     juce_UseDebuggingNewOperator
 
 private:
@@ -61,6 +55,3 @@ private:
     CtrlrLabel (const CtrlrLabel&);
     const CtrlrLabel& operator= (const CtrlrLabel&);
 };
-
-
-#endif

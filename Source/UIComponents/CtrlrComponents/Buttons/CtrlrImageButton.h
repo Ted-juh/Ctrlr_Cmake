@@ -1,8 +1,8 @@
-#ifndef __JUCER_HEADER_CTRLRIMAGEBUTTON_CTRLRIMAGEBUTTON_56E3F9F9__
-#define __JUCER_HEADER_CTRLRIMAGEBUTTON_CTRLRIMAGEBUTTON_56E3F9F9__
-
+#pragma once
 #include "CtrlrComponents/CtrlrComponent.h"
+
 class CtrlrValueMap;
+
 class CtrlrCustomButtonInternal;
 
 class CtrlrImageButton  : public CtrlrComponent,
@@ -65,5 +65,3 @@ private:
     CtrlrImageButton (const CtrlrImageButton&);
     const CtrlrImageButton& operator= (const CtrlrImageButton&);
 };
-
-#endif

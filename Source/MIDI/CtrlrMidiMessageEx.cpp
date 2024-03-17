@@ -3,9 +3,7 @@
 #include "CtrlrMidiMessageEx.h"
 #include "CtrlrLog.h"
 
-/** CtrlrMidiMessageEx container implementation
-
-*/
+/** CtrlrMidiMessageEx container implementation */
 
 CtrlrMidiMessageEx::CtrlrMidiMessageEx()
 	:	indirectValueFlag(ByteValue),

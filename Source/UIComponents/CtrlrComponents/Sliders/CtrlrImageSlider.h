@@ -1,6 +1,4 @@
-#ifndef __JUCER_HEADER_CTRLRIMAGESLIDER_CTRLRIMAGESLIDER_391ECC09__
-#define __JUCER_HEADER_CTRLRIMAGESLIDER_CTRLRIMAGESLIDER_391ECC09__
-
+#pragma once
 #include "CtrlrComponents/CtrlrComponent.h"
 #include "CtrlrSliderInternal.h"
 
@@ -45,6 +43,3 @@ private:
     CtrlrImageSlider (const CtrlrImageSlider&);
     const CtrlrImageSlider& operator= (const CtrlrImageSlider&);
 };
-
-
-#endif   // __JUCER_HEADER_CTRLRIMAGESLIDER_CTRLRIMAGESLIDER_391ECC09__

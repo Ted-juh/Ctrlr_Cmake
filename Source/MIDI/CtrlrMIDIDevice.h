@@ -1,6 +1,4 @@
-#ifndef __CTRLR_MIDI_DEVICE__
-#define __CTRLR_MIDI_DEVICE__
-
+#pragma once
 #ifdef _WIN32
 #pragma warning(disable:4201)
 #endif // _WIN32
@@ -82,5 +80,3 @@ class CtrlrMIDIDevice : public ValueTree::Listener, public MidiInputCallback
 						> deviceListeners;
 		CtrlrMidiMessage midiMessageCollector;
 };
-
-#endif

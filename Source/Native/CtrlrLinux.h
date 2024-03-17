@@ -1,6 +1,4 @@
-#ifndef CTRLR_LINUX_H
-#define CTRLR_LINUX_H
-
+#pragma once
 #include "CtrlrNative.h"
 
 class CtrlrManager;
@@ -18,5 +16,3 @@ class CtrlrLinux : public CtrlrNative
     private:
         CtrlrManager &owner;
 };
-
-#endif

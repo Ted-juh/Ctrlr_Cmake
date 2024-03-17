@@ -1,9 +1,9 @@
-#ifndef CTRLR_NATIVE_H
-#define CTRLR_NATIVE_H
-
+#pragma once
 #include "JuceHeader.h"
+
 class CtrlrPanel;
 class CtrlrManager;
+
 #define CTRLR_NEW_INSTANCE_DIALOG_TITLE		L"Write new instance here"
 
 #define	CTRLR_INTERNAL_PANEL_RESID				1040
@@ -37,5 +37,3 @@ class CtrlrNative
 		virtual const Result sendKeyPressEvent (const KeyPress &)                                       { return (Result::fail("Native, implement me")); }
 		virtual const Result sendKeyPressEvent (const KeyPress &, const String &)						{ return (Result::fail("Native, implement me")); }
 };
-
-#endif

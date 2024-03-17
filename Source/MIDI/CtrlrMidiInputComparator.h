@@ -1,6 +1,4 @@
-#ifndef __CTRLR_MIDI_INPUT_COMPARATOR__
-#define __CTRLR_MIDI_INPUT_COMPARATOR__
-
+#pragma once
 #include "CtrlrModulator/CtrlrModulator.h"
 #include "CtrlrMidiMessage.h"
 #include "CtrlrMidiInputComparatorMulti.h"
@@ -30,5 +28,3 @@ class CtrlrMidiInputComparator
 		bool lastPanelMode;
 		CtrlrMIDIDeviceType source;
 };
-
-#endif

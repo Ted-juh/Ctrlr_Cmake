@@ -1,6 +1,4 @@
-#ifndef __JUCER_HEADER_CTRLRGROUP_CTRLRGROUP_F9C865FE__
-#define __JUCER_HEADER_CTRLRGROUP_CTRLRGROUP_F9C865FE__
-
+#pragma once
 #include "CtrlrComponents/CtrlrComponent.h"
 
 class CtrlrGroup;
@@ -84,5 +82,3 @@ private:
     CtrlrGroup (const CtrlrGroup&);
     const CtrlrGroup& operator= (const CtrlrGroup&);
 };
-
-#endif

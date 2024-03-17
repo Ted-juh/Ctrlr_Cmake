@@ -1,6 +1,4 @@
-#ifndef __JUCER_HEADER_CTRLRIMAGE_CTRLRIMAGE_F0F0FB10__
-#define __JUCER_HEADER_CTRLRIMAGE_CTRLRIMAGE_F0F0FB10__
-
+#pragma once
 #include "../CtrlrComponent.h"
 
 class CtrlrImage  : public CtrlrComponent
@@ -40,6 +38,3 @@ private:
     CtrlrImage (const CtrlrImage&);
     const CtrlrImage& operator= (const CtrlrImage&);
 };
-
-
-#endif

@@ -1,23 +1,10 @@
-#ifndef __CTRLR_LUA_OBJECT__
-#define __CTRLR_LUA_OBJECT__
-
+#pragma once
 #include "CtrlrLuaObjectWrapper.h"
 
-//==============================================================================
-/** \brief A class that defines standard access methods for all Ctrlr-LUA based objects like Panels, Modulators, Components, MidiMessages etc.
-
-*/
 class CtrlrLuaObject
 {
 	public:
-		/** @brief Internal
-
-		*/
 		CtrlrLuaObject();
-
-		/** @brief Internal
-
-		*/
 		virtual ~CtrlrLuaObject();
 
 		/** @brief This method is an internal method overloaded by any class that wants to live in the LUA state
@@ -67,5 +54,3 @@ class CtrlrLuaObject
 
 		JUCE_LEAK_DETECTOR(CtrlrLuaObject)
 };
-
-#endif

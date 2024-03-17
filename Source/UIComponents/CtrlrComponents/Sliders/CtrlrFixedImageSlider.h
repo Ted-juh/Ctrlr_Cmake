@@ -1,6 +1,4 @@
-#ifndef __JUCER_HEADER_CTRLRFIXEDIMAGESLIDER_CTRLRFIXEDIMAGESLIDER_73B20E68__
-#define __JUCER_HEADER_CTRLRFIXEDIMAGESLIDER_CTRLRFIXEDIMAGESLIDER_73B20E68__
-
+#pragma once
 #include "CtrlrComponents/CtrlrComponent.h"
 
 class CtrlrValueMap;
@@ -52,6 +50,3 @@ private:
     CtrlrFixedImageSlider (const CtrlrFixedImageSlider&);
     const CtrlrFixedImageSlider& operator= (const CtrlrFixedImageSlider&);
 };
-
-
-#endif   // __JUCER_HEADER_CTRLRFIXEDIMAGESLIDER_CTRLRFIXEDIMAGESLIDER_73B20E68__

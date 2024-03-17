@@ -1,6 +1,4 @@
-#ifndef __JUCER_HEADER_CTRLRTABSCOMPONENT_CTRLRTABSCOMPONENT_C6ADFA92__
-#define __JUCER_HEADER_CTRLRTABSCOMPONENT_CTRLRTABSCOMPONENT_C6ADFA92__
-
+#pragma once
 #include "CtrlrComponents/CtrlrComponent.h"
 #include "CtrlrPanel/CtrlrPanel.h"
 
@@ -109,6 +107,3 @@ private:
     CtrlrTabsComponent (const CtrlrTabsComponent&);
     const CtrlrTabsComponent& operator= (const CtrlrTabsComponent&);
 };
-
-
-#endif

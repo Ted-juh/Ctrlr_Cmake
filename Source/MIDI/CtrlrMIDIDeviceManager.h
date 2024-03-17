@@ -1,6 +1,4 @@
-#ifndef CTRLR_MIDI_DEVICE_MANAGER
-#define CTRLR_MIDI_DEVICE_MANAGER
-
+#pragma once
 #include "CtrlrMacros.h"
 #include "CtrlrModulator/CtrlrModulator.h"
 #include "CtrlrIDs.h"
@@ -61,5 +59,3 @@ class CtrlrMIDIDeviceManager
 		ValueTree managerTree;
 		CtrlrManager &owner;
 };
-
-#endif

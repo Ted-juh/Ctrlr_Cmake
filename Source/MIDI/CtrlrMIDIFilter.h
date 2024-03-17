@@ -1,6 +1,4 @@
-#ifndef CTRLR_MIDI_FILTER_H
-#define CTRLR_MIDI_FILTER_H
-
+#pragma once
 #include "CtrlrMacros.h"
 #include "CtrlrMidiMessage.h"
 #include "CtrlrIDs.h"
@@ -41,5 +39,3 @@ class CtrlrMIDIFilterSet
 	private:
 		ValueTree filterTree;
 };
-
-#endif

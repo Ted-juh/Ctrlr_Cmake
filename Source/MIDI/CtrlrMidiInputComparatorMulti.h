@@ -1,6 +1,4 @@
-#ifndef __CTRLR_MIDI_INPUT_COMPARATOR_MULTI__
-#define __CTRLR_MIDI_INPUT_COMPARATOR_MULTI__
-
+#pragma once
 #include "CtrlrModulator/CtrlrModulator.h"
 #include "CtrlrUtilities.h"
 #include "CtrlrMidiInputComparatorTypes.h"
@@ -38,5 +36,3 @@ class CtrlrMidiInputComparatorMulti : public Timer
 		int cacheSize;
 		CtrlrMIDIDeviceType source;
 };
-
-#endif

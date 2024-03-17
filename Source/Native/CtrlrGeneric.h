@@ -1,6 +1,4 @@
-#ifndef __CTRLR_GENERIC__
-#define __CTRLR_GENERIC__
-
+#pragma once
 #include "CtrlrNative.h"
 
 class CtrlrGeneric : public CtrlrNative
@@ -12,4 +10,3 @@ class CtrlrGeneric : public CtrlrNative
 		const short getCpuUsage(){}
 		void timerCallback(){}
 };
-#endif

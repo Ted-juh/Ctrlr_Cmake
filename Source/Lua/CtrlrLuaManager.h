@@ -1,5 +1,4 @@
-#ifndef CTRLR_LUA_MANAGER
-#define CTRLR_LUA_MANAGER
+#pragma once
 #ifdef _WIN32
 #pragma warning(disable:4100)
 #endif
@@ -72,5 +71,3 @@ class CtrlrLuaManager : public ValueTree::Listener
 		CtrlrLuaDebugger *ctrlrLuaDebugger;
 		LAudioFormatManager *luaAudioFormatManager;
 };
-
-#endif

@@ -1,5 +1,4 @@
 #pragma once
-
 #include "CtrlrMidiMessageEx.h"
 
 class CtrlrLuaObjectWrapper;
@@ -40,10 +39,7 @@ class TimestampComparator
 			return (first.m.getTimeStamp() < second.m.getTimeStamp()) ? -1 : ((second.m.getTimeStamp() < first.m.getTimeStamp()) ? 1 : 0);
 		}
 };
-//==============================================================================
-/** @brief Class that represents a MIDI message
 
-*/
 class CtrlrMidiMessage : public ValueTree::Listener
 {
 	public:
@@ -55,54 +51,13 @@ class CtrlrMidiMessage : public ValueTree::Listener
 		CtrlrMidiMessage (const CtrlrLuaObjectWrapper& other);
 
 		virtual ~CtrlrMidiMessage();
-
-
-		/** @brief Set the number of the MIDI message
-
-			@param number	 the number to set
-		*/
 		virtual void setNumber(const int number);
-
-		/** @brief Get the number of the MIDI message
-
-			@return the number of the MIDI message
-		*/
 		int getNumber() const;
-
-		/** @brief Set the value of the MIDI message
-
-			@param value	 the value to set
-		*/
 		void setValue (const int value);
-
-		/** @brief Get the value of the MIDI message
-
-			@return the value of the MIDI Message
-		*/
 		int getValue();
-
-		/** @brief Set the MIDI channel of the message
-
-			@param midiChannel	 the MIDI channel to set
-		*/
 		virtual void setChannel(const int midiChannel);
-
-		/** @brief Get the MIDI channel of the message
-
-			@return the MIDI channel of this message
-		*/
 		virtual int getChannel() const ;
-
-		/** @brief Get the number of MIDI messages that make this one
-
-			@return the number of sub-MIDI messages inside this one
-		*/
 		int getNumMessages() const																		{ return (messageArray.size()); }
-
-		/** @brief Set the SysEx formula for this MIDI message
-
-			@param	formula	the new formula to set
-		*/
 		void setSysExFormula (const String &formula);
 
 		const CtrlrMidiMessageEx &getMidiMessageEx(const int index) const									{ return (messageArray.getReference(index)); }

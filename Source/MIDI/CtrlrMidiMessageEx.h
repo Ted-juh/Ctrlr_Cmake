@@ -1,6 +1,4 @@
-#ifndef CTRLR_MIDI_MESSAGE_EX
-#define CTRLR_MIDI_MESSAGE_EX
-
+#pragma once
 #include "CtrlrMacros.h"
 #include "CtrlrSysexProcessorOwned.h"
 
@@ -33,5 +31,3 @@ class CtrlrMidiMessageEx
 		int getValueInternal(const int value) const;
 		int getNumberInternal(const int number) const;
 };
-
-#endif

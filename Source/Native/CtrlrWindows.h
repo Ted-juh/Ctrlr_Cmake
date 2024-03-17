@@ -1,8 +1,7 @@
-#ifndef __CTRLR_WINDOWS__
-#define __CTRLR_WINDOWS__
-
+#pragma once
 #include "CtrlrNative.h"
 #include <Windows.h>
+
 class CtrlrPanel;
 
 class CtrlrWindows : public CtrlrNative
@@ -21,7 +20,7 @@ class CtrlrWindows : public CtrlrNative
 		const Result registerFileHandler();
 		const Result sendKeyPressEvent (const KeyPress &event);
 		const Result sendKeyPressEvent (const KeyPress &event, const String &targetWindowName);
+
     private:
         CtrlrManager &owner;
 };
-#endif

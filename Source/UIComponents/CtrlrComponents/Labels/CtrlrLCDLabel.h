@@ -1,6 +1,4 @@
-#ifndef __JUCER_HEADER_CTRLRLCDLABEL_CTRLRLCDLABEL_980087AF__
-#define __JUCER_HEADER_CTRLRLCDLABEL_CTRLRLCDLABEL_980087AF__
-
+#pragma once
 #include "CtrlrComponents/CtrlrComponent.h"
 #include "CtrlrPanel/CtrlrPanel.h"
 
@@ -42,6 +40,3 @@ private:
     CtrlrLCDLabel (const CtrlrLCDLabel&);
     const CtrlrLCDLabel& operator= (const CtrlrLCDLabel&);
 };
-
-
-#endif   // __JUCER_HEADER_CTRLRLCDLABEL_CTRLRLCDLABEL_980087AF__

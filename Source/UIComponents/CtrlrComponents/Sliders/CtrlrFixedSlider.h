@@ -1,6 +1,4 @@
-#ifndef __JUCER_HEADER_CTRLRFIXEDSLIDER_CTRLRFIXEDSLIDER_AD4513E7__
-#define __JUCER_HEADER_CTRLRFIXEDSLIDER_CTRLRFIXEDSLIDER_AD4513E7__
-
+#pragma once
 #include "CtrlrComponents/CtrlrComponent.h"
 #include "CtrlrSliderInternal.h"
 
@@ -47,6 +45,3 @@ private:
     CtrlrFixedSlider (const CtrlrFixedSlider&);
     const CtrlrFixedSlider& operator= (const CtrlrFixedSlider&);
 };
-
-
-#endif   // __JUCER_HEADER_CTRLRFIXEDSLIDER_CTRLRFIXEDSLIDER_AD4513E7__

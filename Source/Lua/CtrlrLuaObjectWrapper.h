@@ -1,6 +1,4 @@
-#ifndef CTRLR_LUA_OBJECT_WRAPPER
-#define CTRLR_LUA_OBJECT_WRAPPER
-
+#pragma once
 #include "luabind/object_fwd.hpp"
 
 class CtrlrLuaObjectWrapper
@@ -16,5 +14,3 @@ class CtrlrLuaObjectWrapper
 	private:
 		luabind::object *o;
 };
-
-#endif
