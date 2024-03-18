@@ -10,7 +10,7 @@ OptionsSection::OptionsSection()
     cCMakeButton->addListener(this);
 
     addAndMakeVisible(buildButton = new TextButton(""));
-    buildButton->setButtonText("Build files");
+    buildButton->setButtonText("Generate build files");
     buildButton->setConnectedEdges(Button::ConnectedOnLeft | Button::ConnectedOnRight);
     buildButton->addListener(this);
 

@@ -2,7 +2,6 @@
 #include "CtrlrManager/CtrlrManager.h"
 #include "CtrlrBuildScriptDialogWindow.h"
 
-
 CtrlrBuildScriptDialogWindow::CtrlrBuildScriptDialogWindow(CtrlrManager &_owner) 
     : owner(_owner)
 {
@@ -15,11 +14,15 @@ CtrlrBuildScriptDialogWindow::CtrlrBuildScriptDialogWindow(CtrlrManager &_owner)
     outputSection = new OutputSection();
     addAndMakeVisible (outputSection);
 
-    /*
-    addAndMakeVisible(cancelButton = new TextButton(""));
-    cancelButton->setButtonText("Cancel");
-    cancelButton->addListener(this);
-    */
+    addAndMakeVisible (saveFileButton = new TextButton(""));
+    saveFileButton->setButtonText("Save options");
+    saveFileButton->setVisible(true);
+    saveFileButton->addListener(this);
+
+    addAndMakeVisible (loadFileButton = new TextButton(""));
+    loadFileButton->setButtonText("Load options");
+    loadFileButton->setVisible(true);
+    loadFileButton->addListener(this);
 
     addAndMakeVisible(okButton = new TextButton(""));
     okButton->setButtonText("OK");
@@ -38,12 +41,13 @@ CtrlrBuildScriptDialogWindow::CtrlrBuildScriptDialogWindow(CtrlrManager &_owner)
 
 CtrlrBuildScriptDialogWindow::~CtrlrBuildScriptDialogWindow()
 {
-    ideSection = nullptr;
-	optionsSection = nullptr;
-    outputSection = nullptr;
-    okButton = nullptr;
+    ideSection      = nullptr;
+	optionsSection  = nullptr;
+    outputSection   = nullptr;
 
-    //cancelButton = nullptr;
+    saveFileButton  = nullptr;
+    loadFileButton  = nullptr;
+    okButton        = nullptr;
 }
 
 void CtrlrBuildScriptDialogWindow::paint(Graphics& g)
@@ -61,10 +65,14 @@ void CtrlrBuildScriptDialogWindow::paintOverChildren(Graphics& g)
     const int amountBut = 4;
     const int buttonSpace = rectWidth / amountBut;
 
+    g.setColour(Colours::darkgrey);
+    g.drawRect(startRect,                       rectLineHeight * 23,    buttonSpace,    buttonHeight, 1.0);
+    g.drawRect(startRect + buttonSpace,         rectLineHeight * 23,    buttonSpace,    buttonHeight, 1.0);
+
     if (okButton->isVisible())
     {
     g.setColour(Colours::darkgrey);
-    g.drawRect(startRect + (buttonSpace * 2), rectLineHeight * 23, buttonSpace * 2, buttonHeight, 1.0);
+    g.drawRect(startRect + (buttonSpace * 3),   rectLineHeight * 23,    buttonSpace,    buttonHeight, 1.0);
 	}
 }
 
@@ -81,11 +89,13 @@ void CtrlrBuildScriptDialogWindow::resized()
 
     ideSection          ->setBounds(startRect,                          rectLineHeight * 1,     rectWidth,          buttonHeight * 5);
     optionsSection      ->setBounds(startRect,                          rectLineHeight * 12,    rectWidth,          buttonHeight * 5);
-    okButton            ->setBounds(startRect + (buttonSpace * 2),      rectLineHeight * 23,    buttonSpace * 2,    buttonHeight);
+
+    saveFileButton      ->setBounds(startRect,                          rectLineHeight * 23,    buttonSpace,        buttonHeight);
+    loadFileButton      ->setBounds(startRect + buttonSpace,            rectLineHeight * 23,    buttonSpace,        buttonHeight);
+
+    okButton            ->setBounds(startRect + (buttonSpace * 3),      rectLineHeight * 23,    buttonSpace,        buttonHeight);
     outputSection       ->setBounds(startRect,                          rectLineHeight * 26,    rectWidth,          buttonHeight * 7);
 
-
-    //cancelButton->setBounds(10, getHeight() - 40, 100, 30);
 }
 
 void CtrlrBuildScriptDialogWindow::setButtonStateAndColour(TextButton* button, bool state)
@@ -141,6 +151,9 @@ void CtrlrBuildScriptDialogWindow::buttonClicked(Button* buttonThatWasClicked)
                 }
             }
         }
+
+    if (buttonThatWasClicked == saveFileButton) { saveOptionsToFile(); }
+    if (buttonThatWasClicked == loadFileButton) { loadOptionsFromFile(); }
  }
 
 void CtrlrBuildScriptDialogWindow::setOkButtonVisible(const bool isVisible)
@@ -244,10 +257,6 @@ void CtrlrBuildScriptDialogWindow::openBuildFolder()
     system(openFolderCommand.toStdString().c_str());
 }
 
-
-
-
-
 void CtrlrBuildScriptDialogWindow::buildFiles()
 {
     String projectFolderPath = ideSection->getBuildFolderPath();
@@ -272,38 +281,153 @@ void CtrlrBuildScriptDialogWindow::buildFiles()
 	} 
 }
 
+void CtrlrBuildScriptDialogWindow::saveOptionsToFile()
+{
+    FileChooser chooser("Save options to file", File::getSpecialLocation(File::userDesktopDirectory), "*.bso", true);
 
+    if (chooser.browseForFileToSave(true))
+    {
+        File file = chooser.getResult();
 
+        if (file.exists())
+		{
+			file.deleteFile();
+		}
 
+        FileOutputStream outputStream(file, false);
 
+        if (outputStream.openedOk())
+        {
+            outputStream << "This file's purpose is to store the options for the build script dialog window in Ctrlr.\n\n";
+            outputStream << "IDE="                  << ideSection       ->getIDEIndex()                         << newLine;
+            outputStream << "ProjectFolder=\""      << ideSection       ->getBuildFolderPath()      <<"\""      << newLine;
+            outputStream << "VSTFolder=\""          << ideSection       ->getVSTFolderPath()        <<"\""      << newLine;
+            outputStream << "DAWFolder=\""          << ideSection       ->getDAWFolderPath()        <<"\""      << newLine;
+            outputStream << "CheckCMake="           << optionsSection   ->isCCMakeButtonToggled()               << newLine;
+            outputStream << "GenerateBuildFiles="   << optionsSection   ->isBuildButtonToggled()                << newLine;
+            outputStream << "Release="              << optionsSection   ->isReleaseButtonToggled()              << newLine;
+            outputStream << "CleanBuild="           << optionsSection   ->isCleanBuildButtonToggled()           << newLine;
+            outputStream << "BuildFolder="          << optionsSection   ->isBuildFolderButtonToggled()          << newLine;
+            outputStream << "openVSTFolder="        << optionsSection   ->isVSTFolderButtonToggled()            << newLine;
+            outputStream << "openDAWFolder="        << optionsSection   ->isDAWButtonToggled()                  << newLine;
 
+            outputStream.flush();
 
+            outputSection->getOutputView().insertTextAtCaret("Options file saved.\n");
+        }
+        else
+        {
+            outputSection->getOutputView().insertTextAtCaret("Failed to save options to file.\n");
+        }
+    }
+}
 
+void CtrlrBuildScriptDialogWindow::loadOptionsFromFile()
+{
+	FileChooser chooser("Load options from file", File::getSpecialLocation(File::userDesktopDirectory), "*.bso", true);
 
+	if (chooser.browseForFileToOpen())
+	{
+		File file = chooser.getResult();
 
+		FileInputStream inputStream(file);
 
+		if (inputStream.openedOk())
+		{
+			StringArray lines;
+			lines.addTokens(inputStream.readEntireStreamAsString(), true);
 
+			for (int i = 0; i < lines.size(); i++)
+			{
+				StringArray tokens;
+				tokens.addTokens(lines[i], "=", "");
 
+                if (tokens[0] == "IDE")                
+                { 
+                    int index = tokens[1].getIntValue();
+                    ideSection->setIDEIndex(tokens[1].getIntValue()); 
+                }
 
+                if (tokens[0] == "ProjectFolder")      
+                { 
+                    String unquotedPath = tokens[1].unquoted();
+                    ideSection->setBuildFolderPath(unquotedPath);
+                    ideSection->getBuildFolderLabel()->setText(unquotedPath, dontSendNotification);
+                }
 
+                if (tokens[0] == "VSTFolder")          
+				{ 
+                    String unqoutedPath = tokens[1].unquoted();
+					ideSection->setVSTFolderPath(unqoutedPath);
+					ideSection->getVSTFolderLabel()->setText(unqoutedPath, dontSendNotification);
+				}
 
+                if (tokens [0] == "DAWFolder")
+				{
+                    String unqoutedPath = tokens[1].unquoted();
+					ideSection->setDAWFolderPath(unqoutedPath);
+					ideSection->getDAWFolderLabel()->setText(unqoutedPath, dontSendNotification);
+				}
 
+                if (tokens[0] == "CheckCMake")               
+				{ 
+				    bool state = tokens[1].getIntValue() == 1;
+					optionsSection->setCCMakeButtonToggled(state);
+					optionsSection->setButtonStateAndColour(optionsSection->getcCMakeButton(), state);
+                    optionsSection->getcCMakeButton()->repaint();
+				}
 
+                if (tokens[0] == "GenerateBuildFiles")
+                {
+                	bool state = tokens[1].getIntValue() == 1;
+					optionsSection->setBuildButtonToggled(state);
+					optionsSection->setButtonStateAndColour(optionsSection->getBuildButton(), state);
 
+                }
 
+                if (tokens[0] == "Release")
+                {
+                    bool state = tokens[1].getIntValue() == 1;
+                    optionsSection->setReleaseButtonToggled(state);
+                    optionsSection->setButtonStateAndColour(optionsSection->getReleaseButton(), state);
+                }
 
+                if (tokens[0] == "CleanBuild")
+				{
+					bool state = tokens[1].getIntValue() == 1;
+					optionsSection->setCleanBuildButtonToggled(state);
+					optionsSection->setButtonStateAndColour(optionsSection->getCleanBuildButton(), state);
+				}
 
+                if (tokens[0] == "BuildFolder")
+                {
+                    bool state = tokens[1].getIntValue() == 1;
+                    optionsSection->setBuildFolderButtonToggled(state);
+                    optionsSection->setButtonStateAndColour(optionsSection->getBuildFolderButton(), state);
+                    optionsSection->getBuildFolderButton()->setVisible(true);
+                    setOkButtonVisible(true);
+                }
 
+                if (tokens[0] == "openVSTFolder")
+				{
+					bool state = tokens[1].getIntValue() == 1;
+					optionsSection->setVSTFolderButtonToggled(state);
+					optionsSection->setButtonStateAndColour(optionsSection->getVSTFolderButton(), state);
+				}
 
+                if (tokens[0] == "openDAWFolder")
+				{
+					bool state = tokens[1].getIntValue() == 1;
+					optionsSection->setDAWButtonToggled(state);
+					optionsSection->setButtonStateAndColour(optionsSection->getDAWButton(), state);
+				}
+			}
 
-
-
-
-
-
-
-
-
-
-
-  
+            outputSection->getOutputView().insertTextAtCaret("Options file loaded.\n");
+		}
+		else
+		{
+			outputSection->getOutputView().insertTextAtCaret("Failed to load options from file.\n");
+		}
+	}
+}  

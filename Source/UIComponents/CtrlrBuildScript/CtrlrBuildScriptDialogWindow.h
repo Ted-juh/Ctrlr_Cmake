@@ -1,6 +1,4 @@
-#ifndef __CTRLR_BUILD_SCRIPT_DIALOG_WINDOW_H__
-#define __CTRLR_BUILD_SCRIPT_DIALOG_WINDOW_H__
-
+#pragma once
 #include "CtrlrWindowManagers/CtrlrChildWindowContent.h"
 #include "CtrlrWindowManagers/CtrlrManagerWindowManager.h"
 #include "IDESection.h"
@@ -19,17 +17,15 @@ class CtrlrBuildScriptDialogWindow : public CtrlrChildWindowContent,
 
     String getContentName()             { return ("Build Script Editor"); }
     uint8 getType()                     { return (CtrlrManagerWindowManager::BuildScript);}
+
     void paint (Graphics& g);
     void paintOverChildren (Graphics& g);
-
     void resized();
 
     void setButtonStateAndColour(TextButton* button, bool state);
     void buttonClicked(Button* buttonThatWasClicked);
     void buttonStateChanged(Button* button);
-
     void setOkButtonVisible (const bool isVisible);
-
 
     void labelTextChanged (Label* labelThatHasChanged);
 
@@ -37,6 +33,10 @@ class CtrlrBuildScriptDialogWindow : public CtrlrChildWindowContent,
     void openBuildFolder();
     void generateBuildFiles();
     void buildFiles();
+
+    void saveOptionsToFile();
+    void loadOptionsFromFile();
+
     int getIDEIndex() { return ideSection->getIDEIndex(); }
     
 private:
@@ -46,11 +46,10 @@ private:
     ScopedPointer<OptionsSection>                   optionsSection;
     ScopedPointer<OutputSection>	                outputSection;
 
-    ScopedPointer<TextButton>                       cancelButton;
-    ScopedPointer<TextButton>                       okButton;
-    
+    ScopedPointer<TextButton>                       saveFileButton;
+    ScopedPointer<TextButton>                       loadFileButton;
 
+    ScopedPointer<TextButton>                       okButton;
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(CtrlrBuildScriptDialogWindow)
 };
-#endif
