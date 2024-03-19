@@ -24,22 +24,23 @@ public:
     void  IDESection::setBuildFolder(String Text) { lBuildFolder->setText(Text, dontSendNotification); }
 
     //ComboBox*   IDESection::getIDEComboBox() { return cIDE; }
-    Label*      IDESection::getBuildFolderLabel() { return lBuildFolder; }
-    Label*      IDESection::getVSTFolderLabel() { return lVSTFolder; }
-    Label*      IDESection::getDAWFolderLabel() { return lDAWFolder; }
+    Label*      IDESection::getBuildFolderLabel() { return lBuildFolder.get(); }
+    Label*      IDESection::getVSTFolderLabel() { return lVSTFolder.get(); }
+    Label*      IDESection::getDAWFolderLabel() { return lDAWFolder.get(); }
 
 
 
 
 private:
-    Label*      lIDE;
-    ComboBox*   cIDE;
-    TextButton* bBuildFolder;
-    Label*      lBuildFolder;
-    TextButton* bVSTFolder;
-    Label*      lVSTFolder;
-    TextButton* bDAWFolder;
-    Label*      lDAWFolder;
+    std::unique_ptr<Label>      lIDE;
+    std::unique_ptr<ComboBox>   cIDE;
+    std::unique_ptr<TextButton> bBuildFolder;
+
+    std::unique_ptr<Label>      lBuildFolder;
+    std::unique_ptr<TextButton> bVSTFolder;
+    std::unique_ptr<Label>      lVSTFolder;
+	std::unique_ptr<TextButton> bDAWFolder;
+    std::unique_ptr<Label>      lDAWFolder;
 
     int         IDEIndex;
     String      buildFolderPath;

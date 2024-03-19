@@ -3,7 +3,8 @@
 
 OutputSection::OutputSection()
 {
-    addAndMakeVisible(outputView = new TextEditor("Output"));
+    outputView = std::make_unique<TextEditor>("Output");
+    addAndMakeVisible(*outputView);
     outputView->setFont(Font(14.0f, Font::plain));
     outputView->setJustification(Justification::topLeft);
     outputView->setReadOnly(true);
@@ -12,18 +13,15 @@ OutputSection::OutputSection()
     outputView->setMultiLine(true);
     outputView->setScrollbarsShown(true);
 
-    addAndMakeVisible(clearButton = new TextButton("Clear"));
+    clearButton = std::make_unique<TextButton>("");
+    addAndMakeVisible(*clearButton);
     clearButton->setButtonText("Clear Output");
     clearButton->addListener(this);
 
     setSize(240, 300);
 }
 
-OutputSection::~OutputSection()
-{
-	outputView = nullptr;
-    clearButton = nullptr;
-}
+OutputSection::~OutputSection() {}
 
 void OutputSection::paint(Graphics& g)
 {
@@ -54,7 +52,7 @@ void OutputSection::resized()
 
 void OutputSection::buttonClicked(Button* button)
 {
-	if (button == clearButton)
+	if (button == clearButton.get())
 	{
 		outputView->clear();
 	}

@@ -31,23 +31,24 @@ public:
     void setVSTFolderButtonToggled  (int value) { vstFolderButton   ->setToggleState(value, dontSendNotification); }
     void setDAWButtonToggled        (int value) { dawButton         ->setToggleState(value, dontSendNotification); }
 
-    TextButton* getcCMakeButton()        const { return cCMakeButton; }
-    TextButton* getBuildButton()         const { return buildButton; }
-    TextButton* getReleaseButton()       const { return releaseButton; }
-    TextButton* getCleanBuildButton()    const { return cleanBuildButton; }
-    TextButton* getBuildFolderButton()   const { return buildFolderButton; }
-    TextButton* getVSTFolderButton()     const { return vstFolderButton; }
-    TextButton* getDAWButton()           const { return dawButton; }
+    TextButton* getcCMakeButton()        const { return cCMakeButton.get(); }
+    TextButton* getBuildButton()         const { return buildButton.get(); }
+    TextButton* getReleaseButton()       const { return releaseButton.get(); }
+    TextButton* getCleanBuildButton()    const { return cleanBuildButton.get(); }
+    TextButton* getBuildFolderButton()   const { return buildFolderButton.get(); }
+    TextButton* getVSTFolderButton()     const { return vstFolderButton.get(); }
+    TextButton* getDAWButton()           const { return dawButton.get(); }
+    TextButton* getVST3Button()          const { return VST3Button.get(); }
 private:
 
-    ScopedPointer<TextButton> cCMakeButton;
-    ScopedPointer<TextButton> releaseButton;
-    ScopedPointer<TextButton> buildButton;
-    ScopedPointer<TextButton> VST3Button;
-    ScopedPointer<TextButton> cleanBuildButton;
-    ScopedPointer<TextButton> buildFolderButton;
-    ScopedPointer<TextButton> vstFolderButton;
-    ScopedPointer<TextButton> dawButton;
+    std::unique_ptr<TextButton> cCMakeButton;
+    std::unique_ptr<TextButton> releaseButton;
+    std::unique_ptr<TextButton> buildButton;
+    std::unique_ptr<TextButton> VST3Button;
+    std::unique_ptr<TextButton> cleanBuildButton;
+    std::unique_ptr<TextButton> buildFolderButton;
+    std::unique_ptr<TextButton> vstFolderButton;
+    std::unique_ptr<TextButton> dawButton;
 
 
 };

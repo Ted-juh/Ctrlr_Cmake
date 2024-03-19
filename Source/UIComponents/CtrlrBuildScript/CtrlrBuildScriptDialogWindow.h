@@ -42,14 +42,14 @@ class CtrlrBuildScriptDialogWindow : public CtrlrChildWindowContent,
 private:
     CtrlrManager &owner;
 
-    ScopedPointer<IDESection>                       ideSection;
-    ScopedPointer<OptionsSection>                   optionsSection;
-    ScopedPointer<OutputSection>	                outputSection;
+    std::unique_ptr<IDESection>               ideSection;
+    std::unique_ptr<OptionsSection>           optionsSection;
+    std::unique_ptr<OutputSection>	          outputSection;
 
-    ScopedPointer<TextButton>                       saveFileButton;
-    ScopedPointer<TextButton>                       loadFileButton;
+    std::unique_ptr<TextButton>               saveFileButton;
+    std::unique_ptr<TextButton>               loadFileButton;
 
-    ScopedPointer<TextButton>                       okButton;
+    std::unique_ptr<TextButton>               okButton;
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(CtrlrBuildScriptDialogWindow)
 };

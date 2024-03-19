@@ -15,6 +15,6 @@ class OutputSection : public Component, public Button::Listener
 
 	private:
 
-		ScopedPointer<TextEditor>       outputView;
-		ScopedPointer<TextButton>       clearButton;
+		std::unique_ptr<TextEditor>       outputView;
+		std::unique_ptr<TextButton>       clearButton;
 };

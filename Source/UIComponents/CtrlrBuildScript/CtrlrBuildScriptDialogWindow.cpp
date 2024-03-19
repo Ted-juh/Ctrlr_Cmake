@@ -5,50 +5,37 @@
 CtrlrBuildScriptDialogWindow::CtrlrBuildScriptDialogWindow(CtrlrManager &_owner) 
     : owner(_owner)
 {
-    ideSection = new IDESection();
-    addAndMakeVisible (ideSection);
+    ideSection = std::make_unique<IDESection>();
+    addAndMakeVisible (*ideSection);
 
-    optionsSection = new OptionsSection();
-    addAndMakeVisible (optionsSection);
+    optionsSection = std::make_unique<OptionsSection>();
+    addAndMakeVisible (*optionsSection);
 
-    outputSection = new OutputSection();
-    addAndMakeVisible (outputSection);
+    outputSection = std::make_unique<OutputSection>();
+    addAndMakeVisible (*outputSection);
 
-    addAndMakeVisible (saveFileButton = new TextButton(""));
+    saveFileButton = std::make_unique<TextButton>("");
+    addAndMakeVisible (*saveFileButton);
     saveFileButton->setButtonText("Save options");
     saveFileButton->setVisible(true);
     saveFileButton->addListener(this);
 
-    addAndMakeVisible (loadFileButton = new TextButton(""));
+    loadFileButton = std::make_unique<TextButton>("");
+    addAndMakeVisible (*loadFileButton);
     loadFileButton->setButtonText("Load options");
     loadFileButton->setVisible(true);
     loadFileButton->addListener(this);
 
-    addAndMakeVisible(okButton = new TextButton(""));
+    okButton = std::make_unique<TextButton>("");
+    addAndMakeVisible(*okButton);
     okButton->setButtonText("OK");
     okButton->setVisible(false);
     okButton->addListener(this);
 
-    const float factor = 1.5f;
-    int newWidth = jmax(240, (int)(getWidth() * factor));
-    int newHeight = jmax(700, (int)(getHeight() * factor));
-
-    if (newWidth != getWidth() || newHeight != getHeight())
-    {
-        setSize(newWidth, newHeight);
-    }
+    setSize(500, 240);
 }
 
-CtrlrBuildScriptDialogWindow::~CtrlrBuildScriptDialogWindow()
-{
-    ideSection      = nullptr;
-	optionsSection  = nullptr;
-    outputSection   = nullptr;
-
-    saveFileButton  = nullptr;
-    loadFileButton  = nullptr;
-    okButton        = nullptr;
-}
+CtrlrBuildScriptDialogWindow::~CtrlrBuildScriptDialogWindow(){}
 
 void CtrlrBuildScriptDialogWindow::paint(Graphics& g)
 {
@@ -64,7 +51,7 @@ void CtrlrBuildScriptDialogWindow::paintOverChildren(Graphics& g)
 
     const int amountBut = 4;
     const int buttonSpace = rectWidth / amountBut;
-
+    
     g.setColour(Colours::darkgrey);
     g.drawRect(startRect,                       rectLineHeight * 23,    buttonSpace,    buttonHeight, 1.0);
     g.drawRect(startRect + buttonSpace,         rectLineHeight * 23,    buttonSpace,    buttonHeight, 1.0);
@@ -87,29 +74,61 @@ void CtrlrBuildScriptDialogWindow::resized()
     const int amountBut         = 4;
     const int buttonSpace       = rectWidth / amountBut;
 
-    ideSection          ->setBounds(startRect,                          rectLineHeight * 1,     rectWidth,          buttonHeight * 5);
-    optionsSection      ->setBounds(startRect,                          rectLineHeight * 12,    rectWidth,          buttonHeight * 5);
+    ideSection          ->setBounds(startRect,                          rectLineHeight * 1,        rectWidth,          buttonHeight * 5);
+    optionsSection      ->setBounds(startRect,                          rectLineHeight * 12,       rectWidth,          buttonHeight * 5);
 
-    saveFileButton      ->setBounds(startRect,                          rectLineHeight * 23,    buttonSpace,        buttonHeight);
-    loadFileButton      ->setBounds(startRect + buttonSpace,            rectLineHeight * 23,    buttonSpace,        buttonHeight);
+    saveFileButton      ->setBounds(startRect,                          rectLineHeight * 23,       buttonSpace,        buttonHeight);
+    loadFileButton      ->setBounds(startRect + buttonSpace,            rectLineHeight * 23,       buttonSpace,        buttonHeight);
 
-    okButton            ->setBounds(startRect + (buttonSpace * 3),      rectLineHeight * 23,    buttonSpace,        buttonHeight);
-    outputSection       ->setBounds(startRect,                          rectLineHeight * 26,    rectWidth,          buttonHeight * 7);
-
+    okButton            ->setBounds(startRect + (buttonSpace * 3),      rectLineHeight * 23,       buttonSpace,        buttonHeight);
+    outputSection       ->setBounds(startRect,                          rectLineHeight * 26,       rectWidth,          buttonHeight * 7);
 }
 
 void CtrlrBuildScriptDialogWindow::setButtonStateAndColour(TextButton* button, bool state)
 {
-    button->setToggleState(state, dontSendNotification);
-    button->setColour(TextButton::buttonColourId,   state ? Colours::darkgrey : Colours::whitesmoke);       // on/off
-    button->setColour(TextButton::buttonOnColourId, state ? Colours::darkgrey : Colours::whitesmoke);       // on/off
-    button->setColour(TextButton::textColourOffId,  state ? Colours::black : Colours::black);               // on/off
-    button->setColour(TextButton::textColourOnId,   state ? Colours::white : Colours::white);			    // on/off          
+    button->setToggleState(state, dontSendNotification);    // ON                   OFF
+    button->setColour(TextButton::buttonColourId,   state ? Colours::darkgrey : Colours::whitesmoke);       
+    button->setColour(TextButton::buttonOnColourId, state ? Colours::darkgrey : Colours::whitesmoke);       
+    button->setColour(TextButton::textColourOffId,  state ? Colours::black : Colours::black);               
+    button->setColour(TextButton::textColourOnId,   state ? Colours::white : Colours::white);			    
 }
 
 void CtrlrBuildScriptDialogWindow::buttonClicked(Button* buttonThatWasClicked)
 {
-    if (buttonThatWasClicked == okButton) 
+    if (buttonThatWasClicked == optionsSection->getVST3Button())
+    {
+        Component* parentWindow = getParentComponent();
+
+        if (parentWindow != nullptr)
+		{
+            std::cout << "Type of parentWindow: " << typeid(*parentWindow).name() << std::endl;
+            DocumentWindow* dw = dynamic_cast<DocumentWindow*>(parentWindow);
+
+            if (dw != nullptr)
+            {
+                dw->setSize(700, 240);
+            }
+            else
+            {
+                // Print a message if the cast failed
+                std::cout << "Failed to cast parentWindow to DocumentWindow" << std::endl;
+            }
+		}
+
+    }
+
+
+    if (buttonThatWasClicked == saveFileButton.get())                                             // Do saveOptionsToFile method when the saveFileButton is clicked
+    {
+        saveOptionsToFile();
+    }
+
+    if (buttonThatWasClicked == loadFileButton.get())											    // Do loadOptionsFromFile method when the loadFileButton is clicked
+    {
+        loadOptionsFromFile();
+    }
+
+    if (buttonThatWasClicked == okButton.get())                                                   // Do the following when the okButton is clicked
         {   
             // Check if an IDE is selected
             if (ideSection->getIDEIndex() == -1)
@@ -151,9 +170,6 @@ void CtrlrBuildScriptDialogWindow::buttonClicked(Button* buttonThatWasClicked)
                 }
             }
         }
-
-    if (buttonThatWasClicked == saveFileButton) { saveOptionsToFile(); }
-    if (buttonThatWasClicked == loadFileButton) { loadOptionsFromFile(); }
  }
 
 void CtrlrBuildScriptDialogWindow::setOkButtonVisible(const bool isVisible)

@@ -389,6 +389,8 @@ target_sources(Ctrlr
 	Source/UIComponents/CtrlrBuildScript/OptionsSection.h
 	Source/UIComponents/CtrlrBuildScript/OutputSection.cpp
 	Source/UIComponents/CtrlrBuildScript/OutputSection.h
+	Source/UIComponents/CtrlrBuildScript/VST3Section.cpp
+	Source/UIComponents/CtrlrBuildScript/VST3Section.h
 
 	# Source files	\UIComponents\CtrlrComponents
 	Source/UIComponents/CtrlrComponents/CtrlrCombo.cpp

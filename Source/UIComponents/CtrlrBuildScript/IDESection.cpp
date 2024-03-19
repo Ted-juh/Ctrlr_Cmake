@@ -3,55 +3,52 @@
 
 IDESection::IDESection()
     {
-        addAndMakeVisible(lIDE = new Label(""));
+        lIDE = std::make_unique<Label>("");
+        addAndMakeVisible(*lIDE);
         lIDE->setJustificationType(Justification::centred);
         lIDE->setText("Choose IDE", dontSendNotification);
 
-        addAndMakeVisible(cIDE = new ComboBox(""));
+        cIDE = std::make_unique<ComboBox>("");
+        addAndMakeVisible(*cIDE);
         cIDE->addItem("Visual Studio 2022", 1);
         cIDE->addItem("Visual Studio 2019", 2);
         cIDE->addItem("Visual Studio 2017", 3);
         cIDE->addItem("Xcode", 4);
 
-
-        addAndMakeVisible(bBuildFolder = new TextButton(""));
+        bBuildFolder = std::make_unique<TextButton>("");
+        addAndMakeVisible(*bBuildFolder);
         bBuildFolder->setButtonText("Project Folder");
         bBuildFolder->setConnectedEdges(Button::ConnectedOnLeft | Button::ConnectedOnRight);
         bBuildFolder->addListener(this);
 
-        addAndMakeVisible(lBuildFolder = new Label(""));
+		lBuildFolder = std::make_unique<Label>("");
+        addAndMakeVisible(*lBuildFolder);
         lBuildFolder->setText("No folder selected..", dontSendNotification);
 
-        addAndMakeVisible(bVSTFolder = new TextButton(""));
+        bVSTFolder = std::make_unique<TextButton>("");
+        addAndMakeVisible(*bVSTFolder);
         bVSTFolder->setButtonText("VST Folder");
         bVSTFolder->setConnectedEdges(Button::ConnectedOnLeft | Button::ConnectedOnRight);
         bVSTFolder->addListener(this);
 
-        addAndMakeVisible(lVSTFolder = new Label(""));
+        lVSTFolder = std::make_unique<Label>("");
+        addAndMakeVisible(*lVSTFolder);
         lVSTFolder->setText("No folder selected..", dontSendNotification);
 
-        addAndMakeVisible(bDAWFolder = new TextButton(""));
+        bDAWFolder = std::make_unique<TextButton>("");
+        addAndMakeVisible(*bDAWFolder);
         bDAWFolder->setButtonText("DAW Folder");
         bDAWFolder->setConnectedEdges(Button::ConnectedOnLeft | Button::ConnectedOnRight);
         bDAWFolder->addListener(this);
 
-        addAndMakeVisible(lDAWFolder = new Label(""));
+        lDAWFolder = std::make_unique<Label>("");
+        addAndMakeVisible(*lDAWFolder);
         lDAWFolder->setText("No folder selected..", dontSendNotification);
 
         setSize(240, 125);
     }
 
-    IDESection::~IDESection()
-    {
-        lIDE = nullptr;
-        cIDE = nullptr;
-        bBuildFolder = nullptr;
-        lBuildFolder = nullptr;
-        bVSTFolder = nullptr;
-        lVSTFolder = nullptr;
-        bDAWFolder = nullptr;
-        lDAWFolder = nullptr;
-    }
+    IDESection::~IDESection(){}
 
     void IDESection::paint(Graphics& g) 
     {
@@ -105,7 +102,7 @@ IDESection::IDESection()
 
     void IDESection::buttonClicked(Button* button)
     {
-        if (button == bBuildFolder)
+        if (button = bBuildFolder.get())
         {
             // Create a FileChooser object
             FileChooser bBuildchooser("Select a folder", File::getSpecialLocation(File::userDesktopDirectory));
@@ -117,7 +114,7 @@ IDESection::IDESection()
             }
         }
 
-        if (button == bVSTFolder)
+        if (button == bVSTFolder.get())
         {
             // Create a FileChooser object
             FileChooser bVSTchooser("Select a folder", File::getSpecialLocation(File::userDesktopDirectory));
@@ -129,7 +126,7 @@ IDESection::IDESection()
             }
         }
 
-        if (button == bDAWFolder)
+        if (button == bDAWFolder.get())
         {
 			// Create a FileChooser object
 			FileChooser bDAWchooser("Select a folder", File::getSpecialLocation(File::userDesktopDirectory));
@@ -140,11 +137,5 @@ IDESection::IDESection()
 				lDAWFolder->setText(folder.getFullPathName(), dontSendNotification);
 			}
 		}
-
-
-
-
-
-
     }
 

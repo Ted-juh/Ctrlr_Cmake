@@ -4,45 +4,53 @@
 
 OptionsSection::OptionsSection()
 {
-    addAndMakeVisible(cCMakeButton = new TextButton(""));
+    cCMakeButton = std::make_unique<TextButton>("");
+    addAndMakeVisible(*cCMakeButton);
     cCMakeButton->setButtonText("Check CMake");
     cCMakeButton->setConnectedEdges(Button::ConnectedOnLeft | Button::ConnectedOnRight);
     cCMakeButton->addListener(this);
 
-    addAndMakeVisible(buildButton = new TextButton(""));
+    buildButton = std::make_unique<TextButton>("");
+    addAndMakeVisible(*buildButton);
     buildButton->setButtonText("Generate build files");
     buildButton->setConnectedEdges(Button::ConnectedOnLeft | Button::ConnectedOnRight);
     buildButton->addListener(this);
 
-    addAndMakeVisible(releaseButton = new TextButton(""));
+    releaseButton = std::make_unique<TextButton>("");
+    addAndMakeVisible(*releaseButton);
     releaseButton->setButtonText("Release");
     releaseButton->setConnectedEdges(Button::ConnectedOnLeft | Button::ConnectedOnRight);
     releaseButton->addListener(this);
 
-    addAndMakeVisible(VST3Button = new TextButton(""));
+    VST3Button = std::make_unique<TextButton>("");
+    addAndMakeVisible(*VST3Button);
     VST3Button->setButtonText("VST3");
     VST3Button->setConnectedEdges(Button::ConnectedOnLeft | Button::ConnectedOnRight);
     VST3Button->addListener(this);
 
-    addAndMakeVisible(cleanBuildButton = new TextButton(""));
+    cleanBuildButton = std::make_unique<TextButton>("");
+    addAndMakeVisible(*cleanBuildButton);
     cleanBuildButton->setButtonText("Clean->Rebuild");
     cleanBuildButton->setConnectedEdges(Button::ConnectedOnLeft | Button::ConnectedOnRight);
     cleanBuildButton->setVisible(false);
     cleanBuildButton->addListener(this);
 
-    addAndMakeVisible(vstFolderButton = new TextButton(""));
+    vstFolderButton = std::make_unique<TextButton>("");
+    addAndMakeVisible(*vstFolderButton);
     vstFolderButton->setButtonText("VST Folder");
     vstFolderButton->setConnectedEdges(Button::ConnectedOnLeft | Button::ConnectedOnRight);
     vstFolderButton->setVisible(false);
     vstFolderButton->addListener(this);
 
-    addAndMakeVisible(dawButton = new TextButton(""));
+    dawButton = std::make_unique<TextButton>("");
+    addAndMakeVisible(*dawButton);
     dawButton->setButtonText("Open DAW");
     dawButton->setConnectedEdges(Button::ConnectedOnLeft | Button::ConnectedOnRight);
     dawButton->setVisible(false);
     dawButton->addListener(this);
 
-    addAndMakeVisible(buildFolderButton = new TextButton(""));
+    buildFolderButton = std::make_unique<TextButton>("");
+    addAndMakeVisible(*buildFolderButton);
     buildFolderButton->setButtonText("Open build folder");
     buildFolderButton->setConnectedEdges(Button::ConnectedOnLeft | Button::ConnectedOnRight);
     buildFolderButton->setVisible(false);
@@ -51,17 +59,7 @@ OptionsSection::OptionsSection()
     setSize(240, 115);
 }
 
-OptionsSection::~OptionsSection()
-{
-	cCMakeButton = nullptr;
-	buildButton = nullptr;
-	releaseButton = nullptr;
-	VST3Button = nullptr;
-	cleanBuildButton = nullptr;
-	vstFolderButton = nullptr;
-	dawButton = nullptr;
-	buildFolderButton = nullptr;
-}
+OptionsSection::~OptionsSection(){}
 
 void OptionsSection::paint (Graphics& g)
 {
@@ -149,49 +147,49 @@ void OptionsSection::setButtonStateAndColour(TextButton* button, bool state)
 void OptionsSection::buttonClicked(Button *button)
 {
 
-    if (button == cCMakeButton)
+    if (button == cCMakeButton.get())
     {
-        setButtonStateAndColour(cCMakeButton, !cCMakeButton->getToggleState());
+        setButtonStateAndColour(cCMakeButton.get(), !cCMakeButton->getToggleState());
         if (cCMakeButton->getToggleState()) {
-            setButtonStateAndColour(releaseButton, false);
-            setButtonStateAndColour(buildButton, false);
-            setButtonStateAndColour(VST3Button, false);
+            setButtonStateAndColour(releaseButton.get(), false);
+            setButtonStateAndColour(buildButton.get(), false);
+            setButtonStateAndColour(VST3Button.get(), false);
         }
     }
 
-    if (button == buildButton)
+    if (button == buildButton.get())
     {
-        setButtonStateAndColour(buildButton, !buildButton->getToggleState());
+        setButtonStateAndColour(buildButton.get(), !buildButton->getToggleState());
         if (buildButton->getToggleState()) {
-            setButtonStateAndColour(cCMakeButton, false);
-            setButtonStateAndColour(releaseButton, false);
-            setButtonStateAndColour(VST3Button, false);
+            setButtonStateAndColour(cCMakeButton.get(), false);
+            setButtonStateAndColour(releaseButton.get(), false);
+            setButtonStateAndColour(VST3Button.get(), false);
         }
     }
 
-    if (button == releaseButton)
+    if (button == releaseButton.get())
     {
-        setButtonStateAndColour(releaseButton, !releaseButton->getToggleState());
+        setButtonStateAndColour(releaseButton.get(), !releaseButton->getToggleState());
         if (releaseButton->getToggleState()) {
-            setButtonStateAndColour(cCMakeButton, false);
-            setButtonStateAndColour(buildButton, false);
-            setButtonStateAndColour(VST3Button, false);
+            setButtonStateAndColour(cCMakeButton.get(), false);
+            setButtonStateAndColour(buildButton.get(), false);
+            setButtonStateAndColour(VST3Button.get(), false);
         }
     }
 
-    if (button == VST3Button)
+    if (button == VST3Button.get())
     {
-        setButtonStateAndColour(VST3Button, !VST3Button->getToggleState());
+        setButtonStateAndColour(VST3Button.get(), !VST3Button->getToggleState());
         if (VST3Button->getToggleState()) {
-            setButtonStateAndColour(cCMakeButton, false);
-            setButtonStateAndColour(releaseButton, false);
-            setButtonStateAndColour(buildButton, false);
+            setButtonStateAndColour(cCMakeButton.get(), false);
+            setButtonStateAndColour(releaseButton.get(), false);
+            setButtonStateAndColour(buildButton.get(), false);
         }
     }
-    if (button == cleanBuildButton) { setButtonStateAndColour(cleanBuildButton, !cleanBuildButton->getToggleState()); }
-    if (button == buildFolderButton) { setButtonStateAndColour(buildFolderButton, !buildFolderButton->getToggleState()); }
-    if (button == vstFolderButton) { setButtonStateAndColour(vstFolderButton, !vstFolderButton->getToggleState()); }
-    if (button == dawButton) { setButtonStateAndColour(dawButton, !dawButton->getToggleState()); }
+    if (button == cleanBuildButton.get())   { setButtonStateAndColour(cleanBuildButton.get(),   !cleanBuildButton   ->getToggleState()); }
+    if (button == buildFolderButton.get())  { setButtonStateAndColour(buildFolderButton.get(),  !buildFolderButton  ->getToggleState()); }
+    if (button == vstFolderButton.get())    { setButtonStateAndColour(vstFolderButton.get(),    !vstFolderButton    ->getToggleState()); }
+    if (button == dawButton.get())          { setButtonStateAndColour(dawButton.get(),          !dawButton          ->getToggleState()); }
 
     vstFolderButton->setVisible(VST3Button->getToggleState());
     dawButton->setVisible(VST3Button->getToggleState());
