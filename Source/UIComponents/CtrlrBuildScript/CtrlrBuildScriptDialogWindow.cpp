@@ -95,29 +95,6 @@ void CtrlrBuildScriptDialogWindow::setButtonStateAndColour(TextButton* button, b
 
 void CtrlrBuildScriptDialogWindow::buttonClicked(Button* buttonThatWasClicked)
 {
-    if (buttonThatWasClicked == optionsSection->getVST3Button())
-    {
-        Component* parentWindow = getParentComponent();
-
-        if (parentWindow != nullptr)
-		{
-            std::cout << "Type of parentWindow: " << typeid(*parentWindow).name() << std::endl;
-            DocumentWindow* dw = dynamic_cast<DocumentWindow*>(parentWindow);
-
-            if (dw != nullptr)
-            {
-                dw->setSize(700, 240);
-            }
-            else
-            {
-                // Print a message if the cast failed
-                std::cout << "Failed to cast parentWindow to DocumentWindow" << std::endl;
-            }
-		}
-
-    }
-
-
     if (buttonThatWasClicked == saveFileButton.get())                                             // Do saveOptionsToFile method when the saveFileButton is clicked
     {
         saveOptionsToFile();

@@ -1,9 +1,8 @@
-#ifndef __CTRLR_MIDI_MON__
-#define __CTRLR_MIDI_MON__
-
+#pragma once
 #include "CtrlrMacros.h"
 #include "CtrlrLog.h"
 #include "CtrlrWindowManagers/CtrlrChildWindowContent.h"
+
 class CtrlrManager;
 
 class CtrlrMIDIMon  : public CtrlrChildWindowContent,
@@ -13,6 +12,7 @@ class CtrlrMIDIMon  : public CtrlrChildWindowContent,
 	public:
 		CtrlrMIDIMon (CtrlrManager &_owner);
 		~CtrlrMIDIMon();
+
 		void messageLogged (CtrlrLog::CtrlrLogMessage _message);
 		String getContentName()					{ return ("MIDI Monitor"); }
 		uint8 getType()							{ return (CtrlrManagerWindowManager::MidiMonWindow); }
@@ -36,6 +36,3 @@ class CtrlrMIDIMon  : public CtrlrChildWindowContent,
 		CodeEditorComponent* outMon;
 		CodeEditorComponent* inMon;
 };
-
-
-#endif

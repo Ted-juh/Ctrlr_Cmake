@@ -1,6 +1,4 @@
-#ifndef __JUCE_HEADER_76E483A2275D56C__
-#define __JUCE_HEADER_76E483A2275D56C__
-
+#pragma once
 #include "CtrlrMacros.h"
 
 class CtrlrPanel;
@@ -49,5 +47,3 @@ private:
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (CtrlrMIDISettingsDevices)
 };
-
-#endif

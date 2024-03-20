@@ -39,6 +39,8 @@ public:
     TextButton* getVSTFolderButton()     const { return vstFolderButton.get(); }
     TextButton* getDAWButton()           const { return dawButton.get(); }
     TextButton* getVST3Button()          const { return VST3Button.get(); }
+
+
 private:
 
     std::unique_ptr<TextButton> cCMakeButton;

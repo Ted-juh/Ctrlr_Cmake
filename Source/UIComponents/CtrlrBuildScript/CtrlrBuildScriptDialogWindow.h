@@ -6,6 +6,7 @@
 #include "OutputSection.h"
 
 class CtrlrManager;
+
 class CtrlrBuildScriptDialogWindow : public CtrlrChildWindowContent,
                                      public Label::Listener,
 									 public Button::Listener

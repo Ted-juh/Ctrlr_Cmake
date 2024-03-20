@@ -25,8 +25,6 @@ public:
     void paint (Graphics& g);
     void resized();
 
-
-
 private:
 	CtrlrChildWindowContent *content;
 	CtrlrWindowManager &owner;

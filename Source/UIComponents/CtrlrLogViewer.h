@@ -28,6 +28,7 @@ public:
 		_none,
 		clearLog
 	};
+
 	void messageLogged (CtrlrLog::CtrlrLogMessage message);
 	String getContentName()					{ return ("Log viewer"); }
 	uint8 getType()							{ return (CtrlrManagerWindowManager::LogViewer); }

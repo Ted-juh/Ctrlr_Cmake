@@ -186,6 +186,8 @@ void OptionsSection::buttonClicked(Button *button)
             setButtonStateAndColour(buildButton.get(), false);
         }
     }
+
+
     if (button == cleanBuildButton.get())   { setButtonStateAndColour(cleanBuildButton.get(),   !cleanBuildButton   ->getToggleState()); }
     if (button == buildFolderButton.get())  { setButtonStateAndColour(buildFolderButton.get(),  !buildFolderButton  ->getToggleState()); }
     if (button == vstFolderButton.get())    { setButtonStateAndColour(vstFolderButton.get(),    !vstFolderButton    ->getToggleState()); }

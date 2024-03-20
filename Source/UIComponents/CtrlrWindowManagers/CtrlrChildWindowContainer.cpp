@@ -26,7 +26,10 @@ void CtrlrChildWindowContainer::paint (Graphics& g)
 
 void CtrlrChildWindowContainer::resized()
 {
-    menuBar->setBounds (0, 0, getWidth() - 0, owner.managerOwner.getProperty(Ids::ctrlrMenuBarHeight));
+	if (menuBar)
+	{
+		menuBar->setBounds(0, 0, getWidth() - 0, owner.managerOwner.getProperty(Ids::ctrlrMenuBarHeight));
+	}
 
 	if (content)
 	{
@@ -34,20 +37,22 @@ void CtrlrChildWindowContainer::resized()
 	}
 }
 
-void CtrlrChildWindowContainer::setContent(CtrlrChildWindowContent *_content)
+
+void CtrlrChildWindowContainer::setContent(CtrlrChildWindowContent* _content)
 {
 	content = _content;
 
 	if (content != nullptr)
 	{
-		deleteAndZero (menuBar);
-		addAndMakeVisible (menuBar = new MenuBarComponent (this));
-		addAndMakeVisible (content);
-		content->setContainer (this);
+		deleteAndZero(menuBar);
+		addAndMakeVisible(menuBar = new MenuBarComponent(this));
+		addAndMakeVisible(content);
+		content->setContainer(this);
 	}
 
 	resized();
 }
+
 
 CtrlrChildWindowContent *CtrlrChildWindowContainer::getContent()
 {

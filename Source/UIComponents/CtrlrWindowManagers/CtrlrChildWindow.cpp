@@ -4,28 +4,28 @@
 #include "CtrlrInlineUtilitiesGUI.h"
 #include "CtrlrChildWindow.h"
 
-CtrlrChildWindow::CtrlrChildWindow (CtrlrWindowManager &_owner)
-    : owner(_owner), DocumentWindow("Child window", Colours::lightgrey, DocumentWindow::allButtons, true), contentComponent(nullptr)
+CtrlrChildWindow::CtrlrChildWindow(CtrlrWindowManager& _owner)
+	: owner(_owner), DocumentWindow("Child window", Colours::lightgrey, DocumentWindow::allButtons, true), contentComponent(nullptr)
 {
-	setUsingNativeTitleBar (true);
-	setResizable(true,false);
+	setUsingNativeTitleBar(true);
+	setResizable(true, false);
 	containerComponent = new CtrlrChildWindowContainer(owner);
-	setContentOwned (containerComponent, true);
+	setContentOwned(containerComponent, true);
 
 	if (!JUCEApplication::isStandaloneApp())
 	{
 		setAlwaysOnTop(true);
 	}
-	addKeyListener (this);
-    setSize (800, 500);
+	addKeyListener(this);
+	setSize(800, 500);
 }
 
 CtrlrChildWindow::~CtrlrChildWindow()
 {
-	deleteAndZero (containerComponent);
+	deleteAndZero(containerComponent);
 	if (contentComponent)
 	{
-		deleteAndZero (contentComponent);
+		deleteAndZero(contentComponent);
 	}
 }
 
@@ -44,7 +44,7 @@ void CtrlrChildWindow::moved()
 	owner.windowChanged(this);
 }
 
-CtrlrChildWindowContent *CtrlrChildWindow::getContent()
+CtrlrChildWindowContent* CtrlrChildWindow::getContent()
 {
 	return (contentComponent);
 }
@@ -61,13 +61,13 @@ uint8 CtrlrChildWindow::getType()
 	}
 }
 
-void CtrlrChildWindow::setContent(CtrlrChildWindowContent *_contentComponent)
+void CtrlrChildWindow::setContent(CtrlrChildWindowContent* _contentComponent)
 {
 	contentComponent = _contentComponent;
 	if (contentComponent != nullptr)
 	{
-		setName (contentComponent->getName());
-		containerComponent->setContent (contentComponent);
+		setName(contentComponent->getName());
+		containerComponent->setContent(contentComponent);
 	}
 }
 
@@ -79,11 +79,11 @@ void CtrlrChildWindow::closeButtonPressed()
 	}
 }
 
-bool CtrlrChildWindow::keyPressed (const KeyPress &key, Component *originatingComponent)
+bool CtrlrChildWindow::keyPressed(const KeyPress& key, Component* originatingComponent)
 {
 	if (contentComponent)
 	{
-		return (contentComponent->keyPressed (key, originatingComponent));
+		return (contentComponent->keyPressed(key, originatingComponent));
 	}
 
 	return (false);
