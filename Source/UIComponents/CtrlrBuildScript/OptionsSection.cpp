@@ -151,9 +151,13 @@ void OptionsSection::buttonClicked(Button *button)
     {
         setButtonStateAndColour(cCMakeButton.get(), !cCMakeButton->getToggleState());
         if (cCMakeButton->getToggleState()) {
-            setButtonStateAndColour(releaseButton.get(), false);
             setButtonStateAndColour(buildButton.get(), false);
+            setButtonStateAndColour(buildFolderButton.get(), false);
+            setButtonStateAndColour(releaseButton.get(), false);
+            setButtonStateAndColour(cleanBuildButton.get(), false);
             setButtonStateAndColour(VST3Button.get(), false);
+            setButtonStateAndColour(vstFolderButton.get(), false);
+            setButtonStateAndColour(dawButton.get(), false);
         }
     }
 
@@ -163,7 +167,12 @@ void OptionsSection::buttonClicked(Button *button)
         if (buildButton->getToggleState()) {
             setButtonStateAndColour(cCMakeButton.get(), false);
             setButtonStateAndColour(releaseButton.get(), false);
+            setButtonStateAndColour(buildFolderButton.get(), false);
+            setButtonStateAndColour(cleanBuildButton.get(), false);
+
             setButtonStateAndColour(VST3Button.get(), false);
+            setButtonStateAndColour(vstFolderButton.get(), false);
+            setButtonStateAndColour(dawButton.get(), false);
         }
     }
 
@@ -173,7 +182,10 @@ void OptionsSection::buttonClicked(Button *button)
         if (releaseButton->getToggleState()) {
             setButtonStateAndColour(cCMakeButton.get(), false);
             setButtonStateAndColour(buildButton.get(), false);
+            setButtonStateAndColour(buildFolderButton.get(), false);
             setButtonStateAndColour(VST3Button.get(), false);
+            setButtonStateAndColour(vstFolderButton.get(), false);
+            setButtonStateAndColour(dawButton.get(), false);
         }
     }
 
@@ -184,6 +196,9 @@ void OptionsSection::buttonClicked(Button *button)
             setButtonStateAndColour(cCMakeButton.get(), false);
             setButtonStateAndColour(releaseButton.get(), false);
             setButtonStateAndColour(buildButton.get(), false);
+            setButtonStateAndColour(buildFolderButton.get(), false);
+            setButtonStateAndColour(cleanBuildButton.get(), false);
+
         }
     }
 

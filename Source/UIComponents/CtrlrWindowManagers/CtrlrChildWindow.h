@@ -12,10 +12,10 @@ class CtrlrManager;
 class CtrlrWindowManager
 {
 public:
-	CtrlrWindowManager(CtrlrManager& _managerOwner) : managerOwner(_managerOwner) {}
+	CtrlrWindowManager						(CtrlrManager& _managerOwner) : managerOwner(_managerOwner) {}
 	virtual ~CtrlrWindowManager() {}
-	virtual void windowChanged(CtrlrChildWindow* windowThatChanged) = 0;
-	virtual void windowClosedButtonPressed(CtrlrChildWindow* windowThatChanged) = 0;
+	virtual void windowChanged				(CtrlrChildWindow* windowThatChanged) = 0;
+	virtual void windowClosedButtonPressed	(CtrlrChildWindow* windowThatChanged) = 0;
 
 	CtrlrManager& managerOwner;
 };
