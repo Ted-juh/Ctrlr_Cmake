@@ -1,7 +1,7 @@
 #include "stdafx.h"
-#include "OutputSection.h"
+#include "CtrlrBuildScriptOutputSection.h"
 
-OutputSection::OutputSection()
+CtrlrBuildScriptOutputSection::CtrlrBuildScriptOutputSection()
 {
     outputView = std::make_unique<TextEditor>("Output");
     addAndMakeVisible(*outputView);
@@ -21,9 +21,9 @@ OutputSection::OutputSection()
     setSize(240, 300);
 }
 
-OutputSection::~OutputSection() {}
+CtrlrBuildScriptOutputSection::~CtrlrBuildScriptOutputSection() {}
 
-void OutputSection::paint(Graphics& g)
+void CtrlrBuildScriptOutputSection::paint(Graphics& g)
 {
     const int buttonHeight = getHeight() / 5;
     
@@ -36,13 +36,13 @@ void OutputSection::paint(Graphics& g)
     g.drawText("Output",                    5, 0, getWidth(), buttonHeight, Justification::left, true);
 }
 
-void OutputSection::paintOverChildren(Graphics& g)
+void CtrlrBuildScriptOutputSection::paintOverChildren(Graphics& g)
 {
     g.setColour(Colours::darkgrey);
     g.drawRect(0, 0, getWidth(), getHeight(), 1.0);
 }
 
-void OutputSection::resized()
+void CtrlrBuildScriptOutputSection::resized()
 {
     const int buttonHeight = getHeight() / 12;
 
@@ -50,7 +50,7 @@ void OutputSection::resized()
     clearButton->setBounds(getWidth() - 100, getHeight() - 40, 85, 35);
 }
 
-void OutputSection::buttonClicked(Button* button)
+void CtrlrBuildScriptOutputSection::buttonClicked(Button* button)
 {
 	if (button == clearButton.get())
 	{

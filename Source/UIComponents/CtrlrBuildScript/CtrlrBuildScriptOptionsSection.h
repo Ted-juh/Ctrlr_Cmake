@@ -1,12 +1,11 @@
 #pragma once
-
 #include "stdafx.h"
 
-class OptionsSection : public Component, public Button::Listener
+class CtrlrBuildScriptOptionsSection : public Component, public Button::Listener
 {
 public:
-	OptionsSection();
-	~OptionsSection();
+    CtrlrBuildScriptOptionsSection();
+	~CtrlrBuildScriptOptionsSection();
 
 	void paint(Graphics& g) override;
     void paintOverChildren(Graphics& g) override;
@@ -40,7 +39,6 @@ public:
     TextButton* getDAWButton()           const { return dawButton.get(); }
     TextButton* getVST3Button()          const { return VST3Button.get(); }
 
-
 private:
 
     std::unique_ptr<TextButton> cCMakeButton;
@@ -51,7 +49,5 @@ private:
     std::unique_ptr<TextButton> buildFolderButton;
     std::unique_ptr<TextButton> vstFolderButton;
     std::unique_ptr<TextButton> dawButton;
-
-
 };
 

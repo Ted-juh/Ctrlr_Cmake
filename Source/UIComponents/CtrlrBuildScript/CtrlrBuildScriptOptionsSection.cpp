@@ -1,8 +1,8 @@
 #include "stdafx.h"
-#include "OptionsSection.h"
-#include "CtrlrBuildScriptDialogWindow.h"
+#include "CtrlrBuildScriptOptionsSection.h"
+#include "CtrlrBuildScriptMain.h"
 
-OptionsSection::OptionsSection()
+CtrlrBuildScriptOptionsSection::CtrlrBuildScriptOptionsSection()
 {
     cCMakeButton = std::make_unique<TextButton>("");
     addAndMakeVisible(*cCMakeButton);
@@ -59,9 +59,9 @@ OptionsSection::OptionsSection()
     setSize(240, 115);
 }
 
-OptionsSection::~OptionsSection(){}
+CtrlrBuildScriptOptionsSection::~CtrlrBuildScriptOptionsSection(){}
 
-void OptionsSection::paint (Graphics& g)
+void CtrlrBuildScriptOptionsSection::paint (Graphics& g)
 {
     const int space = getHeight() / 10;
     const int buttonHeight = (getHeight() - space) / 4;
@@ -91,7 +91,7 @@ void OptionsSection::paint (Graphics& g)
     g.fillRect(                                             0,      buttonHeight * 3 + space,    getWidth(),        buttonHeight);
 }
 
-void OptionsSection::paintOverChildren(Graphics& g)
+void CtrlrBuildScriptOptionsSection::paintOverChildren(Graphics& g)
 {
 
     const int space = getHeight() / 10;
@@ -112,7 +112,7 @@ void OptionsSection::paintOverChildren(Graphics& g)
 
 }
 
-void OptionsSection::resized()
+void CtrlrBuildScriptOptionsSection::resized()
 {
     const int space = getHeight() / 10;
     const int buttonHeight = (getHeight() - space) / 4;
@@ -135,7 +135,7 @@ void OptionsSection::resized()
 
 }
 
-void OptionsSection::setButtonStateAndColour(TextButton* button, bool state)
+void CtrlrBuildScriptOptionsSection::setButtonStateAndColour(TextButton* button, bool state)
 {
     button->setToggleState(state, dontSendNotification);
     button->setColour(TextButton::buttonColourId, state ? Colours::darkgrey : Colours::whitesmoke);         // on/off
@@ -144,7 +144,7 @@ void OptionsSection::setButtonStateAndColour(TextButton* button, bool state)
     button->setColour(TextButton::textColourOnId, state ? Colours::white : Colours::white);			        // on/off          
 }
 
-void OptionsSection::buttonClicked(Button *button)
+void CtrlrBuildScriptOptionsSection::buttonClicked(Button *button)
 {
 
     if (button == cCMakeButton.get())
@@ -192,6 +192,7 @@ void OptionsSection::buttonClicked(Button *button)
     if (button == VST3Button.get())
     {
         setButtonStateAndColour(VST3Button.get(), !VST3Button->getToggleState());
+
         if (VST3Button->getToggleState()) {
             setButtonStateAndColour(cCMakeButton.get(), false);
             setButtonStateAndColour(releaseButton.get(), false);
@@ -199,7 +200,21 @@ void OptionsSection::buttonClicked(Button *button)
             setButtonStateAndColour(buildFolderButton.get(), false);
             setButtonStateAndColour(cleanBuildButton.get(), false);
 
+            ComponentAnimator& animator = Desktop::getInstance().getAnimator();
+
+            animator.animateComponent(((CtrlrChildWindow*)findParentComponentOfClass<CtrlrChildWindow>()),
+                            Rectangle<int>(300, 300, 450, 1000), 1.0f, 200, false, 0.0, 0.0);
+
+            auto* parentWindow = findParentComponentOfClass<CtrlrBuildScriptMain>();
+            if (parentWindow) { parentWindow->animateButtons(); }
+
         }
+        else 
+        {
+            ComponentAnimator& animator = Desktop::getInstance().getAnimator();
+            animator.animateComponent(((CtrlrChildWindow*)findParentComponentOfClass<CtrlrChildWindow>()),
+                			Rectangle<int>(300, 300, 450, 600), 1.0f,  200, false, 0.0, 0.0);
+		}
     }
 
 
@@ -213,5 +228,5 @@ void OptionsSection::buttonClicked(Button *button)
     cleanBuildButton->setVisible(releaseButton->getToggleState());
     buildFolderButton->setVisible(releaseButton->getToggleState() || buildButton->getToggleState());
 
-    ((CtrlrBuildScriptDialogWindow*)findParentComponentOfClass<CtrlrBuildScriptDialogWindow>())->setOkButtonVisible(cCMakeButton->getToggleState() || buildButton->getToggleState() || releaseButton->getToggleState() || VST3Button->getToggleState());
+    ((CtrlrBuildScriptMain*)findParentComponentOfClass<CtrlrBuildScriptMain>())->setOkButtonVisible(cCMakeButton->getToggleState() || buildButton->getToggleState() || releaseButton->getToggleState() || VST3Button->getToggleState());
 }

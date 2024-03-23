@@ -1,18 +1,22 @@
 #include "stdafx.h"
 #include "CtrlrManager/CtrlrManager.h"
-#include "CtrlrBuildScriptDialogWindow.h"
+#include "CtrlrBuildScriptMain.h"
 
-CtrlrBuildScriptDialogWindow::CtrlrBuildScriptDialogWindow(CtrlrManager &_owner) 
+CtrlrBuildScriptMain::CtrlrBuildScriptMain(CtrlrManager &_owner) 
     : owner(_owner)
 {
-    ideSection = std::make_unique<IDESection>();
+    ideSection = std::make_unique<CtrlrBuildScriptIDESection>();
     addAndMakeVisible (*ideSection);
 
-    optionsSection = std::make_unique<OptionsSection>();
+    optionsSection = std::make_unique<CtrlrBuildScriptOptionsSection>();
     addAndMakeVisible (*optionsSection);
 
-    outputSection = std::make_unique<OutputSection>();
+    outputSection = std::make_unique<CtrlrBuildScriptOutputSection>();
     addAndMakeVisible (*outputSection);
+
+    vst3Section = std::make_unique<CtrlrBuildScriptVST3Section>();
+    vst3Section->setVisible(false);
+    addAndMakeVisible (*vst3Section);
 
     saveFileButton = std::make_unique<TextButton>("");
     addAndMakeVisible (*saveFileButton);
@@ -32,17 +36,17 @@ CtrlrBuildScriptDialogWindow::CtrlrBuildScriptDialogWindow(CtrlrManager &_owner)
     okButton->setVisible(false);
     okButton->addListener(this);
 
-    setSize(500, 240);
+    setSize(240, 600);
 }
 
-CtrlrBuildScriptDialogWindow::~CtrlrBuildScriptDialogWindow(){}
+CtrlrBuildScriptMain::~CtrlrBuildScriptMain(){}
 
-void CtrlrBuildScriptDialogWindow::paint(Graphics& g)
+void CtrlrBuildScriptMain::paint(Graphics& g)
 {
     g.fillAll(Colours::lightgrey);
 }
 
-void CtrlrBuildScriptDialogWindow::paintOverChildren(Graphics& g)
+void CtrlrBuildScriptMain::paintOverChildren(Graphics& g)
 {
     const int startRect = getWidth() * 0.05;
     const int rectWidth = getWidth() - (startRect * 2);
@@ -63,7 +67,7 @@ void CtrlrBuildScriptDialogWindow::paintOverChildren(Graphics& g)
 	}
 }
 
-void CtrlrBuildScriptDialogWindow::resized()
+void CtrlrBuildScriptMain::resized()
 {
 
     const int startRect         = getWidth() * 0.05;
@@ -77,6 +81,8 @@ void CtrlrBuildScriptDialogWindow::resized()
     ideSection          ->setBounds(startRect,                          rectLineHeight * 1,        rectWidth,          buttonHeight * 5);
     optionsSection      ->setBounds(startRect,                          rectLineHeight * 12,       rectWidth,          buttonHeight * 5);
 
+    vst3Section		    ->setBounds(startRect,                          rectLineHeight * 23,       rectWidth,          buttonHeight * 5);
+
     saveFileButton      ->setBounds(startRect,                          rectLineHeight * 23,       buttonSpace,        buttonHeight);
     loadFileButton      ->setBounds(startRect + buttonSpace,            rectLineHeight * 23,       buttonSpace,        buttonHeight);
 
@@ -84,7 +90,7 @@ void CtrlrBuildScriptDialogWindow::resized()
     outputSection       ->setBounds(startRect,                          rectLineHeight * 26,       rectWidth,          buttonHeight * 7);
 }
 
-void CtrlrBuildScriptDialogWindow::setButtonStateAndColour(TextButton* button, bool state)
+void CtrlrBuildScriptMain::setButtonStateAndColour(TextButton* button, bool state)
 {
     button->setToggleState(state, dontSendNotification);    // ON                   OFF
     button->setColour(TextButton::buttonColourId,   state ? Colours::darkgrey : Colours::whitesmoke);       
@@ -93,8 +99,9 @@ void CtrlrBuildScriptDialogWindow::setButtonStateAndColour(TextButton* button, b
     button->setColour(TextButton::textColourOnId,   state ? Colours::white : Colours::white);			    
 }
 
-void CtrlrBuildScriptDialogWindow::buttonClicked(Button* buttonThatWasClicked)
+void CtrlrBuildScriptMain::buttonClicked(Button* buttonThatWasClicked)
 {
+
     if (buttonThatWasClicked == saveFileButton.get())                                             // Do saveOptionsToFile method when the saveFileButton is clicked
     {
         saveOptionsToFile();
@@ -149,16 +156,16 @@ void CtrlrBuildScriptDialogWindow::buttonClicked(Button* buttonThatWasClicked)
         }
  }
 
-void CtrlrBuildScriptDialogWindow::setOkButtonVisible(const bool isVisible)
+void CtrlrBuildScriptMain::setOkButtonVisible(const bool isVisible)
 {
 	okButton->setVisible(isVisible);
 }
 
-void CtrlrBuildScriptDialogWindow::labelTextChanged(Label* labelThatHasChanged){}
+void CtrlrBuildScriptMain::labelTextChanged(Label* labelThatHasChanged){}
 
-void CtrlrBuildScriptDialogWindow::buttonStateChanged(Button* button){}
+void CtrlrBuildScriptMain::buttonStateChanged(Button* button){}
 
-void CtrlrBuildScriptDialogWindow::checkCMake()                                                                     // Check if CMake is installed and added to the PATH
+void CtrlrBuildScriptMain::checkCMake()                                                                     // Check if CMake is installed and added to the PATH
 {
     // Add CMake to the PATH
     String cmakePath = "C:\\Program Files\\CMake\\bin";                                                             // Actual path to CMake bin directory
@@ -190,7 +197,7 @@ void CtrlrBuildScriptDialogWindow::checkCMake()                                 
      }
 }
 
-void CtrlrBuildScriptDialogWindow::generateBuildFiles()										    // Re-Generate the build folder + build/solution files   
+void CtrlrBuildScriptMain::generateBuildFiles()										    // Re-Generate the build folder + build/solution files   
 {
     std::map<int, String> generatorMap =
     {
@@ -239,7 +246,7 @@ void CtrlrBuildScriptDialogWindow::generateBuildFiles()										    // Re-Gener
 	}
 }
 
-void CtrlrBuildScriptDialogWindow::openBuildFolder()
+void CtrlrBuildScriptMain::openBuildFolder()
 {
     String projectFolderPath = ideSection->getBuildFolderPath();
     String buildFolderPath = projectFolderPath + "\\build";
@@ -250,7 +257,7 @@ void CtrlrBuildScriptDialogWindow::openBuildFolder()
     system(openFolderCommand.toStdString().c_str());
 }
 
-void CtrlrBuildScriptDialogWindow::buildFiles()
+void CtrlrBuildScriptMain::buildFiles()
 {
     String projectFolderPath = ideSection->getBuildFolderPath();
     String buildFolderPath = projectFolderPath + "\\build";
@@ -274,7 +281,7 @@ void CtrlrBuildScriptDialogWindow::buildFiles()
 	} 
 }
 
-void CtrlrBuildScriptDialogWindow::saveOptionsToFile()
+void CtrlrBuildScriptMain::saveOptionsToFile()
 {
     FileChooser chooser("Save options to file", File::getSpecialLocation(File::userDesktopDirectory), "*.bso", true);
 
@@ -315,7 +322,7 @@ void CtrlrBuildScriptDialogWindow::saveOptionsToFile()
     }
 }
 
-void CtrlrBuildScriptDialogWindow::loadOptionsFromFile()
+void CtrlrBuildScriptMain::loadOptionsFromFile()
 {
 	FileChooser chooser("Load options from file", File::getSpecialLocation(File::userDesktopDirectory), "*.bso", true);
 
@@ -424,3 +431,14 @@ void CtrlrBuildScriptDialogWindow::loadOptionsFromFile()
 		}
 	}
 }  
+
+
+void CtrlrBuildScriptMain::animateButtons()
+{
+   ComponentAnimator& animator = Desktop::getInstance().getAnimator();
+
+   animator.animateComponent(loadFileButton.get(), 
+       loadFileButton->getBounds().translated(0,450), 1.0f, 200, false, 0.0, 0.0);
+
+
+}

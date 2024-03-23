@@ -7,7 +7,7 @@
 #include "CtrlrMIDI/CtrlrMIDIMon.h"
 #include "CtrlrLogViewer.h"
 #include "CtrlrMIDI/CtrlrMIDICalculator.h"
-#include "CtrlrBuildScript/CtrlrBuildScriptDialogWindow.h"
+#include "CtrlrBuildScript/CtrlrBuildScriptMain.h"
 
 CtrlrManagerWindowManager::CtrlrManagerWindowManager(CtrlrManager &_owner)
     : owner(_owner), managerTree(Ids::uiWindowManager), CtrlrWindowManager(_owner)
@@ -199,7 +199,7 @@ CtrlrChildWindow *CtrlrManagerWindowManager::createWindow(const CtrlrManagerWind
 			break;
 
 		case CtrlrManagerWindowManager::BuildScript:
-			w->setContent(new CtrlrBuildScriptDialogWindow (owner));
+			w->setContent(new CtrlrBuildScriptMain (owner));
 			break;
 
         case CtrlrManagerWindowManager::Repository:

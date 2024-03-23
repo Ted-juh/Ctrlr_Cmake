@@ -12,6 +12,7 @@ CtrlrChildWindowContainer::CtrlrChildWindowContainer (CtrlrWindowManager &_owner
       menuBar (0)
 {
     addAndMakeVisible (menuBar = new MenuBarComponent (this));
+
     setSize (600, 400);
 }
 

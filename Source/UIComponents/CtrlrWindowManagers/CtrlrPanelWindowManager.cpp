@@ -9,7 +9,7 @@
 #include "CtrlrLua/CtrlrLuaConsole.h"
 #include "CtrlrLua/MethodEditor/CtrlrLuaMethodEditor.h"
 #include "CtrlrMIDI/CtrlrMIDISettingsDialog.h"
-#include "CtrlrBuildScript/CtrlrBuildScriptDialogWindow.h"
+#include "CtrlrBuildScript/CtrlrBuildScriptMain.h"
 #include "CtrlrUtilities.h"
 
 CtrlrPanelWindowManager::CtrlrPanelWindowManager(CtrlrPanel &_owner)

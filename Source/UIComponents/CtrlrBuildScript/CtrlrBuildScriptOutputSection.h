@@ -1,10 +1,10 @@
 #include "stdafx.h"
 
-class OutputSection : public Component, public Button::Listener
+class CtrlrBuildScriptOutputSection : public Component, public Button::Listener
 {
 	public:
-	OutputSection();
-	~OutputSection();
+	CtrlrBuildScriptOutputSection();
+	~CtrlrBuildScriptOutputSection();
 
 	void paint(Graphics& g);
 	void paintOverChildren(Graphics& g);

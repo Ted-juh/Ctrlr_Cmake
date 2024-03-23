@@ -1,7 +1,7 @@
 #include "stdafx.h"
-#include "IDESection.h"
+#include "CtrlrBuildScriptIDESection.h"
 
-IDESection::IDESection()
+CtrlrBuildScriptIDESection::CtrlrBuildScriptIDESection()
     {
         lIDE = std::make_unique<Label>("");
         addAndMakeVisible(*lIDE);
@@ -48,9 +48,9 @@ IDESection::IDESection()
         setSize(240, 125);
     }
 
-    IDESection::~IDESection(){}
+CtrlrBuildScriptIDESection::~CtrlrBuildScriptIDESection(){}
 
-    void IDESection::paint(Graphics& g) 
+    void CtrlrBuildScriptIDESection::paint(Graphics& g)
     {
         const int buttonHeight = getHeight() / 5;
 
@@ -66,7 +66,7 @@ IDESection::IDESection()
         g.fillRect(                             0, buttonHeight,    getWidth(),     getHeight());
     }
 
-    void IDESection::paintOverChildren(Graphics& g)
+    void CtrlrBuildScriptIDESection::paintOverChildren(Graphics& g)
     {
         const int amountBut = 4;
         const int buttonSpace = getWidth() / amountBut;
@@ -83,7 +83,7 @@ IDESection::IDESection()
         g.drawLine(0, buttonHeight * 5, getWidth(), buttonHeight * 5, 1.0);
 	}
 
-    void IDESection::resized()
+    void CtrlrBuildScriptIDESection::resized()
     {
         const int amountBut = 4;
         const int buttonSpace = getWidth() / amountBut;
@@ -100,7 +100,7 @@ IDESection::IDESection()
         lDAWFolder->setBounds(                  0 + buttonSpace,    buttonHeight * 4,   buttonSpace * 3,    buttonHeight);
     }
 
-    void IDESection::buttonClicked(Button* button)
+    void CtrlrBuildScriptIDESection::buttonClicked(Button* button)
     {
         if (button = bBuildFolder.get())
         {

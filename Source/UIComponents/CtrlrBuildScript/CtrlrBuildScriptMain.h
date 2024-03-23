@@ -1,20 +1,21 @@
 #pragma once
 #include "CtrlrWindowManagers/CtrlrChildWindowContent.h"
 #include "CtrlrWindowManagers/CtrlrManagerWindowManager.h"
-#include "IDESection.h"
-#include "OptionsSection.h"
-#include "OutputSection.h"
+#include "CtrlrBuildScriptIDESection.h"
+#include "CtrlrBuildScriptOptionsSection.h"
+#include "CtrlrBuildScriptOutputSection.h"
+#include "CtrlrBuildScriptVST3Section.h"
 
 class CtrlrManager;
 
-class CtrlrBuildScriptDialogWindow : public CtrlrChildWindowContent,
+class CtrlrBuildScriptMain : public CtrlrChildWindowContent,
                                      public Label::Listener,
 									 public Button::Listener
 {
  public:
 
-    CtrlrBuildScriptDialogWindow(CtrlrManager &_owner);
-    ~CtrlrBuildScriptDialogWindow();
+    CtrlrBuildScriptMain(CtrlrManager &_owner);
+    ~CtrlrBuildScriptMain();
 
     String getContentName()             { return ("Build Script Editor"); }
     uint8 getType()                     { return (CtrlrManagerWindowManager::BuildScript);}
@@ -39,18 +40,21 @@ class CtrlrBuildScriptDialogWindow : public CtrlrChildWindowContent,
     void loadOptionsFromFile();
 
     int getIDEIndex() { return ideSection->getIDEIndex(); }
+
+    void animateButtons();
     
 private:
     CtrlrManager &owner;
 
-    std::unique_ptr<IDESection>               ideSection;
-    std::unique_ptr<OptionsSection>           optionsSection;
-    std::unique_ptr<OutputSection>	          outputSection;
+    std::unique_ptr<CtrlrBuildScriptIDESection>               ideSection;
+    std::unique_ptr<CtrlrBuildScriptOptionsSection>           optionsSection;
+    std::unique_ptr<CtrlrBuildScriptOutputSection>	          outputSection;
+    std::unique_ptr<CtrlrBuildScriptVST3Section>              vst3Section;
 
     std::unique_ptr<TextButton>               saveFileButton;
     std::unique_ptr<TextButton>               loadFileButton;
 
     std::unique_ptr<TextButton>               okButton;
 
-    JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(CtrlrBuildScriptDialogWindow)
+    JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(CtrlrBuildScriptMain)
 };

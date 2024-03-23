@@ -381,16 +381,16 @@ target_sources(Ctrlr
 	Source/UIComponents/CtrlrApplicationWindow/CtrlrSettings.h
 
 	# Source files	\UIComponents\CtrlrBuildScript
-	Source/UIComponents/CtrlrBuildScript/CtrlrBuildScriptDialogWindow.cpp
-	Source/UIComponents/CtrlrBuildScript/CtrlrBuildScriptDialogWindow.h
-	Source/UIComponents/CtrlrBuildScript/IDEsection.cpp
-	Source/UIComponents/CtrlrBuildScript/IDEsection.h
-	Source/UIComponents/CtrlrBuildScript/OptionsSection.cpp
-	Source/UIComponents/CtrlrBuildScript/OptionsSection.h
-	Source/UIComponents/CtrlrBuildScript/OutputSection.cpp
-	Source/UIComponents/CtrlrBuildScript/OutputSection.h
-	Source/UIComponents/CtrlrBuildScript/VST3Section.cpp
-	Source/UIComponents/CtrlrBuildScript/VST3Section.h
+	Source/UIComponents/CtrlrBuildScript/CtrlrBuildScriptMain.cpp
+	Source/UIComponents/CtrlrBuildScript/CtrlrBuildScriptMain.h
+	Source/UIComponents/CtrlrBuildScript/CtrlrBuildScriptIDEsection.cpp
+	Source/UIComponents/CtrlrBuildScript/CtrlrBuildScriptIDEsection.h
+	Source/UIComponents/CtrlrBuildScript/CtrlrBuildScriptOptionsSection.cpp
+	Source/UIComponents/CtrlrBuildScript/CtrlrBuildScriptOptionsSection.h
+	Source/UIComponents/CtrlrBuildScript/CtrlrBuildScriptOutputSection.cpp
+	Source/UIComponents/CtrlrBuildScript/CtrlrBuildScriptOutputSection.h
+	Source/UIComponents/CtrlrBuildScript/CtrlrBuildScriptVST3Section.cpp
+	Source/UIComponents/CtrlrBuildScript/CtrlrBuildScriptVST3Section.h
 
 	# Source files	\UIComponents\CtrlrComponents
 	Source/UIComponents/CtrlrComponents/CtrlrCombo.cpp
