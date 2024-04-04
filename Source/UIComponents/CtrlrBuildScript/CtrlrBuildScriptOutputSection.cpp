@@ -63,6 +63,11 @@ void CtrlrBuildScriptOutputSection::insertTextAtCaret(const String &text)
     outputView->insertTextAtCaret(text); 
 }
 
+void CtrlrBuildScriptOutputSection::setCaretPosition(int newPosition)
+{ 
+    outputView->setCaretPosition(newPosition); 
+}
+
 void CtrlrBuildScriptOutputSection::setFont(const Font &font)
 {
     outputView->setFont(font);

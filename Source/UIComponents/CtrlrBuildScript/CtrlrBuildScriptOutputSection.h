@@ -15,6 +15,7 @@ class CtrlrBuildScriptOutputSection : public Component, public Button::Listener
 	TextEditor& getOutputView() { return *outputView; }
 
 	void insertTextAtCaret(const String &text);
+	void setCaretPosition(int newPosition);
 	void setFont(const Font &font);
 
 	private:

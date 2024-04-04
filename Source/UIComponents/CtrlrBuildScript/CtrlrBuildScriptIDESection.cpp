@@ -1,3 +1,4 @@
+
 #include "stdafx.h"
 #include "CtrlrBuildScriptIDESection.h"
 
@@ -50,11 +51,11 @@ CtrlrBuildScriptIDESection::~CtrlrBuildScriptIDESection(){}
 
 void CtrlrBuildScriptIDESection::paint(Graphics& g)
     {
+        const int w = getWidth();
+        const int y = getHeight();
         const int buttonHeight = getHeight() / 5;
-        int w = getWidth();
-        int y = getHeight();
-        int qy = static_cast<int>(y / 25);
-        int qx = w - static_cast<int>(qy * 5);
+        const int qmX = static_cast<int>(w * 0.95f);
+        const int qmY = static_cast<int>(y * 0.02f);
 
         // Space for Title Folder Options
         g.setColour(Colours::darkgrey);
@@ -68,13 +69,13 @@ void CtrlrBuildScriptIDESection::paint(Graphics& g)
         g.fillRect(                             0,          buttonHeight,    getWidth(),     getHeight());
         // Space for Question Mark
         g.setColour(Colours::darkgrey);
-        g.fillRect(                             qx,         0 + qy,               buttonHeight - qy,     buttonHeight -  2 * qy);
+        g.fillRect(                             qmX,         qmY,               buttonHeight - qmY,     buttonHeight -  (2 * qmY));
         g.setColour(Colours::whitesmoke);
-        g.drawRect(                             qx,         0 + qy,               buttonHeight - qy,     buttonHeight -  2 * qy,    1);
+        g.drawRect(                             qmX,         qmY,               buttonHeight - qmY,     buttonHeight -  (2 * qmY),    1);
         g.setFont(Font(17.0f, Font::bold));
-        g.drawText("?",                         qx,         0 + qy,               buttonHeight - qy,     buttonHeight -  2 * qy, Justification::centred, true);
+        g.drawText("?",                         qmX,         qmY,               buttonHeight - qmY,     buttonHeight -  (2 * qmY), Justification::centred, true);
 
-        questionMarkArea = juce::Rectangle<int>(qx, 0 + qy, buttonHeight - qy, buttonHeight - 2 * qy);
+        questionMarkArea = juce::Rectangle<int>(qmX, 0 + qmY, buttonHeight - qmY, buttonHeight - (2 * qmY));
     }
 
     void CtrlrBuildScriptIDESection::paintOverChildren(Graphics& g)
@@ -157,7 +158,6 @@ void CtrlrBuildScriptIDESection::paint(Graphics& g)
             if (outputSection != nullptr)
             {
                 outputSection->getOutputView().clear();
-                outputSection->insertTextAtCaret("\n");
                 outputSection->setFont(Font(15.0f, Font::bold));
                 outputSection->insertTextAtCaret("Choose IDE: \n");
                 outputSection->setFont(Font(14.0f, Font::plain));

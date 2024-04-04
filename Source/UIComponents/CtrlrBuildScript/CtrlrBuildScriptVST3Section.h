@@ -1,5 +1,6 @@
 #pragma once
 #include "stdafx.h"
+#include "CtrlrBuildScriptOutputSection.h"
 
 class LimitedLengthLabel : public Label
 {
@@ -43,7 +44,7 @@ class CtrlrBuildScriptVST3Section : public Component, public Button::Listener
 {
 
 public:
-	CtrlrBuildScriptVST3Section();
+	CtrlrBuildScriptVST3Section(CtrlrBuildScriptOutputSection *outputSection);
 	~CtrlrBuildScriptVST3Section();
 
 	void paint(Graphics& g);
@@ -52,6 +53,7 @@ public:
 	void resized();
 
 	void buttonClicked(Button* button);
+	void mouseDown(const MouseEvent& event);
 
 	String getProductName() { return tProductName->getText(); }
 	String getVersion() { return tVersion->getText(); }
@@ -129,5 +131,11 @@ private:
 
 	std::unique_ptr<Label> lVSTMidiOutputs;
 	std::unique_ptr<ComboBox> tVSTMidiOutputs;
+
+	juce::Rectangle<int> questionMarkAreaVST3;
+	CtrlrBuildScriptOutputSection* outputSection;
+
+	JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(CtrlrBuildScriptVST3Section)
+
 };
 

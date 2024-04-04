@@ -1,9 +1,8 @@
-#pragma once
 #include "stdafx.h"
 #include "CtrlrBuildScriptVST3Section.h"
 #include "CtrlrBuildScriptMain.h"
 
-CtrlrBuildScriptVST3Section::CtrlrBuildScriptVST3Section()
+CtrlrBuildScriptVST3Section::CtrlrBuildScriptVST3Section(CtrlrBuildScriptOutputSection *outputSection)	: outputSection(outputSection)
 {
 	// First row
 	lProductName = std::make_unique<Label>("");
@@ -162,9 +161,12 @@ CtrlrBuildScriptVST3Section::~CtrlrBuildScriptVST3Section(){}
 
 void CtrlrBuildScriptVST3Section::paint(Graphics& g)
 {
-    //const int amountBut = 4;
-    //const int buttonSpace = getWidth() / amountBut;
-    const int buttonHeight = getHeight() / 7;
+	const int w = getWidth();
+	const int y = getHeight();
+ 	const int buttonHeight = y / 7;
+	const int qmX = (w * 0.95);
+    const int qmY = (y * 0.02);
+    
 
 	g.setColour(Colours::darkgrey);
 	g.fillRect(0, 0, getWidth(), buttonHeight);
@@ -178,6 +180,16 @@ void CtrlrBuildScriptVST3Section::paint(Graphics& g)
 
 	g.setColour(Colours::black);
 	g.drawRect(0, 0, getWidth(), getHeight());
+
+    // Space for Question Mark
+    g.setColour(Colours::darkgrey);
+    g.fillRect(                             qmX,         qmY,      buttonHeight - qmY,     buttonHeight -  (2 * qmY));
+    g.setColour(Colours::whitesmoke);
+    g.drawRect(                             qmX,         qmY,      buttonHeight - qmY,     buttonHeight -  (2 * qmY),    1);
+    g.setFont(Font(17.0f, Font::bold));
+    g.drawText("?",                         qmX,         qmY,      buttonHeight - qmY,     buttonHeight -  (2 * qmY), Justification::centred, true);
+
+    questionMarkAreaVST3 = juce::Rectangle<int>(qmX, 0 + qmY, buttonHeight - qmY, buttonHeight - (2 * qmY));
 }
 
 void CtrlrBuildScriptVST3Section::paintOverChildren(Graphics& g)
@@ -252,3 +264,67 @@ void CtrlrBuildScriptVST3Section::buttonClicked(Button* button)
 
 }
 
+void CtrlrBuildScriptVST3Section::mouseDown(const juce::MouseEvent& event)
+{
+	        if (questionMarkAreaVST3.contains(event.getPosition()))
+        {
+            if (outputSection != nullptr)
+            {
+                outputSection->getOutputView().clear();
+
+                outputSection->setFont(Font(15.0f, Font::bold));
+                outputSection->insertTextAtCaret("Product Name: \n");
+                outputSection->setFont(Font(14.0f, Font::plain));
+                outputSection->insertTextAtCaret(
+                                        "The name of the output built by this target.\n\n");
+                outputSection->setFont(Font(15.0f, Font::bold));
+                outputSection->insertTextAtCaret("Version: \n");
+                outputSection->setFont(Font(14.0f, Font::plain));
+                outputSection->insertTextAtCaret( 
+                                        "Version number in format: major.minor.bugfix .\n\n");
+                outputSection->setFont(Font(15.0f, Font::bold));
+                outputSection->insertTextAtCaret("Plugin Name \n");
+                outputSection->setFont(Font(14.0f, Font::plain));
+                outputSection->insertTextAtCaret(
+                                        "Name of the Plugin that will be displayed in DAW.\n\n");
+                outputSection->setFont(Font(15.0f, Font::bold));
+                outputSection->insertTextAtCaret("Description: \n");
+                outputSection->setFont(Font(14.0f, Font::plain));
+                outputSection->insertTextAtCaret(
+                                        "Short description of the plugin or leave blank.\n\n");
+				outputSection->setFont(Font(15.0f, Font::bold));
+				outputSection->insertTextAtCaret("Plugin Manufacturer Code: \n");
+				outputSection->setFont(Font(14.0f, Font::plain));
+				outputSection->insertTextAtCaret(
+										"Manufacturer code of the plugin. 4-Character unique-id. Use one uppercase letter.\n\n");
+				outputSection->setFont(Font(15.0f, Font::bold));
+				outputSection->insertTextAtCaret("Plugin Code: \n");
+				outputSection->setFont(Font(14.0f, Font::plain));
+				outputSection->insertTextAtCaret(
+										"A 4-character unique ID of your plugin. Use one uppercase letter.\n\n");
+				outputSection->setFont(Font(15.0f, Font::bold));
+				outputSection->insertTextAtCaret("Bundle ID: \n");
+				outputSection->setFont(Font(14.0f, Font::plain));
+				outputSection->insertTextAtCaret(
+										"Unique identifier for the plugin. Use notation: com.yourcompany.productname .\n\n");
+				outputSection->setFont(Font(15.0f, Font::bold));
+				outputSection->insertTextAtCaret("Company Name: \n");
+				outputSection->setFont(Font(14.0f, Font::plain));
+				outputSection->insertTextAtCaret(
+										"Name of the company that owns the plugin.\n\n");
+				outputSection->setFont(Font(15.0f, Font::bold));
+				outputSection->insertTextAtCaret("Needs Midi Input/ Output: \n");
+				outputSection->setFont(Font(14.0f, Font::plain));
+				outputSection->insertTextAtCaret(
+										"Does the plugin need Midi Input/ Output? Yes or No?.\n\n");
+				outputSection->setFont(Font(15.0f, Font::bold));
+				outputSection->insertTextAtCaret("VST Midi Inputs/ Outputs: \n");
+				outputSection->setFont(Font(14.0f, Font::plain));
+				outputSection->insertTextAtCaret(
+										"Number of Midi Inputs/ Outputs for the VST plugin.\n\n");
+
+				outputSection->setCaretPosition(0);																				
+
+            }
+        }
+}

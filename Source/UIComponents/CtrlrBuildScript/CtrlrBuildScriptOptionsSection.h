@@ -1,10 +1,12 @@
 #pragma once
 #include "stdafx.h"
+#include "CtrlrBuildScriptOutputSection.h"
 
-class CtrlrBuildScriptOptionsSection : public Component, public Button::Listener
+class CtrlrBuildScriptOptionsSection : public Component, 
+                                        public Button::Listener
 {
 public:
-    CtrlrBuildScriptOptionsSection();
+    CtrlrBuildScriptOptionsSection(CtrlrBuildScriptOutputSection *outputSection);
 	~CtrlrBuildScriptOptionsSection();
 
 	void paint(Graphics& g) override;
@@ -12,6 +14,7 @@ public:
 	void resized() override;
     void setButtonStateAndColour(TextButton* button, bool state);
 	void buttonClicked(Button* button) override;
+    void mouseDown(const MouseEvent& event);
 
     bool isCCMakeButtonToggled()        const { return cCMakeButton     ->getToggleState(); }
     bool isReleaseButtonToggled()       const { return releaseButton    ->getToggleState(); }
@@ -50,5 +53,10 @@ private:
     std::unique_ptr<TextButton> buildFolderButton;
     std::unique_ptr<TextButton> vstFolderButton;
     std::unique_ptr<TextButton> dawButton;
+
+    juce::Rectangle<int> questionMarkAreaOptions;
+    CtrlrBuildScriptOutputSection *outputSection;
+
+    JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(CtrlrBuildScriptOptionsSection)
 };
 

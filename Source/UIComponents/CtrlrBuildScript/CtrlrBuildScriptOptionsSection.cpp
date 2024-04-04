@@ -3,7 +3,7 @@
 #include "CtrlrBuildScriptOptionsSection.h"
 #include "CtrlrBuildScriptMain.h"
 
-CtrlrBuildScriptOptionsSection::CtrlrBuildScriptOptionsSection()
+CtrlrBuildScriptOptionsSection::CtrlrBuildScriptOptionsSection(CtrlrBuildScriptOutputSection *outputSection) : outputSection(outputSection)
 {
     cCMakeButton = std::make_unique<TextButton>("");
     addAndMakeVisible(*cCMakeButton);
@@ -57,18 +57,21 @@ CtrlrBuildScriptOptionsSection::CtrlrBuildScriptOptionsSection()
     buildFolderButton->setVisible(false);
     buildFolderButton->addListener(this);
 
-    //setSize(400, 115);
 }
 
 CtrlrBuildScriptOptionsSection::~CtrlrBuildScriptOptionsSection(){}
 
 void CtrlrBuildScriptOptionsSection::paint (Graphics& g)
 {
-    const int space = getHeight() / 10;
-    const int buttonHeight = (getHeight() - space) / 4;
+    const int w   = getWidth();
+    const int y   = getHeight();
 
+    const int space = y / 10;
+    const int buttonHeight = (y - space) / 4;
 
-
+    const int qmX = static_cast<int>(w * 0.941f);
+    const int qmY = static_cast<int>(y * 0.02f);
+ 
     // Space for Title Project Options
     g.setColour(Colours::darkgrey);
     g.fillRect(                                             0,      0,                           getWidth(),        buttonHeight);
@@ -76,6 +79,7 @@ void CtrlrBuildScriptOptionsSection::paint (Graphics& g)
     g.setColour(Colours::white);
     g.setFont(Font(14.0f, Font::bold));
     g.drawText("Choose the project configuration to build", 5,      0,                           getWidth(),        buttonHeight, Justification::left, true);
+
     // Space for  Project Option Buttons 
     g.setColour(Colours::whitesmoke);
     g.fillRect(                                             0,      buttonHeight,                getWidth(),        buttonHeight);
@@ -87,9 +91,20 @@ void CtrlrBuildScriptOptionsSection::paint (Graphics& g)
     g.setColour(Colours::white);
     g.setFont(Font(14.0f, Font::bold));
     g.drawText("Extra options",                             5,      buttonHeight * 2 + space,    getWidth(),        buttonHeight, Justification::left, true);
+
     // Space for Extra Options Buttons
     g.setColour(Colours::whitesmoke);
     g.fillRect(                                             0,      buttonHeight * 3 + space,    getWidth(),        buttonHeight);
+
+    // Space for Question Mark
+    g.setColour(Colours::darkgrey);
+    g.fillRect(                             qmX,         qmY,               buttonHeight - qmY,     buttonHeight -  (2 * qmY));
+    g.setColour(Colours::whitesmoke);
+    g.drawRect(                             qmX,         qmY,               buttonHeight - qmY,     buttonHeight -  (2 * qmY),    1);
+    g.setFont(Font(17.0f, Font::bold));
+    g.drawText("?",                         qmX,         qmY,               buttonHeight - qmY,     buttonHeight -  (2 * qmY), Justification::centred, true);
+
+    questionMarkAreaOptions = juce::Rectangle<int>(qmX, qmY, buttonHeight - qmY, buttonHeight - (2 * qmY));
 }
 
 void CtrlrBuildScriptOptionsSection::paintOverChildren(Graphics& g)
@@ -201,26 +216,7 @@ void CtrlrBuildScriptOptionsSection::buttonClicked(Button *button)
             setButtonStateAndColour(buildFolderButton.get(), false);
             setButtonStateAndColour(cleanBuildButton.get(), false);
 		}
-
-            /*
-            ComponentAnimator& animator = Desktop::getInstance().getAnimator();
-
-            animator.animateComponent(((CtrlrChildWindow*)findParentComponentOfClass<CtrlrChildWindow>()),
-                            Rectangle<int>(300, 300, 450, 1000), 1.0f, 200, false, 0.0, 0.0);
-
-            //auto* parentWindow = findParentComponentOfClass<CtrlrBuildScriptMain>();
-            //if (parentWindow) { parentWindow->animateButtons(); }
-
-            }
-            else 
-            {
-                ComponentAnimator& animator = Desktop::getInstance().getAnimator();
-                animator.animateComponent(((CtrlrChildWindow*)findParentComponentOfClass<CtrlrChildWindow>()),
-                Rectangle<int>(300, 300, 450, 800), 1.0f,  200, false, 0.0, 0.0);
-		    }
-        */
     }
-
 
     if (button == cleanBuildButton.get())   { setButtonStateAndColour(cleanBuildButton.get(),   !cleanBuildButton   ->getToggleState()); }
     if (button == buildFolderButton.get())  { setButtonStateAndColour(buildFolderButton.get(),  !buildFolderButton  ->getToggleState()); }
@@ -233,4 +229,46 @@ void CtrlrBuildScriptOptionsSection::buttonClicked(Button *button)
     buildFolderButton->setVisible(releaseButton->getToggleState() || buildButton->getToggleState());
 
     ((CtrlrBuildScriptMain*)findParentComponentOfClass<CtrlrBuildScriptMain>())->setOkButtonVisible(cCMakeButton->getToggleState() || buildButton->getToggleState() || releaseButton->getToggleState() || VST3Button->getToggleState());
+}
+
+void CtrlrBuildScriptOptionsSection::mouseDown(const juce::MouseEvent& event)
+{
+    if (questionMarkAreaOptions.contains(event.getPosition()))
+        {
+            if (outputSection != nullptr)
+            {
+                outputSection->getOutputView().clear();
+                outputSection->setFont(Font(15.0f, Font::bold));
+                outputSection->insertTextAtCaret("Check CMake: \n");
+                outputSection->setFont(Font(14.0f, Font::plain));
+                outputSection->insertTextAtCaret(
+                                        "Checks if CMake is added to the System Path.\n\n");
+                outputSection->setFont(Font(15.0f, Font::bold));
+                outputSection->insertTextAtCaret("Generate Build Files: \n");
+                outputSection->setFont(Font(14.0f, Font::plain));
+                outputSection->insertTextAtCaret( 
+                                        "Generates the build files to debug, release or VST3.\n\n");
+                outputSection->setFont(Font(15.0f, Font::bold));
+                outputSection->insertTextAtCaret("Release / VST3 \n");
+                outputSection->setFont(Font(14.0f, Font::plain));
+                outputSection->insertTextAtCaret(
+                                        "Builds the actual Release Version or ctrlr.vst3 with given credentials.\n\n");
+                outputSection->setFont(Font(15.0f, Font::bold));
+                outputSection->insertTextAtCaret("Clean->Rebuild: \n");
+                outputSection->setFont(Font(14.0f, Font::plain));
+                outputSection->insertTextAtCaret(
+                                        "Cleans the build folder and generates the project files as new.\n"
+                                        "This is usually a last resort if the project folder is corrupted.\n\n");
+                outputSection->setFont(Font(15.0f, Font::bold));
+                outputSection->insertTextAtCaret("Open Build/ VST3 Folder \n");
+                outputSection->setFont(Font(14.0f, Font::plain));
+                outputSection->insertTextAtCaret(
+                                        "Opens the build folder or VST3 folder of choice in the file explorer\n\n");
+                outputSection->setFont(Font(15.0f, Font::bold));
+                outputSection->insertTextAtCaret("Open DAW: \n");
+                outputSection->setFont(Font(14.0f, Font::plain));
+                outputSection->insertTextAtCaret(
+                                        "Should open the DAW folder or nameofdaw.exe after building the VST3. (Experimental)\n\n");
+            }
+        }
 }

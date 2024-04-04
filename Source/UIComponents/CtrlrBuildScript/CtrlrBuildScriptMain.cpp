@@ -1,17 +1,10 @@
 #include "stdafx.h"
-//#include "CtrlrManager/CtrlrManager.h"
+#include "CtrlrManager/CtrlrManager.h"
 #include "CtrlrBuildScriptMain.h"
 
 CtrlrBuildScriptMain::CtrlrBuildScriptMain(CtrlrManager &_owner) 
     : owner(_owner)
 {
-    optionsSection = std::make_unique<CtrlrBuildScriptOptionsSection>();
-    addAndMakeVisible (*optionsSection);
-
-    vst3Section = std::make_unique<CtrlrBuildScriptVST3Section>();
-    vst3Section->setVisible(true);
-    addAndMakeVisible(*vst3Section);
-
     saveFileButton = std::make_unique<TextButton>("");
     addAndMakeVisible(*saveFileButton);
     saveFileButton->setButtonText("Save options");
@@ -35,6 +28,14 @@ CtrlrBuildScriptMain::CtrlrBuildScriptMain(CtrlrManager &_owner)
 
     ideSection = std::make_unique<CtrlrBuildScriptIDESection>(outputSection.get());
     addAndMakeVisible (*ideSection);
+
+    optionsSection = std::make_unique<CtrlrBuildScriptOptionsSection>(outputSection.get());
+    addAndMakeVisible (*optionsSection);
+
+    vst3Section = std::make_unique<CtrlrBuildScriptVST3Section>(outputSection.get());
+    vst3Section->setVisible(true);
+    addAndMakeVisible(*vst3Section);    
+
 }
 
 CtrlrBuildScriptMain::~CtrlrBuildScriptMain(){}

@@ -7,7 +7,6 @@
 #include "CtrlrBuildScriptOutputSection.h"
 #include "CtrlrBuildScriptVST3Section.h"
 
-
 class CtrlrManager;
 
 class CtrlrBuildScriptMain : public CtrlrChildWindowContent,
