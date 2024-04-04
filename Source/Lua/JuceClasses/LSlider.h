@@ -1,5 +1,4 @@
-#ifndef L_SLIDER
-#define L_SLIDER
+#pragma once
 
 extern  "C"
 {
@@ -11,5 +10,3 @@ class LSlider
 	public:
 		static void wrapForLua (lua_State *L);
 };
-
-#endif

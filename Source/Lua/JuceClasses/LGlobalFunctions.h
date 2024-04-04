@@ -1,5 +1,4 @@
-#ifndef __L_GLOBAL_FUNCTIONS__
-#define __L_GLOBAL_FUNCTIONS__
+#pragma once
 
 #include "JuceHeader.h"
 extern  "C"
@@ -25,5 +24,3 @@ class LGlobalFunctions
 		static const double int64ToDouble(const int64 value);
 		static const int int64ToInt(const int64 value);
 };
-
-#endif

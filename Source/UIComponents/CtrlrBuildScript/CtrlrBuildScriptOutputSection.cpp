@@ -1,3 +1,4 @@
+#pragma once
 #include "stdafx.h"
 #include "CtrlrBuildScriptOutputSection.h"
 
@@ -17,8 +18,6 @@ CtrlrBuildScriptOutputSection::CtrlrBuildScriptOutputSection()
     addAndMakeVisible(*clearButton);
     clearButton->setButtonText("Clear Output");
     clearButton->addListener(this);
-
-    setSize(240, 300);
 }
 
 CtrlrBuildScriptOutputSection::~CtrlrBuildScriptOutputSection() {}
@@ -29,25 +28,26 @@ void CtrlrBuildScriptOutputSection::paint(Graphics& g)
     
     // Space for outputView Title
     g.setColour(Colours::darkgrey);
-    g.fillRect(                             0, 0, getWidth(), buttonHeight);
+    g.fillRect(                             0,      0,  getWidth(),     buttonHeight / 2);
+
     // Title for outputView
     g.setColour(Colours::white);
     g.setFont(Font(14.0f, Font::bold));
-    g.drawText("Output",                    5, 0, getWidth(), buttonHeight, Justification::left, true);
+    g.drawText("Output",                    5,      0,  getWidth(),     buttonHeight / 2, Justification::left, true);
 }
 
 void CtrlrBuildScriptOutputSection::paintOverChildren(Graphics& g)
 {
     g.setColour(Colours::darkgrey);
-    g.drawRect(0, 0, getWidth(), getHeight(), 1.0);
+    g.drawRect(0, 0,getWidth(), getHeight(), 1);
 }
 
 void CtrlrBuildScriptOutputSection::resized()
 {
-    const int buttonHeight = getHeight() / 12;
+    const int buttonHeight = getHeight() / 5;
 
-	outputView->setBounds(0, buttonHeight * 2, getWidth(), getHeight());
-    clearButton->setBounds(getWidth() - 100, getHeight() - 40, 85, 35);
+	outputView->        setBounds(0,                    buttonHeight / 2,   getWidth(),     getHeight());
+    clearButton->       setBounds(getWidth() - 100,     getHeight() - 40,   85,             35);
 }
 
 void CtrlrBuildScriptOutputSection::buttonClicked(Button* button)
@@ -56,4 +56,14 @@ void CtrlrBuildScriptOutputSection::buttonClicked(Button* button)
 	{
 		outputView->clear();
 	}
+}
+
+void CtrlrBuildScriptOutputSection::insertTextAtCaret(const String &text)
+{ 
+    outputView->insertTextAtCaret(text); 
+}
+
+void CtrlrBuildScriptOutputSection::setFont(const Font &font)
+{
+    outputView->setFont(font);
 }

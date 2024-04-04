@@ -1,5 +1,4 @@
-#ifndef L_COMBO_BOX
-#define L_COMBO_BOX
+#pragma once
 
 extern  "C"
 {
@@ -11,5 +10,3 @@ class LComboBox
 	public:
 		static void wrapForLua (lua_State *L);
 };
-
-#endif

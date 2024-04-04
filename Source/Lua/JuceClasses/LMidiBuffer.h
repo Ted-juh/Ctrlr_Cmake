@@ -1,5 +1,4 @@
-#ifndef L_MIDI_BUFFER
-#define L_MIDI_BUFFER
+#pragma once
 
 extern  "C"
 {
@@ -11,5 +10,3 @@ class LMidiBuffer
 	public:
 		static void wrapForLua (lua_State *L);
 };
-
-#endif

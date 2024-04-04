@@ -1,5 +1,4 @@
-#ifndef L_BUBBLE_MESSAGE_COMPONENT
-#define L_BUBBLE_MESSAGE_COMPONENT
+#pragma once
 
 #include "JuceHeader.h"
 extern  "C"
@@ -18,5 +17,3 @@ class LBubbleMessageComponent : public BubbleMessageComponent
 		void showAt (const Rectangle<int> &rectangle, const String &message, int numMillisecondsBeforeRemoving, bool removeWhenMouseClicked=true, bool deleteSelfAfterUse=false);
 		void getContentSize (int &w, int &h);
 };
-
-#endif

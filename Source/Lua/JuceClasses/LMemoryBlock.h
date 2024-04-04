@@ -1,5 +1,4 @@
-#ifndef __L_MEMORY_BLOCK__
-#define __L_MEMORY_BLOCK__
+#pragma once
 
 #include "luabind/object_fwd.hpp"
 
@@ -36,5 +35,3 @@ class LMemoryBlock : public MemoryBlock
 		static LMemoryBlock fromLuaTable (luabind::object const& table);
 		static void wrapForLua (lua_State *L);
 };
-
-#endif

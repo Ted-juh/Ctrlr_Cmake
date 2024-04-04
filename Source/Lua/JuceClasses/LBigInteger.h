@@ -1,5 +1,4 @@
-#ifndef L_BIG_INTEGER
-#define L_BIG_INTEGER
+#pragma once
 
 #include "JuceHeader.h"
 extern  "C"
@@ -33,5 +32,3 @@ class LBigInteger : public BigInteger
 		*/
 		static void wrapForLua (lua_State *L);
 };
-
-#endif

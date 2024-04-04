@@ -1,5 +1,4 @@
-#ifndef L_DRAWABLE
-#define L_DRAWABLE
+#pragma once
 
 #include "JuceHeader.h"
 extern  "C"
@@ -17,5 +16,3 @@ class LDrawable
 			return (dynamic_cast<DrawableComposite*>(drawableToConvert));
 		}
 };
-
-#endif

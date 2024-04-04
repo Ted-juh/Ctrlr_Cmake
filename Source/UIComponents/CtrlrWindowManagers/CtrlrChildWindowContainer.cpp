@@ -46,9 +46,14 @@ void CtrlrChildWindowContainer::setContent(CtrlrChildWindowContent* _content)
 	if (content != nullptr)
 	{
 		deleteAndZero(menuBar);
-		addAndMakeVisible(menuBar = new MenuBarComponent(this));
+			if (content->getType() != CtrlrManagerWindowManager::BuildScript)
+			{
+				addAndMakeVisible(menuBar = new MenuBarComponent(this));
+			}
+
 		addAndMakeVisible(content);
 		content->setContainer(this);
+
 	}
 
 	resized();

@@ -1,5 +1,4 @@
-#ifndef L_BORDERSIZE
-#define L_BORDERSIZE
+#pragma once
 
 extern  "C"
 {
@@ -11,5 +10,3 @@ class LBorderSize
 	public:
 		static void wrapForLua (lua_State *L);
 };
-
-#endif

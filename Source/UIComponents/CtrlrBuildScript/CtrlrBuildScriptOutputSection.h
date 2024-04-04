@@ -1,3 +1,4 @@
+#pragma once
 #include "stdafx.h"
 
 class CtrlrBuildScriptOutputSection : public Component, public Button::Listener
@@ -12,6 +13,9 @@ class CtrlrBuildScriptOutputSection : public Component, public Button::Listener
 	void buttonClicked(Button* button);
 
 	TextEditor& getOutputView() { return *outputView; }
+
+	void insertTextAtCaret(const String &text);
+	void setFont(const Font &font);
 
 	private:
 

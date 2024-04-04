@@ -86,6 +86,7 @@ CtrlrMIDICalculator::CtrlrMIDICalculator (CtrlrManager &_owner)
 	decDisplay->setFont (Font(owner.getFontManager().getDefaultMonoFontName(), 24, Font::plain));
 	decDisplay->setText (L"240");
 	decDisplay->addListener (this);
+
     setSize (400, 256);
 }
 

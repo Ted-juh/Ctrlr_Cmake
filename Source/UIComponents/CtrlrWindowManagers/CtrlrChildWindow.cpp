@@ -18,7 +18,7 @@ CtrlrChildWindow::CtrlrChildWindow(CtrlrWindowManager& _owner)
 	}
 
 	addKeyListener(this);
-	setSize(800, 500);
+	setSize(700, 800);
 }
 
 CtrlrChildWindow::~CtrlrChildWindow()
@@ -65,6 +65,7 @@ uint8 CtrlrChildWindow::getType()
 void CtrlrChildWindow::setContent(CtrlrChildWindowContent* _contentComponent)
 {
 	contentComponent = _contentComponent;
+
 	if (contentComponent != nullptr)
 	{
 		setName(contentComponent->getName());

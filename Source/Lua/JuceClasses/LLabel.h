@@ -1,5 +1,4 @@
-#ifndef L_LABEL
-#define L_LABEL
+#pragma once
 
 extern  "C"
 {
@@ -11,5 +10,3 @@ class LLabel
 	public:
 		static void wrapForLua (lua_State *L);
 };
-
-#endif

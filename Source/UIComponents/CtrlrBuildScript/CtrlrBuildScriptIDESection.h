@@ -1,35 +1,37 @@
+#pragma once
 #include "stdafx.h"
+#include "CtrlrBuildScriptOutputSection.h" 
 
-class CtrlrBuildScriptIDESection : public Component, public Button::Listener
+class CtrlrBuildScriptIDESection : public Component, 
+                                    public Button::Listener
 {
 public:
-    CtrlrBuildScriptIDESection();
+    CtrlrBuildScriptIDESection(CtrlrBuildScriptOutputSection *outputSection);
     ~CtrlrBuildScriptIDESection();
 
-    void CtrlrBuildScriptIDESection::paint(Graphics& g);
-    void CtrlrBuildScriptIDESection::paintOverChildren(Graphics& g);
-    void CtrlrBuildScriptIDESection::resized();
-    void CtrlrBuildScriptIDESection::buttonClicked(Button* button);
+    void paint(Graphics& g);
+    void paintOverChildren(Graphics& g);
+    void resized() override;
+    void buttonClicked(Button* button);
+    void mouseDown(const MouseEvent& event);
+   
+    String getIDE() { return cIDE->getText(); }
+    String getBuildFolderPath() { return lBuildFolder->getText(); }
+    String getVSTFolderPath() { return lVSTFolder->getText(); }
+    String getDAWFolderPath() { return lDAWFolder->getText(); }
 
-    String CtrlrBuildScriptIDESection::getIDE() { return cIDE->getText(); }
-    String CtrlrBuildScriptIDESection::getBuildFolderPath() { return lBuildFolder->getText(); }
-    String CtrlrBuildScriptIDESection::getVSTFolderPath() { return lVSTFolder->getText(); }
-    String CtrlrBuildScriptIDESection::getDAWFolderPath() { return lDAWFolder->getText(); }
-
-    int   CtrlrBuildScriptIDESection::getIDEIndex() { return cIDE->getSelectedItemIndex(); }
-    void  CtrlrBuildScriptIDESection::setIDEIndex(int index) { cIDE->setSelectedItemIndex(index); }
-    void  CtrlrBuildScriptIDESection::setBuildFolderPath(String path) { this->buildFolderPath = path; }
-    void  CtrlrBuildScriptIDESection::setVSTFolderPath(String path) { this->vstFolderPath = path; }
-    void  CtrlrBuildScriptIDESection::setDAWFolderPath(String path) { this->dawFolderPath = path; }
-    void  CtrlrBuildScriptIDESection::setBuildFolder(String Text) { lBuildFolder->setText(Text, dontSendNotification); }
+    int   getIDEIndex() { return cIDE->getSelectedItemIndex(); }
+    void  setIDEIndex(int index) { cIDE->setSelectedItemIndex(index); }
+    void  setBuildFolderPath(String path) { this->buildFolderPath = path; }
+    void  setVSTFolderPath(String path) { this->vstFolderPath = path; }
+    void  setDAWFolderPath(String path) { this->dawFolderPath = path; }
+    void  setBuildFolder(String Text) { lBuildFolder->setText(Text, dontSendNotification); }
 
     //ComboBox*   IDESection::getIDEComboBox() { return cIDE; }
+    ComboBox* CtrlrBuildScriptIDESection::getIDEComboBox() { return cIDE.get(); }
     Label* CtrlrBuildScriptIDESection::getBuildFolderLabel() { return lBuildFolder.get(); }
     Label* CtrlrBuildScriptIDESection::getVSTFolderLabel() { return lVSTFolder.get(); }
     Label* CtrlrBuildScriptIDESection::getDAWFolderLabel() { return lDAWFolder.get(); }
-
-
-
 
 private:
     std::unique_ptr<Label>      lIDE;
@@ -46,4 +48,9 @@ private:
     String      buildFolderPath;
     String      vstFolderPath;
     String      dawFolderPath;
+
+    juce::Rectangle<int> questionMarkArea;
+    CtrlrBuildScriptOutputSection *outputSection;
+
+    JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(CtrlrBuildScriptIDESection)
 };

@@ -1,5 +1,4 @@
-#ifndef L_POINT
-#define L_POINT
+#pragma once
 
 extern  "C"
 {
@@ -11,5 +10,3 @@ class LPoint
 	public:
 		static void wrapForLua (lua_State *L);
 };
-
-#endif

@@ -1,8 +1,8 @@
-#ifndef L_THREADWITHPROGRESSWINDOW_H
-#define L_THREADWITHPROGRESSWINDOW_H
+#pragma once
 
 #include "JuceHeader.h"
 #include "luabind/object_fwd.hpp"
+
 extern  "C"
 {
 	#include "lua.h"
@@ -22,5 +22,3 @@ class LThreadWithProgressWindow : public ThreadWithProgressWindow
 	private:
 		luabind::object functionToRunOnThread;
 };
-
-#endif

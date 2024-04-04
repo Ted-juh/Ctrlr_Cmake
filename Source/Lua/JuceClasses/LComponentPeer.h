@@ -1,5 +1,4 @@
-#ifndef L_COMPONENT_PEER
-#define L_COMPONENT_PEER
+#pragma once
 
 extern  "C"
 {
@@ -11,5 +10,3 @@ class LComponentPeer
 	public:
 		static void wrapForLua (lua_State *L);
 };
-
-#endif

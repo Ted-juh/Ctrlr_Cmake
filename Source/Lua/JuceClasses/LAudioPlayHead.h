@@ -1,5 +1,4 @@
-#ifndef L_AUDIO_PLAYHEAD
-#define L_AUDIO_PLAYHEAD
+#pragma once
 
 extern  "C"
 {
@@ -11,5 +10,3 @@ class LAudioPlayHead
 	public:
 		static void wrapForLua (lua_State *L);
 };
-
-#endif

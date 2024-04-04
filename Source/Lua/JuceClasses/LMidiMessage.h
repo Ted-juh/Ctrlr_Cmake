@@ -1,5 +1,4 @@
-#ifndef L_MIDI_MESSAGE
-#define L_MIDI_MESSAGE
+#pragma once
 
 extern  "C"
 {
@@ -11,5 +10,3 @@ class LMidiMessage
 	public:
 		static void wrapForLua (lua_State *L);
 };
-
-#endif

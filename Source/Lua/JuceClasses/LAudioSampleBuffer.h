@@ -1,5 +1,4 @@
-#ifndef L_AUDIO_SAMPLE_BUFFER
-#define L_AUDIO_SAMPLE_BUFFER
+#pragma once
 
 extern  "C"
 {
@@ -11,5 +10,3 @@ class LAudioSampleBuffer
 	public:
 		static void wrapForLua (lua_State *L);
 };
-
-#endif

@@ -1,5 +1,4 @@
-#ifndef L_RANGE
-#define L_RANGE
+#pragma once
 
 extern  "C"
 {
@@ -15,5 +14,3 @@ class LRange
 	public:
 		static void wrapForLua (lua_State *L);
 };
-
-#endif

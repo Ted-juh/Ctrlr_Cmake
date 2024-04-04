@@ -1,5 +1,4 @@
-#ifndef L_AFFINE_TRANSFORM
-#define L_AFFINE_TRANSFORM
+#pragma once
 
 extern  "C"
 {
@@ -11,5 +10,3 @@ class LAffineTransform
 	public:
 		static void wrapForLua (lua_State *L);
 };
-
-#endif

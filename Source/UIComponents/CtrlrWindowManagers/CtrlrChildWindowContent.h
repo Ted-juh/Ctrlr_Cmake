@@ -9,6 +9,7 @@ class CtrlrChildWindowContent :	public Component
 	public:
 		CtrlrChildWindowContent();
 		virtual ~CtrlrChildWindowContent();
+
 		void setContainer(CtrlrChildWindowContainer *_container);
 		virtual String getContentName();
 		virtual ValueTree &saveState();

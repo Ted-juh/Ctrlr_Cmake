@@ -1,5 +1,4 @@
-#ifndef L_MEMORY_INPUT_STREAM
-#define L_MEMORY_INPUT_STREAM
+#pragma once
 
 extern  "C"
 {
@@ -11,5 +10,3 @@ class LMemoryInputStream
 	public:
 		static void wrapForLua (lua_State *L);
 };
-
-#endif

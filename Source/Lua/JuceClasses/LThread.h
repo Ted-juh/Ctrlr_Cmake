@@ -1,5 +1,4 @@
-#ifndef L_THREAD_H
-#define L_THREAD_H
+#pragma once
 
 #include "JuceHeader.h"
 #include "luabind/object_fwd.hpp"
@@ -31,5 +30,3 @@ class LThread : public Thread
 	private:
 		luabind::object functionToRunOnThread;
 };
-
-#endif

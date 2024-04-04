@@ -1,5 +1,4 @@
-#ifndef L_AUDIO_THUMBNAIL
-#define L_AUDIO_THUMBNAIL
+#pragma once
 
 extern  "C"
 {
@@ -11,5 +10,3 @@ class LAudioThumbnail
 	public:
 		static void wrapForLua (lua_State *L);
 };
-
-#endif

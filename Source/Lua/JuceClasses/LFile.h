@@ -1,5 +1,4 @@
-#ifndef __L_FILE__
-#define __L_FILE__
+#pragma once
 
 #include "LMemoryBlock.h"
 
@@ -37,5 +36,3 @@ class LFile : public File
 		bool isValid();
 		static void wrapForLua (lua_State *L);
 };
-
-#endif

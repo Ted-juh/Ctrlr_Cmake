@@ -1,5 +1,4 @@
-#ifndef L_SPARSE_SET
-#define L_SPARSE_SET
+#pragma once
 
 #include "JuceHeader.h"
 extern  "C"
@@ -17,5 +16,3 @@ class LSparseSet : public SparseSet<int>
 		int get(int index);
 		static void wrapForLua (lua_State *L);
 };
-
-#endif

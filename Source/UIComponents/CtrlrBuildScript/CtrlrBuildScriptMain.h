@@ -1,10 +1,12 @@
 #pragma once
+#include "stdafx.h"
 #include "CtrlrWindowManagers/CtrlrChildWindowContent.h"
 #include "CtrlrWindowManagers/CtrlrManagerWindowManager.h"
 #include "CtrlrBuildScriptIDESection.h"
 #include "CtrlrBuildScriptOptionsSection.h"
 #include "CtrlrBuildScriptOutputSection.h"
 #include "CtrlrBuildScriptVST3Section.h"
+
 
 class CtrlrManager;
 
@@ -41,7 +43,9 @@ class CtrlrBuildScriptMain : public CtrlrChildWindowContent,
 
     int getIDEIndex() { return ideSection->getIDEIndex(); }
 
-    void animateButtons();
+    TextButton* getOkButton() { return okButton.get(); }
+    TextButton* getSaveFileButton() { return saveFileButton.get(); }
+    TextButton* getLoadFileButton() { return loadFileButton.get(); }
     
 private:
     CtrlrManager &owner;
@@ -51,10 +55,10 @@ private:
     std::unique_ptr<CtrlrBuildScriptOutputSection>	          outputSection;
     std::unique_ptr<CtrlrBuildScriptVST3Section>              vst3Section;
 
-    std::unique_ptr<TextButton>               saveFileButton;
-    std::unique_ptr<TextButton>               loadFileButton;
+    std::unique_ptr<TextButton>                               saveFileButton;
+    std::unique_ptr<TextButton>                               loadFileButton;
 
-    std::unique_ptr<TextButton>               okButton;
+    std::unique_ptr<TextButton>                               okButton;
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(CtrlrBuildScriptMain)
 };

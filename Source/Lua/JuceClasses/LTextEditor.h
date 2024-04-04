@@ -1,5 +1,4 @@
-#ifndef L_TEXT_EDITOR
-#define L_TEXT_EDITOR
+#pragma once
 
 extern  "C"
 {
@@ -11,5 +10,3 @@ class LTextEditor
 	public:
 		static void wrapForLua (lua_State *L);
 };
-
-#endif

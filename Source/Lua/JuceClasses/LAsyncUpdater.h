@@ -1,5 +1,4 @@
-#ifndef L_ASYNC_UPDATER_H
-#define L_ASYNC_UPDATER_H
+#pragma once
 
 #include "JuceHeader.h"
 extern  "C"
@@ -16,5 +15,3 @@ class LAsyncUpdater : public AsyncUpdater
 	private:
 		luabind::object asyncCallbackMethod;
 };
-
-#endif

@@ -1,5 +1,4 @@
-#ifndef __L_STRING__
-#define __L_STRING__
+#pragma once
 
 #include "JuceHeader.h"
 extern  "C"
@@ -26,5 +25,3 @@ class LStringArray : public StringArray
             return (StringArray::strings[index]);
         }
 };
-
-#endif

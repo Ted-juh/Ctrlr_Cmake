@@ -1,5 +1,4 @@
-#ifndef L_INPUT_STREAM
-#define L_INPUT_STREAM
+#pragma once
 
 extern  "C"
 {
@@ -18,5 +17,3 @@ class LInputStream
 		*/
 		static void wrapForLua (lua_State *L);
 };
-
-#endif

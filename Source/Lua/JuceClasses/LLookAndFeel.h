@@ -1,5 +1,4 @@
-#ifndef L_LOOK_AND_FEEL
-#define L_LOOK_AND_FEEL
+#pragma once
 
 #include "JuceHeader.h"
 #include "luabind/object_fwd.hpp"
@@ -127,4 +126,3 @@ class LookAndFeelBase : public LookAndFeel_V2
 	private:
 	    HashMap<String,luabind::object> methods;
 };
-#endif

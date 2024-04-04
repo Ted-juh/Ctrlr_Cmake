@@ -126,16 +126,16 @@ int maybe_yield(int results, Policies*)
 
 inline int sum_scores(int const* first, int const* last)
 {
-    int result = 0;
+    int sum = 0;
 
     for (; first != last; ++first)
     {
         if (*first < 0)
             return *first;
-        result += *first;
+        sum += *first;
     }
 
-    return result;
+    return sum;
 }
 
 #  define LUABIND_INVOKE_NEXT_ITER(n) \

@@ -1,6 +1,4 @@
-#ifndef __L_ZIP_FILE__
-#define __L_ZIP_FILE__
-
+#pragma once
 extern  "C"
 {
 	#include "lua.h"
@@ -17,5 +15,3 @@ class LZipFile
 	public:
 		static void wrapForLua (lua_State *L);
 };
-
-#endif

@@ -1,5 +1,4 @@
-#ifndef __L_AUDIO_FORMAT__
-#define __L_AUDIO_FORMAT__
+#pragma once
 
 #include "JuceHeader.h"
 extern  "C"
@@ -30,5 +29,3 @@ class LAudioFormat
 	public:
 		static void wrapForLua (lua_State *L);
 };
-
-#endif

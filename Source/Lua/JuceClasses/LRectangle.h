@@ -1,5 +1,4 @@
-#ifndef L_RECTANGLE
-#define L_RECTANGLE
+#pragma once
 
 #include "JuceHeader.h"
 extern  "C"
@@ -25,5 +24,3 @@ class LRectangle : public Rectangle<float>
 		    return (toType<int>());
 		}
 };
-
-#endif

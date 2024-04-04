@@ -1,5 +1,4 @@
-#ifndef L_JUCE_H
-#define L_JUCE_H
+#pragma once
 
 #include "LFileListComponent.h"
 #include "LFileTreeComponent.h"
@@ -67,5 +66,3 @@
 #include "LBorderSize.h"
 #include "LGlobalFunctions.h"
 #include "LAsyncUpdater.h"
-
-#endif

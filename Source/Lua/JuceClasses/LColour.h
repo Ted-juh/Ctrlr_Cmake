@@ -1,5 +1,4 @@
-#ifndef L_COLOUR
-#define L_COLOUR
+#pragma once
 
 extern  "C"
 {
@@ -11,5 +10,3 @@ class LColour
 	public:
 		static void wrapForLua (lua_State *L);
 };
-
-#endif

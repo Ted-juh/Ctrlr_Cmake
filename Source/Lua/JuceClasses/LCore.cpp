@@ -486,6 +486,45 @@ void LMouseEvent::wrapForLua (lua_State *L)
 			.def("getMouseDownScreenPosition", &MouseEvent::getMouseDownScreenPosition)
 	];
 }
+
+/*
+void LMouseInputSource::wrapForLua(lua_State* L)
+{
+	using namespace luabind;
+
+	module(L)
+		[
+			class_<MouseInputSource>("MouseInputSource")
+				.def("isMouse", (bool (MouseInputSource::*)() const)&MouseInputSource::isMouse)
+				.def("isTouch", (bool (MouseInputSource::*)() const)&MouseInputSource::isTouch)
+				.def("isPen", (bool (MouseInputSource::*)() const)&MouseInputSource::isPen)
+				.def("hasMouseWheel", (bool (MouseInputSource::*)() const)&MouseInputSource::hasMouseWheel)
+				.def("getIndex", (int (MouseInputSource::*)() const)&MouseInputSource::getIndex)
+				.def("isDragging", (bool (MouseInputSource::*)(const Component *))&MouseInputSource::isDragging)
+
+				.def("getScreenPosition", (Point<int> (MouseInputSource::*)() const)&MouseInputSource::getScreenPosition)
+
+				.def("setScreenPosition", (void (MouseInputSource::*)(const Point<int> &))&MouseInputSource::setScreenPosition)
+
+				.scope
+				[
+					def("invalidTiltY", &MouseInputSource::invalidTiltY),
+					def("offscreenMousePos", &MouseInputSource::offscreenMousePos)
+				]
+
+
+				.enum_ ("InputSourceType")
+				[
+					value ("mouse", MouseInputSource::mouse),
+					value ("touch", MouseInputSource::touch),
+					value ("pen", MouseInputSource::pen)
+				]
+		];
+}
+*/
+
+
+
 void LRandom::wrapForLua (lua_State *L)
 {
 	using namespace luabind;

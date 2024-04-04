@@ -11,13 +11,14 @@ class CtrlrComponentTypeManager
 	public:
 		enum CtrlrSliderStyle
 		{
-			LinearHorizontal=Slider::LinearHorizontal,
-			LinearVertical=Slider::LinearVertical,
-			LinearBar=Slider::LinearBar,
-			Rotary=Slider::Rotary,
-			RotaryHorizontalDrag=Slider::RotaryHorizontalDrag,
-			RotaryVerticalDrag=Slider::RotaryVerticalDrag,
-			IncDecButtons=Slider::IncDecButtons,
+			LinearHorizontal=				Slider::LinearHorizontal,
+			LinearVertical=					Slider::LinearVertical,
+			LinearBar=						Slider::LinearBar,
+			Rotary=							Slider::Rotary,
+			RotaryHorizontalDrag=			Slider::RotaryHorizontalDrag,
+			RotaryVerticalDrag=				Slider::RotaryVerticalDrag,
+			RotaryHorizontalVerticalDrag=	Slider::RotaryHorizontalVerticalDrag,
+			IncDecButtons=					Slider::IncDecButtons,
 			__nCtrlrSliderStyle
 		};
 

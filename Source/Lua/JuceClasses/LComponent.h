@@ -1,6 +1,4 @@
-#ifndef L_COMPONENT
-#define L_COMPONENT
-
+#pragma once
 #include "JuceHeader.h"
 extern  "C"
 {
@@ -44,5 +42,3 @@ class LComponent : public Component
 
 		static void wrapForLua (lua_State *L);
 };
-
-#endif

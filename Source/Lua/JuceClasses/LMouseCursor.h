@@ -1,5 +1,4 @@
-#ifndef L_MOUSE_CURSOR
-#define L_MOUSE_CURSOR
+#pragma once
 
 extern  "C"
 {
@@ -11,5 +10,3 @@ class LMouseCursor
 	public:
 		static void wrapForLua (lua_State *L);
 };
-
-#endif

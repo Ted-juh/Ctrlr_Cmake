@@ -1,5 +1,4 @@
-#ifndef L_TIME
-#define L_TIME
+#pragma once
 
 #include "JuceHeader.h"
 extern  "C"
@@ -64,5 +63,3 @@ class LTime : public Time
 
 		static void wrapForLua (lua_State *L);
 };
-
-#endif

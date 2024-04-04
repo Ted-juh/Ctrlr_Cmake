@@ -1,3 +1,4 @@
+#pragma once
 #include "stdafx.h"
 #include "CtrlrBuildScriptOptionsSection.h"
 #include "CtrlrBuildScriptMain.h"
@@ -56,7 +57,7 @@ CtrlrBuildScriptOptionsSection::CtrlrBuildScriptOptionsSection()
     buildFolderButton->setVisible(false);
     buildFolderButton->addListener(this);
 
-    setSize(240, 115);
+    //setSize(400, 115);
 }
 
 CtrlrBuildScriptOptionsSection::~CtrlrBuildScriptOptionsSection(){}
@@ -128,10 +129,10 @@ void CtrlrBuildScriptOptionsSection::resized()
 
     //Extra Options Buttons
     cleanBuildButton    ->setBounds(0,                      buttonHeight * 3 + space,   buttonSpace * 2,    buttonHeight);
-    buildFolderButton   ->setBounds(0 + (buttonSpace * 2),  buttonHeight * 3 + space,   buttonSpace * 2,    buttonHeight);
+    buildFolderButton   ->setBounds(0 + (buttonSpace * 2),  buttonHeight * 3 + space,   buttonSpace * 2 + 3,    buttonHeight);
 
     vstFolderButton     ->setBounds(0,                      buttonHeight * 3 + space,   buttonSpace * 2,    buttonHeight);
-    dawButton           ->setBounds(0 + (buttonSpace * 2),  buttonHeight * 3 + space,   buttonSpace * 2,    buttonHeight);
+    dawButton           ->setBounds(0 + (buttonSpace * 2),  buttonHeight * 3 + space,   buttonSpace * 2 + 3,    buttonHeight);
 
 }
 
@@ -199,22 +200,25 @@ void CtrlrBuildScriptOptionsSection::buttonClicked(Button *button)
             setButtonStateAndColour(buildButton.get(), false);
             setButtonStateAndColour(buildFolderButton.get(), false);
             setButtonStateAndColour(cleanBuildButton.get(), false);
+		}
 
+            /*
             ComponentAnimator& animator = Desktop::getInstance().getAnimator();
 
             animator.animateComponent(((CtrlrChildWindow*)findParentComponentOfClass<CtrlrChildWindow>()),
                             Rectangle<int>(300, 300, 450, 1000), 1.0f, 200, false, 0.0, 0.0);
 
-            auto* parentWindow = findParentComponentOfClass<CtrlrBuildScriptMain>();
-            if (parentWindow) { parentWindow->animateButtons(); }
+            //auto* parentWindow = findParentComponentOfClass<CtrlrBuildScriptMain>();
+            //if (parentWindow) { parentWindow->animateButtons(); }
 
-        }
-        else 
-        {
-            ComponentAnimator& animator = Desktop::getInstance().getAnimator();
-            animator.animateComponent(((CtrlrChildWindow*)findParentComponentOfClass<CtrlrChildWindow>()),
-                			Rectangle<int>(300, 300, 450, 600), 1.0f,  200, false, 0.0, 0.0);
-		}
+            }
+            else 
+            {
+                ComponentAnimator& animator = Desktop::getInstance().getAnimator();
+                animator.animateComponent(((CtrlrChildWindow*)findParentComponentOfClass<CtrlrChildWindow>()),
+                Rectangle<int>(300, 300, 450, 800), 1.0f,  200, false, 0.0, 0.0);
+		    }
+        */
     }
 
 

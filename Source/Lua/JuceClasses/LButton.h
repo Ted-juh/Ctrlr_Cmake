@@ -1,5 +1,4 @@
-#ifndef L_BUTTON
-#define L_BUTTON
+#pragma once
 
 extern  "C"
 {
@@ -11,5 +10,3 @@ class LButton
 	public:
 		static void wrapForLua (lua_State *L);
 };
-
-#endif

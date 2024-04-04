@@ -1,5 +1,4 @@
-#ifndef L_POPUP_MENU
-#define L_POPUP_MENU
+#pragma once
 
 #include "JuceHeader.h"
 extern  "C"
@@ -27,5 +26,3 @@ class LPopupMenu : public PopupMenu
 
 		static void wrapForLua (lua_State *L);
 };
-
-#endif

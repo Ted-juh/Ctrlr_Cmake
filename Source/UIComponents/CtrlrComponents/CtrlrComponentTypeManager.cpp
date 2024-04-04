@@ -204,6 +204,8 @@ const String CtrlrComponentTypeManager::sliderStyleToString (CtrlrComponentTypeM
 			return "RotaryHorizontalDrag";
 		case Slider::RotaryVerticalDrag:
 			return "RotaryVerticalDrag";
+		case Slider::RotaryHorizontalVerticalDrag:
+			return "RotaryHorizontalVerticalDrag";
 		case Slider::IncDecButtons:
 			return "IncDecButtons";
 		default:
@@ -225,6 +227,8 @@ const CtrlrComponentTypeManager::CtrlrSliderStyle CtrlrComponentTypeManager::sli
 		return RotaryHorizontalDrag;
 	else if (s == "RotaryVerticalDrag")
 		return RotaryVerticalDrag;
+	else if (s == "RotaryHorizontalVerticalDrag")
+		return RotaryHorizontalVerticalDrag;
 	else if (s == "IncDecButtons")
 		return IncDecButtons;
 

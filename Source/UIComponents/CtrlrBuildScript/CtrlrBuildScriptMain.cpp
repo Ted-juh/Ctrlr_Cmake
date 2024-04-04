@@ -1,31 +1,25 @@
 #include "stdafx.h"
-#include "CtrlrManager/CtrlrManager.h"
+//#include "CtrlrManager/CtrlrManager.h"
 #include "CtrlrBuildScriptMain.h"
 
 CtrlrBuildScriptMain::CtrlrBuildScriptMain(CtrlrManager &_owner) 
     : owner(_owner)
 {
-    ideSection = std::make_unique<CtrlrBuildScriptIDESection>();
-    addAndMakeVisible (*ideSection);
-
     optionsSection = std::make_unique<CtrlrBuildScriptOptionsSection>();
     addAndMakeVisible (*optionsSection);
 
-    outputSection = std::make_unique<CtrlrBuildScriptOutputSection>();
-    addAndMakeVisible (*outputSection);
-
     vst3Section = std::make_unique<CtrlrBuildScriptVST3Section>();
-    vst3Section->setVisible(false);
-    addAndMakeVisible (*vst3Section);
+    vst3Section->setVisible(true);
+    addAndMakeVisible(*vst3Section);
 
     saveFileButton = std::make_unique<TextButton>("");
-    addAndMakeVisible (*saveFileButton);
+    addAndMakeVisible(*saveFileButton);
     saveFileButton->setButtonText("Save options");
     saveFileButton->setVisible(true);
     saveFileButton->addListener(this);
 
     loadFileButton = std::make_unique<TextButton>("");
-    addAndMakeVisible (*loadFileButton);
+    addAndMakeVisible(*loadFileButton);
     loadFileButton->setButtonText("Load options");
     loadFileButton->setVisible(true);
     loadFileButton->addListener(this);
@@ -36,7 +30,11 @@ CtrlrBuildScriptMain::CtrlrBuildScriptMain(CtrlrManager &_owner)
     okButton->setVisible(false);
     okButton->addListener(this);
 
-    setSize(240, 600);
+    outputSection = std::make_unique<CtrlrBuildScriptOutputSection>();
+    addAndMakeVisible(*outputSection);
+
+    ideSection = std::make_unique<CtrlrBuildScriptIDESection>(outputSection.get());
+    addAndMakeVisible (*ideSection);
 }
 
 CtrlrBuildScriptMain::~CtrlrBuildScriptMain(){}
@@ -50,44 +48,60 @@ void CtrlrBuildScriptMain::paintOverChildren(Graphics& g)
 {
     const int startRect = getWidth() * 0.05;
     const int rectWidth = getWidth() - (startRect * 2);
-    const int buttonHeight = getHeight() * 0.05;
-    const int rectLineHeight = buttonHeight / 2;
+    const int buttonHeight = getHeight() * 0.032;
+    const int rlH = buttonHeight / 2;
 
     const int amountBut = 4;
     const int buttonSpace = rectWidth / amountBut;
-    
+
+    int componentBottom = 0;
+
+    // The drawRect for saveFileButton and loadFileButton are underneath the VST3Section
+    componentBottom = vst3Section->getBottom();
+        
     g.setColour(Colours::darkgrey);
-    g.drawRect(startRect,                       rectLineHeight * 23,    buttonSpace,    buttonHeight, 1.0);
-    g.drawRect(startRect + buttonSpace,         rectLineHeight * 23,    buttonSpace,    buttonHeight, 1.0);
+    g.drawRect(startRect,                       componentBottom + rlH,    buttonSpace,    buttonHeight, 1.0);
+    g.drawRect(startRect + buttonSpace,         componentBottom + rlH,    buttonSpace,    buttonHeight, 1.0);
 
     if (okButton->isVisible())
     {
     g.setColour(Colours::darkgrey);
-    g.drawRect(startRect + (buttonSpace * 3),   rectLineHeight * 23,    buttonSpace,    buttonHeight, 1.0);
+    g.drawRect(startRect + (buttonSpace * 3),   componentBottom + rlH,    buttonSpace,    buttonHeight, 1.0);
 	}
+
 }
 
 void CtrlrBuildScriptMain::resized()
 {
 
-    const int startRect         = getWidth() * 0.05;
-    const int rectWidth         = getWidth() - (startRect * 2);
-    const int buttonHeight      = getHeight() * 0.05;
-    const int rectLineHeight    = buttonHeight / 2;
+    const int startRect         = getWidth() * 0.05;                // Margin
+    const int rectWidth         = getWidth() - (startRect * 2);	    // Width of the section
 
-    const int amountBut         = 4;
-    const int buttonSpace       = rectWidth / amountBut;
+    const int buttonHeight      = getHeight() * 0.032;			    // Height of the buttons
+    const int rlH               = buttonHeight / 2;				    // Height of the lines
 
-    ideSection          ->setBounds(startRect,                          rectLineHeight * 1,        rectWidth,          buttonHeight * 5);
-    optionsSection      ->setBounds(startRect,                          rectLineHeight * 12,       rectWidth,          buttonHeight * 5);
+    const int amountBut         = 4;								// Amount of buttons
+    const int buttonSpace       = rectWidth / amountBut;			// Space for buttons, max 4 buttons in rectWidth
 
-    vst3Section		    ->setBounds(startRect,                          rectLineHeight * 23,       rectWidth,          buttonHeight * 5);
+    int componentBottom = 0;
 
-    saveFileButton      ->setBounds(startRect,                          rectLineHeight * 23,       buttonSpace,        buttonHeight);
-    loadFileButton      ->setBounds(startRect + buttonSpace,            rectLineHeight * 23,       buttonSpace,        buttonHeight);
+    ideSection->                                setBounds(startRect,                          componentBottom,          rectWidth,          buttonHeight * 5);
+    componentBottom = ideSection->getBottom();
 
-    okButton            ->setBounds(startRect + (buttonSpace * 3),      rectLineHeight * 23,       buttonSpace,        buttonHeight);
-    outputSection       ->setBounds(startRect,                          rectLineHeight * 26,       rectWidth,          buttonHeight * 7);
+    optionsSection->                            setBounds(startRect,                          componentBottom + rlH,    rectWidth,          buttonHeight * 5);
+    componentBottom = optionsSection->getBottom();
+
+    vst3Section->                               setBounds(startRect,                          componentBottom + rlH,    rectWidth,          buttonHeight * 7);
+    componentBottom = vst3Section->getBottom();
+
+    saveFileButton->                            setBounds(startRect,                          componentBottom + rlH,    buttonSpace,        buttonHeight);
+    loadFileButton->                            setBounds(startRect + (buttonSpace),          componentBottom + rlH,    buttonSpace,        buttonHeight);
+    okButton->                                  setBounds(startRect + (buttonSpace * 3),      componentBottom + rlH,    buttonSpace,        buttonHeight);
+    componentBottom = okButton->getBottom();
+
+    outputSection->                             setBounds(startRect,                          componentBottom + rlH ,   rectWidth,          buttonHeight * 11);
+    componentBottom = outputSection->getBottom();
+
 }
 
 void CtrlrBuildScriptMain::setButtonStateAndColour(TextButton* button, bool state)
@@ -165,7 +179,7 @@ void CtrlrBuildScriptMain::labelTextChanged(Label* labelThatHasChanged){}
 
 void CtrlrBuildScriptMain::buttonStateChanged(Button* button){}
 
-void CtrlrBuildScriptMain::checkCMake()                                                                     // Check if CMake is installed and added to the PATH
+void CtrlrBuildScriptMain::checkCMake()                                                                             // Check if CMake is installed and added to the PATH
 {
     // Add CMake to the PATH
     String cmakePath = "C:\\Program Files\\CMake\\bin";                                                             // Actual path to CMake bin directory
@@ -197,7 +211,7 @@ void CtrlrBuildScriptMain::checkCMake()                                         
      }
 }
 
-void CtrlrBuildScriptMain::generateBuildFiles()										    // Re-Generate the build folder + build/solution files   
+void CtrlrBuildScriptMain::generateBuildFiles()										            // Re-Generate the build folder + build/solution files   
 {
     std::map<int, String> generatorMap =
     {
@@ -218,7 +232,7 @@ void CtrlrBuildScriptMain::generateBuildFiles()										    // Re-Generate the 
     String argument1 = "\"rmdir /S /Q \"" + buildFolderPath + "\" && ";                         // delete the build folder
 	String argument2 = "mkdir \"" + buildFolderPath + "\" && ";                                 // create a new build folder
 	String argument3 = "cd \"" + buildFolderPath + "\" && ";                                    // change directory to the build folder
-    //String argument4 = "cmake -S .. -B . -G \"" + generator + "\"";                             // generate the build files
+    //String argument4 = "cmake -S .. -B . -G \"" + generator + "\"";                           // generate the build files
 
     String argument4;
     if (generator == "Xcode")
@@ -306,10 +320,23 @@ void CtrlrBuildScriptMain::saveOptionsToFile()
             outputStream << "CheckCMake="           << optionsSection   ->isCCMakeButtonToggled()               << newLine;
             outputStream << "GenerateBuildFiles="   << optionsSection   ->isBuildButtonToggled()                << newLine;
             outputStream << "Release="              << optionsSection   ->isReleaseButtonToggled()              << newLine;
+            outputStream << "VST3="                 << optionsSection   ->isVST3ButtonToggled()                 << newLine;           
             outputStream << "CleanBuild="           << optionsSection   ->isCleanBuildButtonToggled()           << newLine;
             outputStream << "BuildFolder="          << optionsSection   ->isBuildFolderButtonToggled()          << newLine;
             outputStream << "openVSTFolder="        << optionsSection   ->isVSTFolderButtonToggled()            << newLine;
             outputStream << "openDAWFolder="        << optionsSection   ->isDAWButtonToggled()                  << newLine;
+            outputStream << "productName="          << vst3Section      ->getProductName()                      << newLine;
+            outputStream << "version="              << vst3Section      ->getVersion()                          << newLine;
+            outputStream << "pluginName="           << vst3Section      ->getPluginName()                       << newLine;
+            outputStream << "description="          << vst3Section      ->getDescription()                      << newLine;
+            outputStream << "pluginMC="             << vst3Section      ->getPluginMC()                         << newLine;
+            outputStream << "pluginCode="           << vst3Section      ->getPluginCode()                       << newLine;
+            outputStream << "bundleID="             << vst3Section      ->getBundleID()                         << newLine;
+            outputStream << "companyName="          << vst3Section      ->getCompanyName()                      << newLine;
+            outputStream << "needsMidiInput="       << vst3Section      ->getNeedsMidiInput()                   << newLine;
+            outputStream << "VSTMidiInputs="        << vst3Section      ->getVSTMidiInputs()                    << newLine;
+            outputStream << "needsMidiOutput="      << vst3Section      ->getNeedsMidiOutput()                  << newLine;
+            outputStream << "VSTMidiOutputs="       << vst3Section      ->getVSTMidiOutputs()                   << newLine;
 
             outputStream.flush();
 
@@ -344,8 +371,8 @@ void CtrlrBuildScriptMain::loadOptionsFromFile()
 
                 if (tokens[0] == "IDE")                
                 { 
-                    int index = tokens[1].getIntValue();
-                    ideSection->setIDEIndex(tokens[1].getIntValue()); 
+                    ideSection->setIDEIndex(tokens[1].getIntValue());
+                    ideSection->getIDEComboBox()->setSelectedItemIndex(tokens[1].getIntValue());
                 }
 
                 if (tokens[0] == "ProjectFolder")      
@@ -392,6 +419,13 @@ void CtrlrBuildScriptMain::loadOptionsFromFile()
                     optionsSection->setButtonStateAndColour(optionsSection->getReleaseButton(), state);
                 }
 
+                if (tokens[0] == "VST3")
+                {
+                    bool state = tokens[1].getIntValue() == 1;
+                    optionsSection->setVST3ButtonToggled(state);
+                    optionsSection->setButtonStateAndColour(optionsSection->getVST3Button(), state);
+                }
+
                 if (tokens[0] == "CleanBuild")
 				{
 					bool state = tokens[1].getIntValue() == 1;
@@ -421,6 +455,78 @@ void CtrlrBuildScriptMain::loadOptionsFromFile()
 					optionsSection->setDAWButtonToggled(state);
 					optionsSection->setButtonStateAndColour(optionsSection->getDAWButton(), state);
 				}
+
+                if (tokens[0] == "productName")
+                {
+                    vst3Section->setProductName(tokens[1]);
+                    vst3Section->getProductNameLabel()->setText(tokens[1], dontSendNotification);
+                }
+
+                if (tokens[0] == "version")
+                {
+                    vst3Section->setVersion(tokens[1]);
+                    vst3Section->getVersionLabel()->setText(tokens[1], dontSendNotification);
+                }
+
+                if (tokens[0] == "pluginName")
+                {
+                    vst3Section->setPluginName(tokens[1]);
+                    vst3Section->getPluginNameLabel()->setText(tokens[1], dontSendNotification);
+                }
+
+                if (tokens[0] == "description")
+                {
+                    vst3Section->setDescription(tokens[1]);
+                    vst3Section->getDescriptionLabel()->setText(tokens[1], dontSendNotification);
+                }
+
+                if (tokens[0] == "pluginMC")
+                {
+                    vst3Section->setPluginMC(tokens[1]);
+                    vst3Section->getPluginMCLabel()->setText(tokens[1], dontSendNotification);
+                }
+
+                if (tokens[0] == "pluginCode")
+                {
+                    vst3Section->setPluginCode(tokens[1]);
+                    vst3Section->getPluginCodeLabel()->setText(tokens[1], dontSendNotification);
+                }
+
+                if (tokens[0] == "bundleID")
+                {
+                    vst3Section->setBundleID(tokens[1]);
+                    vst3Section->getBundleIDLabel()->setText(tokens[1], dontSendNotification);
+                }
+
+                if (tokens[0] == "companyName")
+                {
+                    vst3Section->setCompanyName(tokens[1]);
+                    vst3Section->getCompanyNameLabel()->setText(tokens[1], dontSendNotification);
+                }   
+
+                if (tokens[0] == "needsMidiInput")
+                {
+                    vst3Section->setNeedsMidiInput(tokens[1]);
+                    vst3Section->getNeedsMidiInputComboBox()->setText(tokens[1], dontSendNotification);
+                }
+
+                if (tokens[0] == "VSTMidiInputs")
+                {
+                    vst3Section->setVSTMidiInputs(tokens[1].getIntValue());
+                    vst3Section->getVSTMidiInputsComboBox()->setSelectedItemIndex(tokens[1].getIntValue());
+                }
+
+                if (tokens[0] == "needsMidiOutput")
+                {
+                    vst3Section->setNeedsMidiOutput(tokens[1]);
+                    vst3Section->getNeedsMidiOutputComboBox()->setText(tokens[1], dontSendNotification);
+                }
+
+                if (tokens[0] == "VSTMidiOutputs")
+                {
+                    vst3Section->setVSTMidiOutputs(tokens[1].getIntValue());
+                    vst3Section->getVSTMidiOutputsComboBox()->setSelectedItemIndex(tokens[1].getIntValue());
+                }
 			}
 
             outputSection->getOutputView().insertTextAtCaret("Options file loaded.\n");
@@ -431,14 +537,3 @@ void CtrlrBuildScriptMain::loadOptionsFromFile()
 		}
 	}
 }  
-
-
-void CtrlrBuildScriptMain::animateButtons()
-{
-   ComponentAnimator& animator = Desktop::getInstance().getAnimator();
-
-   animator.animateComponent(loadFileButton.get(), 
-       loadFileButton->getBounds().translated(0,450), 1.0f, 200, false, 0.0, 0.0);
-
-
-}

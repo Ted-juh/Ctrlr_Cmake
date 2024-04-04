@@ -1,5 +1,4 @@
-#ifndef L_TIMER
-#define L_TIMER
+#pragma once
 
 #include "stdafx_luabind.h"
 
@@ -14,5 +13,3 @@ class LTimer : public Timer
 	private:
 		luabind::object callback;
 };
-
-#endif

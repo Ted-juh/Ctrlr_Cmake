@@ -1,5 +1,4 @@
-#ifndef __L_KEY_PRESS__
-#define __L_KEY_PRESS__
+#pragma once
 
 #include "JuceHeader.h"
 extern  "C"
@@ -16,5 +15,3 @@ class LKeyPress : public KeyPress
 		static void wrapForLua (lua_State *L);
 		int spaceKey;
 };
-
-#endif

@@ -1,5 +1,4 @@
-#ifndef L_TOGGLE_BUTTON
-#define L_TOGGLE_BUTTON
+#pragma once
 
 extern  "C"
 {
@@ -11,5 +10,3 @@ class LToggleButton
 	public:
 		static void wrapForLua (lua_State *L);
 };
-
-#endif

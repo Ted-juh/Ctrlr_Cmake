@@ -71,13 +71,13 @@ namespace
     {
         lua_pushlightuserdata(L, &main_thread_tag);
         lua_rawget(L, LUA_REGISTRYINDEX);
-        lua_State* result = static_cast<lua_State*>(lua_touserdata(L, -1));
+        lua_State* results = static_cast<lua_State*>(lua_touserdata(L, -1));
         lua_pop(L, 1);
 
-        if (!result)
+        if (!results)
             throw std::runtime_error("Unable to get main thread, luabind::open() not called?");
 
-        return result;
+        return results;
     }
     namespace {
         template<typename T>

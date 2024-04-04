@@ -25,6 +25,7 @@ public:
     void setCCMakeButtonToggled     (int value) { cCMakeButton      ->setToggleState(value, dontSendNotification); }
     void setBuildButtonToggled      (int value) { buildButton       ->setToggleState(value, dontSendNotification); }
     void setReleaseButtonToggled    (int value) { releaseButton     ->setToggleState(value, dontSendNotification); }
+    void setVST3ButtonToggled       (int value) { VST3Button        ->setToggleState(value, dontSendNotification); }
     void setCleanBuildButtonToggled (int value) { cleanBuildButton  ->setToggleState(value, dontSendNotification); }
     void setBuildFolderButtonToggled(int value) { buildFolderButton ->setToggleState(value, dontSendNotification); }
     void setVSTFolderButtonToggled  (int value) { vstFolderButton   ->setToggleState(value, dontSendNotification); }

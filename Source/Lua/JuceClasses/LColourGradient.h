@@ -1,5 +1,4 @@
-#ifndef L_COLOUR_GRADIENT
-#define L_COLOUR_GRADIENT
+#pragma once
 
 extern  "C"
 {
@@ -11,5 +10,3 @@ class LColourGradient
 	public:
 		static void wrapForLua (lua_State *L);
 };
-
-#endif

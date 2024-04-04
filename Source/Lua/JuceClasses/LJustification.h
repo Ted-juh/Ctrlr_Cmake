@@ -1,5 +1,4 @@
-#ifndef L_JUSTIFICATION
-#define L_JUSTIFICATION
+#pragma once
 
 extern  "C"
 {
@@ -11,5 +10,3 @@ class LJustification
 	public:
 		static void wrapForLua (lua_State *L);
 };
-
-#endif

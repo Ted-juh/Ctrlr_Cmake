@@ -1,5 +1,4 @@
-#ifndef L_MIDI_KEYBOARD_COMPONENT
-#define L_MIDI_KEYBOARD_COMPONENT
+#pragma once
 
 extern  "C"
 {
@@ -11,5 +10,3 @@ class LMidiKeyboardComponent
 	public:
 		static void wrapForLua (lua_State *L);
 };
-
-#endif

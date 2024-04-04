@@ -1,5 +1,4 @@
-#ifndef L_FONT
-#define L_FONT
+#pragma once
 
 extern  "C"
 {
@@ -11,5 +10,3 @@ class LFont : public Font
 	public:
 		static void wrapForLua (lua_State *L);
 };
-
-#endif

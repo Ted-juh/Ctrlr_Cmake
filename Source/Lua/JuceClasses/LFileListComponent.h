@@ -1,5 +1,4 @@
-#ifndef L_FILE_LIST_COMPONENT
-#define L_FILE_LIST_COMPONENT
+#pragma once
 
 extern  "C"
 {
@@ -11,5 +10,3 @@ class LFileListComponent
 	public:
 		static void wrapForLua (lua_State *L);
 };
-
-#endif

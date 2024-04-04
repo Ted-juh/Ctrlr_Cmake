@@ -1,5 +1,4 @@
-#ifndef L_ATTRIBUTED_STRING
-#define L_ATTRIBUTED_STRING
+#pragma once
 
 extern  "C"
 {
@@ -11,5 +10,3 @@ class LAttributedString
 	public:
 		static void wrapForLua (lua_State *L);
 };
-
-#endif

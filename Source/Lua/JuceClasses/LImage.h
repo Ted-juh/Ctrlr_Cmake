@@ -1,5 +1,4 @@
-#ifndef L_IMAGE
-#define L_IMAGE
+#pragma once
 
 #include "JuceHeader.h"
 extern  "C"
@@ -13,5 +12,3 @@ class LImage
         static Image null() { return (Image()); }
 		static void wrapForLua (lua_State *L);
 };
-
-#endif

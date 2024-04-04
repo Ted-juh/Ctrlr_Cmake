@@ -1,12 +1,15 @@
+/*
 #pragma once
 
-extern  "C"
+#include "JuceHeader.h"
+extern "C"
 {
 	#include "lua.h"
 }
 
-class LTypeface
+class LMouseInputSource
 {
 	public:
 		static void wrapForLua (lua_State *L);
 };
+*/

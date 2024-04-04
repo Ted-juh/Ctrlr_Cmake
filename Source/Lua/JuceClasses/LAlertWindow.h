@@ -1,5 +1,4 @@
-#ifndef L_ALERT_WINDOW
-#define L_ALERT_WINDOW
+#pragma once
 
 #include "JuceHeader.h"
 #include "luabind/object_fwd.hpp"
@@ -23,5 +22,3 @@ class LAlertWindow : public AlertWindow
 	private:
 		luabind::object o;
 };
-
-#endif

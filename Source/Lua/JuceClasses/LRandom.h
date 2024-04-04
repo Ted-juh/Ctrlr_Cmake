@@ -1,5 +1,4 @@
-#ifndef L_RANDOM
-#define L_RANDOM
+#pragma once
 
 extern  "C"
 {
@@ -11,5 +10,3 @@ class LRandom
 	public:
 		static void wrapForLua (lua_State *L);
 };
-
-#endif

@@ -1,5 +1,4 @@
-#ifndef L_VALUE_TREE
-#define L_VALUE_TREE
+#pragma once
 
 extern  "C"
 {
@@ -11,5 +10,3 @@ class LValueTree
 	public:
 		static void wrapForLua (lua_State *L);
 };
-
-#endif

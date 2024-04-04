@@ -3,10 +3,11 @@ cmake_minimum_required(VERSION 3.23)
 if(APPLE)
 	set(CMAKE_OSX_DEPLOYMENT_TARGET 10.15 CACHE STRING "")
 	set(CMAKE_OSX_ARCHITECTURES "x86_64;arm64" CACHE STRING "Build architectures for Mac OS X" FORCE)
-endif(APPLE)
+elseif(MSVC)
+add_compile_options(/wd4206)
+endif()
 
 project(Ctrlr VERSION 5.6.23)
-
 set(CMAKE_CXX_STANDARD 14)
 
 SET(CMAKE_MODULE_PATH
@@ -26,43 +27,42 @@ elseif(WIN32)
 endif(APPLE)
 
 juce_add_plugin(Ctrlr
-	PRODUCT_NAME 				    "Ctrlr"
-	VERSION						    5.6.23
-	COMPANY_NAME 					"Instigator"
-	COMPANY_WEBSITE 				"https://ctrlr.org"
+	PRODUCT_NAME 				    "Ctrlr"									# The name of the output built by this target.
+	VERSION						    5.6.23									# Version number in the format: "major, minor, bugfix"
+	COMPANY_NAME 					"Instigator"							# The name of the company that owns this product.		
+	COMPANY_WEBSITE 				"https://ctrlr.org"						# The website of the company that owns this product.
 
-	DOCUMENT_EXTENSIONS 			.panel
-	ICON_BIG						"Source/Resources/Icons/ctrlr_logo.svg"
+	DOCUMENT_EXTENSIONS 			.panel .exe .vst3. .vst .au				# The file extensions that this plugin can open.
+	ICON_BIG						"Source/Resources/Icons/ctrlr_logo.svg" # The icon file for the plugin.
 
-	IS_SYNTH 						TRUE
-	NEEDS_MIDI_INPUT				TRUE
-	NEEDS_MIDI_OUTPUT				TRUE
-	IS_MIDI_EFFECT					TRUE
-	EDITOR_WANTS_KEYBOARD_FOCUS		TRUE
+	IS_SYNTH 						TRUE									# Is this a synth or an effect?
+	NEEDS_MIDI_INPUT				TRUE									# Does this plugin need MIDI input?
+	NEEDS_MIDI_OUTPUT				TRUE									# Does this plugin produce MIDI output?				
+	IS_MIDI_EFFECT					TRUE									# Is this a MIDI effect?
+	EDITOR_WANTS_KEYBOARD_FOCUS		TRUE									# Does the editor need keyboard focus?
 
-	FORMATS							VST3 Standalone
-	VS_COPY_TO_OUT_DIR				TRUE
-	VST3_COPY_DIR 					"${PROJECT_BINARY_DIR}/VST3"
-	VST3_AUTO_MANIFEST 				TRUE
+	FORMATS							VST3 Standalone VST						# The formats that this plugin can be built for.
+	VST2_CATEGORY 				    kPlugCategSynth							# The VST2 category for the plugin					
+	VST3_CATEGORY    		        Instrument Synth						# The VST3 category for the plugin
+	VS_COPY_TO_OUT_DIR				TRUE									# Copy the VST3 to the output directory?
+	VST3_COPY_DIR 					"${PROJECT_BINARY_DIR}/VST3"			# The directory to copy the VST3 to.
+	VST3_AUTO_MANIFEST 				FALSE									# Automatically generate the VST3 manifest?
+	VST_NUM_MIDI_INPUTS 	        16										# The number of MIDI inputs for the VST
+	VST_NUM_MIDI_OUTPUTS 	        16										# The number of MIDI outputs for the VST
 
-	PLUGIN_NAME 					Ctrlr
-	DESCRIPTION 					Ctrlr
-	PLUGIN_MANUFACTURER_CODE 		inSt
-	PLUGIN_CODE 					cTrl
+	PLUGIN_NAME 					Ctrlr									# The name of the plugin when loaded into a DAW
+	DESCRIPTION 					Ctrlr									# A short description of the plugin
+	PLUGIN_MANUFACTURER_CODE 		inSt									# A four-character unique ID for your company. Wise: First letter to be uppercase
+	PLUGIN_CODE 					cTrl									# A four-character unique ID for this plugin. Wise: First letter to be uppercase
+	BUNDLE_ID        			    "com.instigator.Ctrlr"					# An identifier string in the form "com.yourcompany.productname" which should uniquely identify this target.
 
-	AU_EXPORT_PREFIX         	    "AU"
-	AU_MAIN_TYPE 				    kAudioUnitType_MusicDevice
-	AU_SANDBOX_SAFE 			    TRUE
-	PLUGINHOST_AU 				    TRUE
-	SUPPRESS_AU_PLIST_RESOURCE_USAGE TRUE
-	VST_NUM_MIDI_INPUTS 	        16
-	VST_NUM_MIDI_OUTPUTS 	        16
-
-	VST2_CATEGORY 				    kPlugCategSynth
-	VST3_CATEGORY    		        Instrument Synth
-
-	BUNDLE_ID        			    "com.instigator.Ctrlr"
-	INCLUDE_BINARYDATA 			    TRUE
+	AU_EXPORT_PREFIX         	    "AU"									# The prefix for the AudioUnit name
+	AU_MAIN_TYPE 				    kAudioUnitType_MusicDevice				# The main type for the AudioUnit
+	AU_SANDBOX_SAFE 			    TRUE									# Is the AudioUnit sandbox safe?				
+	PLUGINHOST_AU 				    TRUE									# Is this plugin an AudioUnit?
+	SUPPRESS_AU_PLIST_RESOURCE_USAGE TRUE									# Suppress the AU plist resource usage warning?
+ 				
+	#INCLUDE_BINARYDATA 			    TRUE
 	DISPLAY_THE_JUCE_SPLASH_SCREEN  TRUE
 	SPLASH_SCREEN_COLOUR 		    Light
 )
@@ -231,6 +231,7 @@ target_sources(Ctrlr
 	Source/Lua/JuceClasses/LModifierKeys.h
 	Source/Lua/JuceClasses/LMouseCursor.h
 	Source/Lua/JuceClasses/LMouseEvent.h
+	Source/Lua/JuceClasses/LMouseInputSource.h
 	Source/Lua/JuceClasses/LPath.h
 	Source/Lua/JuceClasses/LPoint.h
 	Source/Lua/JuceClasses/LPopupMenu.h
@@ -581,6 +582,11 @@ target_compile_definitions(Ctrlr
 	JUCE_APPLICATION_VERSION_STRING="$<TARGET_PROPERTY:Ctrlr,JUCE_VERSION>"
 	JUCE_VST3_CAN_REPLACE_VST2=0
 	JUCE_USE_CUSTOM_PLUGIN_STANDALONE_APP=1
+	JUCE_DISPLAY_SPLASH_SCREEN=1
+    JUCE_REPORT_APP_USAGE=0
+    JUCE_USE_DARK_SPLASH_SCREEN=0
+    JUCE_ALLOW_STATIC_NULL_VARIABLES=0
+    JUCE_STRICT_REFCOUNTEDPOINTER=0
 )
 
 target_include_directories(Ctrlr
@@ -610,7 +616,8 @@ if(UNIX AND NOT APPLE)
 endif()
 
 target_link_libraries(Ctrlr
-		PRIVATE
+		PRIVATE						# Those libraries are linked to the target, they are not included when other targets link to this target. 
+									# They are used only by this target.This is useful for libraries that are used only by the target and not by other targets that link to this target.
 			juce::juce_gui_extra
 			juce::juce_audio_basics
 			juce::juce_audio_devices
@@ -618,7 +625,9 @@ target_link_libraries(Ctrlr
 			juce::juce_audio_processors
 			juce::juce_audio_utils
 			${ctrlrLibs}
-		PUBLIC
+		PUBLIC						# Those libraries are linked to the target, they are included when other targets link to this target. 
+									# They are used by this target and by other targets that link to this target.
+
 			juce::juce_recommended_config_flags
 			juce::juce_recommended_lto_flags
 			juce::juce_recommended_warning_flags

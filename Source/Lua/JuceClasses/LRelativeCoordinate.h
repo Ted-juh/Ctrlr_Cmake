@@ -1,5 +1,4 @@
-#ifndef L_RELATIVE_COORDINATE
-#define L_RELATIVE_COORDINATE
+#pragma once
 
 #include "JuceHeader.h"
 extern  "C"
@@ -26,5 +25,3 @@ class LRelativeCoordinate : public RelativeCoordinate
 
 		static void wrapForLua (lua_State *L);
 };
-
-#endif

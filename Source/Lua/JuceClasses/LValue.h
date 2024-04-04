@@ -1,5 +1,4 @@
-#ifndef L_VALUE
-#define L_VALUE
+#pragma once
 
 extern  "C"
 {
@@ -11,5 +10,3 @@ class LValue
 	public:
 		static void wrapForLua (lua_State *L);
 };
-
-#endif

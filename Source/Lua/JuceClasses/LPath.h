@@ -1,5 +1,4 @@
-#ifndef L_PATH
-#define L_PATH
+#pragma once
 
 #include "JuceHeader.h"
 #include "luabind/object_fwd.hpp"
@@ -19,5 +18,3 @@ class LPathStrokeType : public PathStrokeType
 		LPathStrokeType(const LPathStrokeType &other) : PathStrokeType(other) {}
         void createDashedStrokeWrap (Path &destPath, const Path &sourcePath, const luabind::object dashLengths, const AffineTransform &transform, float extraAccuracy);
 };
-
-#endif
