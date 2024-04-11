@@ -161,12 +161,17 @@ void CtrlrBuildScriptMain::buttonClicked(Button* buttonThatWasClicked)
                     generateBuildFiles();                                                   // Generate build files
                 }
 
-                buildFiles();
+                buildReleaseFile();
 
                 if (optionsSection->isBuildFolderButtonToggled())                           // Open build folder button
                 {
                     openBuildFolder();
                 }
+            }
+
+            if (optionsSection->isVST3ButtonToggled())                                      // VST3 button
+            {
+                buildVst3File();
             }
         }
  }
@@ -272,7 +277,7 @@ void CtrlrBuildScriptMain::openBuildFolder()
     system(openFolderCommand.toStdString().c_str());
 }
 
-void CtrlrBuildScriptMain::buildFiles()
+void CtrlrBuildScriptMain::buildReleaseFile()
 {
     String projectFolderPath = ideSection->getBuildFolderPath();
     String buildFolderPath = projectFolderPath + "\\build";
@@ -294,6 +299,119 @@ void CtrlrBuildScriptMain::buildFiles()
 	{
 		outputSection->getOutputView().insertTextAtCaret("Build process failed. Please check your setup and try again.\n");
 	} 
+}
+
+void CtrlrBuildScriptMain::buildVst3File()
+{
+    String projectFolderPath = ideSection->getBuildFolderPath();
+    String buildFolderPath = projectFolderPath + "\\build";
+
+    // Get the Path to the CMakelists.txt file
+    String cmakeListsPath = projectFolderPath + "\\CMakeLists.txt";
+
+    outputSection->getOutputView().insertTextAtCaret("Check for already existing CMakelists.txt or CMakelists_backup.txt file.\n");
+
+    //If the CMakelistst.txt file exists, create a backup of the file
+    if (File(cmakeListsPath).exists())
+    {
+        outputSection->getOutputView().insertTextAtCaret("CMakelistst.txt or backup already exists, creating a new backup.\n");
+
+        // Find a unique number for the backup file
+        int backupNumber = 1;
+        while (File(projectFolderPath + "\\CMakeLists_backup" + String(backupNumber) + ".txt").exists())
+        {
+            backupNumber++;
+        }
+
+        File backupFile = File(projectFolderPath + "\\CMakeLists_backup" + String(backupNumber) + ".txt");
+        File originalFile = File(cmakeListsPath);
+        originalFile.copyFileTo(backupFile);
+    }
+
+    // Create a File object with the path to the CMakeLists.txt file
+    File cmakeListsFile(cmakeListsPath);
+
+    // Read the content of the file into a String object
+    String content = cmakeListsFile.loadFileAsString();
+
+    // Get changed values from the VST3 section:
+    String productName      = vst3Section->getProductName();
+    String version          = vst3Section->getVersion();
+    String pluginName       = vst3Section->getPluginName();
+    String description      = vst3Section->getDescription();
+    String pluginMC         = vst3Section->getPluginMC();
+    String pluginCode       = vst3Section->getPluginCode();
+    String bundleID         = vst3Section->getBundleID();
+    String companyName      = vst3Section->getCompanyName();
+    String needsMidiInput   = vst3Section->getNeedsMidiInput();
+    int vstMidiInputs       = vst3Section->getVSTMidiInputs() -1;
+    String needsMidiOutput  = vst3Section->getNeedsMidiOutput();
+    int vstMidiOutputs      = vst3Section->getVSTMidiOutputs() -1;
+
+    outputSection->getOutputView().insertTextAtCaret("The following values are going to be changed in the CMakelists.txt file:\n");
+
+    // Split the content into lines
+    StringArray lines;
+    String outputMessages;
+    lines.addLines(content);
+
+    for (int i = 0; i < lines.size(); ++i)
+    {
+        if (lines[i].trimStart().startsWith("PRODUCT_NAME"))            {lines.set(i,  "\tPRODUCT_NAME\t\t\t\t\t\"" + productName + "\"");
+        outputMessages += "PRODUCT_NAME is going to be changed to: " + productName + "\n";}
+
+        if (lines[i].trimStart().startsWith("VERSION"))                 {lines.set(i,  "\tVERSION\t\t\t\t\t\t\t\"" + version + "\"");
+        outputMessages += "VERSION is going to be changed to: " + version + "\n";}
+
+        if (lines[i].trimStart().startsWith("PLUGIN_NAME"))             {lines.set(i,  "\tPLUGIN_NAME\t\t\t\t\t\t\"" + pluginName + "\"");
+        outputMessages += "PLUGIN_NAME is going to be changed to: " + pluginName + "\n";}
+
+        if (lines[i].trimStart().startsWith("DESCRIPTION"))             {lines.set(i,  "\tDESCRIPTION\t\t\t\t\t\t\"" + description + "\"");
+        outputMessages += "DESCRIPTION is going to be changed to: " + description + "\n";}
+
+        if (lines[i].trimStart().startsWith("PLUGIN_MANUFACTURER_CODE")) {lines.set(i,  "\tPLUGIN_MC\t\t\t\t\t\t\"" + pluginMC + "\"");
+        outputMessages += "PLUGIN_MC is going to be changed to: " + pluginMC + "\n";}
+
+        if (lines[i].trimStart().startsWith("PLUGIN_CODE"))             {lines.set(i,  "\tPLUGIN_CODE\t\t\t\t\t\t\"" + pluginCode + "\"");
+        outputMessages += "PLUGIN_CODE is going to be changed to: " + pluginCode + "\n";}
+
+        if (lines[i].trimStart().startsWith("BUNDLE_ID"))               {lines.set(i,  "\tBUNDLE_ID\t\t\t\t\t\t\"" + bundleID + "\"");
+        outputMessages += "BUNDLE_ID is going to be changed to: " + bundleID + "\n";}
+
+        if (lines[i].trimStart().startsWith("COMPANY_NAME"))            {lines.set(i,  "\tCOMPANY_NAME\t\t\t\t\t\"" + companyName + "\"");
+        outputMessages += "COMPANY_NAME is going to be changed to: " + companyName + "\n";}
+
+        if (lines[i].trimStart().startsWith("NEEDS_MIDI_INPUT"))        {lines.set(i,  "\tNEEDS_MIDI_INPUT\t\t\t\t" + needsMidiInput);
+        outputMessages += "NEEDS_MIDI_INPUT is going to be changed to: " + needsMidiInput + "\n";}
+
+        if (lines[i].trimStart().startsWith("VST_NUM_MIDI_INPUTS"))         {lines.set(i,  "\tVST_NUM_MIDI_INPUTS\t\t\t\t" + juce::String(vstMidiInputs));
+        outputMessages += "VST_NUM_MIDI_INPUTS is going to be changed to: " + juce::String(vstMidiInputs) + "\n";}
+
+        if (lines[i].trimStart().startsWith("NEEDS_MIDI_OUTPUT"))       {lines.set(i,  "\tNEEDS_MIDI_OUTPUT\t\t\t\t" + needsMidiOutput);
+        outputMessages += "NEEDS_MIDI_OUTPUT is going to be changed to: " + needsMidiOutput + "\n";}
+
+        if (lines[i].trimStart().startsWith("VST_NUM_MIDI_OUTPUTS"))        {lines.set(i,  "\tVST_NUM_MIDI_OUTPUTS\t\t\t" + juce::String(vstMidiOutputs));
+        outputMessages += "VST_NUM_MIDI_OUTPUTS is going to be changed to: " + juce::String(vstMidiOutputs) + "\n";}
+    }
+
+    outputSection->getOutputView().insertTextAtCaret(outputMessages);           // Output the changes that are going to be made
+    content = lines.joinIntoString("\n");                                       // Join the lines back into a single string
+    cmakeListsFile.replaceWithText(content);                                    // Replace the content of the file with the new content
+
+    outputSection->getOutputView().insertTextAtCaret("Building the VST3 file\n");
+
+    // Build the VST3 file
+    String command = "cmd /C ";
+    String argument1 = "cd \"" + buildFolderPath + "\" && ";
+    String argument2 = "cmake --build . --target Ctrlr_VST3 --config Release";
+
+    ChildProcess cp;
+    bool success = cp.start(command + argument1 + argument2);
+    String output = cp.readAllProcessOutput();
+    outputSection->getOutputView().insertTextAtCaret("The VST3 is generated, you can find it in the source folder: Release/VST3/\n");
+
+
+
 }
 
 void CtrlrBuildScriptMain::saveOptionsToFile()
@@ -457,76 +575,80 @@ void CtrlrBuildScriptMain::loadOptionsFromFile()
 					optionsSection->setButtonStateAndColour(optionsSection->getDAWButton(), state);
 				}
 
-                if (tokens[0] == "productName")
+                if (tokens[0] == "productName") 
                 {
-                    vst3Section->setProductName(tokens[1]);
-                    vst3Section->getProductNameLabel()->setText(tokens[1], dontSendNotification);
+                    String unqoutedName = tokens[1].unquoted();
+                    vst3Section->setProductName(unqoutedName);
+                    //vst3Section->getProductNameLabel()->setText(unqoutedName, dontSendNotification);
                 }
 
-                if (tokens[0] == "version")
-                {
-                    vst3Section->setVersion(tokens[1]);
-                    vst3Section->getVersionLabel()->setText(tokens[1], dontSendNotification);
+                if (tokens[0] == "version")     
+                { 
+                    String unqoutedVersion = tokens[1].unquoted();
+                    vst3Section->setVersion(unqoutedVersion);
+                    //vst3Section->getVersionLabel()->setText(unqoutedVersion, dontSendNotification);
                 }
 
-                if (tokens[0] == "pluginName")
+                if (tokens[0] == "pluginName")  
                 {
-                    vst3Section->setPluginName(tokens[1]);
-                    vst3Section->getPluginNameLabel()->setText(tokens[1], dontSendNotification);
+                    String unqoutedPluginName = tokens[1].unquoted();
+                    vst3Section->setPluginName(unqoutedPluginName); 
+                    //vst3Section->getPluginNameLabel()->setText(unqoutedPluginName, dontSendNotification);
                 }
 
-                if (tokens[0] == "description")
-                {
-                    vst3Section->setDescription(tokens[1]);
-                    vst3Section->getDescriptionLabel()->setText(tokens[1], dontSendNotification);
+                if (tokens[0] == "description") 
+                { 
+                    String unqoutedDescription = tokens[1].unquoted();
+                    vst3Section->setDescription(unqoutedDescription); 
+                    //vst3Section->getDescriptionLabel()->setText(unqoutedDescription, dontSendNotification);
                 }
 
-                if (tokens[0] == "pluginMC")
+                if (tokens[0] == "pluginMC")    
                 {
-                    vst3Section->setPluginMC(tokens[1]);
-                    vst3Section->getPluginMCLabel()->setText(tokens[1], dontSendNotification);
+                    String unqoutedPluginMC = tokens[1].unquoted();
+                    vst3Section->setPluginMC(unqoutedPluginMC); 
+                    //vst3Section->getPluginMCLabel()->setText(unqoutedPluginMC, dontSendNotification);
                 }
 
-                if (tokens[0] == "pluginCode")
+                if (tokens[0] == "pluginCode")  
                 {
-                    vst3Section->setPluginCode(tokens[1]);
-                    vst3Section->getPluginCodeLabel()->setText(tokens[1], dontSendNotification);
+                    String unqoutedPluginCode = tokens[1].unquoted();
+                    vst3Section->setPluginCode(unqoutedPluginCode);
+                    //vst3Section->getPluginCodeLabel()->setText(unqoutedPluginCode, dontSendNotification);
+                }
+                
+                if (tokens[0] == "bundleID")    
+                {
+                    String unqoutedBundleID = tokens[1].unquoted();
+                    vst3Section->setBundleID(unqoutedBundleID); 
+                    //vst3Section->getBundleIDLabel()->setText(unqoutedBundleID, dontSendNotification); 
                 }
 
-                if (tokens[0] == "bundleID")
+                if (tokens[0] == "companyName") 
                 {
-                    vst3Section->setBundleID(tokens[1]);
-                    vst3Section->getBundleIDLabel()->setText(tokens[1], dontSendNotification);
+                    String unqoutedCompanyName = tokens[1].unquoted();
+                    vst3Section->setCompanyName(unqoutedCompanyName); 
+                    //vst3Section->getCompanyNameLabel()->setText(unqoutedCompanyName, dontSendNotification);
                 }
-
-                if (tokens[0] == "companyName")
-                {
-                    vst3Section->setCompanyName(tokens[1]);
-                    vst3Section->getCompanyNameLabel()->setText(tokens[1], dontSendNotification);
-                }   
 
                 if (tokens[0] == "needsMidiInput")
                 {
-                    vst3Section->setNeedsMidiInput(tokens[1]);
-                    vst3Section->getNeedsMidiInputComboBox()->setText(tokens[1], dontSendNotification);
+                    vst3Section->getNeedsMidiInputComboBox()->setSelectedItemIndex(tokens[1].getIntValue()-1, dontSendNotification);
                 }
 
                 if (tokens[0] == "VSTMidiInputs")
                 {
-                    vst3Section->setVSTMidiInputs(tokens[1].getIntValue());
-                    vst3Section->getVSTMidiInputsComboBox()->setSelectedItemIndex(tokens[1].getIntValue());
+                    vst3Section->getVSTMidiInputsComboBox()->setSelectedItemIndex(tokens[1].getIntValue()-1, dontSendNotification );
                 }
 
                 if (tokens[0] == "needsMidiOutput")
                 {
-                    vst3Section->setNeedsMidiOutput(tokens[1]);
-                    vst3Section->getNeedsMidiOutputComboBox()->setText(tokens[1], dontSendNotification);
+                    vst3Section->getNeedsMidiInputComboBox()->setSelectedItemIndex(tokens[1].getIntValue()+1, dontSendNotification);
                 }
 
                 if (tokens[0] == "VSTMidiOutputs")
                 {
-                    vst3Section->setVSTMidiOutputs(tokens[1].getIntValue());
-                    vst3Section->getVSTMidiOutputsComboBox()->setSelectedItemIndex(tokens[1].getIntValue());
+                    vst3Section->getVSTMidiOutputsComboBox()->setSelectedItemIndex(tokens[1].getIntValue()-1, dontSendNotification);
                 }
 			}
 

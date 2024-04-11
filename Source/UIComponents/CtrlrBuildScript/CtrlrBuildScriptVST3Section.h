@@ -64,9 +64,9 @@ public:
 	String getBundleID() { return tBundleID->getText(); }
 	String getCompanyName() { return tCompanyName->getText(); }
 	String getNeedsMidiInput() { return tNeedsMidiInput->getText(); }
-	int getVSTMidiInputs() { return tVSTMidiInputs->getSelectedItemIndex(); }
+	int getVSTMidiInputs() { return tVSTMidiInputs->getSelectedItemIndex() + 1; }
 	String getNeedsMidiOutput() { return tNeedsMidiOutput->getText(); }
-	int getVSTMidiOutputs() { return tVSTMidiOutputs->getSelectedItemIndex(); }
+	int getVSTMidiOutputs() { return tVSTMidiOutputs->getSelectedItemIndex() + 1; }
 
 	void setProductName(String text) { tProductName->setText(text, dontSendNotification); }
 	void setVersion(String text) { tVersion->setText(text, dontSendNotification); }
@@ -77,9 +77,9 @@ public:
 	void setBundleID(String text) { tBundleID->setText(text, dontSendNotification); }
 	void setCompanyName(String text) { tCompanyName->setText(text, dontSendNotification); }
 	void setNeedsMidiInput(String text) { tNeedsMidiInput->setText(text, dontSendNotification); }
-	void setVSTMidiInputs(int index) { tVSTMidiInputs->setSelectedItemIndex(index); }
+	void setVSTMidiInputs(int index) { tVSTMidiInputs->setSelectedItemIndex(index - 1); }
 	void setNeedsMidiOutput(String text) { tNeedsMidiOutput->setText(text, dontSendNotification); }
-	void setVSTMidiOutputs(int index) { tVSTMidiOutputs->setSelectedItemIndex(index); }
+	void setVSTMidiOutputs(int index) { tVSTMidiOutputs->setSelectedItemIndex(index - 1); }
 
 	Label* getProductNameLabel() { return lProductName.get(); }
 	Label* getVersionLabel() { return lVersion.get(); }
@@ -89,8 +89,10 @@ public:
 	Label* getPluginCodeLabel() { return lPluginCode.get(); }
 	Label* getBundleIDLabel() { return lBundleID.get(); }
 	Label* getCompanyNameLabel() { return lCompanyName.get(); }
+
 	ComboBox* getNeedsMidiInputComboBox() { return tNeedsMidiInput.get(); }
 	ComboBox* getNeedsMidiOutputComboBox() { return tNeedsMidiOutput.get(); }
+	
 	ComboBox* getVSTMidiInputsComboBox() { return tVSTMidiInputs.get(); }
 	ComboBox* getVSTMidiOutputsComboBox() { return tVSTMidiOutputs.get(); }
 

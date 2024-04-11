@@ -26,48 +26,50 @@ elseif(WIN32)
 	juce_set_vst2_sdk_path(Source/Misc/vst2sdk)
 endif(APPLE)
 
-juce_add_plugin(Ctrlr
-	PRODUCT_NAME 				    "Ctrlr"									# The name of the output built by this target.
-	VERSION						    5.6.23									# Version number in the format: "major, minor, bugfix"
-	COMPANY_NAME 					"Instigator"							# The name of the company that owns this product.		
-	COMPANY_WEBSITE 				"https://ctrlr.org"						# The website of the company that owns this product.
+set(TARGET_NAME "Ctrlr")
 
-	DOCUMENT_EXTENSIONS 			.panel .exe .vst3. .vst .au				# The file extensions that this plugin can open.
-	ICON_BIG						"Source/Resources/Icons/ctrlr_logo.svg" # The icon file for the plugin.
+juce_add_plugin(${TARGET_NAME}
+	PRODUCT_NAME					"Ctrlr"
+	VERSION						    "5.6.23"
+	COMPANY_NAME 					"Instigator"							
+	COMPANY_WEBSITE 				"https://ctrlr.org"						
 
-	IS_SYNTH 						TRUE									# Is this a synth or an effect?
-	NEEDS_MIDI_INPUT				TRUE									# Does this plugin need MIDI input?
-	NEEDS_MIDI_OUTPUT				TRUE									# Does this plugin produce MIDI output?				
-	IS_MIDI_EFFECT					TRUE									# Is this a MIDI effect?
-	EDITOR_WANTS_KEYBOARD_FOCUS		TRUE									# Does the editor need keyboard focus?
+	DOCUMENT_EXTENSIONS 			".panel .exe .vst3 .vst .au"
+	ICON_BIG						"Source/Resources/Icons/ctrlr_logo.svg" 
 
-	FORMATS							VST3 Standalone VST						# The formats that this plugin can be built for.
-	VST2_CATEGORY 				    kPlugCategSynth							# The VST2 category for the plugin					
-	VST3_CATEGORY    		        Instrument Synth						# The VST3 category for the plugin
-	VS_COPY_TO_OUT_DIR				TRUE									# Copy the VST3 to the output directory?
-	VST3_COPY_DIR 					"${PROJECT_BINARY_DIR}/VST3"			# The directory to copy the VST3 to.
-	VST3_AUTO_MANIFEST 				FALSE									# Automatically generate the VST3 manifest?
-	VST_NUM_MIDI_INPUTS 	        16										# The number of MIDI inputs for the VST
-	VST_NUM_MIDI_OUTPUTS 	        16										# The number of MIDI outputs for the VST
+	IS_SYNTH 						FALSE									
+	NEEDS_MIDI_INPUT				TRUE									
+	NEEDS_MIDI_OUTPUT				TRUE									
+	IS_MIDI_EFFECT					TRUE									
+	EDITOR_WANTS_KEYBOARD_FOCUS		TRUE									
 
-	PLUGIN_NAME 					Ctrlr									# The name of the plugin when loaded into a DAW
-	DESCRIPTION 					Ctrlr									# A short description of the plugin
-	PLUGIN_MANUFACTURER_CODE 		inSt									# A four-character unique ID for your company. Wise: First letter to be uppercase
-	PLUGIN_CODE 					cTrl									# A four-character unique ID for this plugin. Wise: First letter to be uppercase
-	BUNDLE_ID        			    "com.instigator.Ctrlr"					# An identifier string in the form "com.yourcompany.productname" which should uniquely identify this target.
+	FORMATS							VST3 Standalone VST						
+	VST2_CATEGORY 				    kPlugCategEffect							
+	VST3_CATEGORY    		        "Fx"						
+	VS_COPY_TO_OUT_DIR				TRUE									
+	VST3_COPY_DIR 					"${PROJECT_BINARY_DIR}/VST3"			
+	VST3_AUTO_MANIFEST 				FALSE									
+	VST_NUM_MIDI_INPUTS 	        1										
+	VST_NUM_MIDI_OUTPUTS 	        1										
 
-	AU_EXPORT_PREFIX         	    "AU"									# The prefix for the AudioUnit name
-	AU_MAIN_TYPE 				    kAudioUnitType_MusicDevice				# The main type for the AudioUnit
-	AU_SANDBOX_SAFE 			    TRUE									# Is the AudioUnit sandbox safe?				
-	PLUGINHOST_AU 				    TRUE									# Is this plugin an AudioUnit?
-	SUPPRESS_AU_PLIST_RESOURCE_USAGE TRUE									# Suppress the AU plist resource usage warning?
+	PLUGIN_NAME 					"Ctrlr"
+	DESCRIPTION 					"Ctrlr"
+	PLUGIN_MANUFACTURER_CODE 		"inSt"									
+	PLUGIN_CODE 					"cTrl"									
+	BUNDLE_ID        			    "com.instigator.Ctrlr"					
+
+	AU_EXPORT_PREFIX         	    "AU"									
+	AU_MAIN_TYPE 				    kAudioUnitType_MusicDevice				
+	AU_SANDBOX_SAFE 			    TRUE									
+	PLUGINHOST_AU 				    TRUE									
+	SUPPRESS_AU_PLIST_RESOURCE_USAGE TRUE									
  				
-	#INCLUDE_BINARYDATA 			    TRUE
+	#INCLUDE_BINARYDATA 			TRUE
 	DISPLAY_THE_JUCE_SPLASH_SCREEN  TRUE
 	SPLASH_SCREEN_COLOUR 		    Light
 )
 
-target_precompile_headers(Ctrlr
+target_precompile_headers(${TARGET_NAME}
 	PUBLIC
 	Source/Core/stdafx.h
 	Source/Core/stdafx_luabind.h
@@ -79,7 +81,7 @@ foreach(file ${SOURCE_FILES})
     endif()
 endforeach()
 
-target_sources(Ctrlr
+target_sources(${TARGET_NAME}
 	PRIVATE
 
 	JuceLibraryCode/BinaryData.cpp
@@ -574,12 +576,12 @@ source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR}/JUCE PREFIX "JUCE" FILES ${JUCE_FI
 
 #target_compile_options(Ctrlr PUBLIC "-w")
 
-target_compile_definitions(Ctrlr
+target_compile_definitions(${TARGET_NAME}
 	PRIVATE
 	JUCE_WEB_BROWSER=0
 	JUCE_USE_CURL=0
-	JUCE_APPLICATION_NAME_STRING="$<TARGET_PROPERTY:Ctrlr,JUCE_PRODUCT_NAME>"
-	JUCE_APPLICATION_VERSION_STRING="$<TARGET_PROPERTY:Ctrlr,JUCE_VERSION>"
+	JUCE_APPLICATION_NAME_STRING="$<TARGET_PROPERTY:${TARGET_NAME},JUCE_Tedjuh>"
+	JUCE_APPLICATION_VERSION_STRING="$<TARGET_PROPERTY:${TARGET_NAME},JUCE_VERSION>"
 	JUCE_VST3_CAN_REPLACE_VST2=0
 	JUCE_USE_CUSTOM_PLUGIN_STANDALONE_APP=1
 	JUCE_DISPLAY_SPLASH_SCREEN=1
@@ -589,7 +591,7 @@ target_compile_definitions(Ctrlr
     JUCE_STRICT_REFCOUNTEDPOINTER=0
 )
 
-target_include_directories(Ctrlr
+target_include_directories(${TARGET_NAME}
 	PUBLIC
 	Source/Misc/lua/include
 	Source/Misc/luabind
@@ -615,7 +617,7 @@ if(UNIX AND NOT APPLE)
 	list(APPEND ctrlrLibs "bfd")
 endif()
 
-target_link_libraries(Ctrlr
+target_link_libraries(${TARGET_NAME}
 		PRIVATE						# Those libraries are linked to the target, they are not included when other targets link to this target. 
 									# They are used only by this target.This is useful for libraries that are used only by the target and not by other targets that link to this target.
 			juce::juce_gui_extra

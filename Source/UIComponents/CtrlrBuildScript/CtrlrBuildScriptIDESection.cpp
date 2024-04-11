@@ -179,7 +179,7 @@ void CtrlrBuildScriptIDESection::paint(Graphics& g)
                 outputSection->insertTextAtCaret("DAW Folder: \n");
                 outputSection->setFont(Font(14.0f, Font::plain));
                 outputSection->insertTextAtCaret(
-                                        "Choose the execute file for your DAW.\n\n");
+                                        "Choose the execute file for your DAW.(Experimental)\n\n");
             }
         }
     }

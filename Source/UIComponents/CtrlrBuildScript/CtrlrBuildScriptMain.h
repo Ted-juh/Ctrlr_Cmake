@@ -35,7 +35,8 @@ class CtrlrBuildScriptMain : public CtrlrChildWindowContent,
     void checkCMake();
     void openBuildFolder();
     void generateBuildFiles();
-    void buildFiles();
+    void buildReleaseFile();
+    void buildVst3File();
 
     void saveOptionsToFile();
     void loadOptionsFromFile();

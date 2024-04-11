@@ -93,8 +93,9 @@ CtrlrBuildScriptVST3Section::CtrlrBuildScriptVST3Section(CtrlrBuildScriptOutputS
 
 	tNeedsMidiInput = std::make_unique<ComboBox>("");
 	addAndMakeVisible(*tNeedsMidiInput);
-	tNeedsMidiInput->addItem("No", 1);
-	tNeedsMidiInput->addItem("Yes", 2);
+	tNeedsMidiInput->addItem("FALSE", 1);
+	tNeedsMidiInput->addItem("TRUE", 2);
+	tNeedsMidiInput->setSelectedItemIndex(1);
 
 	lNeedsMidiOutput = std::make_unique<Label>("");
 	addAndMakeVisible(*lNeedsMidiOutput);
@@ -103,8 +104,9 @@ CtrlrBuildScriptVST3Section::CtrlrBuildScriptVST3Section(CtrlrBuildScriptOutputS
 
 	tNeedsMidiOutput = std::make_unique<ComboBox>("");
 	addAndMakeVisible(*tNeedsMidiOutput);
-	tNeedsMidiOutput->addItem("No", 1);
-	tNeedsMidiOutput->addItem("Yes", 2);
+	tNeedsMidiOutput->addItem("FALSE", 1);
+	tNeedsMidiOutput->addItem("TRUE", 2);
+	tNeedsMidiOutput->setSelectedItemIndex(1);
 
 	lVSTMidiInputs = std::make_unique<Label>("");
 	addAndMakeVisible(*lVSTMidiInputs);
@@ -130,6 +132,7 @@ CtrlrBuildScriptVST3Section::CtrlrBuildScriptVST3Section(CtrlrBuildScriptOutputS
 	tVSTMidiInputs->addItem("14", 15);
 	tVSTMidiInputs->addItem("15", 16);
 	tVSTMidiInputs->addItem("16", 17);
+	tVSTMidiInputs->setSelectedItemIndex(1);
 
 	lVSTMidiOutputs = std::make_unique<Label>("");
 	addAndMakeVisible(*lVSTMidiOutputs);
@@ -155,6 +158,7 @@ CtrlrBuildScriptVST3Section::CtrlrBuildScriptVST3Section(CtrlrBuildScriptOutputS
 	tVSTMidiOutputs->addItem("14", 15);
 	tVSTMidiOutputs->addItem("15", 16);
 	tVSTMidiOutputs->addItem("16", 17);
+	tVSTMidiOutputs->setSelectedItemIndex(1);
 }
 
 CtrlrBuildScriptVST3Section::~CtrlrBuildScriptVST3Section(){}
